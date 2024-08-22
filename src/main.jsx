@@ -1,10 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Home from './pages/Home';
+import './styles/GlobalStyles.css'; // 전역 스타일 가져오기
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+ReactDOM.render(
+  <React.StrictMode>
+    <Home />
+  </React.StrictMode>,
+  document.getElementById('root')
+);

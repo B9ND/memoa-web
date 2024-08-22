@@ -1,0 +1,67 @@
+/* src/styles/Login.css */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  text-align: center;
+  width: 400px;
+}
+
+.logo-placeholder {
+  width: 88px;
+  height: 88px;
+  background-color: #715AFF;
+  margin: 0 auto;
+}
+
+.login-box h2 {
+  margin: 20px 0;
+  font-size: 1.5rem;
+}
+
+.project {
+  color: #715AFF;
+}
+
+.login-box p {
+  margin-bottom: 42px;
+  font-size: 1rem;
+}
+
+.login-box input {
+  display: block;
+  width: 100%;
+  height: 52px;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login-button {
+  background-color: #715AFF;
+  width: 100%;
+  height: 64px;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  border-radius: 4px;
+}
+
+.signup {
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.signup a {
+  color: #715AFF;
+  text-decoration: none;
+}
