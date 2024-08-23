@@ -1,4 +1,3 @@
-/* src/styles/Login.css */
 .login {
   display: flex;
   justify-content: center;
@@ -8,7 +7,6 @@
 
 .login-box {
   text-align: center;
-  width: 400px;
 }
 
 .logo-placeholder {
@@ -19,8 +17,7 @@
 }
 
 .login-box h2 {
-  margin: 20px 0;
-  font-size: 1.5rem;
+  margin: 20px;
 }
 
 .project {
@@ -29,36 +26,31 @@
 
 .login-box p {
   margin-bottom: 42px;
-  font-size: 1rem;
 }
 
 .login-box input {
   display: block;
-  width: 100%;
+  width: 400px;
   height: 52px;
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
 }
 
 .login-button {
   background-color: #715AFF;
-  width: 100%;
+  width: 400px;
   height: 64px;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 1.25rem;
-  border-radius: 4px;
 }
 
 .signup {
   margin-top: 20px;
   color: #666;
-  font-size: 0.875rem;
 }
 
 .signup a {

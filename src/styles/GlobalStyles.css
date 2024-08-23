@@ -15,5 +15,12 @@ a {
 
 button {
   cursor: pointer;
-  border-radius: 4px; /* 버튼에 둥근 모서리 추가 */
+}
+Home.css
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 0 100px;
 }

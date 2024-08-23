@@ -1,4 +1,3 @@
-// src/components/Hero.jsx
 import React from 'react';
 import '../styles/Hero.css';  // styles 폴더에서 CSS 파일을 불러옴
 
