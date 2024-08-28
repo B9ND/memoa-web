@@ -1,5 +1,5 @@
 // src/components/Login.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles/Login.css';
 import DelIcon from '../assets/Del.png';  // 삭제 아이콘
 import EyeOpenIcon from '../assets/eye_1.png';  // eye_1 아이콘
