@@ -1,11 +1,8 @@
 /* src/styles/Hero.css */
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
+*{
+font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
-
 .hero {
   display: flex;
   flex-direction: column;
@@ -15,9 +12,9 @@
 }
 
 .hero h1 {
-  font-family: 'Pretendard-Regular';
   margin: 10px;
   font-size: 2.5rem;
+  font-weight: 500;
 }
 
 .gap {
@@ -36,6 +33,6 @@
   color: white;
   font-size: 1.25rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
