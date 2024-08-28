@@ -49,13 +49,13 @@
   height: 52px;
   padding: 10px;
   margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #818182;
+  border-radius: 8px;
   padding-left: 50px; /* 아이콘 공간 확보 */
   background: url('../assets/inputimg.png') no-repeat 10px center; /* 아이콘 위치 설정 */
 }
 
-.Delbutton, .eyebutton {
+.Delbutton{
   position: absolute;
   right: 10px;
   top: 50%;
@@ -65,9 +65,22 @@
   cursor: pointer;
 }
 
-.Delbutton img, .eyebutton img {
+.eyebutton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Delbutton img {
+  width: 20px;
+}
+
+.eyebutton img {
   width: 24px;
-  height: 24px;
 }
 
 .login-button {
