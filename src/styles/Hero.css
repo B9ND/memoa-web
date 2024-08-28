@@ -1,15 +1,27 @@
 /* src/styles/Hero.css */
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  padding-left: 100px;
+  padding: 0 0 10% 100px;
 }
 
 .hero h1 {
-  margin: 0;
+  font-family: 'Pretendard-Regular';
+  margin: 10px;
   font-size: 2.5rem;
+}
+
+.gap {
+  padding-left: 35px;
 }
 
 .hero .highlight {
@@ -17,7 +29,8 @@
 }
 
 .hero-button {
-  margin-top: 30px;
+  font-family: 'Pretendard-Regular';
+  margin: 30px 50px;
   padding: 15px 30px;
   background-color: #715AFF;
   color: white;
