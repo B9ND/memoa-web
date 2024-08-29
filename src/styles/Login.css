@@ -1,16 +1,10 @@
 /* src/styles/Login.css */
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 .login {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: 00;
 }
 
 .login-box {
@@ -26,7 +20,8 @@
 }
 
 .login-box h2 {
-  font-family: 'Pretendard-Regular';
+  font-weight: 600px;
+  font-size: 39px;
   margin: 20px;
 }
 
@@ -34,8 +29,9 @@
   color: #715AFF;
 }
 
-.login-box p {
-  font-family: 'Pretendard-Regular';
+.Cont {
+  font-weight: 400px;
+  font-size: 25px;
   margin-bottom: 42px;
 }
 
@@ -48,17 +44,24 @@
   width: 400px;
   height: 52px;
   padding: 10px;
+  font-weight: 400px;
+  font-size: 20px;
   margin-bottom: 16px;
-  border: 1px solid #818182;
+  border: 1.4px solid #818182;
   border-radius: 8px;
   padding-left: 50px; /* 아이콘 공간 확보 */
   background: url('../assets/inputimg.png') no-repeat 10px center; /* 아이콘 위치 설정 */
 }
 
+.login-box input:focus {
+  border-color: #A090FF;
+  outline: none;
+}
+
 .Delbutton{
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 53%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -67,8 +70,8 @@
 
 .eyebutton {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 8px;
+  top: 52%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -84,8 +87,8 @@
 }
 
 .login-button {
-  font-family: 'Pretendard-Regular';
-  font-size: 2rem;
+  font-size: 25px;
+  font-weight: 600;
   background-color: #715AFF;
   width: 400px;
   height: 64px;
@@ -97,11 +100,14 @@
 }
 
 .signup {
+  font-weight: 400px;
+  font-size: 16px;
   margin-top: 20px;
   color: #666;
 }
 
 .signup a {
+  font-weight: 600px;
   color: #715AFF;
   text-decoration: none;
 }

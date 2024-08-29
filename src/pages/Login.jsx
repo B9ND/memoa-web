@@ -23,7 +23,7 @@ const Login = () => {
       <div className="login-box">
         <div className="logo-placeholder" />
         <h2>로그인</h2>
-        <p><span className="project">프로젝트</span> 계정으로 계속하기</p>
+        <p className='Cont'><span className="project">프로젝트</span> 계정으로 계속하기</p>
         <form>
           <div className="inputWrap">
             <input

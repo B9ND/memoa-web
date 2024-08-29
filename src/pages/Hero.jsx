@@ -1,9 +1,12 @@
+import '../styles/Hero.css';
+import cloud from "../assets/cloud.png"
 
-import '../styles/Hero.css';  // styles 폴더에서 CSS 파일을 불러옴
+
 
 const Hero = () => {
   return (
     <div className="hero">
+      {/* <img src={cloud}/> */}
       <h1>기록하고,</h1>
       <h1>공유하고,</h1>
       <h1>활용하는,</h1>
@@ -13,4 +16,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Hero;  

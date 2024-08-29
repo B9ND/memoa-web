@@ -20,7 +20,6 @@
 // export default App
 
 import React from 'react';
-import Login from './components/Login';
 import Home from './Home';
 import Router from './router/index'
 
