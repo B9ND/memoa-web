@@ -1,7 +1,5 @@
-import '../styles/Hero.css';
 import cloud from "../assets/cloud.svg"
-
-
+import '../styles/Hero.css';  // styles 폴더에서 CSS 파일을 불러옴
 
 const Hero = () => {
   return (

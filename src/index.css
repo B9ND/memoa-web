@@ -10,10 +10,9 @@ body {
   color: #333;
 }
 
-* {
+*{
   box-sizing: border-box;
 }
-
 a {
   text-decoration: none;
 }

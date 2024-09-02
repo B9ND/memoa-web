@@ -1,5 +1,5 @@
-import Hero from './pages/Hero';
-import Login from './pages/Login';
+import Hero from './components/Hero';
+import Login from './components/Login';
 import './styles/Home.css';
 
 const Home = () => {
