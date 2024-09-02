@@ -1,9 +1,10 @@
 // src/components/Login.jsx
 import { useState } from 'react';
 import '../styles/Login.css';
-import DelIcon from '../assets/Del.png';  // 삭제 아이콘
-import EyeOpenIcon from '../assets/eye_1.png';  // eye_1 아이콘
-import EyeClosedIcon from '../assets/eye_2.png';  // eye_2 아이콘
+import DelIcon from '../assets/Del.svg';  // 삭제 아이콘
+import EyeOpenIcon from '../assets/eye_1.svg';  // eye_1 아이콘
+import EyeClosedIcon from '../assets/eye_2.svg';  // eye_2 아이콘
+import InputIcon from "../assets/input-icon.svg"
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const Login = () => {
         <p className='Cont'><span className="project">프로젝트</span> 계정으로 계속하기</p>
         <form>
           <div className="inputWrap">
-            <input
+            <input  
               type="email"
               placeholder="이메일"
               value={email}
@@ -43,6 +44,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <InputIcon/>
             <button type="button" className="eyebutton" onClick={toggleShowPassword}>
               <img src={showPassword ? EyeOpenIcon : EyeClosedIcon} alt="Toggle Password Visibility" />
             </button>
