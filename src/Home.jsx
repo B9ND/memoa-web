@@ -1,5 +1,3 @@
-// src/pages/Home.jsx
-import React from 'react';
 import Hero from './pages/Hero';
 import Login from './pages/Login';
 import './styles/Home.css';
