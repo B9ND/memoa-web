@@ -1,5 +1,5 @@
 import '../styles/Hero.css';
-import cloud from "../assets/cloud.png"
+import cloud from "../assets/cloud.svg"
 
 
 
