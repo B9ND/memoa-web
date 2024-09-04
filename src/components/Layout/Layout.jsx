@@ -1,6 +1,6 @@
-import Header from "./Header"
-import Sidebar from "./Sidebar"
-import '../styles/Layout.css'
+import Header from "./Header/Header"
+import Sidebar from "./Sidebar/Sidebar"
+import './index.css'
 
 const Layout = () => {
   return (

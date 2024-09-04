@@ -1,4 +1,4 @@
-import '../styles/Header.css'
+import '../Header/index.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
@@ -7,13 +7,13 @@ const Header = () => {
 
   let icon = <div className="page-icon" style={{backgroundImage: 'url(/src/assets/icon/'+location+'.svg)'}}></div>
 
-  const goMain=()=>{
-    navigate("/main")
+  const goHome=()=>{
+    navigate("/home")
   }
 
   return (
     <div className="header">
-      <button className="memoa" onClick={goMain}>MEMOA</button>
+      <button className="memoa" onClick={goHome}>MEMOA</button>
       <span>❘</span>
       {icon}
     </div>

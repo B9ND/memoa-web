@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import '../styles/Login.css';
-import DelIcon from '../assets/del.svg';
-import EyeOpenIcon from '../assets/eye_1.svg';
-import EyeClosedIcon from '../assets/eye_2.svg';
-import InputIcon from "../assets/input-icon.svg"
+import './Login.css';
+import del from '../../assets/del.svg';
+import eyeOpen from '../../assets/eye_1.svg';
+import eyeClosed from '../../assets/eye_2.svg';
+// import inputIcon from "../../../assets/input-icon.svg"
 
-const Login = () => {
+const Info = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +33,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button type="button" className="Delbutton" onClick={handleClearEmail}>
-              <img src={DelIcon} alt="Clear Email" />
+              <img src={del} alt="Clear Email" />
             </button>
           </div>
           <div className="inputWrap">
@@ -44,7 +44,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button type="button" className="eyebutton" onClick={toggleShowPassword}>
-              <img src={showPassword ? EyeOpenIcon : EyeClosedIcon} alt="Toggle Password Visibility" />
+              <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
             </button>
           </div>
           <button type="submit" className="login-button">로그인</button>
@@ -55,4 +55,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Info;
