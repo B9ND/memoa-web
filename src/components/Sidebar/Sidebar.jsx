@@ -1,7 +1,7 @@
 import "./index.css";
-import {ReactComponent as ArrowSvg} from "../../../assets/icon/arrowLeft.svg"
-import {ReactComponent as CircleSvg} from "../../../assets/icon/circle.svg"
-import {ReactComponent as PlusSvg} from "../../../assets/icon/plus.svg"
+import {ReactComponent as ArrowSvg} from "../../assets/icon/arrowLeft.svg"
+import {ReactComponent as CircleSvg} from "../../assets/icon/circle.svg"
+import {ReactComponent as PlusSvg} from "../../assets/icon/plus.svg"
 import { Link, useLocation } from "react-router-dom";
 
 
