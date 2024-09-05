@@ -5,7 +5,7 @@ import { ReactComponent as Heart } from '../../assets/icon/heart.svg'
 const Boards = () => {
   const boards = [
     { profileImg:"",
-      name:"박재민",
+      name:"지존재민",
       day:"2024-08-09",
       mainImg:"",
       title:"",
@@ -47,7 +47,7 @@ const Boards = () => {
 
         </div>
       </div>
-      
+
     </div>
   )
 }
