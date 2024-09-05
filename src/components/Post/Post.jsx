@@ -1,7 +1,6 @@
 import React from "react";
 import "./index.css";
 
-
 const Post =()=>{
     const titleList=[
         {
@@ -27,15 +26,14 @@ const Post =()=>{
         else if (bookmark == true){
             titleList[0].isBookmark = false
         }
+        console.log(titleList[0].isBookmark)
     }
     // const subjectFilter=["국어", "사회", "수학","영어","과학","한국사"]
     // const gradeFilter = ["1학년", "2학년", "3학년", "4학년", "5학년", "6학년"]
     // const rankFilter=["초등", "중등", "고등"]
     
-    
     return(
         <>
-        <div className="container">
             <div className="postHead">
                 <img src={titleList[0].profileImg}/>
                 <div>{titleList[0].name}</div>
@@ -53,13 +51,12 @@ const Post =()=>{
                 <div className="postTitle">{titleList[0].title}</div>
                 <div className="icons">
                     <div className="selectOne">
-                        <span></span>
-                        <span></span>
+                        <span>comment</span>
+                        <span>heart</span>
                     </div>
-                    <div className="selectTwo"></div>
+                    <div className="selectTwo" onClick={clickBookmark}>bookmark</div>
                 </div>
             </div>
-        </div>
         </>
     )
 
