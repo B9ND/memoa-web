@@ -51,7 +51,7 @@ const Sidebar = () => {
               let icon = '/src/assets/icon/'+menu.path.substring(1)+'.svg'
               return location === menu.path ? (
                 <Link className="menu-lay-focused" to={menu.path} key={index}>
-                    <div className="comment" >
+                    <div className="comment">
                         <img src={icon} alt="" width='24px' height='24px' />
                       <span>{menu.name}</span>
                     </div>
