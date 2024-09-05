@@ -23,72 +23,74 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className="container">
-      <div className="sidebar">
+    <div className="fix">
+      <div className="container">
+        <div className="sidebar">
 
-        <div className="arrow-btn">
-          <ArrowSvg/>
-        </div>
-
-
-        <div className="profile">
-            <CircleSvg/>
-            <div className="user-info">
-              <div>냉동진교</div>
-              <span>oygnijoes0209@gmail.com</span>
-            </div>
-        </div>
+          <div className="arrow-btn">
+            <ArrowSvg/>
+          </div>
 
 
-        <div className="writeBtn">
-          <PlusSvg/>
-          <div>글 작성하기</div>
-        </div>
+          <div className="profile">
+              <CircleSvg/>
+              <div className="user-info">
+                <div>냉동진교</div>
+                <span>oygnijoes0209@gmail.com</span>
+              </div>
+          </div>
 
-        <div className="menu">
-          <div className="selectOne">
-            {menuOne.map((menu, index) => {
-              let icon = '/src/assets/icon/'+menu.path.substring(1)+'.svg'
-              return location === menu.path ? (
-                <Link className="menu-lay-focused" to={menu.path} key={index}>
+
+          <div className="writeBtn">
+            <PlusSvg/>
+            <div>글 작성하기</div>
+          </div>
+
+          <div className="menu">
+            <div className="selectOne">
+              {menuOne.map((menu, index) => {
+                let icon = '/src/assets/icon/'+menu.path.substring(1)+'.svg'
+                return location === menu.path ? (
+                  <Link className="menu-lay-focused" to={menu.path} key={index}>
+                      <div className="comment" >
+                          <img src={icon} alt="" width='24px' height='24px' />
+                        <span>{menu.name}</span>
+                      </div>
+                    </Link>
+                ) : (
+                  <Link className="menu-lay" to={menu.path} key={index}>
                     <div className="comment" >
                         <img src={icon} alt="" width='24px' height='24px' />
                       <span>{menu.name}</span>
                     </div>
                   </Link>
-              ) : (
-                <Link className="menu-lay" to={menu.path} key={index}>
-                  <div className="comment" >
-                      <img src={icon} alt="" width='24px' height='24px' />
-                    <span>{menu.name}</span>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+                )
+              })}
+            </div>
 
 
-          <div className="selectTwo">
-            {menuTwo.map((menu, index) => {
-              let icon = '/src/assets/icon/'+menu.path.substring(1)+'.svg'
-              return location === menu.path ? (
-                <Link className="menu-lay-focused" to={menu.path} key={index}>
+            <div className="selectTwo">
+              {menuTwo.map((menu, index) => {
+                let icon = '/src/assets/icon/'+menu.path.substring(1)+'.svg'
+                return location === menu.path ? (
+                  <Link className="menu-lay-focused" to={menu.path} key={index}>
+                      <div className="comment" >
+                        <img src={icon} alt="" width='24px' height='24px' />
+                        <span>{menu.name}</span>
+                      </div>
+                    </Link>
+                ) : (
+                  <Link className="menu-lay" to={menu.path} key={index}>
                     <div className="comment" >
                       <img src={icon} alt="" width='24px' height='24px' />
                       <span>{menu.name}</span>
                     </div>
                   </Link>
-              ) : (
-                <Link className="menu-lay" to={menu.path} key={index}>
-                  <div className="comment" >
-                    <img src={icon} alt="" width='24px' height='24px' />
-                    <span>{menu.name}</span>
-                  </div>
-                </Link>
-              )
-            })}
+                )
+              })}
+            </div>
+          
           </div>
-        
         </div>
       </div>
     </div>

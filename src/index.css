@@ -22,6 +22,9 @@ button {
 .head-main{
   flex-direction: column;
   display: flex;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100vw;
 }
 
 .layout{
