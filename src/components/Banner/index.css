@@ -4,32 +4,64 @@
   flex-direction: column;
   justify-content: center;
   height: 100vh;
-  padding: 0 0 10% 100px;
+  padding: 0 0 130px 0;
+  margin-left: 13%;
+}
+
+.cloud-1 {
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  transform: translateX(-50%);
+}
+
+.cloud-2 {
+  position: absolute;
+  top: -50%;
+  left: 100%;
+  transform: translateX(-50%);
 }
 
 .hero h1 {
   margin: 10px;
   font-size: 42px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .gap {
   padding-left: 35px;
 }
 
-.hero .highlight {
+.highlight {
   font-size: 42px;
+  font-weight: 400;
   color: #3867DD;
 }
 
+.highlight-bar {
+  font-weight: 600;
+  font-size: 42px;
+  color: #000;
+}
+
 .hero-button {
+  width: 315px;
+  height: 100px;
   font-family: 'Pretendard-Regular';
-  margin: 30px 50px;
-  padding: 15px 30px;
-  background-color: #715AFF;
-  color: white;
-  font-size: 1.25rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin: 30px 170px;
+  background-color: #fff;
+  color: #715AFF;
+  font-size: 62px;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highlight-logo {
+  font-size: 62px;
+  font-weight: 800;
+  color: #000;
 }
