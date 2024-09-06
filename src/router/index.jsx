@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from '../../src/pages/Login/Login'
+import Signup from '../../src/pages/Signup/Signup'
 import Home from '../../src/pages/Home/Home'
 import Follow from '../../src/pages/Follow/Follow'
 import Bookmark from '../../src/pages/Bookmark/Bookmark'
@@ -14,6 +15,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/follow' element={<Follow />}/>
         <Route path='/bookmark' element={<Bookmark />}/>

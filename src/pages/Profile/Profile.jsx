@@ -1,12 +1,16 @@
-import Layout from '../../components/Layout/Layout'
-import Post from '../../components/Post/post'
+
+import Header from "../../components/Header/Header"
+import Sidebar from "../../components/Sidebar/Sidebar"
 
 const Profile = () => {
   return (
-    <>
-    <Layout></Layout>
-    <Post/>
-    </>
+    <div className="layout">
+      <Sidebar/>
+      <div className="head-main">
+        <Header/>
+        <Post/>
+      </div>
+    </div>
   )
 }
 

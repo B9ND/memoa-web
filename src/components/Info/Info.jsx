@@ -3,7 +3,7 @@ import './Login.css';
 import del from '../../assets/del.svg';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
-// import inputIcon from "../../../assets/input-icon.svg"
+import inputIcon from '../../assets/input-icon.svg';
 
 const Info = () => {
   const [email, setEmail] = useState('');
@@ -26,6 +26,7 @@ const Info = () => {
         <p className='Cont'><span className="project">프로젝트</span> 계정으로 계속하기</p>
         <form>
           <div className="inputWrap">
+            <img src={inputIcon} className="input-icon" />
             <label className={`floating-label ${email ? 'active' : ''}`}>이메일</label>
             <input  
               type="email"
@@ -37,6 +38,7 @@ const Info = () => {
             </button>
           </div>
           <div className="inputWrap">
+            <img src={inputIcon} className="input-icon" />
             <label className={`floating-label ${password ? 'active' : ''}`}>비밀번호</label>
             <input
               type={showPassword ? "text" : "password"}

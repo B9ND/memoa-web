@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+.fix{
+    display: flex;
+    width: fit-content;
+    height: 100vh;
+}
+
 .container{
     display: flex;
     width: fit-content;
@@ -90,6 +96,7 @@ button{
     margin-bottom: 16px;
     color: black;
 }
+
 .menu-lay-focused{
     display: flex;
     flex-direction: row;
