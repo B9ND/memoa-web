@@ -22,6 +22,7 @@ const Post =()=>{
         let bookmark = titleList[0].isBookmark
         if (bookmark == false){
             titleList[0].isBookmark = true
+            
         }
         else if (bookmark == true){
             titleList[0].isBookmark = false
@@ -51,8 +52,8 @@ const Post =()=>{
                 <div className="postTitle">{titleList[0].title}</div>
                 <div className="icons">
                     <div className="selectOne">
-                        <span>comment</span>
-                        <span>heart</span>
+                        <span className="comment">comment</span>
+                        <span className="heart">heart</span>
                     </div>
                     <div className="selectTwo" onClick={clickBookmark}>bookmark</div>
                 </div>
