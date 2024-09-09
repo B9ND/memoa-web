@@ -1,0 +1,37 @@
+.profile-container{
+    width: 100vw;
+    height: 176px;
+    display: flex;
+    flex-direction: row;
+}
+.user-pro-img{
+    margin-left:128px;
+}
+.user-introduce{
+    margin-left: 40px;
+}
+.user-container{
+    display: flex;
+    justify-content: space-between;
+}
+.user-introduce>div{
+    font-size: 39px;
+    font-weight: 600;
+}
+.user-introduce>span{
+    font-size: 25px;
+    font-weight: 400;
+}
+.user-information{
+    display: flex;
+    flex-direction: column;
+}
+.user-information>div{
+    font-size: 25px;
+    font-weight: 400;
+}
+.user-number{
+    font-size: 25px;
+    font-weight: 400;
+    color: #715AFF;
+}
