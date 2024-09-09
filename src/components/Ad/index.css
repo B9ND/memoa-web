@@ -1,0 +1,9 @@
+.ad{
+  min-width: 200px;
+  max-width: 300px;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+}
+.ad-img{
+  width: 100%;
+}
