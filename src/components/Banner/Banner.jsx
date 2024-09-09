@@ -5,8 +5,6 @@ import cloud from '../../assets/cloud.svg'
 const Banner = () => {
   return (
     <div className="hero">
-      <img src={cloud} className="cloud-1" />
-      <img src={cloud} className="cloud-2" />
       <h1>기록하고,</h1>
       <h1>공유하고,</h1>
       <h1>활용하는,</h1>

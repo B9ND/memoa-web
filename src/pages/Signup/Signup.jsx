@@ -4,7 +4,7 @@ import './index.css';
 
 const Login = () => {
   return (
-    <div className="home">
+    <div className="signup-home">
       <Banner />
       <Info />
     </div>

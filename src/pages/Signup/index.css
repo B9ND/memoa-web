@@ -1,9 +1,14 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
-.home {
+.signup-home {
+  background-color: #715AFF;
+  background-image: url("../../assets/cloud.svg");
+  background-size: cover;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
