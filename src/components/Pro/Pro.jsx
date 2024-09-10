@@ -23,8 +23,8 @@ const Pro=()=>{
                     <div>작성한 글 <span className="user-number">{userInfo.postCount}</span></div>
                     <div>팔로워 <span className="user-number">{userInfo.followerCount}</span></div>
                     <div>팔로우 <span className="user-number">{userInfo.followCount}</span></div>
-                </div>           
-            </div>
+                </div>   
+            </div>        
     )
 }
 
