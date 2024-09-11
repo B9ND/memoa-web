@@ -1,7 +1,7 @@
 import "./index.css";
 import { CSSTransition } from "react-transition-group";
 import { MdAccountCircle, MdArrowBackIosNew, MdAdd, MdArrowForwardIos } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 
