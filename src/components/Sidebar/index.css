@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    width: fit-content;
+    height: 100vh;
+    justify-content: center;
+    /* align-items: center; */
+    background-color:#FFFFFF;
+    box-shadow: 8px 0 8px -8px rgba(0, 0, 0, 0.25);
+}
+
+
+.sidebar{
+    display: flex;
+    width: 296px;
+    padding: 12px 16px;
+    flex-direction: column;
+    justify-content: stretch;
+    height: 100%;
+    transition: 0.3s ease-in;
+}
+
+.sidebar.exit-done{
+    width: 84px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.arrow-btn{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 24px;
+    justify-content: end;
+}
+
+
+.profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 280px;
+    margin-bottom: 24px;
+    padding: 0 8px;
+}
+
+.profile.exit-done{
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.user-name{
+    font-weight: 600;
+    font-size: 16px;
+}
+.user-email{
+    font-size: 13px;
+}
+.writeBtn{
+    width: 100%;
+    height: 36px;
+    background-color: #715AFF;
+    border-radius: 4px;
+    display: flex;
+    padding: 12px 0;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+.writeBtn>div{
+    font-weight: 600;
+}
+
+.writeBtn>div{
+    color: white;
+}
+
+.menu-lay{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 48px;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding-left: 14px;
+    color: black;
+}
+
+.menu-lay.exit-done{
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 16px;
+}
+
+.menu-lay:hover{
+    background-color: #fafafa;
+}
+
+.menu-lay-focused{
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f1f1;
+    width: 100%;
+    height: 48px;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: black;
+    padding-left: 14px;
+}
+
+.menu-lay-focused.exit-done{
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 16px;
+}
+   
+.comment{
+    display: flex;
+    flex-direction: row;
+    z-index: 10;
+}
+
+.comment>span{
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 12px;
+    padding-top: 3px;
+}
+  
+.fade.enter {
+    opacity: 0;
+}
+  
+.fade.enter-active {
+    opacity: 1;
+    transition: opacity 1000ms ease-in;
+}
+  
+.fade.exit {
+    opacity: 1;
+}
+  
+.fade.exit-active {
+    opacity: 0;
+    transition: opacity 400ms;
+}
