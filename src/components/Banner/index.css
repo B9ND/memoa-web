@@ -9,20 +9,6 @@
   margin-left: 13%;
 }
 
-.cloud-1 {
-  position: absolute;
-  top: 45%;
-  left: 10%;
-  transform: translateX(-50%);
-}
-
-.cloud-2 {
-  position: absolute;
-  top: -50%;
-  left: 100%;
-  transform: translateX(-50%);
-}
-
 .hero h1 {
   margin: 10px;
   font-size: 42px;
