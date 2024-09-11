@@ -9,22 +9,31 @@ import School from '../../src/pages/School/School'
 import Setting from '../../src/pages/Setting/Setting'
 import Search from '../../src/pages/Search/Search'
 import Help from '../../src/pages/Help/Help'
+import Sidebar from '../components/Sidebar/Sidebar'
+import { useState } from 'react'
 
 const Router = () => {
+  
+
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup/>}/>
-        <Route path='/home' element={<Home />} />
-        <Route path='/follow' element={<Follow />}/>
-        <Route path='/bookmark' element={<Bookmark />}/>
-        <Route path='/profile' element={<Profile />}/>
-        <Route path='/school' element={<School />}/>
-        <Route path='/setting' element={<Setting />}/>
-        <Route path='/search' element={<Search />}/>
-        <Route path='/help' element={<Help/>}/>
-      </Routes>
+      <div className="layout">
+        <Sidebar />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup/>}/>
+          <Route path='/home' element={<Home />} />
+          <Route path='/follow' element={<Follow />}/>
+          <Route path='/bookmark' element={<Bookmark />}/>
+          <Route path='/profile' element={<Profile />}/>
+          <Route path='/school' element={<School />}/>
+          <Route path='/setting' element={<Setting />}/>
+          <Route path='/search' element={<Search />}/>
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/sidebar' element={<Sidebar/>}/>
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }

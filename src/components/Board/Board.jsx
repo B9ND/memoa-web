@@ -25,11 +25,11 @@ const Board = ({detail}) => {
                           <div className="board-counters">
                             <div className="board-comment">
                               <MdOutlineComment style={{width:'24px', height:'24px', marginRight:'8px'}}/>
-                              <div className="board-count">{detail.commentCount}</div>
+                              <div className="board-count">{detail.commentCount >= 999 ? '999+' : detail.commentCount}</div>
                             </div>
                             <div className="board-heart">
                               <FaRegHeart style={{width:'24px', height:'24px', marginRight:'8px'}}/>
-                              <div className="board-count">{detail.heartCount}</div>
+                              <div className="board-count">{detail.heartCount >= 999 ? '999+' : detail.heartCount}</div>
                             </div>
                           </div>
                           <div className="board-bookmark">
