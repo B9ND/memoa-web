@@ -15,16 +15,18 @@ const Pro=()=>{
             <div className="user-pro-img">
                 <img src={userInfo.profileImg} style={{width:"160px", height:"160px"}} />
             </div>
-            <div className="user-introduce">
-                <div>{userInfo.name}</div>
-                <span>{userInfo.introduce}</span>
+            <div className="user-info-container">
+                <div className="user-introduce">
+                    <div>{userInfo.name}</div>
+                    <span>{userInfo.introduce}</span>
+                </div>
+                    <div className="user-information">
+                            <div>작성한 글 <span className="user-number">{userInfo.postCount}</span></div>
+                            <div>팔로워 <span className="user-number">{userInfo.followerCount}</span></div>
+                            <div>팔로우 <span className="user-number">{userInfo.followCount}</span></div>
+                        </div>
+                    </div>  
             </div>
-                <div className="user-information">
-                    <div>작성한 글 <span className="user-number">{userInfo.postCount}</span></div>
-                    <div>팔로워 <span className="user-number">{userInfo.followerCount}</span></div>
-                    <div>팔로우 <span className="user-number">{userInfo.followCount}</span></div>
-                </div>   
-            </div>        
     )
 }
 

@@ -20,18 +20,6 @@ const Post =()=>{
             rankTag:"고등",
             gradeTag:"1학년"
         }
-
-    const clickBookmark =()=>{
-        let bookmark = titleList.isBookmark
-        if (bookmark == false){
-            titleList.isBookmark = true
-            
-        }
-        else if (bookmark == true){
-            titleList.isBookmark = false
-        }
-        console.log(titleList.isBookmark)
-    }
     // const subjectFilter=["국어", "사회", "수학","영어","과학","한국사"]
     // const gradeFilter = ["1학년", "2학년", "3학년", "4학년", "5학년", "6학년"]
     // const rankFilter=["초등", "중등", "고등"]
@@ -67,7 +55,7 @@ const Post =()=>{
                             <span>{titleList.heartCount >= 999 ? '999+' : titleList.heartCount}</span>
                         </div>
                     </div>
-                    <div className="post-state-two" onClick={clickBookmark}>
+                    <div className="post-state-two" >
                         <MdBookmarkBorder style={{width:'28px', height:'28px'}}/>
                     </div>
                 </div>
