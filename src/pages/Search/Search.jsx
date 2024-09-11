@@ -4,9 +4,7 @@ const Search = () => {
   return (
     <div className="head-main">
         <Header />
-        <div className="home-main">
-        </div>
-      </div>
+    </div>
   )
 }
 
