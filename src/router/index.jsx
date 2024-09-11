@@ -13,9 +13,6 @@ import Sidebar from '../components/Sidebar/Sidebar'
 import { useState } from 'react'
 
 const Router = () => {
-  
-
-
   return (
     <BrowserRouter>
       <div className="layout">
