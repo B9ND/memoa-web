@@ -4,9 +4,12 @@ const Ads = () => {
   const Ads = [
     { adId: 0,
       adImg: 'src/assets/ad.png',
-      adLink: ''},
+      adLink: 'https://dodam.b1nd.com/'},
     { adId: 1,
       adImg: 'src/assets/ad2.jpeg',
+      adLink: ''},
+    { adId: 2,
+      adImg: 'src/assets/ad3.png',
       adLink: ''}
   ]
   return (

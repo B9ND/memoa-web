@@ -1,14 +1,12 @@
 import Header from "../../components/Header/Header"
-import Sidebar from "../../components/Sidebar/Sidebar"
 
 const Search = () => {
   return (
-    <div className="layout">
-      <Sidebar/>
-      <div className="head-main">
-        <Header/>
+    <div className="head-main">
+        <Header />
+        <div className="home-main">
+        </div>
       </div>
-    </div>
   )
 }
 

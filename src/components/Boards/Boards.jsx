@@ -5,7 +5,7 @@ const Boards = () => {
   const boards = [
     { id: 0,
       profileImg:"src/assets/profile-img.png",
-      name:"재민",
+      name:"지존재민",
       date:"2024-08-09",
       mainImg:"src/assets/boardImg.png",
       title:"⭐  프리드리히 니체 명언 ⭐",
@@ -20,7 +20,7 @@ const Boards = () => {
 
     { id:1,
       profileImg:"src/assets/profile-img.png",
-      name:"재민",
+      name:"지존재민",
       date:"2024-08-09",
       mainImg:"src/assets/boardImg.png",
       title:"⭐  프리드리히 니체 명언 ⭐",

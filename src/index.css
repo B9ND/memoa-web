@@ -17,6 +17,8 @@ a {
 
 button {
   cursor: pointer;
+  border: none;
+  background-color: #FFFFFF;
 }
 
 .head-main{
@@ -29,4 +31,15 @@ button {
 
 .layout{
   display: flex;
+  width: 100vw;
+}
+
+.normal-icon{
+  width: 24px;
+  height: 24px;
+}
+
+.big-icon{
+  width: 48px;
+  height: 48px;
 }
