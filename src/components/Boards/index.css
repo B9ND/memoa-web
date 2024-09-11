@@ -1,20 +1,9 @@
 .boards{
   display: flex;
   width: 100%;
+  height: fit-content;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid;
 }
 
-.board{
-  display: flex;
-  flex-direction: column;
-  width: 420px;
-  height: 500px;
-  border: 1px solid;
-}
-
-.board-header{
-  
-}

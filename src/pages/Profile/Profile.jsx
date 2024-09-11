@@ -6,14 +6,11 @@ import Pro from "../../components/Pro/Pro"
 
 const Profile = () => {
   return (
-    <div className="layout">
-      <Sidebar/>
       <div className="head-main">
         <Header/>
         <Pro/>
         <Post/>
       </div>
-    </div>
   )
 }
 

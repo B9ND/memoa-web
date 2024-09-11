@@ -1,9 +1,220 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
-.home {
+.signup-home {
+  background-image: url("../../assets/cloud.svg");
+  background-size: cover;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.hero {
+  background-color: #715AFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 0 130px 0;
+  margin-left: 13%;
+}
+
+.hero h1 {
+  margin: 10px;
+  font-size: 42px;
+  font-weight: 400;
+}
+
+.gap {
+  padding-left: 35px;
+}
+
+.highlight {
+  font-size: 42px;
+  font-weight: 400;
+  color: #3867DD;
+}
+
+.highlight-bar {
+  font-weight: 600;
+  font-size: 42px;
+  color: #000;
+}
+
+.hero-button {
+  width: 315px;
+  height: 100px;
+  font-family: 'Pretendard-Regular';
+  margin: 30px 170px;
+  background-color: #fff;
+  color: #715AFF;
+  font-size: 62px;
+  font-weight: 800;
+  border-radius: 8px;
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highlight-logo {
+  font-size: 62px;
+  font-weight: 800;
+  color: #000;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-right: 13%;
+  margin-left: 10%;
+}
+
+.login-box {
+  text-align: center;
+  margin-right: 150px;
+}
+
+.logo-placeholder {
+  width: 88px;
+  height: 88px;
+  background-color: #715AFF;
+  margin: 0 auto;
+}
+
+.login-box h2 {
+  font-weight: 600;
+  font-size: 39px;
+  margin: 20px;
+}
+
+.project {
+  color: #715AFF;
+  font-weight: 400;
+  margin: 0;
+  font-size: 25px;
+}
+
+.Cont {
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 38px;
+}
+
+.inputWrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.floating-label {
+  position: absolute;
+  left: 50px; /* Adjusted for icon space */
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  font-size: 18px;
+  color: #818182;
+}
+
+.floating-label.active {
+  top: 12px;
+  left: 50px; /* Adjusted for icon space */
+  font-size: 10px;
+  color: #715AFF;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 27px;
+  height: 27px;
+}
+
+.login-box input {
+  display: block;
+  width: 400px;
+  height: 56px;
+  padding: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px; /* Adjusted for icon space */
+}
+
+.login-box input:focus {
+  border-color: #A090FF;
+  outline: none;
+}
+
+.login-box input:focus + .floating-label,
+.login-box input:not(:placeholder-shown) + .floating-label {
+  top: -12px;
+  left: 50px; /* Adjusted for icon space */
+  font-size: 16px;
+  color: #715AFF;
+}
+
+.Delbutton {
+  position: absolute;
+  right: 20px;
+  top: 53%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eyebutton {
+  position: absolute;
+  right: 18px;
+  top: 52%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Delbutton img {
+  width: 17px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.eyebutton img {
+  width: 21px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.login-button {
+  font-size: 25px;
+  font-weight: 600;
+  background-color: #715AFF;
+  width: 400px;
+  height: 64px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.signup {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 20px;
+  color: #666;
+}
+
+.signup a {
+  font-weight: 600;
+  color: #715AFF;
+  text-decoration: none;
 }

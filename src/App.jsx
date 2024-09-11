@@ -21,10 +21,15 @@
 
 import Router from './router/index'
 
+
 const App = () => {
+
+  // console.log(loc.pathname)
+  // console.log(loc.pathname.substring in hideSidebar)
+
   return (
     <Router/>
-  );
+  )
 }
 
 export default App;
