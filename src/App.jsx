@@ -1,4 +1,4 @@
-import Router from './router/index'
+import Router from '../src/components/router/index'
 
 const App = () => {
   return (
