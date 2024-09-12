@@ -19,7 +19,7 @@ const HomeSelector = ({ setBoard, board }) => {
         className={board == "new" ? "selecter" : "selected"}
         onClick={() => boardchange("new")}
       >
-        새로운 글
+        최신순
       </button>
     </div>
   );
