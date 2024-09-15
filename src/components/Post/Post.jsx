@@ -69,6 +69,7 @@ const Post =()=>{
             <div className="post-title">{titleList.title}</div>
         </div>
         </div>
+        <div>아아악</div>
         </>
     )
 
