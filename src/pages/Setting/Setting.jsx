@@ -1,13 +1,18 @@
+import { useState } from "react"
 import Header from "../../components/Header/Header"
 import './index.css'
 
 const Setting = () => {
+
+  const [ isFixing, setIsFixing ] = useState(false);
+
   const userInfo = {
     userName:'지존재민',
     userIntro:'나는 지존짱짱',
     email:'pjmin0923@gmail.com',
     school:'대구소프트웨어마이스터고'
   }
+
   return (
       <div className="head-main">
         <Header/>
@@ -20,11 +25,19 @@ const Setting = () => {
                 <div className="setting-userInfo">
                   <div className="setting-user-name">{userInfo.userName}</div>
                   <div className="setting-user-intro">{userInfo.userIntro}</div>
-                  <button className="setting-fix-info">수정하기</button>
                 </div>
               </div>
-              <div className="setting-email"></div>
-              <div className="setting-school"></div>
+              <div className="setting-at">
+                <div className="setting-heading">이메일</div>
+                <div className={isFixing == false ? 'setting-contain' : 'setting-contain-fixing'}>{userInfo.email}</div>
+              </div>
+              <div className="setting-at">
+                <div className="setting-heading">학교</div>
+                <div className={isFixing == false ? 'setting-contain' : 'setting-contain-fixing'}>{userInfo.school}</div>
+              </div>
+              <div className="setting-fix">
+                <button className="setting-fix-button" onClick={()=>setIsFixing(!isFixing)}>{isFixing == false ? '수정하기' : '수정 완료'}</button>
+              </div>
             </div>
           </div>
         </div>

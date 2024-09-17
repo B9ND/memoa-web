@@ -18,7 +18,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid;
   padding: 24px 0 48px 0;
 }
 
@@ -30,10 +29,10 @@
 }
 
 .setting-profile{
-  border: 1px solid;
   width: 100%;
   height: fit-content;
   display: flex;
+  margin-bottom: 32px;
 }
 
 .setting-profileimg{
@@ -62,4 +61,50 @@
   height: 100%;
   font-size: 25px;
   padding: 0px 8px;
+}
+
+.setting-fix-info{
+  width: fit-content;
+
+}
+
+.setting-at{
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-bottom: 1px solid;
+  margin-bottom: 28px;
+}
+
+.setting-heading{
+  font-size: 25px;
+  font-weight: 600;
+  padding-right: 24px;
+}
+
+.setting-contain{
+  font-size: 22px;
+  width: 80%;
+  transition: 80ms linear;
+}
+
+.setting-contain-fixing{
+  font-size: 22px;
+  border: 1px solid #6D6D6E;
+  color: #6D6D6E;
+  width: 80%;
+  padding: 6px 0 6px 12px;
+  transition: 80ms linear;
+}
+
+.setting-fix{
+  display: flex;
+  justify-content: end;
+}
+
+.setting-fix-button{
+  color: #3867DD;
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 600;
 }
