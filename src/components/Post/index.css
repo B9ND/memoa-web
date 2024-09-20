@@ -1,8 +1,4 @@
-.post-wrap {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+
 .post-container {
   width: 320px;
   height: fit-content;
@@ -10,7 +6,6 @@
   border-radius: 12px;
   padding: 16px 0px 16px 0px;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
-  margin: 40px;
 }
 .post-head {
   width: 100%;

@@ -1,13 +1,18 @@
 /* src/styles/GlobalStyles.css */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
-*{
+* {
   box-sizing: border-box;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   color: #333;
 }
 
@@ -18,28 +23,29 @@ a {
 button {
   cursor: pointer;
   border: none;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
-.head-main{
+.head-main {
   flex-direction: column;
   display: flex;
   overflow-y: scroll;
+  align-items: center;
   height: 100vh;
   width: 100vw;
 }
 
-.layout{
+.layout {
   display: flex;
   width: 100vw;
 }
 
-.normal-icon{
+.normal-icon {
   width: 24px;
   height: 24px;
 }
 
-.big-icon{
+.big-icon {
   width: 48px;
   height: 48px;
 }
