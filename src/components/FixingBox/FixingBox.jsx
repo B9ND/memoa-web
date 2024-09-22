@@ -25,6 +25,13 @@ const FixingBox = ({detail, isFix, whatFix}) => {
         fixing = <div className="setting-contain">{detail.school}</div>
       }
       break;
+    case 'name' :
+      if( isFix == true ){
+        fixing = <input type="text" className="setting-user-name-fixing" placeholder={detail.userName} />;
+      }else{
+        fixing = <div className="setting-user-name">{detail.userName}</div>
+      }
+      break;
     default :
       break;
   }

@@ -28,7 +28,7 @@ const Setting = () => {
               <div className="setting-profile">
                 <img src="src/assets/profile-img.png" alt="" className="setting-profileimg"/>
                 <div className="setting-user-info">
-                  <div className="setting-user-name">{userInfo.userName}</div>
+                  <FixingBox detail={userInfo} isFix={isFixing} whatFix='name' />
                   <FixingBox detail={userInfo} isFix={isFixing} whatFix='intro' />
                 </div>
               </div>
