@@ -1,4 +1,3 @@
-
 import Header from "../../components/Header/Header"
 import Post from "../../components/Post/post"
 import Pro from "../../components/Pro/Pro"

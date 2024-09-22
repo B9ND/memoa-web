@@ -10,6 +10,7 @@ import Setting from '../../pages/Setting/Setting'
 import Search from '../../pages/Search/Search'
 import Help from '../../pages/Help/Help'
 import Sidebar from '../Sidebar/Sidebar'
+import NotFound from '../../pages/NotFound/NotFound'
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
           <Route path='/search' element={<Search />}/>
           <Route path='/help' element={<Help/>}/>
           <Route path='/sidebar' element={<Sidebar/>}/>
+          <Route path='/*' element={<NotFound/>}/>
         </Routes>
       </div>
     </BrowserRouter>

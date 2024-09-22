@@ -9,18 +9,20 @@ const HomeSelector = ({ setBoard, board }) => {
 
   return (
     <div className="selecters">
-      <button
-        className={board == "follow" ? "selecter" : "selected"}
-        onClick={() => boardchange("follow")}
-      >
-        팔로우
-      </button>
-      <button
-        className={board == "new" ? "selecter" : "selected"}
-        onClick={() => boardchange("new")}
-      >
-        최신순
-      </button>
+      <div className="selecter-underline">
+        <button
+          className={board == "follow" ? "selecter" : "selected"}
+          onClick={() => boardchange("follow")}
+        >
+          팔로우
+        </button>
+        <button
+          className={board == "new" ? "selecter" : "selected"}
+          onClick={() => boardchange("new")}
+        >
+          최신순
+        </button>
+      </div>
     </div>
   );
 };
