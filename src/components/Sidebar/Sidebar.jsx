@@ -11,6 +11,8 @@ const Sidebar = () => {
   const location = useLocation().pathname
   const [isOpen, setIsOpen] = useState(true);
 
+  const goodLoc = ['/home', '/search', '/profile', '/bookmark', '/school', '/help', '/profile', '/setting']
+  
   const menuOne = [
     { name: "홈", path: "/home" },
     { name: "검색", path: "/search" },
@@ -24,7 +26,7 @@ const Sidebar = () => {
     { name: "도움말", path: "/help" },
   ];
 
-  return location == '/login' || location == '/signup' ? (
+  return goodLoc.includes(location) == false ? (
     <></>
   ) : (
     <div className="container" >
@@ -37,7 +39,7 @@ const Sidebar = () => {
         </div>
 
         <CSSTransition in={isOpen} timeout={{enter: 300, exit: 450}} className={'profile'} >
-          <div className="profile">
+          <Link to={'/profile'} className="profile">
             <MdAccountCircle className="big-icon"/>
             <CSSTransition in={isOpen} timeout={400} className={"fade user-info"} unmountOnExit>
               <div className="user-info">
@@ -45,7 +47,7 @@ const Sidebar = () => {
                 <div className="user-email">oygnijoes0209</div>
               </div>
             </CSSTransition>
-          </div>
+          </Link>
         </CSSTransition>
 
         <button className="writeBtn">
