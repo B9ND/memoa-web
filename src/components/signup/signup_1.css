@@ -1,0 +1,112 @@
+
+.inputWrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.floating-label {
+  position: absolute;
+  left: 50px; /* Adjusted for icon space */
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  font-size: 18px;
+  color: #818182;
+}
+
+.floating-label.active {
+  top: 12px;
+  left: 50px; /* Adjusted for icon space */
+  font-size: 10px;
+  color: #715AFF;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 27px;
+  height: 27px;
+}
+
+.login-box input {
+  display: block;
+  width: 400px;
+  height: 56px;
+  padding: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px; /* Adjusted for icon space */
+}
+
+.signup-box input {
+  display: block;
+  width: 400px;
+  height: 56px;
+  padding: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px; /* Adjusted for icon space */
+}
+
+.login-box input:focus {
+  border-color: #A090FF;
+  outline: none;
+}
+
+.signup-box input:focus {
+  border-color: #A090FF;
+  outline: none;
+}
+
+.login-box input:focus + .login-floating-label,
+.login-box input:not(:placeholder-shown) + .login-floating-label {
+  top: -12px;
+  left: 50px; /* Adjusted for icon space */
+  font-size: 16px;
+  color: #715AFF;
+}
+
+.login-box input:focus + .login-floating-label,
+.login-box input:not(:placeholder-shown) + .login-floating-label {
+  top: -12px;
+  left: 50px; /* Adjusted for icon space */
+  font-size: 16px;
+  color: #715AFF;
+}
+
+.Delbutton {
+  position: absolute;
+  right: 20px;
+  top: 53%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eyebutton {
+  position: absolute;
+  right: 18px;
+  top: 52%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Delbutton img {
+  width: 17px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.eyebutton img {
+  width: 21px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
