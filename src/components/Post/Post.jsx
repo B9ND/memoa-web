@@ -310,7 +310,7 @@ const Post = () => {
         <Masonry gutter={"30px"}>
           {titleList.map((post, index) => {
             return (
-              <div className="post-container">
+              <div key={index} className="post-container">
                 <div className="post-head">
                   <img src={post.profileImg} />
                   <div className="user-name">{post.name}</div>
