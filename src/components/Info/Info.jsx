@@ -1,15 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-import del from '../../assets/del.svg';
-import eyeOpen from '../../assets/eye_1.svg';
-import eyeClosed from '../../assets/eye_2.svg';
-import inputIcon from '../../assets/input-icon.svg';
-import signup_1 from '../signup/signup_1.jsx';
+import EmailPasswordForm from './EmailPasswordForm';
 
 const Info = ({ isLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [step, setStep] = useState(1); // 현재 단계(컴포넌트 변경용)
 
   const handleClearEmail = () => {
     setEmail('');
@@ -17,6 +14,11 @@ const Info = ({ isLogin }) => {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleNextStep = (e) => {
+    e.preventDefault();
+    setStep(2); // 다음 단계로 이동
   };
 
   return (
@@ -30,28 +32,15 @@ const Info = ({ isLogin }) => {
               <span className="login-project">프로젝트</span> 계정으로 계속하기
             </p>
             <form>
-            <div className="inputWrap">
-              <img src={inputIcon} className="input-icon" />
-              <label className={`floating-label ${email ? 'active' : ''}`}>이메일</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} />
-              <button type="button" className="Delbutton" onClick={handleClearEmail}>
-                <img src={del} alt="Clear Email" />
-              </button>
-            </div>
-            <div className="inputWrap">
-              <img src={inputIcon} className="input-icon" />
-              <label className={`floating-label ${password ? 'active' : ''}`}>비밀번호</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} />
-              <button type="button" className="eyebutton" onClick={toggleShowPassword}>
-                <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
-              </button>
-            </div>
+              <EmailPasswordForm
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                showPassword={showPassword}
+                toggleShowPassword={toggleShowPassword}
+                handleClearEmail={handleClearEmail}
+              />
               <button type="submit" className="login-button">로그인</button>
             </form>
             <p className="login-signup-link">
@@ -64,37 +53,34 @@ const Info = ({ isLogin }) => {
           <div className="signup-box">
             <div className="login-logo" />
             <h2>회원가입</h2>
-            <p className="signup-Cont">
-              가입해서 노트 정리 시작하기!
-            </p>
+            <p className="signup-Cont">가입해서 노트 정리 시작하기!</p>
             <form>
-            <div className="inputWrap">
-              <img src={inputIcon} className="input-icon" />
-              <label className={`floating-label ${email ? 'active' : ''}`}>이메일</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} />
-              <button type="button" className="Delbutton" onClick={handleClearEmail}>
-                <img src={del} alt="Clear Email" />
-              </button>
-            </div>
-            <div className="inputWrap">
-              <img src={inputIcon} className="input-icon" />
-              <label className={`floating-label ${password ? 'active' : ''}`}>비밀번호</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} />
-              <button type="button" className="eyebutton" onClick={toggleShowPassword}>
-                <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
-              </button>
-            </div>
-              <button type="submit" className="login-button">다음으로</button>
-              <div className='tc'>
-                계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과
-                <span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-              </div>
+              {step === 1 ? (
+                <>
+                  <EmailPasswordForm
+                    email={email}
+                    setEmail={setEmail}
+                    password={password}
+                    setPassword={setPassword}
+                    showPassword={showPassword}
+                    toggleShowPassword={toggleShowPassword}
+                    handleClearEmail={handleClearEmail}
+                  />
+                  <button type="button" className="login-button" onClick={handleNextStep}>
+                    다음으로
+                  </button>
+                  <div className='tc'>
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과
+                    <span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <h3>박재민 멍청이</h3>
+                  <p>여승원 채고</p>
+                  {/* 여기에 다른 폼 필드를 추가할 수 있음 */}
+                </div>
+              )}
             </form>
             <p className="login-signup-link">
               이미 계정이 있다면? <a href="/login">로그인</a>
