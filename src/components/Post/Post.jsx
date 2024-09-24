@@ -9,7 +9,7 @@ const Post = () => {
     {
       id: 1,
       name: "지존진교",
-      profileImg: "src/assets/profile-img.png",
+      profileImg: "../src/assets/profile-img.png",
       title: "국어 고1 천재 1-2 노트필기 공유합니다",
       day: "2024.08.33",
       mainImg: "src/assets/main-img.png",

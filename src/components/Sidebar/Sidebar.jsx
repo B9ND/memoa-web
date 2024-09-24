@@ -4,8 +4,6 @@ import { MdAccountCircle, MdArrowBackIosNew, MdAdd, MdArrowForwardIos } from "re
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-
-/* eslint-disable */
 const Sidebar = () => {
 
   const location = useLocation().pathname
