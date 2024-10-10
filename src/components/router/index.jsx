@@ -33,7 +33,7 @@ const Router = () => {
         </Routes>
       </div>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
