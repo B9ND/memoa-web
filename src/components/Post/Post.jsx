@@ -1,4 +1,3 @@
-import React from "react";
 import "./index.css";
 import { MdOutlineComment, MdBookmarkBorder } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
@@ -304,7 +303,7 @@ const Post = () => {
   return (
     <>
       <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+        columnsCountBreakPoints={{ 900: 1, 1000: 2, 1100: 3 }}
         style={{ width: "85%" }}
       >
         <Masonry gutter={"30px"}>
