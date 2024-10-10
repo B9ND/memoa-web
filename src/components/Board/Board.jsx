@@ -20,7 +20,7 @@ const Board = ({detail}) => {
                         <div className="board-date">{detail.date}</div>
                       </div>
   const boardMain = <div className="board-main">
-                      <img src="src/assets/boardImg.png" alt="" className="board-img" />
+                      <img src={detail.mainImg} alt="" className="board-img" />
                         <div className="board-state">
                           <div className="board-counters">
                             <div className="board-comment">
