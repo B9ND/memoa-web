@@ -15,7 +15,7 @@ const Sidebar = () => {
   const location = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(true);
 
-  const goodLoc = [ '/home', '/search', '/profile', 'bookmark', '/school', '/setting', '/help']
+  const goodLoc = [ '/home', '/search', '/profile', '/bookmark', '/school', '/setting', '/help']
 
   const menuOne = [
     { name: "홈", path: "/home", origin: "home" },
