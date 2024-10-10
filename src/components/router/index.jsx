@@ -23,7 +23,7 @@ const Router = () => {
           <Route path='/home' element={<Home />} />
           <Route path='/follow' element={<Follow />}/>
           <Route path='/bookmark' element={<Bookmark />}/>
-          <Route path='/profile' element={<Profile />}/>
+          <Route path='/profile/:username' element={<Profile />}/>
           <Route path='/school' element={<School />}/>
           <Route path='/setting' element={<Setting />}/>
           <Route path='/search' element={<Search />}/>

@@ -15,8 +15,8 @@ const Sidebar = () => {
   const location = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(true);
 
-  const goodLoc = ['/home', '/search', '/profile', '/bookmark', '/school', '/help', '/profile', '/setting']
-  
+  const goodLoc = [ '/home', '/search', '/profile', 'bookmark', '/school', '/setting', '/help']
+
   const menuOne = [
     { name: "홈", path: "/home", origin: "home" },
     { name: "검색", path: "/search", origin: "search" },
@@ -30,9 +30,9 @@ const Sidebar = () => {
     { name: "도움말", path: "/help", origin: "help" },
   ];
 
-  return goodLoc.includes(location) == false ? (
-    <></>
-  ) : (
+  console.log(goodLoc.includes(location.split('/:')[0]))
+
+  return goodLoc.includes(location.split('/:')[0]) ? (
     <div className="container" >
     <CSSTransition in={isOpen} className={'sidebar'} timeout={150} >
       <div className="sidebar">
@@ -41,18 +41,6 @@ const Sidebar = () => {
           {isOpen == true ? <MdArrowBackIosNew className="normal-icon" style={{ margin:'8px', cursor:'pointer'}} onClick={() => setIsOpen(!isOpen)}/>
           : <MdArrowForwardIos className='normal-icon' style={{margin:'8px', cursor:'pointer'}} onClick={() => setIsOpen(!isOpen)}/>}
         </div>
-
-        <CSSTransition in={isOpen} timeout={{enter: 300, exit: 450}} className={'profile'} >
-          <Link to={'/profile'} className="profile">
-            <MdAccountCircle className="big-icon"/>
-            <CSSTransition in={isOpen} timeout={400} className={"fade user-info"} unmountOnExit>
-              <div className="user-info">
-                <div className="user-name">zㅣ존재민</div>
-                <div className="user-email">oygnijoes0209</div>
-              </div>
-            </CSSTransition>
-          </Link>
-        </CSSTransition>
           <CSSTransition
             in={isOpen}
             timeout={{ enter: 300, exit: 450 }}
@@ -193,6 +181,8 @@ const Sidebar = () => {
         </div>
       </CSSTransition>
     </div>
+  ) : (
+    <></>
   );
 };
 
