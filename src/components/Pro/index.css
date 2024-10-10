@@ -12,6 +12,19 @@
 .user-introduce {
   margin-left: 40px;
 }
+.user-introduce > div {
+  display: flex;
+  margin-bottom: 4px;
+}
+.user-introduce > div > button {
+  width: 98px;
+  height: 46px;
+  color: #fff;
+  background-color: #715aff;
+  font-size: 25px;
+  font-weight: 500;
+  border-radius: 12px;
+}
 .user-container {
   display: flex;
 }
@@ -21,9 +34,10 @@
   width: 63%;
   justify-content: space-between;
 }
-.user-introduce > div {
+.user-introduce > div > div {
   font-size: 39px;
   font-weight: 600;
+  margin-right: 16px;
 }
 .user-introduce > span {
   font-size: 25px;
