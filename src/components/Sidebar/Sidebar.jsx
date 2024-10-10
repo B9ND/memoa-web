@@ -75,7 +75,7 @@ const Sidebar = () => {
           </button>
 
           <div className="menu">
-            <div className="selectOne">
+            <div className="select-one">
               {menuOne.map((menu, index) => {
                 let icon =
                   "/src/assets/icon/" + menu.path.substring(1) + ".svg";
