@@ -49,7 +49,6 @@ const Pro = () => {
       <div className="user-pro-img">
         <img
           src={userInfo[userIndex].profileImg}
-          style={{ width: "160px", height: "160px" }}
         />
       </div>
       <div className="user-info-container">

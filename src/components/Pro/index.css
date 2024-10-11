@@ -9,6 +9,10 @@
 .user-pro-img {
   margin-left: 128px;
 }
+.user-pro-img > img {
+  width: 160px;
+  height: 160px;
+}
 .user-introduce {
   margin-left: 40px;
 }
@@ -57,4 +61,31 @@
   font-size: 25px;
   font-weight: 400;
   color: #715aff;
+}
+@media (max-width: 950px) {
+  .user-pro-img > img {
+    width: 130px;
+    height: 130px;
+  }
+  .user-introduce > div > div {
+    font-size: 30px;
+  }
+  .user-introduce > span {
+    font-size: 20px;
+  }
+  .user-introduce > div > button {
+    width: 90px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .user-information > div,
+  .user-information > div > span {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 750px) {
+  .user-information {
+    
+  }
 }

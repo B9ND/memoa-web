@@ -303,7 +303,7 @@ const Post = () => {
   return (
     <>
       <ResponsiveMasonry
-        columnsCountBreakPoints={{ 900: 1, 1000: 2, 1100: 3 }}
+        columnsCountBreakPoints={{ 900: 1, 1000: 2, 1300: 3 }}
         style={{ width: "85%" }}
       >
         <Masonry gutter={"30px"}>
