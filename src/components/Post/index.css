@@ -1,5 +1,5 @@
-
 .post-container {
+  justify-content: center;
   width: 320px;
   height: fit-content;
   background-color: white;
@@ -101,3 +101,19 @@
   overflow: hidden;
   white-space: nowrap;
 }
+.all-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* @media (max-width: 1300px) {
+  .control {
+    width: 1020px;
+  }
+}
+@media (max-width: 1000px) {
+  .control {
+    width: 670px;
+  }
+} */

@@ -302,63 +302,69 @@ const Post = () => {
   ];
   return (
     <>
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 900: 1, 1000: 2, 1300: 3 }}
-        style={{ width: "85%" }}
-      >
-        <Masonry gutter={"30px"}>
-          {titleList.map((post, index) => {
-            return (
-              <div key={index} className="post-container">
-                <div className="post-head">
-                  <img src={post.profileImg} />
-                  <div className="user-name">{post.name}</div>
-                  <div className="post-dot">•</div>
-                  <span>{post.day}</span>
-                </div>
-                <div className="main-img">
-                  <img src={post.mainImg} />
-                </div>
-                <div className="post-footer">
-                  <div className="icons">
-                    <div className="post-state">
-                      <div className="post-comment">
-                        <MdOutlineComment
-                          style={{ width: "24px", height: "24px" }}
+      <div className="all-container">
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 900: 1, 1000: 2, 1300: 3 }}
+          style={{
+            width: "fit-content",
+          }}
+        >
+          <Masonry gutter={"30px"} style={{width:"1020px"}}>
+            {titleList.map((post, index) => {
+              return (
+                <div key={index} className="post-container">
+                  <div className="post-head">
+                    <img src={post.profileImg} />
+                    <div className="user-name">{post.name}</div>
+                    <div className="post-dot">•</div>
+                    <span>{post.day}</span>
+                  </div>
+                  <div className="main-img">
+                    <img src={post.mainImg} />
+                  </div>
+                  <div className="post-footer">
+                    <div className="icons">
+                      <div className="post-state">
+                        <div className="post-comment">
+                          <MdOutlineComment
+                            style={{ width: "24px", height: "24px" }}
+                          />
+                          <span>
+                            {post.commentCount >= 999
+                              ? "999+"
+                              : post.commentCount}
+                          </span>
+                        </div>
+                        <div className="post-heart">
+                          <FaRegHeart
+                            style={{ width: "24px", height: "24px" }}
+                          />
+                          <span>
+                            {post.heartCount >= 999 ? "999+" : post.heartCount}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="post-state-two">
+                        <MdBookmarkBorder
+                          style={{ width: "28px", height: "28px" }}
                         />
-                        <span>
-                          {post.commentCount >= 999
-                            ? "999+"
-                            : post.commentCount}
-                        </span>
-                      </div>
-                      <div className="post-heart">
-                        <FaRegHeart style={{ width: "24px", height: "24px" }} />
-                        <span>
-                          {post.heartCount >= 999 ? "999+" : post.heartCount}
-                        </span>
                       </div>
                     </div>
-                    <div className="post-state-two">
-                      <MdBookmarkBorder
-                        style={{ width: "28px", height: "28px" }}
-                      />
+                    <div className="post-board">
+                      <div className="post-tag">
+                        <div>{post.subTag}</div>
+                        <div>{post.rankTag}</div>
+                        <div>{post.gradeTag}</div>
+                      </div>
                     </div>
+                    <div className="post-title">{post.title}</div>
                   </div>
-                  <div className="post-board">
-                    <div className="post-tag">
-                      <div>{post.subTag}</div>
-                      <div>{post.rankTag}</div>
-                      <div>{post.gradeTag}</div>
-                    </div>
-                  </div>
-                  <div className="post-title">{post.title}</div>
                 </div>
-              </div>
-            );
-          })}
-        </Masonry>
-      </ResponsiveMasonry>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
+      </div>
     </>
   );
 };

@@ -84,8 +84,30 @@
   }
 }
 
-@media (max-width: 750px) {
-  .user-information {
-    
+@media (max-width: 1000px) {
+  .user-pro-img {
+    display: none;
+  }
+  .profile-container {
+    justify-content: center;
+  }
+  .user-info-container {
+    align-items: center;
+    width: 100vw;
+  }
+  .user-information > div,
+  .user-information > div > span {
+    font-size: 1em;
+  }
+  .user-introduce > div > div {
+    font-size: 1.5em;
+  }
+  .user-introduce > span {
+    font-size: 1em;
+  }
+  .user-introduce > div > button {
+    font-size: 1em;
+    width: 5em;
+    height: 2.3em;
   }
 }
