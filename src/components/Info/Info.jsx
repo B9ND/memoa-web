@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import './Login.css';
-import EmailPasswordForm from './EmailPasswordForm';
+import EmailPasswordForm from '../EmailPassword/EmailPasswordForm';
+import EmailVerificationForm from '../EmailVerification/EmailVerificationForm';
+import PasswordForm from '../Password/PasswordForm';
+import SchoolForm from '../School/SchoolForm';
+import NicknameForm from '../Nickname/NicknameForm';
 
 const Info = ({ isLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [step, setStep] = useState(1); // 현재 단계(컴포넌트 변경용)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [school, setSchool] = useState('');
+  const [step, setStep] = useState(1);
+  const [nickname, setnickname] = useState('');
 
-  const handleClearEmail = () => {
-    setEmail('');
-  };
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleClearEmail = () => setEmail('');
+  
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+  
+  const handleSendCode = () => {
+    console.log("인증번호를 전송합니다.");
   };
 
   const handleNextStep = (e) => {
     e.preventDefault();
-    setStep(2); // 다음 단계로 이동
+    setStep(step + 1);
   };
 
   return (
@@ -55,31 +65,70 @@ const Info = ({ isLogin }) => {
             <h2>회원가입</h2>
             <p className="signup-Cont">가입해서 노트 정리 시작하기!</p>
             <form>
-              {step === 1 ? (
-                <>
-                  <EmailPasswordForm
+              {step === 1 && (
+                <div>
+                  <EmailVerificationForm
                     email={email}
                     setEmail={setEmail}
-                    password={password}
-                    setPassword={setPassword}
-                    showPassword={showPassword}
-                    toggleShowPassword={toggleShowPassword}
-                    handleClearEmail={handleClearEmail}
+                    verificationCode={verificationCode}
+                    setVerificationCode={setVerificationCode}
+                    handleSendCode={handleSendCode}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
                   </button>
                   <div className='tc'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과
-                    <span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                  </div>
+                </div>
+              )}
+              {step === 2 && (
+                <>
+                  <PasswordForm
+                    password={password}
+                    setPassword={setPassword}
+                    showPassword={showPassword}
+                    confirmPassword={confirmPassword}
+                    setConfirmPassword={setConfirmPassword}
+                    showConfirmPassword={showConfirmPassword}
+                    toggleShowPassword={() => setShowPassword(!showPassword)}
+                    toggleShowConfirmPassword={() => setShowConfirmPassword(!showConfirmPassword)}
+                  />
+                  <button type="button" className="login-button" onClick={handleNextStep}>
+                    다음으로
+                  </button>
+                  <div className='tc'>
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                 </>
-              ) : (
-                <div>
-                  <h3>박재민 멍청이</h3>
-                  <p>여승원 채고</p>
-                  {/* 여기에 다른 폼 필드를 추가할 수 있음 */}
-                </div>
+              )}
+              {step === 3 && (
+                <>
+                  <SchoolForm
+                    school={school}
+                    setSchool={setSchool}
+                  />
+                  <button type="button" className="login-button" onClick={handleNextStep}>
+                    다음으로
+                  </button>
+                  <div className='tc'>
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                  </div>
+                </>
+              )}
+              {step === 4 && (
+                <>
+                  <NicknameForm
+                    nickname={school}
+                    setnickname={setSchool}
+                  />
+                  <button type="button" className="login-button" onClick={handleNextStep}>
+                    다음으로
+                  </button>
+                  <div className='tc'>
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                  </div>
+                </>
               )}
             </form>
             <p className="login-signup-link">
