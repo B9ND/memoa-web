@@ -1,4 +1,6 @@
 .post-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 320px;
   height: fit-content;
@@ -102,7 +104,7 @@
   white-space: nowrap;
 }
 .all-container {
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;

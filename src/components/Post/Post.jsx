@@ -306,10 +306,10 @@ const Post = () => {
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 900: 1, 1000: 2, 1300: 3 }}
           style={{
-            width: "fit-content",
+            width: "100%",
           }}
         >
-          <Masonry gutter={"30px"} style={{width:"1020px"}}>
+          <Masonry gutter={"30px"} columnsCount={2}>
             {titleList.map((post, index) => {
               return (
                 <div key={index} className="post-container">
