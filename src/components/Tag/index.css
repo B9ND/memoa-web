@@ -5,8 +5,27 @@
   border-radius: 24px;
   margin-right: 4px;
   color: #6D6D6E;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap
 }
 
+.tag-choiced{
+  width: fit-content;
+  padding: 4px 16px;
+  border: 1.2px solid #715AFF;
+  border-radius: 24px;
+  margin-right: 4px;
+  color: #ffffff;
+  background-color: #715AFF;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap
+}
+
+.filter-button{
+  /* display: none; */
+}
 .tag-filter{
   display: flex;
   align-items: center;
@@ -20,6 +39,7 @@
   margin-right: 4px;
   color: #6D6D6E;
   transition: 0.05s linear;
+  white-space: nowrap
 }
 
 .tag-filter-choiced{
@@ -30,10 +50,11 @@
   background-color: #715AFF;
   width: fit-content;
   padding: 4px 10px 4px 8px;
-  border: 1px solid #715AFF;
+  border: 1.2px solid #715AFF;
   font-size: 16px;
   border-radius: 24px;
   margin-right: 4px;
   color: #ffffff;
   transition: 0.05s linear;
+  white-space: nowrap
 }

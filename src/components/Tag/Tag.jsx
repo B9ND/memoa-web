@@ -1,9 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import "./index.css";
 import { FaPlus } from "react-icons/fa6";
 
-// eslint-disable-next-line
-const Tag = ({ tagName, tagStyle }) => {
+const Tag = ({
+  tagPrint,
+  tagStyle,
+  tagType = "button",
+  tagName,
+  RadioValue,
+  setRadioValue,
+}) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {
@@ -12,20 +19,55 @@ const Tag = ({ tagName, tagStyle }) => {
 
   return tagStyle == "filter" ? (
     <>
-      {choiced == true ? (
-        <button className="tag-filter-choiced" onClick={()=>toggleChoice()}>
+      {RadioValue.tagName == tagPrint ? (
+        <label className="tag-filter-choiced">
+          <input
+            className="filter-button"
+            type="radio"
+            onClick={() => {
+              setRadioValue({ ...RadioValue, tagName: null })
+              this.radiochecked = false
+            }}
+            name={tagName}
+          />
           <FaPlus color="white" />
-          {tagName}
-        </button>
+          {tagPrint}
+        </label>
       ) : (
-        <button className="tag-filter" onClick={()=>toggleChoice()}>
-          <FaPlus />
-          {tagName}
-        </button>
+        <label className="tag-filter">
+          <input
+            className="filter-button"
+            type="radio"
+            onClick={() => setRadioValue({ ...RadioValue, tagName: tagPrint })}
+            name={tagName}
+          />
+          <FaPlus color="#6D6D6E" />
+          {tagPrint}
+        </label>
       )}
     </>
   ) : (
-    <div className="tag">{tagName}</div>
+    <>
+      {choiced == true ? (
+        <label>
+          <input
+            className="tag-choiced"
+            onClick={() => toggleChoice()}
+            type={tagType}
+          />
+          {tagPrint}
+        </label>
+      ) : (
+        <label>
+          <input
+            className="tag"
+            onClick={() => toggleChoice()}
+            type={tagType}
+          />
+          {tagPrint}
+        </label>
+      )}
+    </>
   );
 };
 
