@@ -23,6 +23,28 @@ const Search = () => {
                 <Tag tagName={'고등'} tagStyle={'filter'}/>
               </div>
             </div>
+            <div className="search-filter-container">
+              학년
+              <div className="search-filter-grade">
+                <Tag tagName={'1학년'} tagStyle={'filter'}/>
+                <Tag tagName={'2학년'} tagStyle={'filter'}/>
+                <Tag tagName={'3학년'} tagStyle={'filter'}/>
+                <Tag tagName={'4학년'} tagStyle={'filter'}/>
+                <Tag tagName={'5학년'} tagStyle={'filter'}/>
+                <Tag tagName={'6학년'} tagStyle={'filter'}/>
+              </div>
+            </div>
+            <div className="search-filter-container">
+              과목
+              <div className="search-filter-grade">
+                <Tag tagName={'국어'} tagStyle={'filter'}/>
+                <Tag tagName={'수학'} tagStyle={'filter'}/>
+                <Tag tagName={'영어'} tagStyle={'filter'}/>
+                <Tag tagName={'사회'} tagStyle={'filter'}/>
+                <Tag tagName={'과학'} tagStyle={'filter'}/>
+                <Tag tagName={'한국사'} tagStyle={'filter'}/>
+              </div>
+            </div>
           </div>
         </CSSTransition>
     </div>
