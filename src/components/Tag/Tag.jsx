@@ -12,17 +12,8 @@ const Tag = ({ tagPrint, tagStyle }) => {
 
   return tagStyle == "filter" ? (
     <>
-      {RadioValue.tagName == tagPrint ? (
-        <label className="tag-filter-choiced">
-          <input
-            className="filter-button"
-            type="radio"
-            onClick={() => {
-              setRadioValue({ ...RadioValue, tagName: null })
-              this.radiochecked = false
-            }}
-            name={tagName}
-          />
+    {choiced == true ? (
+        <button className="tag-filter-choiced" onClick={() => toggleChoice()}>
           <FaPlus color="white" />
           {tagPrint}
           </button>
