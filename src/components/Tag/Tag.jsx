@@ -3,14 +3,7 @@ import { useState } from "react";
 import "./index.css";
 import { FaPlus } from "react-icons/fa6";
 
-const Tag = ({
-  tagPrint,
-  tagStyle,
-  tagType = "button",
-  tagName,
-  RadioValue,
-  setRadioValue,
-}) => {
+const Tag = ({ tagPrint, tagStyle }) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {
@@ -32,43 +25,35 @@ const Tag = ({
           />
           <FaPlus color="white" />
           {tagPrint}
-        </label>
-      ) : (
-        <label className="tag-filter">
-          <input
-            className="filter-button"
-            type="radio"
-            onClick={() => setRadioValue({ ...RadioValue, tagName: tagPrint })}
-            name={tagName}
-          />
-          <FaPlus color="#6D6D6E" />
+          </button>
+    ) : (
+      <button className="tag-filter" onClick={() => toggleChoice()}>
+          <FaPlus color='#6D6D6E' />
           {tagPrint}
-        </label>
-      )}
+        </button>
+    )}
     </>
   ) : (
     <>
       {choiced == true ? (
         <label>
-          <input
+          <button
             className="tag-choiced"
             onClick={() => toggleChoice()}
-            type={tagType}
           />
           {tagPrint}
         </label>
       ) : (
         <label>
-          <input
+          <button
             className="tag"
             onClick={() => toggleChoice()}
-            type={tagType}
           />
           {tagPrint}
         </label>
       )}
     </>
-  );
+  )
 };
 
 export default Tag;
