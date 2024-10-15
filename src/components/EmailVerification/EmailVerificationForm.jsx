@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './EmailVerification.css'; // 필요한 스타일을 적용하는 CSS 파일
 import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
@@ -13,7 +12,6 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
     setIsCodeSent(true); // 인증번호 전송 후 입력 필드 활성화
   };
 
-  // 입력 변경 핸들러: 값은 숨겨진 input에서 관리
   const handleCodeChange = (e) => {
     const newCode = e.target.value.slice(0, 6); // 최대 6자리
     setCode(newCode);
@@ -21,10 +19,8 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
 
   const handleResendCode = () => {
     console.log("인증코드 재발송");
-    // 인증코드 재발송 로직 추가
   };
 
-  // 코드 박스에 개별적으로 입력값을 보여주기 위한 함수
   const getCodeBoxValue = (index) => {
     return code[index] || ''; // 코드가 있으면 해당 인덱스 값, 없으면 빈 값
   };
@@ -35,16 +31,13 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
         <img src={inputIcon} className="input-icon" alt="input-icon" />
         <label className={`floating-label ${email ? 'active' : ''}`}>이메일</label>
         <input
-          className='email-check'
+          className='short-input'
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="button" className="Delbutton" onClick={() => setEmail('')}>
+        <button type="button" className="short-Delbutton" onClick={() => setEmail('')}>
           <img src={del} alt="Clear Email" />
-        </button>
-        <button type="button" className="send-code-button" onClick={handleSendEmailCode}>
-          이메일 인증
         </button>
       </div>
 

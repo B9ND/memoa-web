@@ -25,21 +25,23 @@
 }
 
 .login-logo {
-  width: 88px;
-  height: 88px;
-  background-color: #715AFF;
+  width: 80px;
+  height: 80px;
+  background-image: url("../../assets/icon/MEMOA_Logo.svg");
+  background-repeat: space;
+  background-size: 80px;
   margin: 0 auto;
 }
 
 .login-box h2 {
   font-weight: 600;
-  font-size: 39px;
+  font-size: 35px;
   margin: 20px;
 }
 
 .signup-box h2 {
   font-weight: 600;
-  font-size: 39px;
+  font-size: 35px;
   margin: 20px;
 }
 
@@ -47,14 +49,14 @@
   color: #715AFF;
   font-weight: 400;
   margin: 0;
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .signup-project {
   color: #715AFF;
   font-weight: 400;
   margin: 0;
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .login-Cont {
@@ -103,8 +105,8 @@
 
 .login-box input {
   display: block;
-  width: 400px;
-  height: 56px;
+  width: 375px;
+  height: 50px;
   padding: 10px;
   font-weight: 400;
   font-size: 17px;
@@ -115,14 +117,21 @@
 
 .signup-box input {
   display: block;
-  width: 400px;
-  height: 56px;
+  height: 50px;
   padding: 10px;
   font-weight: 400;
   font-size: 17px;
   border: 1.4px solid #818182;
   border-radius: 8px;
   padding-left: 50px; /* Adjusted for icon space */
+}
+
+.long-input {
+  width: 375px;
+}
+
+.short-input {
+  width: 250px;
 }
 
 .login-box input:focus {
@@ -151,9 +160,19 @@
   color: #715AFF;
 } 
 
-.Delbutton {
-  position: absolute;
+.long-Delbutton {
   right: 20px;
+  position: absolute;
+  top: 53%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.short-Delbutton {
+  right: 145px;
+  position: absolute;
   top: 53%;
   transform: translateY(-50%);
   background: none;
@@ -171,13 +190,18 @@
   cursor: pointer;
 }
 
-.Delbutton img {
-  width: 17px;
+.long-Delbutton img {
+  width: 15px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.short-Delbutton img {
+  width: 15px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .eyebutton img {
-  width: 21px;
+  width: 19px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -185,8 +209,8 @@
   font-size: 25px;
   font-weight: 600;
   background-color: #715AFF;
-  width: 400px;
-  height: 64px;
+  width: 375px;
+  height: 60px;
   color: white;
   border: none;
   border-radius: 10px;
@@ -231,20 +255,20 @@
 .grade-buttons {
   display: flex;
   justify-content: space-between; /* 버튼 사이에 균등한 간격 */
-  margin: 20px 0;
+  margin: 15px 0;
   gap: 20px;
 }
 
 .grade-button {
   flex: 1;
-  width: 120px;
-  height: 65px;
-  padding: 10px 20px;
+  width: 100px;
+  height: 60px;
+  padding: 10px 10px;
   border: 2px solid #7f56d9;
   border-radius: 12px;
   background-color: #f5f5ff;
   color: #000;
-  font-size: 16px;
+  font-size: 10px;
   cursor: pointer;
   text-align: center; /* 텍스트 가운데 정렬 */
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -259,7 +283,6 @@
 .grade-button.selected {
   background-color: #7f56d9;
   color: #fff;
-  border: none;
 }
 
 .grade {

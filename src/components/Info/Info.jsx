@@ -119,8 +119,8 @@ const Info = ({ isLogin }) => {
               {step === 4 && (
                 <>
                   <NicknameForm
-                    nickname={school}
-                    setnickname={setSchool}
+                    nickname={nickname}
+                    setnickname={setnickname}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로

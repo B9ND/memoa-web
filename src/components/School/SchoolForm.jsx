@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './School.css';
 import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
@@ -16,11 +15,12 @@ const SchoolForm = ({ school, setSchool }) => {
         <img src={inputIcon} className="input-icon" />
         <label className={`floating-label ${school ? 'active' : ''}`}>학교</label>
         <input
+          className='long-input'
           type="text"
           value={school}
           onChange={(e) => setSchool(e.target.value)} // 학교 입력 값 업데이트
         />
-        <button type="button" className="Delbutton" onClick={() => setSchool('')}>
+        <button type="button" className="long-Delbutton" onClick={() => setSchool('')}>
           <img src={del} alt="Clear School" />
         </button>
       </div>
