@@ -3,11 +3,23 @@ import { useState } from "react";
 import "./index.css";
 import { FaPlus } from "react-icons/fa6";
 
-const Tag = ({ tagPrint, tagStyle }) => {
+const Tag = ({ tagPrint, tagStyle, setFilter, tagName, filter }) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {
     setChoiced(!choiced);
+    if(filter[tagName].includes(tagPrint)){
+      const result = filter[tagName].filter((v)=>v!==tagPrint)
+      setFilter((prev)=>{
+        return{...prev, [tagName]:result}
+      }
+      )}
+    else{
+      setFilter((prev)=>{
+        const t = tagName
+        return{...prev, [t]:[...(prev[t] || []), tagPrint]}
+        })
+    }
   };
 
   return tagStyle == "filter" ? (
@@ -27,21 +39,19 @@ const Tag = ({ tagPrint, tagStyle }) => {
   ) : (
     <>
       {choiced == true ? (
-        <label>
           <button
             className="tag-choiced"
             onClick={() => toggleChoice()}
-          />
+          >
           {tagPrint}
-        </label>
+          </button>
       ) : (
-        <label>
           <button
             className="tag"
             onClick={() => toggleChoice()}
-          />
+          >
           {tagPrint}
-        </label>
+          </button>
       )}
     </>
   )

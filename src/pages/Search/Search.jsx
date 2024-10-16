@@ -8,49 +8,39 @@ import './index.css'
 const Search = () => {
   const [toggleFilter, setToggleFilter] = useState(false)
   const [searchMod, setSearchMod] = useState('인기순')
-  const [filter, setFilter] = useState({school : null, grade:null, subject:null})
+  const [filter, setFilter] = useState({school : [], grade:[], subject:[], input:''})
 
   const toggleSearchMod = () => {
     searchMod == '인기순' ? setSearchMod('최신순') : setSearchMod('인기순')
   }
-  useEffect(()=>{
-    console.log(filter)
-  }, [filter])
+
+  const school = ['초등', '중등', '고등']
+  const grade = [1,2,3,4,5,6]
+  const subject = ['국어','사회','수학','영어','과학','한국사']
+
   return (
     <div className="head-main">
         <Header />
-        <SearchBar filter={toggleFilter} setFilter={setToggleFilter} />
+        <SearchBar filter={toggleFilter} setFilter={setToggleFilter} inputFilter={filter.input} setInputFilter={setFilter} />
         <div className="search-info">
           <CSSTransition in={!toggleFilter} className={'search-filter-contain'} timeout={200}>
             <div className="search-filter-contain">
               <div className="search-filter-tags">
                 등급
                 <div className="search-filter-real-tag">
-                  <Tag tagPrint={'초등'} tagStyle={'filter'} tagName={'school'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'중등'} tagStyle={'filter'} tagName={'school'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'고등'} tagStyle={'filter'} tagName={'school'} setRadioValue={setFilter} RadioValue={filter}/>
+                  {school.map((s, i)=>( <Tag key={i} tagPrint={s} tagStyle={'filter'} tagName={'school'} setFilter={setFilter} filter={filter} /> ))}
                 </div>
               </div>
               <div className="search-filter-tags">
                 학년
                 <div className="search-filter-real-tag">
-                  <Tag tagPrint={'1학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'2학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'3학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'4학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'5학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'6학년'} tagStyle={'filter'} tagName={'grade'} setRadioValue={setFilter} RadioValue={filter}/>
+                  {grade.map((g, i)=>(<Tag key={i} tagPrint={g+'학년'} tagStyle={'filter'} tagName={'grade'} setFilter={setFilter} filter={filter} />))}
                 </div>
               </div>
               <div className="search-filter-tags">
                 과목
                 <div className="search-filter-real-tag">
-                  <Tag tagPrint={'국어'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'수학'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'영어'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'사회'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'과학'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
-                  <Tag tagPrint={'한국사'} tagStyle={'filter'} tagName={'subject'} setRadioValue={setFilter} RadioValue={filter}/>
+                  {subject.map((s, i)=>(<Tag key={i} tagPrint={s} tagStyle={'filter'} tagName={'subject'} setFilter={setFilter} filter={filter} />))}
                 </div>
               </div>
             </div>

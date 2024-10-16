@@ -28,8 +28,6 @@ const Sidebar = () => {
     { name: "도움말", path: "/help", origin: "help" },
   ];
 
-  console.log(goodLoc.includes(location.split('/:')[0]))
-
   return goodLoc.includes(location.split('/:')[0]) ? (
     <div className="container" >
     <CSSTransition in={isOpen} className={'sidebar'} timeout={150} >

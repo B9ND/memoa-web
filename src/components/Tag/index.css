@@ -1,4 +1,5 @@
 .tag{
+  font-size: 16px;
   width: fit-content;
   padding: 4px 16px;
   border: 1.2px #6D6D6E solid;
@@ -7,7 +8,7 @@
   color: #6D6D6E;
   cursor: pointer;
   user-select: none;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .tag-choiced{
@@ -23,9 +24,7 @@
   white-space: nowrap
 }
 
-.filter-button{
-  /* display: none; */
-}
+
 .tag-filter{
   display: flex;
   align-items: center;

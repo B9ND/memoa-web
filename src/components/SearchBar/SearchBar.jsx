@@ -1,8 +1,18 @@
 import { MdSearch, MdFilterAlt } from "react-icons/md";
 import './index.css'
+import { useEffect, useState } from "react";
 
 /* eslint-disable */
-const SearchBar = ({filter, setFilter}) => {
+const SearchBar = ({filter, setFilter, inputFilter, setInputFilter}) => {
+  
+  useEffect(()=>{
+    console.log(inputFilter)
+  }, [inputFilter])
+  const handleInput = (e) => {
+    const {name, value} = e.target
+    setInputFilter((prev) => ( { ...prev,[name]:value } ))
+    console.log(inputFilter)
+  }
 
   const toggleFilter = () =>{
     setFilter(!filter)
@@ -11,7 +21,7 @@ const SearchBar = ({filter, setFilter}) => {
   return (
     <div style={{display:'flex', width:'100%', justifyContent:'center'}}>
       <div className="search-bar">
-        <input type="text" className="search-bar-input" placeholder="검색어를 입력해주세요." />
+        <input type="text" className="search-bar-input" placeholder="검색어를 입력해주세요." value={inputFilter} onChange={()=>handleInput()} name="input" />
         <button className="search-button">
           <MdSearch className="semi-icon" color="white"/>
         </button>
