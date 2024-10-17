@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./index.css";
 import { useLocation, useParams } from "react-router-dom";
+import { useState } from "react";
 // import { useLocation } from "react-router-dom";
 
 const userInfo = [
@@ -22,6 +23,20 @@ const Pro = () => {
   const { username } = useParams();
   const UserName = username.replace(":", "");
   let userIndex = userInfo.findIndex((user) => user.nickname === UserName);
+  const [follow, following] = useState("팔로잉");
+  const [ok, notok] = useState(true);
+
+  const changeFollow = () => {
+    if (follow === "팔로잉") {
+      following("팔로우");
+      console.log(follow);
+      notok(false);
+    } else if (follow === "팔로우") {
+      following("팔로잉");
+      console.log(follow);
+      notok(true);
+    }
+  };
 
   console.log(userIndex);
   console.log(UserName);
@@ -34,10 +49,10 @@ const Pro = () => {
   }
 
   let isVisible = true;
+
   if (UserName === userInfo[0].nickname) {
     isVisible = false;
   }
-  let num = 10;
 
   return (
     <div className="profile-container">
@@ -52,9 +67,12 @@ const Pro = () => {
           <div>
             <div>{userInfo[userIndex].nickname}</div>
             <button
-              className="follow"
+              onClick={changeFollow}
+              className={ok ? "following" : "follower"}
               style={{ display: isVisible ? "befwqraglock" : "none" }}
-            >팔로워</button>
+            >
+              {follow}
+            </button>
           </div>
           <span>{userInfo[userIndex].description}</span>
         </div>

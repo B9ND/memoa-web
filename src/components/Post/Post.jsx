@@ -24,7 +24,7 @@ const Post = () => {
       title: "제목",
       content: "내용내용",
       author: "지존진교",
-      tags: ["국어", "수학", "영어"],
+      tags: ["초등", "1학년", "국어", "한국사"],
       createdAt: "2024-10-17",
       images: ["../src/assets/boardImg.png"],
     },

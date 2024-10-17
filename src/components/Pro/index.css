@@ -20,7 +20,7 @@
   display: flex;
   margin-bottom: 4px;
 }
-.user-introduce > div > button {
+.following {
   width: 68px;
   height: 32px;
   color: #fff;
@@ -28,6 +28,17 @@
   font-size: 17px;
   font-weight: 500;
   border-radius: 10px;
+  position: relative;
+  top: 5px;
+}
+.follower {
+  width: 68px;
+  height: 32px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 0.7px solid #6d6d6e;
+  color: #6d6d6e;
   position: relative;
   top: 5px;
 }
