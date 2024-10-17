@@ -38,9 +38,9 @@ const Board = ({detail}) => {
                         </div>
                     </div>
   const boardTag = <div className="board-tag">
-                    <Tag tagName={detail.subTag} />
-                    <Tag tagName={detail.rankTag} />
-                    <Tag tagName={detail.gradeTag} />
+                    <Tag tagPrint={detail.subTag}/>
+                    <Tag tagPrint={detail.rankTag} />
+                    <Tag tagPrint={detail.gradeTag} />
                   </div>
   const boardFooter = <div className="board-footer">
                         <div className="board-title">{detail.title}</div>
