@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Header from "../../components/Header/Header"
 import SearchBar from "../../components/SearchBar/SearchBar"
 import { CSSTransition } from "react-transition-group";

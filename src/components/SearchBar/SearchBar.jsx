@@ -1,13 +1,9 @@
 import { MdSearch, MdFilterAlt } from "react-icons/md";
 import './index.css'
-import { useEffect, useState } from "react";
 
 /* eslint-disable */
 const SearchBar = ({filter, setFilter, inputFilter, setInputFilter}) => {
   
-  useEffect(()=>{
-    console.log(inputFilter)
-  }, [inputFilter])
   const handleInput = (e) => {
     const {name, value} = e.target
     setInputFilter((prev) => ( { ...prev,[name]:value } ))
