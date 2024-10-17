@@ -3,28 +3,28 @@ import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
 const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificationCode, handleSendCode }) => {
-  const [isCodeSent, setIsCodeSent] = useState(false); // 인증번호가 전송되었는지 상태 확인
-  const [code, setCode] = useState(''); // 숨겨진 input의 상태 (최종 입력된 코드)
-
   const handleSendEmailCode = (e) => {
     e.preventDefault();
-    handleSendCode(); // 이메일 인증번호 전송 로직 호출
-    setIsCodeSent(true); // 인증번호 전송 후 입력 필드 활성화
+    handleSendCode();
+    setIsCodeSent(true);
   };
+  
+  const [code, setCode] = useState(Array(6).fill(''));
 
-  const handleCodeChange = (e) => {
-    const newCode = e.target.value.slice(0, 6); // 최대 6자리
+  const handleCodeChange = (e, index) => {
+    const newCode = [...code];
+    newCode[index] = e.target.value;
     setCode(newCode);
+  
+    if (e.target.value && index < 5) {
+      document.getElementById(`code-input-${index + 1}`).focus();
+    }
   };
-
+  
   const handleResendCode = () => {
-    console.log("인증코드 재발송");
+    console.log('인증코드 재발송');
   };
-
-  const getCodeBoxValue = (index) => {
-    return code[index] || ''; // 코드가 있으면 해당 인덱스 값, 없으면 빈 값
-  };
-
+  
   return (
     <>
       <div className="inputWrap">
@@ -39,32 +39,25 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
         <button type="button" className="short-Delbutton" onClick={() => setEmail('')}>
           <img src={del} alt="Clear Email" />
         </button>
+        <button type="button" className="send-code-button" onClick={handleSendEmailCode}>
+          이메일 인증
+        </button>
       </div>
-
-      {isCodeSent && (
-        <>
-          {/* 숨겨진 input */}
+      <div className="code-input-wrap">
+        {[...Array(6)].map((_, index) => (
           <input
+            key={index}
+            id={`code-input-${index}`}
             type="text"
-            value={code}
-            onChange={handleCodeChange}
-            maxLength={6}
-            style={{ position: 'absolute', left: '-9999px' }} // 화면 밖으로 숨김
+            maxLength="1"
+            className="code-input"
+            onChange={(e) => handleCodeChange(e, index)}
           />
-          
-          {/* 보이는 코드 박스 */}
-          <div className="code-input-wrap">
-            {[...Array(6)].map((_, index) => (
-              <div key={index} className="code-box">
-                {getCodeBoxValue(index)}
-              </div>
-            ))}
-          </div>
-          <button type="button" className="resend-code-button" onClick={handleResendCode}>
-            인증코드 재발송
-          </button>
-        </>
-      )}
+        ))}
+      </div>
+      <button type="button" className="resend-code-button" onClick={handleResendCode}>
+        인증코드 재발송
+      </button>
     </>
   );
 };

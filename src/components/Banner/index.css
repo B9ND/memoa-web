@@ -22,22 +22,21 @@
 
 .login-message {
   margin: 10px;
-  font-size: 39px;
+  font-size: 33px;
   font-weight: 400;
 }
 
 .signup-message {
   margin: 10px;
-  font-size: 39px;
+  font-size: 33px;
   font-weight: 400;
   color: #fff;
 }
 
 .login-message-box{
   display: flex;
-  background-color: #fff;
   height: 65px;
-  width: 375px;
+  width: 325px;
   flex-direction: column;
   justify-content: center;
   border-radius: 5px;
@@ -48,7 +47,7 @@
   display: flex;
   background-color: #fff;
   height: 65px;
-  width: 375px;
+  width: 325px;
   flex-direction: column;
   justify-content: center;
   border-radius: 5px;
@@ -56,51 +55,51 @@
 }
 
 .login-gap {
-  font-size: 39px;
+  font-size: 35px;
   font-weight: 400;
   padding-left: 20px;
 }
 
 .signup-gap {
-  font-size: 39px;
+  font-size: 35px;
   font-weight: 400;
   padding-left: 20px;
   color: #000;
 }
 
 .login-highlight {
-  font-size: 42px;
+  font-size: 35px;
   font-weight: 400;
   color: #3867DD;
 }
 
 .signup-highlight {
-  font-size: 42px;
+  font-size: 35px;
   font-weight: 400;
   color: #715AFF;
 }
 
 .login-highlight-bar {
   font-weight: 600;
-  font-size: 42px;
+  font-size: 35px;
   color: #000;
 }
 
 .signup-highlight-bar {
   font-weight: 600;
-  font-size: 42px;
+  font-size: 35px;
   color: #000;
 }
 
 .login-hero-button {
-  width: 290px;
-  height: 90px;
+  width: 230px;
+  height: 75px;
   font-family: 'Pretendard-Regular';
   margin: 20px 170px;
   background-color: #fff;
   color: #715AFF;
-  font-size: 58px;
-  font-weight: 800;
+  font-size: 43px;
+  font-weight: 600;
   border-radius: 8px;
   box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.10);
   display: flex;
@@ -109,29 +108,31 @@
 }
 
 .signup-hero-button {
-  width: 290px;
-  height: 90px;
+  width: 230px;
+  height: 75px;
   font-family: 'Pretendard-Regular';
   margin: 20px 170px;
   background-color: #fff;
   color: #715AFF;
-  font-size: 58px;
-  font-weight: 800;
+  font-size: 43px;
+  font-weight: 600;
   border-radius: 8px;
-  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.10);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .login-highlight-logo {
-  font-size: 58px;
-  font-weight: 800;
+  font-size: 43px;
+  font-weight: 600;
   color: #000;
+  margin: 0;
 }
 
 .signup-highlight-logo {
-  font-size: 58px;
-  font-weight: 800;
+  font-size: 43px;
+  font-weight: 600;
   color: #000;
+  margin: 0;
 }

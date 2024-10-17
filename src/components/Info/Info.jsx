@@ -36,7 +36,7 @@ const Info = ({ isLogin }) => {
       {isLogin ? (
         <div className="login">
           <div className="login-box">
-            <div className="login-logo" />
+            <div className="logo" />
             <h2>로그인</h2>
             <p className="login-Cont">
               <span className="login-project">프로젝트</span> 계정으로 계속하기
@@ -61,7 +61,7 @@ const Info = ({ isLogin }) => {
       ) : (
         <div className="signup">
           <div className="signup-box">
-            <div className="login-logo" />
+            <div className="logo" />
             <h2>회원가입</h2>
             <p className="signup-Cont">가입해서 노트 정리 시작하기!</p>
             <form>

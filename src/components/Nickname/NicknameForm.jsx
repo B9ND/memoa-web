@@ -6,7 +6,7 @@ const NicknameForm = ({ nickname, setnickname }) => {
   return (
     <>
       <div className="inputWrap">
-        <img src={inputIcon} className="input-icon" />
+        <img src={inputIcon} className="input-icon" alt="Input Icon" />
         <label className={`floating-label ${nickname ? 'active' : ''}`}>별명</label>
         <input
           className='short-input'
@@ -16,6 +16,9 @@ const NicknameForm = ({ nickname, setnickname }) => {
         />
         <button type="button" className="short-Delbutton" onClick={() => setnickname('')}>
           <img src={del} alt="Clear nickname" />
+        </button>
+        <button type="button" className="send-code-button">
+          중복확인
         </button>
       </div>
     </>

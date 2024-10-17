@@ -24,25 +24,25 @@
   margin-right: 150px;
 }
 
-.login-logo {
-  width: 80px;
-  height: 80px;
+.logo {
+  width: 70px;
+  height: 70px;
   background-image: url("../../assets/icon/MEMOA_Logo.svg");
   background-repeat: space;
-  background-size: 80px;
+  background-size: 70px;
   margin: 0 auto;
 }
 
 .login-box h2 {
   font-weight: 600;
-  font-size: 35px;
-  margin: 20px;
+  font-size: 30px;
+  margin: 15px;
 }
 
 .signup-box h2 {
   font-weight: 600;
-  font-size: 35px;
-  margin: 20px;
+  font-size: 30px;
+  margin: 15px;
 }
 
 .login-project {
@@ -62,23 +62,24 @@
 .login-Cont {
   font-weight: 400;
   font-size: 25px;
-  margin-bottom: 38px;
+  margin-bottom: 25px;
 }
 
 .signup-Cont {
   font-weight: 400;
   font-size: 25px;
-  margin-bottom: 38px;
+  margin-bottom: 25px;
 }
 
 .inputWrap {
   position: relative;
   margin-bottom: 16px;
+    width: 350px;
 }
 
 .floating-label {
   position: absolute;
-  left: 50px; /* Adjusted for icon space */
+  left: 50px;
   top: 50%;
   transform: translateY(-50%);
   transition: all 0.2s ease;
@@ -89,7 +90,7 @@
 
 .floating-label.active {
   top: 12px;
-  left: 50px; /* Adjusted for icon space */
+  left: 50px;
   font-size: 10px;
   color: #715AFF;
 }
@@ -103,35 +104,28 @@
   height: 27px;
 }
 
-.login-box input {
-  display: block;
-  width: 375px;
-  height: 50px;
-  padding: 10px;
-  font-weight: 400;
-  font-size: 17px;
-  border: 1.4px solid #818182;
-  border-radius: 8px;
-  padding-left: 50px; /* Adjusted for icon space */
-}
-
-.signup-box input {
-  display: block;
-  height: 50px;
-  padding: 10px;
-  font-weight: 400;
-  font-size: 17px;
-  border: 1.4px solid #818182;
-  border-radius: 8px;
-  padding-left: 50px; /* Adjusted for icon space */
-}
-
 .long-input {
-  width: 375px;
+  width: 350px;
+  display: block;
+  height: 50px;
+  padding: 10px 45px 10px 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px;
 }
 
 .short-input {
   width: 250px;
+  display: block;
+  height: 50px;
+  padding: 10px 45px 10px 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px;
 }
 
 .login-box input:focus {
@@ -146,19 +140,11 @@
 
 .login-box input:focus + .login-floating-label,
 .login-box input:not(:placeholder-shown) + .login-floating-label {
-  top: -12px;
-  left: 50px; /* Adjusted for icon space */
-  font-size: 16px;
+  top: -13px;
+  left: 50px;
+  font-size: 13px;
   color: #715AFF;
 }
-
-.login-box input:focus + .login-floating-label,
-.login-box input:not(:placeholder-shown) + .login-floating-label {
-  top: -12px;
-  left: 50px; /* Adjusted for icon space */
-  font-size: 16px;
-  color: #715AFF;
-} 
 
 .long-Delbutton {
   right: 20px;
@@ -171,7 +157,7 @@
 }
 
 .short-Delbutton {
-  right: 145px;
+  right: 120px;
   position: absolute;
   top: 53%;
   transform: translateY(-50%);
@@ -206,11 +192,12 @@
 }
 
 .login-button {
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   background-color: #715AFF;
-  width: 375px;
-  height: 60px;
+  width: 350px;
+  height: 45px;
+  align-content: center;
   color: white;
   border: none;
   border-radius: 10px;
@@ -238,12 +225,12 @@
   color: #38A1DD;
 }
 
-  .login-signup-link {
-    font-weight: 400;
-    font-size: 16px;
-    margin-top: 20px;
-    color: #666;
-  }
+.login-signup-link {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 20px;
+  color: #666;
+}
 
 .login-signup-link a {
   font-weight: 600;
@@ -251,7 +238,6 @@
   text-decoration: none;
 }
 
-/* 학년 선택 버튼 컨테이너 스타일 */
 .grade-buttons {
   display: flex;
   justify-content: space-between; /* 버튼 사이에 균등한 간격 */
@@ -274,12 +260,10 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 버튼에 호버시 스타일 */
 .grade-button:hover {
   background-color: #e0d5ff;
 }
 
-/* 선택된 버튼 스타일 */
 .grade-button.selected {
   background-color: #7f56d9;
   color: #fff;
@@ -291,8 +275,74 @@
   margin-left: 8px;
 }
 
-.code-input-wrap{
-  background-color: #000;
-  width: 100px;
-  height: 100px;
+.send-code-button {
+  height: 50px;
+  width: 9cap;
+  position: absolute;
+  right: 0px;
+  top: 51%;
+  transform: translateY(-50%);
+  background-color: #715AFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 600;
+}
+
+.send-code-button {
+  height: 50px;
+  width: 9cap;
+  position: absolute;
+  right: 0px;
+  top: 51%;
+  transform: translateY(-50%);
+  background-color: #715AFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 600;
+}
+
+.code-input-wrap {
+  width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.code-input {
+  width: 48px;
+  height: 60px;
+  text-align: center;
+  font-size: 25px;
+  border: 1px solid #818182;
+  border-radius:8px;
+  margin: 0 6px;
+}
+
+.resend-code-button {
+  background: none;
+  border: none;
+  color: #715AFF;
+  cursor: pointer;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.resend-code-button {
+  width: 350px;
+  margin: 10px 0px;
+  display: flex;
+  color: #715AFF;
+  cursor: pointer;
+  padding-left: 260px;
+  font-size: 14px;
+  text-decoration-line: none;
 }
