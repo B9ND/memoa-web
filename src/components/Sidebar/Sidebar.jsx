@@ -13,14 +13,12 @@ const Sidebar = () => {
   const location = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(true);
 
-  const goodLoc = [ '/home', '/search', '/profile', '/bookmark', '/school', '/setting', '/help']
+  const goodLoc = [ '/home', '/search', '/profile', '/bookmark', '/setting', '/help']
 
   const menuOne = [
     { name: "홈", path: "/home", origin: "home" },
     { name: "검색", path: "/search", origin: "search" },
-    { name: "프로필", path: "/profile/:지존진교", origin: "profile" },
     { name: "북마크", path: "/bookmark", origin: "bookmark" },
-    { name: "내 학교", path: "/school", origin: "school" },
   ];
 
   const menuTwo = [
@@ -42,7 +40,7 @@ const Sidebar = () => {
             timeout={{ enter: 300, exit: 450 }}
             className={"profile"}
           >
-            <div className="profile">
+            <Link to={'profile/:지존진교'} className="profile">
               <MdAccountCircle className="big-icon" />
               <CSSTransition
                 in={isOpen}
@@ -55,7 +53,7 @@ const Sidebar = () => {
                   <div className="user-email">oygnijoes0209</div>
                 </div>
               </CSSTransition>
-            </div>
+            </Link>
           </CSSTransition>
 
           <button className="writeBtn">
