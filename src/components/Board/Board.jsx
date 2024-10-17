@@ -38,7 +38,7 @@ const Board = ({detail}) => {
                         </div>
                     </div>
   const boardTag = <div className="board-tag">
-                    <Tag tagPrint={detail.subTag}/>
+                    <Tag tagPrint={detail.subTag} />
                     <Tag tagPrint={detail.rankTag} />
                     <Tag tagPrint={detail.gradeTag} />
                   </div>
