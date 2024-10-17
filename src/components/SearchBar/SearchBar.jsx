@@ -3,7 +3,6 @@ import './index.css'
 
 /* eslint-disable */
 const SearchBar = ({filter, setFilter, inputFilter, setInputFilter}) => {
-  
   const handleInput = (e) => {
     const {name, value} = e.target
     setInputFilter((prev) => ( { ...prev,[name]:value } ))
