@@ -55,8 +55,8 @@ instance.interceptors.response.use(
             }
           )
           .then((response) => {
-            const newAccessToken = response.data.data.accessToken;
-            const newRefreshToken = response.data.data.refreshToken;
+            const newAccessToken = response.data.data.access;
+            const newRefreshToken = response.data.data.refresh;
             setCookie('ACCESS_TOKEN',newAccessToken, {});
             setCookie('REFRESH_TOKEN',newRefreshToken, {});
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
