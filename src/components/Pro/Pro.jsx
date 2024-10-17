@@ -5,80 +5,79 @@ import { useLocation, useParams } from "react-router-dom";
 
 const userInfo = [
   {
-    name: "지존진교",
-    profileImg: "../src/assets/profile-img.png",
-    introduce: "나는지존짱짱",
-    postCount: 12,
-    followerCount: 123,
-    followCount: 234,
+    email: "Web@gmail.com",
+    nickname: "지존진교",
+    description: "나는 지존진교",
+    profileImage: "../src/assets/base-profile.png",
   },
   {
-    name: "cugar",
-    profileImg: "../src/assets/profile-img.png",
-    introduce: "나는여승원뚠뚠",
-    postCount: 12,
-    followerCount: 123,
-    followCount: 234,
+    email: "cugar@gmail.com",
+    nickname: "cugar",
+    description: "나는 여승원",
+    profileImage: "../src/assets/base-profile.png",
   },
 ];
 
 const Pro = () => {
   const { username } = useParams();
   const UserName = username.replace(":", "");
-  let userIndex = userInfo.findIndex((user) => user.name === UserName);
+  let userIndex = userInfo.findIndex((user) => user.nickname === UserName);
 
   console.log(userIndex);
   console.log(UserName);
 
   const location = useLocation();
-  console.log(location)
-  
-  
+  console.log(location);
 
   if (userIndex === -1) {
     return <div>This is not user</div>;
   }
 
   let isVisible = true;
-  if (UserName === userInfo[0].name) {
+  if (UserName === userInfo[0].nickname) {
     isVisible = false;
   }
+  let num = 10;
 
   return (
     <div className="profile-container">
       <div className="user-pro-img">
         <img
-          src={userInfo[userIndex].profileImg}
+          src={userInfo[userIndex].profileImage}
+          style={{ width: "110px", height: "110px" }}
         />
       </div>
       <div className="user-info-container">
         <div className="user-introduce">
           <div>
-            <div>{userInfo[userIndex].name}</div>
+            <div>{userInfo[userIndex].nickname}</div>
             <button
               className="follow"
-              style={{ display: isVisible ? "block" : "none" }}
-            >
-              팔로잉
-            </button>
+              style={{ display: isVisible ? "befwqraglock" : "none" }}
+            >팔로워</button>
           </div>
-          <span>{userInfo[userIndex].introduce}</span>
+          <span>{userInfo[userIndex].description}</span>
         </div>
         <div className="user-information">
-          <div>
+          <div className="detail-container">
             작성한 글{" "}
-            <span className="user-number">{userInfo[userIndex].postCount}</span>
-          </div>
-          <div>
-            팔로워{" "}
             <span className="user-number">
-              {userInfo[userIndex].followerCount}
+              {/* 더미 나중 연결{userInfo[userIndex].postCount} */}
+              10
             </span>
           </div>
-          <div>
+          <div className="detail-container">
+            팔로워{" "}
+            <span className="user-number">
+              {/* 더미 나중 연결 {userInfo[userIndex].followerCount} */}
+              12
+            </span>
+          </div>
+          <div className="detail-container">
             팔로우{" "}
             <span className="user-number">
-              {userInfo[userIndex].followCount}
+              {/* {userInfo[userIndex].followCount} */}
+              14
             </span>
           </div>
         </div>
