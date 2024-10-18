@@ -6,9 +6,6 @@
   align-items: center;
   margin-bottom: 30px;
 }
-/* .user-prwo-img {
-  margin-left: 128px;
-} */
 .user-pro-img > img {
   width: 160px;
   height: 160px;
@@ -18,7 +15,7 @@
 }
 .user-introduce > div {
   display: flex;
-  margin-bottom: 4px;
+  margin-bottom: 0.04rem;
 }
 .following {
   width: 68px;

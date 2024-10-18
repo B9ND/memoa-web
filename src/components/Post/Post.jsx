@@ -17,18 +17,19 @@ const Post = () => {
         "https://i.pinimg.com/736x/8b/e6/6b/8be66bf6dbf168d4c4ecb99c04a3d112.jpg",
     },
   ];
-
+  
   const titleList = [
     {
       id: 0,
       title: "제목",
       content: "내용내용",
       author: "지존진교",
-      tags: ["초등", "1학년", "국어", "한국사"],
+      tags: ["초등", "1학년", "국어", "한국사", "고라니"],
       createdAt: "2024-10-17",
       images: ["../src/assets/boardImg.png"],
     },
   ];
+
 
   return (
     <>
