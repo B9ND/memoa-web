@@ -13,7 +13,15 @@ const Sidebar = () => {
   const location = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(true);
 
-  const goodLoc = [ '/home', '/search', '/profile', '/bookmark', '/setting', '/help']
+  const goodLoc = [
+    "/home",
+    "/search",
+    "/profile",
+    "/bookmark",
+    "/setting",
+    "/help",
+    "/write",
+  ];
 
   const menuOne = [
     { name: "홈", path: "/home", origin: "home" },
@@ -26,21 +34,31 @@ const Sidebar = () => {
     { name: "도움말", path: "/help", origin: "help" },
   ];
 
-  return goodLoc.includes(location.split('/:')[0]) ? (
-    <div className="container" >
-    <CSSTransition in={isOpen} className={'sidebar'} timeout={150} >
-      <div className="sidebar">
-
-        <div className="arrow-btn" >
-          {isOpen == true ? <MdArrowBackIosNew className="normal-icon" style={{ margin:'8px', cursor:'pointer'}} onClick={() => setIsOpen(!isOpen)}/>
-          : <MdArrowForwardIos className='normal-icon' style={{margin:'8px', cursor:'pointer'}} onClick={() => setIsOpen(!isOpen)}/>}
-        </div>
+  return goodLoc.includes(location.split("/:")[0]) ? (
+    <div className="container">
+      <CSSTransition in={isOpen} className={"sidebar"} timeout={150}>
+        <div className="sidebar">
+          <div className="arrow-btn">
+            {isOpen == true ? (
+              <MdArrowBackIosNew
+                className="normal-icon"
+                style={{ margin: "8px", cursor: "pointer" }}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            ) : (
+              <MdArrowForwardIos
+                className="normal-icon"
+                style={{ margin: "8px", cursor: "pointer" }}
+                onClick={() => setIsOpen(!isOpen)}
+              />
+            )}
+          </div>
           <CSSTransition
             in={isOpen}
             timeout={{ enter: 300, exit: 450 }}
             className={"profile"}
           >
-            <Link to={'profile/:지존진교'} className="profile">
+            <Link to={"profile/:지존진교"} className="profile">
               <MdAccountCircle className="big-icon" />
               <CSSTransition
                 in={isOpen}
@@ -56,17 +74,19 @@ const Sidebar = () => {
             </Link>
           </CSSTransition>
 
-          <button className="writeBtn">
-            <MdAdd color="white" className="normal-icon" />
-            <CSSTransition
-              in={isOpen}
-              timeout={400}
-              className={"fade"}
-              unmountOnExit
-            >
-              <div>글 작성하기</div>
-            </CSSTransition>
-          </button>
+          <Link to={"write"}>
+            <button className="writeBtn">
+              <MdAdd color="white" className="normal-icon" />
+              <CSSTransition
+                in={isOpen}
+                timeout={400}
+                className={"fade"}
+                unmountOnExit
+              >
+                <div>글 작성하기</div>
+              </CSSTransition>
+            </button>
+          </Link>
 
           <div className="menu">
             <div className="select-one">
