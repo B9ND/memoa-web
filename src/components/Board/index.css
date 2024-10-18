@@ -47,7 +47,7 @@
   margin-bottom: 8px;
 }
 
-.board-state{
+/* .board-state{
   display: flex;
   padding: 0 8px;
   width: 100%;
@@ -62,23 +62,25 @@
   display: flex;
   align-items: center;
   height: fit-content;
-  margin-right: 16px;
 }
 
 .board-heart{
   display: flex;
   height: fit-content;
   align-items: center;
-
 }
 
 .board-count{
   width: fit-content;
+} */
+
+.board-info{
+  display: flex;
+  justify-content: space-between;
 }
 
 .board-tag{
   display: flex;
-  padding: 0 8px;
   margin-bottom: 12px;
 }
 
@@ -87,7 +89,6 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  padding: 0 8px;
   margin-bottom: 12px;
 }
 
@@ -98,9 +99,9 @@
 .board-pop{
   color: #715AFF;
   cursor: pointer;
+  user-select: none;
 }
 
 .board-text{
   margin-bottom: 12px;
-  padding: 0 8px;
 }

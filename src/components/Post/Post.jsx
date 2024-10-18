@@ -1,7 +1,6 @@
 import "./index.css";
 import { MdOutlineComment, MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { useState, useEffect, useRef } from "react";
 
 const Post = () => {
   const userInfo = [
