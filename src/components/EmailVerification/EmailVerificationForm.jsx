@@ -3,28 +3,45 @@ import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
 const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificationCode, handleSendCode }) => {
+  const [code, setCode] = useState(Array(6).fill(''));
+  const [isCodeSent, setIsCodeSent] = useState(false);
+
   const handleSendEmailCode = (e) => {
     e.preventDefault();
     handleSendCode();
     setIsCodeSent(true);
+    focusOnFirstEmptyIndex();
   };
-  
-  const [code, setCode] = useState(Array(6).fill(''));
 
   const handleCodeChange = (e, index) => {
     const newCode = [...code];
-    newCode[index] = e.target.value;
-    setCode(newCode);
-  
-    if (e.target.value && index < 5) {
-      document.getElementById(`code-input-${index + 1}`).focus();
+    if (e.target.value) {
+      newCode[index] = e.target.value;
+      setCode(newCode);
+      const nextEmptyIndex = newCode.findIndex((value) => value === '');
+      if (nextEmptyIndex !== -1) {
+        document.getElementById(`code-input-${nextEmptyIndex}`).focus();
+      }
+    } else {
+      newCode[index] = '';
+      setCode(newCode);
+      if (index > 0) {
+        document.getElementById(`code-input-${index - 1}`).focus();
+      }
     }
   };
-  
+
+  const focusOnFirstEmptyIndex = () => {
+    const firstEmptyIndex = code.findIndex((value) => value === '');
+    if (firstEmptyIndex !== -1) {
+      document.getElementById(`code-input-${firstEmptyIndex}`).focus();
+    }
+  };
+
   const handleResendCode = () => {
     console.log('인증코드 재발송');
   };
-  
+
   return (
     <>
       <div className="inputWrap">
@@ -52,6 +69,7 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
             maxLength="1"
             className="code-input"
             onChange={(e) => handleCodeChange(e, index)}
+            onClick={focusOnFirstEmptyIndex}
           />
         ))}
       </div>

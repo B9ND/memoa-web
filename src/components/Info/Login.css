@@ -73,8 +73,8 @@
 
 .inputWrap {
   position: relative;
-  margin-bottom: 16px;
-    width: 350px;
+  margin-bottom: 10px;
+  width: 350px;
 }
 
 .floating-label {
@@ -240,7 +240,7 @@
 
 .grade-buttons {
   display: flex;
-  justify-content: space-between; /* 버튼 사이에 균등한 간격 */
+  justify-content: space-between;
   margin: 15px 0;
   gap: 20px;
 }
@@ -256,7 +256,7 @@
   color: #000;
   font-size: 10px;
   cursor: pointer;
-  text-align: center; /* 텍스트 가운데 정렬 */
+  text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -292,7 +292,7 @@
   font-family: 600;
 }
 
-.send-code-button {
+.duplicate-check-button {
   height: 50px;
   width: 9cap;
   position: absolute;
@@ -345,4 +345,25 @@
   padding-left: 260px;
   font-size: 14px;
   text-decoration-line: none;
+}
+
+.duplicate-message {
+  color: #DD3A45;
+  font-size: 16px;
+  padding-left: 180px;
+  margin: 5px 0px 20px 0px;
+  text-align: center;
+}
+
+.duplicate-message {
+  color: #DD3A45;
+  font-size: 16px;
+  padding-left: 180px;
+  margin: 5px 0px 20px 0px;
+  text-align: center;
+}
+
+.duplicate-message.success {
+  color: #28a745;
+  padding-left: 260px;
 }
