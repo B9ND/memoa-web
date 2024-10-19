@@ -1,0 +1,55 @@
+.big-container {
+  width: 90%;
+  height: 100vh;
+}
+.write-container {
+  width: 100%;
+  height: 100%;
+}
+.write-and-tag > input {
+  font-size: 1.5em;
+  font-weight: 500;
+  border: none;
+  width: 100%;
+}
+.write-and-tag > input:focus {
+  outline: none;
+}
+.write-add-tag {
+  color: #6d6d6e;
+  margin-top: 0.6em;
+}
+.line {
+  margin-top: 0.5em;
+  width: 90%;
+  border-bottom: 0.7px solid #6d6d6e;
+}
+.write-main > textarea {
+  width: 90%;
+  height: 100%;
+  border: none;
+  font-size: 18px;
+  overflow: hidden;
+  resize: none;
+  margin-top: 1.3em;
+}
+.write-main > textarea:focus {
+  outline: none;
+}
+.btn-container {
+  width: 90%;
+  height: 10px;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: -10%;
+}
+.submit-btn {
+  width: 7.5em;
+  height: 2.8em;
+  background-color: #715aff;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
