@@ -30,7 +30,7 @@ const WritePost = () => {
       <div className="big-container">
         <div className="write-container">
           <div className="write-and-tag">
-            <input type="text" placeholder="제목을 입력해주세요" />
+            <input type="text" placeholder="제목을 입력해주세요" required/>
             <div className="write-add-tag">태그 추가하기</div>
             <div className="line"></div>
           </div>
@@ -41,6 +41,7 @@ const WritePost = () => {
               onChange={(e) => setValue(e.target.value)}
               rows={1}
               placeholder="본문 내용을 입력해주세요"
+              required
             />
           </div>
         </div>
