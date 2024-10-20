@@ -22,6 +22,7 @@ const Sidebar = () => {
     "/setting",
     "/help",
     "/write",
+    "/detail/post",
   ];
 
   const menuOne = [
