@@ -27,10 +27,15 @@ const WritePost = () => {
 
   return (
     <>
-      <div className="big-container">
+      <form className="big-container">
         <div className="write-container">
           <div className="write-and-tag">
-            <input type="text" placeholder="제목을 입력해주세요" required/>
+            <input
+              type="text"
+              placeholder="제목을 입력해주세요"
+              id="inputTitle"
+              required
+            />
             <div className="write-add-tag">태그 추가하기</div>
             <div className="line"></div>
           </div>
@@ -42,15 +47,16 @@ const WritePost = () => {
               rows={1}
               placeholder="본문 내용을 입력해주세요"
               required
+              id="text"
             />
           </div>
         </div>
         <div className="btn-container">
-          <button className="submit-btn" type="submit">
+          <button className="submit-btn" type="submit"> 
             글 등록하기
           </button>
         </div>
-      </div>
+      </form>
     </>
   );
 };
