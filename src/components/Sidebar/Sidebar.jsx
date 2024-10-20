@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const goodLoc = [
+    "/",
     "/home",
     "/search",
     "/profile",

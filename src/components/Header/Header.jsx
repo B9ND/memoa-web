@@ -2,9 +2,11 @@ import '../Header/index.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const Header = () => {
-  const location = useLocation().pathname.substring(1);
+  let location = useLocation().pathname.substring(1);
   const navigate = useNavigate();
-
+  if (location == ''){
+    location = 'home'
+  }
   let icon = <div className="page-icon" style={{backgroundImage: 'url(/src/assets/icon/'+location+'.svg)'}}></div>
 
   const goHome=()=>{

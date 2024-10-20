@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./index.css";
 import { FaPlus } from "react-icons/fa6";
 
-const Tag = ({ tagPrint, tagStyle, setFilter, tagName, filter }) => {
+const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {
@@ -23,36 +23,27 @@ const Tag = ({ tagPrint, tagStyle, setFilter, tagName, filter }) => {
   };
 
   return tagStyle == "filter" ? (
-    <>
-    {choiced == true ? (
-        <button className="tag-filter-choiced" onClick={() => toggleChoice()}>
-          <FaPlus color="white" />
-          {tagPrint}
-          </button>
-    ) : (
-      <button className="tag-filter" onClick={() => toggleChoice()}>
-          <FaPlus color='#6D6D6E' />
-          {tagPrint}
-        </button>
-    )}
-    </>
+    <button className="tag-filter-choiced" onClick={() => toggleChoice()}>
+      <FaPlus color={choiced == true ? "white" : '#6D6D6E' }/>
+      {tagPrint}
+    </button>
   ) : (
     <>
-      {choiced == true ? (
-          <button
-            className="tag-choiced"
-            onClick={() => toggleChoice()}
-          >
-          {tagPrint}
-          </button>
+    {canActive === true ? (
+      <button
+        className={choiced == true ? "tag-choiced" : "tag"}
+        onClick={() => toggleChoice()}
+      >
+        {tagPrint}
+      </button>
       ) : (
-          <button
-            className="tag"
-            onClick={() => toggleChoice()}
-          >
-          {tagPrint}
-          </button>
-      )}
+        <button
+        className="tag-notActive"
+      >
+        {tagPrint}
+      </button>
+      )
+    }
     </>
   )
 };

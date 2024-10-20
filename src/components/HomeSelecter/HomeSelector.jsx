@@ -1,26 +1,21 @@
+import { useEffect, useState } from "react";
+import Tag from "../Tag/Tag";
 import "./index.css";
 
 /* eslint-disable */
 const HomeSelector = ({ setBoard, board }) => {
-
-  const boardchange = (boardName) => {
-    setBoard(boardName);
-  };
-
+  const [ selecter, setSelecter ] = useState({'select':[]})
+  useEffect(()=>{
+    console.log(selecter)
+  }, [selecter])
   return (
-    <div className="selecters">
-      <button
-        className={board == "follow" ? "selecter" : "selected"}
-        onClick={() => boardchange("follow")}
-      >
-        팔로우
-      </button>
-      <button
-        className={board == "new" ? "selecter" : "selected"}
-        onClick={() => boardchange("new")}
-      >
-        최신순
-      </button>
+    <div className="selecter-container">
+      학년 선택
+      <div className="selecter-tags">
+        <Tag tagPrint={'1학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+        <Tag tagPrint={'2학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+        <Tag tagPrint={'3학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+      </div>
     </div>
   );
 };
