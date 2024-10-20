@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./index.css";
 import { FaPlus } from "react-icons/fa6";
 
-const Tag = ({ tagPrint, tagStyle, filter, setFilter, tagName, canActive }) => {
+const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {

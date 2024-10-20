@@ -41,8 +41,10 @@ const Boards = () => {
   
   return (
     <div className='boards'>
+      <div className="board-container">
+        {boards.map((board, index)=>(<Board detail={board} key={index}/>))}
+      </div>
       <HomeSelector setBoard={setWhatBoard} board={whatBoard}/>
-      {boards.map((board, index)=>(<Board detail={board} key={index}/>))}
     </div>
   )
 }
