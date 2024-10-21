@@ -25,6 +25,25 @@ const WritePost = () => {
     handleResizeHeight();
   }, [value]);
 
+  const post = {
+    title: "",
+    content: "",
+    tags: [],
+    images: "",
+    isReleased: true,
+  };
+
+  const show_tag = (e) => {
+    const tag = document.getElementsByClassName("write-add-tag").value;
+    const code = e.code;
+
+    if (code === "Enter") {
+      console.log("Enter키가 눌렸습니다.");
+      post.tags.push(tag);
+      console.log(tag);
+    }
+  };
+
   return (
     <>
       <form
@@ -45,6 +64,7 @@ const WritePost = () => {
                 type="text"
                 className="write-add-tag"
                 placeholder="태그 추가하기"
+                onKeyDown={show_tag}
                 required
               />
               <label for="file">+ 이미지 추가</label>
