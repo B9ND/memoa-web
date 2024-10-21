@@ -5,8 +5,8 @@ const Header = () => {
   let location = useLocation().pathname.split("/:")[0];
   const navigate = useNavigate();
 
-  if (location == ''){
-    location = 'home'
+  if (location == '/'){
+    location = '/home'
   }
   
   let icon = <div className="page-icon" style={{backgroundImage: 'url(/src/assets/icon'+location+'.svg)'}}></div>

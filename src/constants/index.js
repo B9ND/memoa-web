@@ -1,1 +1,1 @@
-export const API_URL = "http://13.125.84.202/"
+export const API_URL = import.meta.env.VITE_API_KEY

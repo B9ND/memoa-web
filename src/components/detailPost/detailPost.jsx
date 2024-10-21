@@ -8,7 +8,8 @@ import NotFound from "../../pages/NotFound/NotFound";
 import instance from "../../libs/axios/instance"
 
 const DetailPost = () => {
-  const params = useParams();
+  let params = useParams();
+  params.id = params.id.substring(1)
   const [postData, setPostData] = useState({
     id: 0,
     title: "",
@@ -28,7 +29,7 @@ const DetailPost = () => {
   
   const getPost = async () => {
     try{
-      const res = await instance.get(`/post/:${params.id}`)
+      const res = await instance.get(`/post/${params.id}`)
       if(res){
         setPostData(res.data)
       }
