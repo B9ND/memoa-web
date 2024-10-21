@@ -7,10 +7,21 @@ import {
 import Tag from "../Tag/Tag";
 import { useState } from "react";
 import "./index.css";
+import { IoMdBookmark } from "react-icons/io";
 
 /* eslint-disable */
 const Board = ({ detail }) => {
   const [isPop, setIsPop] = useState(false);
+  const [which, setWhich] = useState(true);
+
+  const what = ()=>{
+    if (which === true){
+      setWhich(false)
+    }
+    else if (which === false){
+      setWhich(true)
+    }
+  }
 
   return (
     <div className="board">
@@ -52,9 +63,17 @@ const Board = ({ detail }) => {
           <Tag tagPrint={detail.tags[2]} canActive={false} />
         </div>
         <div className="board-bookmark">
-          <MdOutlineBookmarkBorder
-            style={{ width: "28px", height: "28px", cursor:'pointer'}}
-          />
+          {which?
+            <MdOutlineBookmarkBorder
+            style={{
+               width: "28px", height: "28px", cursor:'pointer'
+              }}
+              onClick={what}/>:
+              <IoMdBookmark style={{
+                width:"28px", height:"28px"
+              }} 
+              onClick={what}/>
+          }
         </div>
       </div>
       <div className="board-footer">
