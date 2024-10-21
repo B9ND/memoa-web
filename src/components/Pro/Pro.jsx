@@ -82,7 +82,7 @@ const Pro = () => {
               12
             </span>
           </Link>
-          <Link to={`/following/:${userName}/:following`} className="detail-container">
+          <Link to={`/follow/:${userName}/:following`} className="detail-container">
             팔로우
             <span className="user-number">
               {/* {userInfo[userIndex].followCount} */}
