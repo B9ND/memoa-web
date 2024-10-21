@@ -1,6 +1,7 @@
 import "./index.css";
-import { MdOutlineComment, MdBookmarkBorder } from "react-icons/md";
+import { MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Tag from "../Tag/Tag";
 
 const Post = () => {
   const userInfo = [
@@ -65,34 +66,17 @@ const Post = () => {
                     <img src={post.images[0]}></img>
                   </div>
                   <div className="post-footer">
-                    <div className="icons">
-                      <div className="post-state">
-                        <div className="post-comment">
-                          <MdOutlineComment
-                            style={{
-                              width: "22px",
-                              height: "22px",
-                              color: "gray",
-                            }}
-                          />
-                        </div>
+                    <div className="post-board">
+                      <div className="post-tag">
+                        {post.tags.map((tag, idx) => <Tag key={idx} tagPrint={tag} canActive={false}/>)}
                       </div>
-                      <div className="post-state-two">
-                        <MdBookmarkBorder
+                      <MdBookmarkBorder
                           style={{
-                            width: "25px",
-                            height: "25px",
+                            width: "28px",
+                            height: "28px",
                             color: "gray",
                           }}
                         />
-                      </div>
-                    </div>
-                    <div className="post-board">
-                      <div className="post-tag">
-                        {post.tags.map((tag, idx) => (
-                          <div key={idx}>{tag}</div>
-                        ))}
-                      </div>
                     </div>
                     <div className="post-title">{post.title}</div>
                   </div>

@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
 import "./index.css";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 // import { useLocation } from "react-router-dom";
 
@@ -21,28 +20,20 @@ const userInfo = [
 
 const Pro = () => {
   const { username } = useParams();
-  const UserName = username.replace(":", "");
-  let userIndex = userInfo.findIndex((user) => user.nickname === UserName);
+  const userName = username.replace(":", "");
+  let userIndex = userInfo.findIndex((user) => user.nickname === userName);
   const [follow, following] = useState("팔로잉");
   const [ok, notok] = useState(true);
 
   const changeFollow = () => {
     if (follow === "팔로잉") {
       following("팔로우");
-      console.log(follow);
       notok(false);
     } else if (follow === "팔로우") {
       following("팔로잉");
-      console.log(follow);
       notok(true);
     }
   };
-
-  console.log(userIndex);
-  console.log(UserName);
-
-  const location = useLocation();
-  console.log(location);
 
   if (userIndex === -1) {
     return <div>This is not user</div>;
@@ -50,7 +41,7 @@ const Pro = () => {
 
   let isVisible = true;
 
-  if (UserName === userInfo[0].nickname) {
+  if (userName === userInfo[0].nickname) {
     isVisible = false;
   }
 
@@ -78,26 +69,26 @@ const Pro = () => {
         </div>
         <div className="user-information">
           <div className="detail-container">
-            작성한 글{" "}
+            작성한 글
             <span className="user-number">
               {/* 더미 나중 연결{userInfo[userIndex].postCount} */}
               10
             </span>
           </div>
-          <div className="detail-container">
-            팔로워{" "}
+          <Link to={`/followers/:${userName}`} className="detail-container">
+            팔로워
             <span className="user-number">
               {/* 더미 나중 연결 {userInfo[userIndex].followerCount} */}
               12
             </span>
-          </div>
-          <div className="detail-container">
-            팔로우{" "}
+          </Link>
+          <Link to={`/following/:${userName}`} className="detail-container">
+            팔로우
             <span className="user-number">
               {/* {userInfo[userIndex].followCount} */}
               14
             </span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

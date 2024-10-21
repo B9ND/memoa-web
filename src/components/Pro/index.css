@@ -62,9 +62,13 @@
   flex-direction: column;
   border-left: 1px solid black;
 }
+
 .detail-container {
   display: flex;
   justify-content: space-between;
+  color: black;
+  font-size: 18px;
+  margin-left: 16px;
 }
 .user-information > div {
   font-size: 18px;

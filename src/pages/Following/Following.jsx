@@ -1,6 +1,6 @@
 import Header from "../../components/Header/Header"
 
-const Follow = () => {
+const Following = () => {
   return (
       <div className="head-main">
         <Header/>
@@ -8,4 +8,4 @@ const Follow = () => {
   )
 }
 
-export default Follow
+export default Following
