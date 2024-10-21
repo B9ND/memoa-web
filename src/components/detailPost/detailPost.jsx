@@ -3,6 +3,9 @@ import "./index.css";
 import { MdBookmarkBorder } from "react-icons/md";
 import { IoMdBookmark } from "react-icons/io";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import NotFound from "../../pages/NotFound/NotFound";
+import Bookmark from "../../pages/Bookmark/Bookmark";
 
 const DetailPost = () => {
   const titleList = [
@@ -14,21 +17,28 @@ const DetailPost = () => {
       author: "지존진교",
       tags: ["초등", "1학년", "국어", "한국사", "고라니"],
       createdAt: "2024-10-17",
-      images: ["../src/assets/boardImg.png"],
+      images: ["../../src/assets/boardImg.png"],
     },
   ];
 
   const [which, setWhich] = useState(true);
-  
-  const what = ()=>{
-    if (which === true){
-        setWhich(false)
+
+  const what = () => {
+    if (which === true) {
+      setWhich(false);
+    } else if (which === false) {
+      setWhich(true);
     }
-    else if(which === false){
-        setWhich(true)
-    }
+  };
+
+  const { id } = useParams();
+  const postId = id.replace(":", "");
+
+  if (postId != titleList[0].id) {
+    return <NotFound></NotFound>;
   }
 
+  Bookmark;
   return (
     <>
       {titleList.map((post) => {

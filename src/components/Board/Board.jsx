@@ -8,21 +8,22 @@ import Tag from "../Tag/Tag";
 import { useState } from "react";
 import "./index.css";
 import { IoMdBookmark } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 /* eslint-disable */
 const Board = ({ detail }) => {
   const [isPop, setIsPop] = useState(false);
   const [which, setWhich] = useState(true);
 
-  const what = ()=>{
-    if (which === true){
-      setWhich(false)
+  const what = () => {
+    if (which === true) {
+      setWhich(false);
+    } else if (which === false) {
+      setWhich(true);
     }
-    else if (which === false){
-      setWhich(true)
-    }
-  }
+  };
 
+  const navigate = useNavigate()
   return (
     <div className="board">
       <div className="board-header">
@@ -34,7 +35,12 @@ const Board = ({ detail }) => {
         <div className="board-date">{detail.createdAt}</div>
       </div>
       <div className="board-main">
-        <img src={detail.images[0]} alt="" className="board-img" />
+        <img
+          src={detail.images[0]}
+          alt=""
+          className="board-img"
+          onClick={() => navigate("/detail/post")}
+        />
         {/* <div className="board-state">
           <div className="board-counters">
             <div className="board-comment">
@@ -61,17 +67,24 @@ const Board = ({ detail }) => {
           {detail.tags.map((k, idx)=><Tag key={idx} tagPrint={k} canActive={false} />)}
         </div>
         <div className="board-bookmark">
-          {which?
+          {which ? (
             <MdOutlineBookmarkBorder
-            style={{
-               width: "28px", height: "28px", cursor:'pointer'
+              style={{
+                width: "28px",
+                height: "28px",
+                cursor: "pointer",
               }}
-              onClick={what}/>:
-              <IoMdBookmark style={{
-                width:"28px", height:"28px"
-              }} 
-              onClick={what}/>
-          }
+              onClick={what}
+            />
+          ) : (
+            <IoMdBookmark
+              style={{
+                width: "28px",
+                height: "28px",
+              }}
+              onClick={what}
+            />
+          )}
         </div>
       </div>
       <div className="board-footer">
@@ -82,7 +95,7 @@ const Board = ({ detail }) => {
       </div>
       {isPop == true && <div className="board-text">{detail.content}</div>}
     </div>
-  )
+  );
 };
 
 export default Board;
