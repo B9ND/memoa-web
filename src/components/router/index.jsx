@@ -11,8 +11,8 @@ import Help from "../../pages/Help/Help";
 import Sidebar from "../Sidebar/Sidebar";
 import NotFound from "../../pages/NotFound/NotFound";
 import Write from "../../pages/Write/Write";
-import Following from "../../pages/Following/Following";
-import Followers from "../../pages/Followers/Followers";
+import FollowList from "../FollowList/FollowList";
+import Follow from "../../pages/Follow/Follow";
 
 const Router = () => {
   return (
@@ -20,14 +20,14 @@ const Router = () => {
       <div className="layout">
         <Sidebar />
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/follow/:username" element={<Follow/>}>
+            <Route path=":followState" element={<FollowList/>}/>
+          </Route>
           <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/profile/:username" element={<Profile />}/>
-          <Route path="/following/:username" element={<Following />} />
-          <Route path="/followers/:username" element={<Followers />} />
           <Route path="/school" element={<School />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/search" element={<Search />} />

@@ -22,8 +22,7 @@ const Sidebar = () => {
     "/setting",
     "/help",
     "/write",
-    "/followers",
-    "/following"
+    "/follow",
   ];
 
   const menuOne = [
