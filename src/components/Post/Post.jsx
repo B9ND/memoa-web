@@ -104,7 +104,6 @@ const Post = () => {
                     </div>
                     <div className="post-title">{post.title}</div>
                   </div>
-                </div>
               );
             })}
           </Masonry>
