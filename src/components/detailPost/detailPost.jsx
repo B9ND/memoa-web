@@ -1,13 +1,42 @@
-import React from "react";
 import "./index.css";
 import { MdBookmarkBorder } from "react-icons/md";
 import { IoMdBookmark } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "../../pages/NotFound/NotFound";
-import Bookmark from "../../pages/Bookmark/Bookmark";
+// import Bookmark from "../../pages/Bookmark/Bookmark";
+import instance from "../../libs/axios/instance"
 
 const DetailPost = () => {
+  const params = useParams();
+  const [postData, setPostData] = useState({
+    id: 0,
+    title: "",
+    content: "",
+    author: "",
+    tags: [
+
+    ],
+    createdAt: "",
+    images: [
+    ]
+  })
+
+  useEffect(()=>{
+    getPost()
+  }, [params.id])
+  
+  const getPost = async () => {
+    try{
+      const res = await instance.get(`/post/:${params.id}`)
+      if(res){
+        setPostData(res.data)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   const titleList = [
     {
       id: 0,
@@ -38,17 +67,13 @@ const DetailPost = () => {
     return <NotFound></NotFound>;
   }
 
-  Bookmark;
   return (
-    <>
-      {titleList.map((post) => {
-        return (
           <div className="detail-post-container">
             <div className="post-detail-container">
               <div className="post-header">
                 <div className="post-detail-header">
                   <span style={{ fontSize: "1.6em", fontWeight: "500" }}>
-                    {post.title}
+                    {postData.title}
                   </span>
                   {which ? (
                     <MdBookmarkBorder
@@ -71,31 +96,28 @@ const DetailPost = () => {
                 </div>
                 <div className="tag-and-author">
                   <div className="tag-container">
-                    {post.tags.map((tag, idx) => (
+                    {postData.tags.map((tag, idx) => (
                       <div key={idx}>{tag}</div>
                     ))}
                   </div>
-                  <div className="author">작성자 : {post.author}</div>
+                  <div className="author">작성자 : {postData.author}</div>
                 </div>
                 <div className="post-line"></div>
               </div>
               <div className="detail-main-post">
-                <img src={post.images[0]}></img>
+                <img src={postData.images[0]}></img>
               </div>
               <div className="detail-post-content">
-                <span>{post.content}</span>
+                <span>{postData.content}</span>
               </div>
               <div className="detail-main-post">
-                <img src={post.images[0]}></img>
+                <img src={postData.images[0]}></img>
               </div>
               <div className="detail-post-content">
-                <span>{post.content}</span>
+                <span>{postData.content}</span>
               </div>
             </div>
           </div>
-        );
-      })}
-    </>
   );
 };
 
