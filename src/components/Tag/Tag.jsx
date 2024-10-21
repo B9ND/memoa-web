@@ -23,7 +23,7 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
   };
 
   return tagStyle == "filter" ? (
-    <button className="tag-filter-choiced" onClick={() => toggleChoice()}>
+    <button className={choiced == true ? "tag-filter-choiced" : "tag-filter"} onClick={() => toggleChoice()}>
       <FaPlus color={choiced == true ? "white" : '#6D6D6E' }/>
       {tagPrint}
     </button>
