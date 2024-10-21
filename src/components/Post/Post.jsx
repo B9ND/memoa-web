@@ -78,9 +78,9 @@ const Post = () => {
                     <img src={post.images[0]}></img>
                   </div>
                   <div className="post-footer">
-                      <div className="post-tag">
-                        {post.tags.map((tag, idx) => <Tag key={idx} tagPrint={tag} canActive={false}/>)}
-                      </div>
+                    <div className="post-tag">
+                      {post.tags.map((tag, idx) => <Tag key={idx} tagPrint={tag} canActive={false}/>)}
+                    </div>
                     <div className="post-state-two">
                         {which ? (
                           <MdBookmarkBorder
@@ -101,9 +101,9 @@ const Post = () => {
                           />
                         )}
                       </div>
-                    </div>
-                    <div className="post-title">{post.title}</div>
                   </div>
+                    <div className="post-title">{post.title}</div>
+                </div>
               );
             })}
           </Masonry>

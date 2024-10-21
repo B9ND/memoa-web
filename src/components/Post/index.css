@@ -65,19 +65,12 @@
   flex-wrap: wrap;
   gap: 4px;
 }
-.post-tag > div {
-  width: 54px; /*ori : 54px*/
-  height: 26px;
-  border: 1px solid #6d6d6e;
-  border-radius: 20px;
-  color: #6d6d6e;
-  margin: 0 4px;
+
+.post-footer{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  overflow-x: scroll;
+  margin-bottom: 8px;
 }
+
 .post-title {
   font-size: 18px;
   margin: 0 4px;
@@ -86,12 +79,14 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
 .all-container {
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 /* @media (max-width: 1300px) {
   .control {
     width: 1020px;

@@ -38,13 +38,12 @@
 
 .board-main{
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .board-img{
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 8px;
 }
 
 /* .board-state{
