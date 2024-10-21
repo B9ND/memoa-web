@@ -23,7 +23,7 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home />} />
           <Route path="/follow" element={<Follow />} />
           <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/profile/:username" element={<Profile />} />
@@ -33,8 +33,8 @@ const Router = () => {
           <Route path="/help" element={<Help />} />
           <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/write" element={<Write/>}/>
-          <Route path="/detail/post" element={<Detail/>}/>
+          <Route path="/write" element={<Write />} />
+          <Route path="/detail/post/:id" element={<Detail />} />
         </Routes>
       </div>
     </BrowserRouter>

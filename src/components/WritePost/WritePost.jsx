@@ -27,7 +27,11 @@ const WritePost = () => {
 
   return (
     <>
-      <form className="big-container">
+      <form
+        className="big-container"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div className="write-container">
           <div className="write-and-tag">
             <input
@@ -36,7 +40,21 @@ const WritePost = () => {
               id="inputTitle"
               required
             />
-            <div className="write-add-tag">태그 추가하기</div>
+            <div className="input-file">
+              <input
+                type="text"
+                className="write-add-tag"
+                placeholder="태그 추가하기"
+                required
+              />
+              <label for="file">+ 이미지 추가</label>
+              <input
+                type="file"
+                id="file"
+                name="chooseFile"
+                accept="image/*" /*onChange=()*/
+              ></input>
+            </div>
             <div className="line"></div>
           </div>
           <div className="write-main">
@@ -52,7 +70,7 @@ const WritePost = () => {
           </div>
         </div>
         <div className="btn-container">
-          <button className="submit-btn" type="submit"> 
+          <button className="submit-btn" type="submit">
             글 등록하기
           </button>
         </div>

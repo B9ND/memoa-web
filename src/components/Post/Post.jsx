@@ -3,6 +3,7 @@ import { MdOutlineComment, MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { IoMdBookmark } from "react-icons/io";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const userInfo = [
@@ -25,7 +26,7 @@ const Post = () => {
       title: "제목",
       content: "내용내용",
       author: "지존진교",
-      tags: ["초등", "1학년", "국어",],
+      tags: ["초등", "1학년", "국어"],
       createdAt: "2024-10-17",
       images: ["../src/assets/boardImg.png"],
     },
@@ -40,6 +41,8 @@ const Post = () => {
       setWhich(true);
     }
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -73,20 +76,23 @@ const Post = () => {
                     <div className="post-date">{post.createdAt}</div>
                   </div>
                   <div className="main-img">
-                    <img src={post.images[0]}></img>
+                    <img
+                      src={post.images[0]}
+                      onClick={() => navigate("/detail/post")}
+                    />
                   </div>
                   <div className="post-footer">
                     <div className="icons">
                       <div className="post-state">
                         <div className="post-comment">
-                          {/* <MdOutlineComment
+                          <MdOutlineComment
                             style={{
-                              width: "22px",
-                              height: "22px",
+                              width: "24px",
+                              height: "24px",
                               color: "gray",
                             }}
-                          /> */}
-                          <div style={{ width: "22px", height: "22px" }}></div>
+                          />
+                          {/* <div style={{ width: "22px", height: "22px" }}></div> */}
                         </div>
                       </div>
                       <div className="post-state-two">

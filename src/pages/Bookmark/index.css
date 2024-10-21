@@ -1,0 +1,19 @@
+.bookmark-container {
+  width: 100%;
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.bookmark-header {
+  width: 100%;
+  height: 7%;
+}
+.bookmark-header > span {
+  font-weight: 500;
+  font-size: 27px;
+  margin-left: 26.1px;
+}
+.bookmark-main {
+  padding-left: 10px;
+  padding-right: 10px;
+}

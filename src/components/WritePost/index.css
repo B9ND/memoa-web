@@ -3,10 +3,10 @@
   height: 100vh;
 }
 .write-container {
-  width: 100%;
+  width: 90%;
   height: 100%;
 }
-.write-and-tag > input {
+#inputTitle {
   font-size: 1.5em;
   font-weight: 500;
   border: none;
@@ -15,17 +15,29 @@
 .write-and-tag > input:focus {
   outline: none;
 }
+.input-file {
+  display: flex;
+  justify-content: space-between;
+}
 .write-add-tag {
   color: #6d6d6e;
   margin-top: 0.6em;
+  font-weight: 400;
+  font-size: 17px;
+  border: none;
+  width: 60%;
+  margin-bottom: 0.3em;
+}
+.write-add-tag:focus {
+  outline: none;
 }
 .line {
   margin-top: 0.5em;
-  width: 90%;
+  width: 100%;
   border-bottom: 0.7px solid #6d6d6e;
 }
 .write-main > textarea {
-  width: 90%;
+  width: 100%;
   height: 100%;
   border: none;
   font-size: 18px;
@@ -52,4 +64,24 @@
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
+}
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7.5em;
+  height: 2.4em;
+  background-color: #715aff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
 }
