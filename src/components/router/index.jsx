@@ -25,7 +25,6 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />} />
           <Route path="/follow/:username" element={<Follow/>}>
             <Route path=":followState" element={<FollowList/>}/>
           </Route>
@@ -37,8 +36,8 @@ const Router = () => {
           <Route path="/help" element={<Help />} />
           <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/write" element={<Write />} />
-          <Route path="/detail/post/:id" element={<Detail />} />
+          <Route path="/write" element={<Write />}/>
+          <Route path="/detail/post/:id" element={<Detail/>}/>
         </Routes>
       </div>
     </BrowserRouter>
