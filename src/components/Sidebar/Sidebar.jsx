@@ -22,6 +22,7 @@ const Sidebar = () => {
     "/setting",
     "/help",
     "/write",
+    "/follow",
     "/detail/post",
   ];
 

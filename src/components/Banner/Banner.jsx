@@ -1,17 +1,40 @@
-// import cloud from "../assets/cloud.svg"
 import './index.css';
-import cloud from '../../assets/cloud.svg'
+import cloud from '../../assets/cloud.svg';
 
-const Banner = () => {
+const Banner = ({ isLogin }) => {
   return (
-    <div className="hero">
-      <h1>기록하고,</h1>
-      <h1>공유하고,</h1>
-      <h1>활용하는,</h1>
-      <h1 className='gap'>가장 <span className="highlight"> 똑똑한</span>SNS <span className="highlight-bar">—</span></h1>
-      <div className="hero-button">MEMO<span className='highlight-logo'>A</span></div>
-    </div>
+    isLogin ? (
+      <div className="login-hero">
+        <h1 className='login-message'>기록하고,</h1>
+        <h1 className='login-message'>공유하고,</h1>
+        <h1 className='login-message'>활용하는,</h1>
+        <div className='login-message-box'>
+          <h1 className="login-gap">
+            가장 <span className="login-highlight"> 똑똑한</span>SNS
+            <span className="login-highlight-bar"> —</span>
+          </h1>
+        </div>
+        <div className="login-hero-button">
+          MEMO<span className="login-highlight-logo">A</span>
+        </div>
+      </div>
+    ) : (
+      <div className="signup-hero">
+        <h1 className='signup-message'>기록하고,</h1>
+        <h1 className='signup-message'>공유하고,</h1>
+        <h1 className='signup-message'>활용하는,</h1>
+        <div className='signup-message-box'>
+          <h1 className="signup-gap">
+            가장 <span className="signup-highlight"> 똑똑한</span>SNS
+            <span className="signup-highlight-bar"> —</span>
+          </h1>
+        </div>
+        <div className="signup-hero-button">
+          MEMO<span className="signup-highlight-logo">A</span>
+        </div>
+      </div>
+    )
   );
 };
 
-export default Banner;  
+export default Banner;

@@ -46,52 +46,31 @@
   width: 100%;
 }
 
-.post-footer {
-  padding: 0 12px 0 12px;
-}
-.icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 4px;
-  margin-bottom: 12px;
-  width: 100%;
-}
-.post-state {
-  display: flex;
-  flex-direction: row;
-}
 .post-comment > span {
   font-size: 16px;
   font-weight: 400;
   margin-left: 8px;
 }
-.post-comment {
-  display: flex;
-  align-items: center;
-}
+
 .post-board {
   margin-bottom: 12px;
+  display: flex;
+
 }
+
 .post-tag {
   display: flex;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  gap: 4px;
 }
-.post-tag > div {
-  width: 54px; /*ori : 54px*/
-  height: 26px;
-  border: 1px solid #6d6d6e;
-  border-radius: 20px;
-  color: #6d6d6e;
-  margin: 0 4px;
+
+.post-footer{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  overflow-x: scroll;
+  margin-bottom: 8px;
 }
+
 .post-title {
   font-size: 18px;
   margin: 0 4px;
@@ -100,12 +79,14 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
 .all-container {
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 /* @media (max-width: 1300px) {
   .control {
     width: 1020px;

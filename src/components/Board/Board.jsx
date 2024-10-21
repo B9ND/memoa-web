@@ -64,9 +64,7 @@ const Board = ({ detail }) => {
       </div>
       <div className="board-info">
         <div className="board-tag">
-          <Tag tagPrint={detail.tags[0]} canActive={false} />
-          <Tag tagPrint={detail.tags[1]} canActive={false} />
-          <Tag tagPrint={detail.tags[2]} canActive={false} />
+          {detail.tags.map((k, idx)=><Tag key={idx} tagPrint={k} canActive={false} />)}
         </div>
         <div className="board-bookmark">
           {which ? (

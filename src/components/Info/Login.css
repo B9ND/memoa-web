@@ -3,7 +3,15 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-right: 13%;
+  margin-right: 5%;
+}
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-right: 5%;
 }
 
 .login-box {
@@ -11,40 +19,67 @@
   margin-right: 150px;
 }
 
-.logo-placeholder {
-  width: 88px;
-  height: 88px;
-  background-color: #715AFF;
+.signup-box {
+  text-align: center;
+  margin-right: 150px;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  background-image: url("../../assets/icon/MEMOA_Logo.svg");
+  background-repeat: space;
+  background-size: 70px;
   margin: 0 auto;
 }
 
 .login-box h2 {
   font-weight: 600;
-  font-size: 39px;
-  margin: 20px;
+  font-size: 30px;
+  margin: 15px;
 }
 
-.project {
+.signup-box h2 {
+  font-weight: 600;
+  font-size: 30px;
+  margin: 15px;
+}
+
+.login-project {
   color: #715AFF;
   font-weight: 400;
   margin: 0;
-  font-size: 25px;
+  font-size: 23px;
 }
 
-.Cont {
+.signup-project {
+  color: #715AFF;
+  font-weight: 400;
+  margin: 0;
+  font-size: 23px;
+}
+
+.login-Cont {
   font-weight: 400;
   font-size: 25px;
-  margin-bottom: 38px;
+  margin-bottom: 25px;
+}
+
+.signup-Cont {
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 25px;
 }
 
 .inputWrap {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
+  width: 350px;
 }
 
 .floating-label {
   position: absolute;
-  left: 50px; /* Adjusted for icon space */
+  left: 50px;
   top: 50%;
   transform: translateY(-50%);
   transition: all 0.2s ease;
@@ -55,7 +90,7 @@
 
 .floating-label.active {
   top: 12px;
-  left: 50px; /* Adjusted for icon space */
+  left: 50px;
   font-size: 10px;
   color: #715AFF;
 }
@@ -69,16 +104,28 @@
   height: 27px;
 }
 
-.login-box input {
+.long-input {
+  width: 350px;
   display: block;
-  width: 400px;
-  height: 56px;
-  padding: 10px;
+  height: 50px;
+  padding: 10px 45px 10px 10px;
   font-weight: 400;
   font-size: 17px;
   border: 1.4px solid #818182;
   border-radius: 8px;
-  padding-left: 50px; /* Adjusted for icon space */
+  padding-left: 50px;
+}
+
+.short-input {
+  width: 250px;
+  display: block;
+  height: 50px;
+  padding: 10px 45px 10px 10px;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1.4px solid #818182;
+  border-radius: 8px;
+  padding-left: 50px;
 }
 
 .login-box input:focus {
@@ -86,17 +133,32 @@
   outline: none;
 }
 
-.login-box input:focus + .floating-label,
-.login-box input:not(:placeholder-shown) + .floating-label {
-  top: -12px;
-  left: 50px; /* Adjusted for icon space */
-  font-size: 16px;
+.signup-box input:focus {
+  border-color: #A090FF;
+  outline: none;
+}
+
+.login-box input:focus + .login-floating-label,
+.login-box input:not(:placeholder-shown) + .login-floating-label {
+  top: -13px;
+  left: 50px;
+  font-size: 13px;
   color: #715AFF;
 }
 
-.Delbutton {
-  position: absolute;
+.long-Delbutton {
   right: 20px;
+  position: absolute;
+  top: 53%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.short-Delbutton {
+  right: 120px;
+  position: absolute;
   top: 53%;
   transform: translateY(-50%);
   background: none;
@@ -114,22 +176,28 @@
   cursor: pointer;
 }
 
-.Delbutton img {
-  width: 17px;
+.long-Delbutton img {
+  width: 15px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.short-Delbutton img {
+  width: 15px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .eyebutton img {
-  width: 21px;
+  width: 19px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .login-button {
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   background-color: #715AFF;
-  width: 400px;
-  height: 64px;
+  width: 350px;
+  height: 45px;
+  align-content: center;
   color: white;
   border: none;
   border-radius: 10px;
@@ -137,15 +205,165 @@
   cursor: pointer;
 }
 
-.signup {
+.tc {
+  margin: 24px 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.TU-highlights {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #38A1DD;
+}
+
+.PI-highlights {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #38A1DD;
+}
+
+.login-signup-link {
   font-weight: 400;
   font-size: 16px;
   margin-top: 20px;
   color: #666;
 }
 
-.signup a {
+.login-signup-link a {
   font-weight: 600;
   color: #715AFF;
   text-decoration: none;
+}
+
+.grade-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  gap: 20px;
+}
+
+.grade-button {
+  flex: 1;
+  width: 100px;
+  height: 60px;
+  padding: 10px 10px;
+  border: 2px solid #7f56d9;
+  border-radius: 12px;
+  background-color: #f5f5ff;
+  color: #000;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.grade-button:hover {
+  background-color: #e0d5ff;
+}
+
+.grade-button.selected {
+  background-color: #7f56d9;
+  color: #fff;
+}
+
+.grade {
+  font-weight: 400;
+  font-size: 20px;
+  margin-left: 8px;
+}
+
+.send-code-button {
+  height: 50px;
+  width: 9cap;
+  position: absolute;
+  right: 0px;
+  top: 51%;
+  transform: translateY(-50%);
+  background-color: #715AFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 600;
+}
+
+.duplicate-check-button {
+  height: 50px;
+  width: 9cap;
+  position: absolute;
+  right: 0px;
+  top: 51%;
+  transform: translateY(-50%);
+  background-color: #715AFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 600;
+}
+
+.code-input-wrap {
+  width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.code-input {
+  width: 48px;
+  height: 60px;
+  text-align: center;
+  font-size: 25px;
+  border: 1px solid #818182;
+  border-radius:8px;
+  margin: 0 6px;
+}
+
+.resend-code-button {
+  background: none;
+  border: none;
+  color: #715AFF;
+  cursor: pointer;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.resend-code-button {
+  width: 350px;
+  margin: 10px 0px;
+  display: flex;
+  color: #715AFF;
+  cursor: pointer;
+  padding-left: 260px;
+  font-size: 14px;
+  text-decoration-line: none;
+}
+
+.duplicate-message {
+  color: #DD3A45;
+  font-size: 16px;
+  padding-left: 180px;
+  margin: 5px 0px 20px 0px;
+  text-align: center;
+}
+
+.duplicate-message {
+  color: #DD3A45;
+  font-size: 16px;
+  padding-left: 180px;
+  margin: 5px 0px 20px 0px;
+  text-align: center;
+}
+
+.duplicate-message.success {
+  color: #28a745;
+  padding-left: 260px;
 }
