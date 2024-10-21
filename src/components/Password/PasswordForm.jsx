@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
+import axios from 'axios';
 
 const PasswordForm = ({ password, setPassword, confirmPassword, setConfirmPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
