@@ -2,10 +2,9 @@ import { Link, useParams } from "react-router-dom";
 import "./index.css";
 
 const FollowList = () => {
-  let { followState } = useParams();
+  let { followState, username } = useParams();
   followState = followState.substring(1)
-
-  const username = "지존진교";
+  
   const following = [
     {
       email: "cugar@gmail.com",
@@ -40,13 +39,13 @@ const FollowList = () => {
         {followState == 'following' ? (
           <>
             <button className="follow-nav-focused">팔로잉</button>
-            <Link to={`/follow/:${username}/:followers`} className="follow-nav">
+            <Link to={`/follow/${username}/:followers`} className="follow-nav">
               팔로워
             </Link>
           </>
         ) : (
           <>
-            <Link to={`/follow/:${username}/:following`} className="follow-nav">
+            <Link to={`/follow/${username}/:following`} className="follow-nav">
               팔로잉
             </Link>
             <button className="follow-nav-focused">팔로워</button>

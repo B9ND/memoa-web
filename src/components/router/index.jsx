@@ -37,8 +37,8 @@ const Router = () => {
           <Route path="/help" element={<Help />} />
           <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/write" element={<Write />} />
-          <Route path="/detail/post/:id" element={<Detail />} />
+          <Route path="/write" element={<Write />}/>
+          <Route path="/detail/post/:id" element={<Detail/>}/>
         </Routes>
       </div>
     </BrowserRouter>

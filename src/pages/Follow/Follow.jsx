@@ -1,12 +1,12 @@
-import Header from '../../components/Header/Header'
-import FollowList from '../../components/FollowList/FollowList'
+import FollowList from "../../components/FollowList/FollowList"
+import Header from "../../components/Header/Header"
 
 const Follow = () => {
   return (
-    <div className="head-main">
-      <Header/>
-      <FollowList/>
-    </div>
+      <div className="head-main">
+        <Header/>
+        <FollowList/>
+      </div>
   )
 }
 
