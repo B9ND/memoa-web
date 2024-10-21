@@ -13,6 +13,8 @@ import NotFound from "../../pages/NotFound/NotFound";
 import Write from "../../pages/Write/Write";
 import FollowList from "../FollowList/FollowList";
 import Follow from "../../pages/Follow/Follow";
+import Detail from "../../pages/Detail/Detail";
+
 
 const Router = () => {
   return (
@@ -35,6 +37,7 @@ const Router = () => {
           <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/*" element={<NotFound />} />
           <Route path="/write" element={<Write/>}/>
+          <Route path="/detail/post" element={<Detail/>}/>
         </Routes>
       </div>
     </BrowserRouter>
