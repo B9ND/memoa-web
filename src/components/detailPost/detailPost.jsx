@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.css";
 import { MdBookmarkBorder } from "react-icons/md";
+import { IoMdBookmark } from "react-icons/io";
+import { useState } from "react";
 
 const DetailPost = () => {
   const titleList = [
@@ -16,6 +18,17 @@ const DetailPost = () => {
     },
   ];
 
+  const [which, setWhich] = useState(true);
+  
+  const what = ()=>{
+    if (which === true){
+        setWhich(false)
+    }
+    else if(which === false){
+        setWhich(true)
+    }
+  }
+
   return (
     <>
       {titleList.map((post) => {
@@ -27,13 +40,24 @@ const DetailPost = () => {
                   <span style={{ fontSize: "1.6em", fontWeight: "500" }}>
                     {post.title}
                   </span>
-                  <MdBookmarkBorder
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      color: "gray",
-                    }}
-                  />
+                  {which ? (
+                    <MdBookmarkBorder
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        color: "gray",
+                      }}
+                      onClick={what}
+                    />
+                  ) : (
+                    <IoMdBookmark
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                      }}
+                      onClick={what}
+                    />
+                  )}
                 </div>
                 <div className="tag-and-author">
                   <div className="tag-container">

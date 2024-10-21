@@ -1,6 +1,8 @@
 import "./index.css";
 import { MdOutlineComment, MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { IoMdBookmark } from "react-icons/io";
+import { useState } from "react";
 
 const Post = () => {
   const userInfo = [
@@ -16,19 +18,28 @@ const Post = () => {
         "https://i.pinimg.com/736x/8b/e6/6b/8be66bf6dbf168d4c4ecb99c04a3d112.jpg",
     },
   ];
-  
+
   const titleList = [
     {
       id: 0,
       title: "제목",
       content: "내용내용",
       author: "지존진교",
-      tags: ["초등", "1학년", "국어", "한국사", "고라니"],
+      tags: ["초등", "1학년", "국어",],
       createdAt: "2024-10-17",
       images: ["../src/assets/boardImg.png"],
     },
   ];
 
+  const [which, setWhich] = useState(true);
+
+  const what = () => {
+    if (which === true) {
+      setWhich(false);
+    } else if (which === false) {
+      setWhich(true);
+    }
+  };
 
   return (
     <>
@@ -68,23 +79,35 @@ const Post = () => {
                     <div className="icons">
                       <div className="post-state">
                         <div className="post-comment">
-                          <MdOutlineComment
+                          {/* <MdOutlineComment
                             style={{
                               width: "22px",
                               height: "22px",
                               color: "gray",
                             }}
-                          />
+                          /> */}
+                          <div style={{ width: "22px", height: "22px" }}></div>
                         </div>
                       </div>
                       <div className="post-state-two">
-                        <MdBookmarkBorder
-                          style={{
-                            width: "25px",
-                            height: "25px",
-                            color: "gray",
-                          }}
-                        />
+                        {which ? (
+                          <MdBookmarkBorder
+                            style={{
+                              width: "27px",
+                              height: "27px",
+                              color: "gray",
+                            }}
+                            onClick={what}
+                          />
+                        ) : (
+                          <IoMdBookmark
+                            style={{
+                              width: "27px",
+                              height: "27px",
+                            }}
+                            onClick={what}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="post-board">

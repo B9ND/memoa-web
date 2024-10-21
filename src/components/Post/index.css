@@ -80,7 +80,7 @@
   width: 100%;
 }
 .post-tag > div {
-  width: 54px;
+  width: 54px; /*ori : 54px*/
   height: 26px;
   border: 1px solid #6d6d6e;
   border-radius: 20px;
