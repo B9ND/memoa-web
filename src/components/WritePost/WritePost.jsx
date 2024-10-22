@@ -25,12 +25,30 @@ const WritePost = () => {
     handleResizeHeight();
   }, [value]);
 
+  const post = {
+    title: "",
+    content: "",
+    tags: [],
+    images: "",
+    isReleased: true,
+  };
+
+  const show_tag = (e) => {
+    const code = e.code;
+
+    console.log(tag)
+    if (code === "Enter") {
+      console.log("Enter키가 눌렸습니다.");
+
+    }
+  };
+
   return (
     <>
       <form
         className="big-container"
         method="post"
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
         <div className="write-container">
           <div className="write-and-tag">
@@ -45,13 +63,15 @@ const WritePost = () => {
                 type="text"
                 className="write-add-tag"
                 placeholder="태그 추가하기"
+                onKeyDown={show_tag}
                 required
               />
-              <label for="file">+ 이미지 추가</label>
+              <label htmlFor="file" id="write-image">+ 이미지 추가</label>
               <input
                 type="file"
                 id="file"
                 name="chooseFile"
+
                 accept="image/*" /*onChange=()*/
               ></input>
             </div>
