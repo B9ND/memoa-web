@@ -6,7 +6,6 @@ import { IoMdBookmark } from "react-icons/io";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Post = () => {
   const userInfo = [
     {
@@ -89,12 +88,14 @@ const Post = () => {
                   <div className="main-img">
                     <img
                       src={post.images[0]}
-                      onClick={() => navigate("/detail/post")}
+                      onClick={() => navigate("/detail/post/:0")}
                     />
                   </div>
                   <div className="post-footer">
                     <div className="post-tag">
-                      {post.tags.map((tag, idx) => <Tag key={idx} tagPrint={tag} canActive={false}/>)}
+                      {post.tags.map((tag, idx) => (
+                        <Tag key={idx} tagPrint={tag} canActive={false} />
+                      ))}
                     </div>
                     <div className="post-state-two">
                         {which ? (
@@ -117,7 +118,7 @@ const Post = () => {
                         )}
                     </div>
                   </div>
-                    <div className="post-title">{post.title}</div>
+                  <div className="post-title">{post.title}</div>
                 </div>
               );
             })}

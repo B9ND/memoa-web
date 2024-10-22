@@ -52,7 +52,6 @@
 .post-board {
   margin-bottom: 12px;
   display: flex;
-
 }
 
 .post-tag {
@@ -63,7 +62,7 @@
   gap: 4px;
 }
 
-.post-footer{
+.post-footer {
   display: flex;
   margin: 8px 0;
   justify-content: center;
