@@ -66,7 +66,7 @@ const WritePost = () => {
                 onKeyDown={show_tag}
                 required
               />
-              <label htmlFor="file">+ 이미지 추가</label>
+              <label htmlFor="file" id="write-image">+ 이미지 추가</label>
               <input
                 type="file"
                 id="file"
