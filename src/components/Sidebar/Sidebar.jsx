@@ -94,11 +94,7 @@ const Sidebar = () => {
           <div className="menu">
             <div className="select-one">
               {menuOne.map((menu, index) => {
-                let icon =
-                  "/src/assets/icon/" + menu.path.substring(1) + ".svg";
-                if (menu.name == "프로필") {
-                  icon = "/src/assets/icon/profile.svg";
-                }
+                let icon = "/src/assets/icon/" + menu.path.substring(1) + ".svg";
                 return location.substring(1).split("/:")[0] === menu.origin ? (
                   <CSSTransition
                     in={isOpen}
@@ -112,10 +108,10 @@ const Sidebar = () => {
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
-                          className={"fade"}
+                          className={"fade menu-name"}
                           unmountOnExit
                         >
-                          <span>{menu.name}</span>
+                          <div >{menu.name}</div>
                         </CSSTransition>
                       </div>
                     </Link>
@@ -133,10 +129,10 @@ const Sidebar = () => {
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
-                          className={"fade"}
+                          className={"fade menu-name"}
                           unmountOnExit
                         >
-                          <span>{menu.name}</span>
+                          <div>{menu.name}</div>
                         </CSSTransition>
                       </div>
                     </Link>
@@ -162,10 +158,10 @@ const Sidebar = () => {
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
-                          className={"fade"}
+                          className={"fade menu-name"}
                           unmountOnExit
                         >
-                          <span>{menu.name}</span>
+                          <div>{menu.name}</div>
                         </CSSTransition>
                       </div>
                     </Link>
@@ -183,10 +179,10 @@ const Sidebar = () => {
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
-                          className={"fade"}
+                          className={"fade menu-name"}
                           unmountOnExit
                         >
-                          <span>{menu.name}</span>
+                          <div >{menu.name}</div>
                         </CSSTransition>
                       </div>
                     </Link>

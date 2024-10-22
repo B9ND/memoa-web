@@ -32,6 +32,15 @@ const Post = () => {
       createdAt: "2024-10-17",
       images: ["../src/assets/boardImg.png"],
     },
+    {
+      id: 0,
+      title: "제목",
+      content: "내용내용",
+      author: "지존진교",
+      tags: ["초등", "1학년", "국어"],
+      createdAt: "2024-10-17",
+      images: ["../src/assets/boardImg.png"],
+    },
   ];
 
   const [which, setWhich] = useState(true);
@@ -106,7 +115,7 @@ const Post = () => {
                             onClick={what}
                           />
                         )}
-                      </div>
+                    </div>
                   </div>
                     <div className="post-title">{post.title}</div>
                 </div>
