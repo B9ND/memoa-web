@@ -34,13 +34,12 @@ const WritePost = () => {
   };
 
   const show_tag = (e) => {
-    const tag = document.getElementsByClassName("write-add-tag").value;
     const code = e.code;
 
+    console.log(tag)
     if (code === "Enter") {
       console.log("Enter키가 눌렸습니다.");
-      post.tags.push(tag);
-      console.log(tag);
+
     }
   };
 
@@ -49,7 +48,7 @@ const WritePost = () => {
       <form
         className="big-container"
         method="post"
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
         <div className="write-container">
           <div className="write-and-tag">
@@ -67,11 +66,12 @@ const WritePost = () => {
                 onKeyDown={show_tag}
                 required
               />
-              <label for="file">+ 이미지 추가</label>
+              <label htmlFor="file">+ 이미지 추가</label>
               <input
                 type="file"
                 id="file"
                 name="chooseFile"
+
                 accept="image/*" /*onChange=()*/
               ></input>
             </div>
