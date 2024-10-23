@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
+import Tag from "../Tag/Tag";
 
 const WritePost = () => {
   const [value, setValue] = useState("");
+  const [tag, setTag] = useState(true);
   const textareaRef = useRef(null);
+  const [textPrint, setText] = useState("");
+  const useInput = useRef(null)
+
 
   const handleResizeHeight = () => {
     const textarea = textareaRef.current;
@@ -25,21 +30,17 @@ const WritePost = () => {
     handleResizeHeight();
   }, [value]);
 
-  const post = {
-    title: "",
-    content: "",
-    tags: [],
-    images: "",
-    isReleased: true,
-  };
-
   const show_tag = (e) => {
     const code = e.code;
+    const text = e.target.value;
 
-    console.log(tag)
     if (code === "Enter") {
       console.log("Enter키가 눌렸습니다.");
-
+      if (text !== "") {
+        setTag(false);
+        setText(text);
+        // useInput.current.value = null
+      }
     }
   };
 
@@ -64,16 +65,19 @@ const WritePost = () => {
                 className="write-add-tag"
                 placeholder="태그 추가하기"
                 onKeyDown={show_tag}
+                ref={useInput}
                 required
               />
-              <label htmlFor="file" id="write-image">+ 이미지 추가</label>
+              {tag ? "" : <Tag tagName="tags" tagPrint={textPrint}></Tag>}
+              <label htmlFor="file" id="write-image">
+                + 이미지 추가
+              </label>
               <input
                 type="file"
                 id="file"
                 name="chooseFile"
-
                 accept="image/*" /*onChange=()*/
-              ></input>
+              />
             </div>
             <div className="line"></div>
           </div>
