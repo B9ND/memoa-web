@@ -3,10 +3,10 @@ import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
 const SchoolForm = ({ school, setSchool }) => {
-  const [selectedGrade, setSelectedGrade] = useState(null); // 선택된 학년 상태
+  const [selectedGrade, setSelectedGrade] = useState(null);
 
   const handleSelectGrade = (grade) => {
-    setSelectedGrade(grade); // 선택된 학년 업데이트
+    setSelectedGrade(grade);
   };
 
   return (

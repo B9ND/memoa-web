@@ -27,16 +27,16 @@ const DetailPost = () => {
     getPost()
   }, [params.id])
   
-  const getPost = async () => {
-    try{
-      const res = await instance.get(`/post/${params.id}`)
-      if(res){
-        setPostData(res.data)
-      }
-    }catch(err){
-      console.log(err)
-    }
-  }
+  // const getPost = async () => {
+  //   try{
+  //     const res = await instance.get(`/post/${params.id}`)
+  //     if(res){
+  //       setPostData(res.data)
+  //     }
+  //   }catch(err){
+  //     console.log(err)
+  //   }
+  // }
 
   const titleList = [
     {

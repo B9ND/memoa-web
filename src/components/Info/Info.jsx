@@ -5,17 +5,16 @@ import EmailVerificationForm from '../EmailVerification/EmailVerificationForm';
 import PasswordForm from '../Password/PasswordForm';
 import SchoolForm from '../School/SchoolForm';
 import NicknameForm from '../Nickname/NicknameForm';
+import instance from '../../libs/axios/instance';
 
 const Info = ({ isLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [ userData, setUserData ] = useState({email: '', password: '' , nickname:''});
+
   const [verificationCode, setVerificationCode] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [school, setSchool] = useState('');
   const [step, setStep] = useState(1);
-  const [nickname, setnickname] = useState('');
 
   const handleClearEmail = () => setEmail('');
   
@@ -43,15 +42,12 @@ const Info = ({ isLogin }) => {
             </p>
             <form>
               <EmailPasswordForm
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
+                userData={userData}
+                setUserData={setUserData}
                 showPassword={showPassword}
                 toggleShowPassword={toggleShowPassword}
                 handleClearEmail={handleClearEmail}
               />
-              <button type="submit" className="login-button">로그인</button>
             </form>
             <p className="login-signup-link">
               계정이 없다면? <a href="/signup">가입하기</a>
@@ -68,8 +64,8 @@ const Info = ({ isLogin }) => {
               {step === 1 && (
                 <div>
                   <EmailVerificationForm
-                    email={email}
-                    setEmail={setEmail}
+                    signupData={signupData}
+                    setSignupData={setSignupData}
                     verificationCode={verificationCode}
                     setVerificationCode={setVerificationCode}
                     handleSendCode={handleSendCode}
@@ -85,12 +81,11 @@ const Info = ({ isLogin }) => {
               {step === 2 && (
                 <>
                   <PasswordForm
-                    password={password}
-                    setPassword={setPassword}
+                    signupData={signupData}
+                    setSignupData={setSignupData}
                     showPassword={showPassword}
                     confirmPassword={confirmPassword}
                     setConfirmPassword={setConfirmPassword}
-                    showConfirmPassword={showConfirmPassword}
                     toggleShowPassword={() => setShowPassword(!showPassword)}
                     toggleShowConfirmPassword={() => setShowConfirmPassword(!showConfirmPassword)}
                   />
@@ -119,8 +114,8 @@ const Info = ({ isLogin }) => {
               {step === 4 && (
                 <>
                   <NicknameForm
-                    nickname={nickname}
-                    setnickname={setnickname}
+                    signupData={signupData}
+                    setSignupData={setSignupData}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
