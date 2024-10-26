@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
 import del from '../../assets/del.svg';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
@@ -8,18 +9,15 @@ import { setCookie } from '../../libs/Cookie/cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const EmailPasswordForm = ({ userData, setUserData, showPassword, toggleShowPassword, handleClearEmail }) => {
+const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
   
+  const nav = useNavigate()
   const login = async () => {
-    // e.preventDefault();
     try {
-      const res = await axios.post('/auth/login', {
-        email: userData.email,
-        password: userData.password,
-      });
+      const res = await instance.post('/auth/login', loginData);
       if(res){
-        setCookie('ACCESS_TOKEN', res.data.access)
-        setCookie('REFRESH_TOKEN', res.data.refresh)
+        setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
+        setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
         console.log('성공', res.data);
         nav('/home')
       }
@@ -30,19 +28,24 @@ const EmailPasswordForm = ({ userData, setUserData, showPassword, toggleShowPass
 
   const handleLogin = (e) => {
     const { name, value } = e.target
-    setUserData((prev)=>({...prev, [name]:value}))
-    console.log(userData)
+    setLoginData((prev)=>({...prev, [name]:value}))
   }
+
+  useEffect(()=>{
+    console.log(loginData.email)
+    console.log(loginData.password)
+  },[loginData])
+
   return (
     <>
         <div className="inputWrap">
           <img src={inputIcon} className="input-icon" />
-          <label className={`floating-label ${userData.email ? 'active' : ''}`}>이메일</label>
+          <label className={`floating-label ${loginData.email ? 'active' : ''}`}>이메일</label>
           <input
             className='long-input'
             type="email"
             name='email'
-            value={userData.email}
+            value={loginData.email}
             onChange={(e) => handleLogin(e)} />
           <button type="button" className="long-Delbutton" onClick={handleClearEmail}>
             <img src={del} alt="Clear Email" />
@@ -50,12 +53,12 @@ const EmailPasswordForm = ({ userData, setUserData, showPassword, toggleShowPass
         </div>
         <div className="inputWrap">
           <img src={inputIcon} className="input-icon" />
-          <label className={`floating-label ${userData.email && 'active' }`}>비밀번호</label>
+          <label className={`floating-label ${loginData.email && 'active' }`}>비밀번호</label>
           <input
             className='long-input'
             type={showPassword ? "text" : "password"}
             name='password'
-            value={userData.password}
+            value={loginData.password}
             onChange={(e) => handleLogin(e)} />
           <button type="button" className="eyebutton" onClick={toggleShowPassword}>
             <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />

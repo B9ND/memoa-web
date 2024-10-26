@@ -8,7 +8,8 @@ import NicknameForm from '../Nickname/NicknameForm';
 import instance from '../../libs/axios/instance';
 
 const Info = ({ isLogin }) => {
-  const [ userData, setUserData ] = useState({email: '', password: '' , nickname:''});
+  const [ loginData, setLoginData ] = useState({email: '', password: '' });
+  const [ signUpData, setSignUpData ] = useState({email: '', password: '' , nickname:''});
 
   const [verificationCode, setVerificationCode] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -16,10 +17,10 @@ const Info = ({ isLogin }) => {
   const [school, setSchool] = useState('');
   const [step, setStep] = useState(1);
 
-  const handleClearEmail = () => setEmail('');
+  const handleClearEmail = () => setLoginData({...loginData, email:''});
   
   const toggleShowPassword = () => setShowPassword(!showPassword);
-  const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+  // const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
   
   const handleSendCode = () => {
     console.log("인증번호를 전송합니다.");
@@ -40,15 +41,14 @@ const Info = ({ isLogin }) => {
             <p className="login-Cont">
               <span className="login-project">프로젝트</span> 계정으로 계속하기
             </p>
-            <form>
+
               <EmailPasswordForm
-                userData={userData}
-                setUserData={setUserData}
+                loginData={loginData}
+                setLoginData={setLoginData}
                 showPassword={showPassword}
                 toggleShowPassword={toggleShowPassword}
-                handleClearEmail={handleClearEmail}
-              />
-            </form>
+                handleClearEmail={handleClearEmail}/>
+
             <p className="login-signup-link">
               계정이 없다면? <a href="/signup">가입하기</a>
             </p>
@@ -60,12 +60,11 @@ const Info = ({ isLogin }) => {
             <div className="logo" />
             <h2>회원가입</h2>
             <p className="signup-Cont">가입해서 노트 정리 시작하기!</p>
-            <form>
               {step === 1 && (
                 <div>
                   <EmailVerificationForm
-                    signupData={signupData}
-                    setSignupData={setSignupData}
+                    signUpData={signUpData}
+                    setSignUpData={setSignUpData}
                     verificationCode={verificationCode}
                     setVerificationCode={setVerificationCode}
                     handleSendCode={handleSendCode}
@@ -81,13 +80,13 @@ const Info = ({ isLogin }) => {
               {step === 2 && (
                 <>
                   <PasswordForm
-                    signupData={signupData}
-                    setSignupData={setSignupData}
+                    signupData={signUpData}
+                    setSignupData={setSignUpData}
                     showPassword={showPassword}
                     confirmPassword={confirmPassword}
                     setConfirmPassword={setConfirmPassword}
                     toggleShowPassword={() => setShowPassword(!showPassword)}
-                    toggleShowConfirmPassword={() => setShowConfirmPassword(!showConfirmPassword)}
+                    toggleShowConfirmPassword={() => setConfirmPassword(!confirmPassword)}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
@@ -114,8 +113,8 @@ const Info = ({ isLogin }) => {
               {step === 4 && (
                 <>
                   <NicknameForm
-                    signupData={signupData}
-                    setSignupData={setSignupData}
+                    signupData={signUpData}
+                    setSignupData={setSignUpData}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
@@ -125,7 +124,6 @@ const Info = ({ isLogin }) => {
                   </div>
                 </>
               )}
-            </form>
             <p className="login-signup-link">
               이미 계정이 있다면? <a href="/login">로그인</a>
             </p>
