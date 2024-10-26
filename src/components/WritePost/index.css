@@ -70,13 +70,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7.5em;
   height: 2.4em;
   background-color: #715aff;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
   border-radius: 10px;
+  padding: 5px;
 }
 input[type="file"] {
   position: absolute;
@@ -85,4 +85,14 @@ input[type="file"] {
   padding: 0;
   overflow: hidden;
   border: 0;
+}
+.write-tag-container {
+  width: 40%;
+  height: 2.4em;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.write-tag-container::-webkit-scrollbar {
+  display: none;
 }

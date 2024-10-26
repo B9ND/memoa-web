@@ -6,9 +6,8 @@ const WritePost = () => {
   const [value, setValue] = useState("");
   const [tag, setTag] = useState(true);
   const textareaRef = useRef(null);
-  const [textPrint, setText] = useState("");
-  const useInput = useRef(null)
-
+  const [textPrint, setText] = useState([]);
+  const useInput = useRef(null);
 
   const handleResizeHeight = () => {
     const textarea = textareaRef.current;
@@ -38,8 +37,9 @@ const WritePost = () => {
       console.log("Enter키가 눌렸습니다.");
       if (text !== "") {
         setTag(false);
-        setText(text);
-        // useInput.current.value = null
+        setText(textPrint.concat(text));
+        console.log(textPrint);
+        useInput.current.value = "";
       }
     }
   };
@@ -68,7 +68,13 @@ const WritePost = () => {
                 ref={useInput}
                 required
               />
-              {tag ? "" : <Tag tagName="tags" tagPrint={textPrint}></Tag>}
+              <div className="write-tag-container">
+                {tag
+                  ? ""
+                  : textPrint.map((text, idx) => (
+                      <Tag tagName="tags" tagPrint={text} key={idx} />
+                    ))}
+              </div>
               <label htmlFor="file" id="write-image">
                 + 이미지 추가
               </label>
