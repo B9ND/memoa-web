@@ -65,7 +65,8 @@
   font-weight: 500;
   font-size: 14px;
 }
-label {
+
+#write-image {
   display: flex;
   justify-content: center;
   align-items: center;

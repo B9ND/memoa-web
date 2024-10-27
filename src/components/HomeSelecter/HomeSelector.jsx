@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Tag from "../Tag/Tag";
 import "./index.css";
 
 /* eslint-disable */
 const HomeSelector = ({ setBoard, board }) => {
   const [ selecter, setSelecter ] = useState({'select':[]})
-  useEffect(()=>{
-    console.log(selecter)
-  }, [selecter])
+  
   return (
     <div className="selecter-container">
       학년 선택

@@ -23,7 +23,7 @@ const Board = ({ detail }) => {
     }
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="board">
       <div className="board-header">
@@ -39,7 +39,7 @@ const Board = ({ detail }) => {
           src={detail.images[0]}
           alt=""
           className="board-img"
-          onClick={() => navigate("/detail/post")}
+          onClick={() => navigate("/detail/post/:0")}
         />
         {/* <div className="board-state">
           <div className="board-counters">
@@ -64,7 +64,9 @@ const Board = ({ detail }) => {
       </div>
       <div className="board-info">
         <div className="board-tag">
-          {detail.tags.map((k, idx)=><Tag key={idx} tagPrint={k} canActive={false} />)}
+          {detail.tags.map((k, idx) => (
+            <Tag key={idx} tagPrint={k} canActive={false} />
+          ))}
         </div>
         <div className="board-bookmark">
           {which ? (

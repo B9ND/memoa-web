@@ -6,7 +6,6 @@ import { IoMdBookmark } from "react-icons/io";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Post = () => {
   const userInfo = [
     {
@@ -23,6 +22,15 @@ const Post = () => {
   ];
 
   const titleList = [
+    {
+      id: 0,
+      title: "제목",
+      content: "내용내용",
+      author: "지존진교",
+      tags: ["초등", "1학년", "국어"],
+      createdAt: "2024-10-17",
+      images: ["../src/assets/boardImg.png"],
+    },
     {
       id: 0,
       title: "제목",
@@ -80,12 +88,14 @@ const Post = () => {
                   <div className="main-img">
                     <img
                       src={post.images[0]}
-                      onClick={() => navigate("/detail/post")}
+                      onClick={() => navigate("/detail/post/:0")}
                     />
                   </div>
                   <div className="post-footer">
                     <div className="post-tag">
-                      {post.tags.map((tag, idx) => <Tag key={idx} tagPrint={tag} canActive={false}/>)}
+                      {post.tags.map((tag, idx) => (
+                        <Tag key={idx} tagPrint={tag} canActive={false} />
+                      ))}
                     </div>
                     <div className="post-state-two">
                         {which ? (
@@ -106,9 +116,9 @@ const Post = () => {
                             onClick={what}
                           />
                         )}
-                      </div>
+                    </div>
                   </div>
-                    <div className="post-title">{post.title}</div>
+                  <div className="post-title">{post.title}</div>
                 </div>
               );
             })}

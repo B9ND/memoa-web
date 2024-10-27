@@ -6,16 +6,15 @@ import FixingBox from "../../components/FixingBox/FixingBox"
 const Setting = () => {
 
   const [ isFixing, setIsFixing ] = useState(false);
-
-  const userInfo = {
-    userName:'지존재민',
-    intro:'나는 지존짱짱',
-    email:'pjmin0923@gmail.com',
-    school:'대구소프트웨어마이스터고'
-  }
+  const [userInfo, setUserInfo] = useState({
+    email: "pjmin0923@gmail.com",
+    nickname: "지존재민",
+    description: "zㅣ존 재민",
+    profileImage: "../src/assets/base-profile.png"
+  })
 
   const submit = () => {
-
+    
   }
 
   return (
@@ -26,19 +25,19 @@ const Setting = () => {
           <div className="settings">
             <div className="setting-container">
               <div className="setting-profile">
-                <img src="src/assets/profile-img.png" alt="" className="setting-profileimg"/>
+                <img src={userInfo.profileImage} alt="" className="setting-profileimg"/>
                 <div className="setting-user-info">
-                  <FixingBox detail={userInfo} isFix={isFixing} whatFix='name' />
-                  <FixingBox detail={userInfo} isFix={isFixing} whatFix='intro' />
+                  <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix='name' />
+                  <FixingBox userInfo={userInfo} isFix={isFixing} whatFix='intro' />
                 </div>
               </div>
               <div className="setting-at">
                 <div className="setting-heading">이메일</div>
-                <FixingBox detail={userInfo} isFix={isFixing} whatFix='email' />
+                <FixingBox userInfo={userInfo} isFix={isFixing} whatFix='email' />
               </div>
               <div className="setting-at">
                 <div className="setting-heading">학교</div>
-                <FixingBox detail={userInfo} isFix={isFixing} whatFix='school' />
+                <FixingBox userInfo={userInfo} isFix={isFixing} whatFix='school' />
               </div>
               <div className="setting-fix">
                 <button className="setting-fix-button" onClick={()=>{setIsFixing(!isFixing); submit()}}>{isFixing == false ? '수정하기' : '수정 완료'}</button>
