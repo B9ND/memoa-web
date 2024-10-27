@@ -34,14 +34,21 @@ const WritePost = () => {
     const text = e.target.value;
 
     if (code === "Enter") {
+      e.preventDefault();  
       console.log("Enter키가 눌렸습니다.");
       if (text !== "") {
         setTag(false);
-        setText(textPrint.concat(text));
+        setText([...textPrint, text]);
         console.log(textPrint);
         useInput.current.value = "";
       }
     }
+  };
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    console.log("글이 제출되었습니다.");
   };
 
   return (
@@ -50,6 +57,7 @@ const WritePost = () => {
         className="big-container"
         method="post"
         encType="multipart/form-data"
+        onSubmit={handleSubmit} 
       >
         <div className="write-container">
           <div className="write-and-tag">
@@ -57,7 +65,6 @@ const WritePost = () => {
               type="text"
               placeholder="제목을 입력해주세요"
               id="inputTitle"
-              required
             />
             <div className="input-file">
               <input
@@ -66,7 +73,6 @@ const WritePost = () => {
                 placeholder="태그 추가하기"
                 onKeyDown={show_tag}
                 ref={useInput}
-                required
               />
               <div className="write-tag-container">
                 {tag
@@ -76,7 +82,7 @@ const WritePost = () => {
                     ))}
               </div>
               <label htmlFor="file" id="write-image">
-                + 이미지 추가
+                + 이미지
               </label>
               <input
                 type="file"
@@ -94,7 +100,6 @@ const WritePost = () => {
               onChange={(e) => setValue(e.target.value)}
               rows={1}
               placeholder="본문 내용을 입력해주세요"
-              required
               id="text"
             />
           </div>

@@ -70,13 +70,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 6em;
   height: 2.4em;
   background-color: #715aff;
   color: #fff;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 500;
   border-radius: 10px;
-  padding: 5px;
 }
 input[type="file"] {
   position: absolute;
