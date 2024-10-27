@@ -18,7 +18,6 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
       if(res){
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
-        console.log('성공', res.data);
         nav('/home')
       }
     } catch (err) {

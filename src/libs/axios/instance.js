@@ -7,7 +7,8 @@ const instance = axios.create({
   headers: {
     Accept: "application/json, text/plain, */*, multipart/form-data",
   },
-  withCredentials: true,
+  // withCredentials: true,
+  // Credentialed Request 방식은 Access-Control-Allow-Origin 헤더가 *일 때 사용 불가하므로 수정!!
 });
 
 // 리퀘스트 인터셉팅
