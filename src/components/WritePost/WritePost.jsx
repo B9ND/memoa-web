@@ -4,7 +4,6 @@ import Tag from "../Tag/Tag";
 
 const WritePost = () => {
   const [value, setValue] = useState("");
-  const [tag, setTag] = useState(true);
   const textareaRef = useRef(null);
   const [textPrint, setText] = useState([]);
   const useInput = useRef(null);
@@ -33,12 +32,11 @@ const WritePost = () => {
     const code = e.code;
     const text = e.target.value;
 
-    if (code === "Enter") {
+    if (code === "Enter" && e.nativeEvent.isComposing === false) {
       e.preventDefault();  
       console.log("Enter키가 눌렸습니다.");
       if (text !== "") {
-        setTag(false);
-        setText([...textPrint, text]);
+        setText((prevTextPrint) => [...prevTextPrint, text]); 
         console.log(textPrint);
         useInput.current.value = "";
       }
@@ -50,6 +48,8 @@ const WritePost = () => {
     e.preventDefault(); 
     console.log("글이 제출되었습니다.");
   };
+
+  
 
   return (
     <>
@@ -75,7 +75,8 @@ const WritePost = () => {
                 ref={useInput}
               />
               <div className="write-tag-container">
-                {tag
+                {
+                  (textPrint.length == 0)
                   ? ""
                   : textPrint.map((text, idx) => (
                       <Tag tagName="tags" tagPrint={text} key={idx} />

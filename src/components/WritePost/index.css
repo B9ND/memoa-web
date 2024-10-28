@@ -70,13 +70,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6em;
+  width: 7em;
   height: 2.4em;
   background-color: #715aff;
   color: #fff;
   font-size: 1em;
   font-weight: 500;
   border-radius: 10px;
+  padding: 10px 0;
 }
 input[type="file"] {
   position: absolute;
@@ -87,7 +88,7 @@ input[type="file"] {
   border: 0;
 }
 .write-tag-container {
-  width: 40%;
+  width: 100%;
   height: 2.4em;
   display: flex;
   flex-wrap: nowrap;
