@@ -92,8 +92,7 @@ const Sidebar = () => {
 
           <div className="menu">
             <div className="select-one">
-              {menuOne.map((menu, index) => {
-                return (
+              {menuOne.map((menu, index) => (
                   <CSSTransition
                     in={isOpen}
                     timeout={500}
@@ -115,12 +114,11 @@ const Sidebar = () => {
                     </Link>
                   </CSSTransition>
                 )
-              })}
+              )}
             </div>
 
             <div className="select-two">
-              {menuTwo.map((menu, index) => {
-                return (
+              {menuTwo.map((menu, index) => (
                   <CSSTransition
                     in={isOpen}
                     timeout={500}
@@ -142,7 +140,7 @@ const Sidebar = () => {
                     </Link>
                   </CSSTransition>
                 )
-              })}
+              )}
             </div>
           </div>
         </div>
