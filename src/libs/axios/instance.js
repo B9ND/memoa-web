@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { API_URL } from "../../constants";
 import { getCookie, removeCookie, setCookie } from "../Cookie/cookie";
 
-const instance = axios.create({
-  baseURL: API_URL,
+const memoaAxios = axios.create({
+  baseURL: import.meta.env.VITE_API_KEY,
   headers: {
     Accept: "application/json, text/plain, */*, multipart/form-data",
   },
@@ -12,10 +11,9 @@ const instance = axios.create({
 });
 
 // 리퀘스트 인터셉팅
-instance.interceptors.request.use(
+memoaAxios.interceptors.request.use(
   async (config) => {
     const token = getCookie("ACCESS_TOKEN");
-    // 토큰 있으면 헤더에 토큰 삽입
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -32,7 +30,7 @@ instance.interceptors.request.use(
   }
 );
 
-instance.interceptors.response.use(
+memoaAxios.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -49,30 +47,25 @@ instance.interceptors.response.use(
     if (originalRequest && !originalRequest._retry) {
       //재시도 마킹
       originalRequest._retry = true;
-      //리프레시 토큰 가져오기
       const refreshToken = getCookie('REFRESH_TOKEN');
-      //리프레시 토큰이 있다면,
+      //리프레시 토큰이 있다면, 재발급 요청
       if (refreshToken) {
-        //토큰 재발급 요청보내기
         return axios
           .post(
-            `${API_URL}/auth/reissue`,
+            `${import.meta.env.VITE_API_KEY}auth/reissue`,
             {},
             { headers: { Refresh: refreshToken } }
           )
           .then((response) => {
-            //받아온 토큰 저장
             const newAccessToken = response.data.data.access;
             const newRefreshToken = response.data.data.refresh;
             setCookie('ACCESS_TOKEN',newAccessToken, {});
             setCookie('REFRESH_TOKEN',newRefreshToken, {});
-            //원래 요청에 새로 받은 토큰 삽입
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-            return instance(originalRequest);
+            return memoaAxios(originalRequest);
           })
           .catch((refreshError) => {
-            //재발급에서 에러나면 저장된 토큰 삭제 후 에러 반환
             removeCookie('ACCESS_TOKEN');
             removeCookie('REFRESH_TOKEN');
             return Promise.reject(refreshError);
@@ -83,4 +76,4 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+export default memoaAxios;
