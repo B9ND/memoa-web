@@ -1,5 +1,6 @@
 import Header from "../../components/Header";
 import Post from "../../components/Post";
+import BaseProfile from '../../assets/base-profile.png'
 import { Link, useParams, useLocation } from "react-router-dom";
 import { memo, useEffect, useState } from "react";
 import memoaAxios from "../../libs/axios/instance";
@@ -69,7 +70,7 @@ const Profile = () => {
       <div className="profile-container">
         <div className="user-pro-img">
           <img
-            src="../src/assets/base-profile.png"
+            src={BaseProfile}
             style={{ width: "110px", height: "110px" }}
           />
         </div>

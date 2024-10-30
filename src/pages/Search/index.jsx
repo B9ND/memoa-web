@@ -17,7 +17,6 @@ const Search = () => {
   const handleInput = (e) => {
     const {name, value} = e.target
     setFilter((prev) => ( { ...prev,[name]:value } ))
-    console.log(filter)
   }
 
   const handleFilter = () =>{

@@ -93,21 +93,16 @@ const Sidebar = () => {
           <div className="menu">
             <div className="select-one">
               {menuOne.map((menu, index) => {
-                let icon = "/src/assets/icon/" + menu.origin + ".svg";
-                let isFocused = false
-                if(location.split("/:")[0] === menu.path){
-                  isFocused = true
-                }
                 return (
                   <CSSTransition
                     in={isOpen}
                     timeout={500}
-                    className={isFocused ? "menu-lay-focused" : "menu-lay"}
+                    className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}
                     key={index}
                   >
-                    <Link to={menu.path} className={isFocused ? "menu-lay-focused" : "menu-lay"}>
+                    <Link to={menu.path} className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}>
                       <div className="comment">
-                        <img src={icon} alt="" className="normal-icon" />
+                        <img src={`/src/assets/icon/${menu.origin}.svg`} alt="" className="normal-icon" />
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
@@ -125,21 +120,16 @@ const Sidebar = () => {
 
             <div className="select-two">
               {menuTwo.map((menu, index) => {
-                let icon = "/src/assets/icon/" + menu.origin + ".svg";
-                let isFocused = false
-                if(location.split("/:")[0] === menu.path){
-                  isFocused = true
-                }
                 return (
                   <CSSTransition
                     in={isOpen}
                     timeout={500}
-                    className={isFocused ? "menu-lay-focused" : "menu-lay"}
+                    className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}
                     key={index}
                   >
-                    <Link to={menu.path} className={isFocused ? "menu-lay-focused" : "menu-lay"}>
+                    <Link to={menu.path} className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}>
                       <div className="comment">
-                        <img src={icon} alt="" className="normal-icon" />
+                        <img src={`/src/assets/icon/${menu.origin}.svg`} alt="" className="normal-icon" />
                         <CSSTransition
                           in={isOpen}
                           timeout={200}
