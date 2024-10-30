@@ -1,8 +1,8 @@
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import BaseProfile from '../../assets/base-profile.png'
-import { Link, useParams, useLocation } from "react-router-dom";
-import { memo, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import memoaAxios from "../../libs/axios/instance";
 import './style.css'
 
@@ -17,15 +17,15 @@ const Profile = () => {
       profileImage: "",
     }
   );
-
-  const [follow, following] = useState("팔로잉");
-
-  const [ok, notok] = useState(true);
+  const [ myData, setMyData ] = useState();
+  const [ isMine, setIsMine ] = useState(false);
+  const [ isFollow, setIsFollow ] = useState(true);
+  const [ followings, setFollowings ] = useState([]);
 
   const getMe = async () => {
     try{
       const res = await memoaAxios.get('/auth/me')
-      setUserData(res.data)
+      setMyData(res.data)
     }catch(err){
       console.log(err)
     }
@@ -33,32 +33,30 @@ const Profile = () => {
   
   const getUser = async () => {
     try{
-      const res = await memoaAxios.get('/auth/user', {params : {username:userName}})
-      setUserData(res.data)
+      const res = await memoaAxios.get('/auth/user', {params : {username : userName}})
+      getMe()
+      if(res.data.nickname == myData.nickname){
+        setIsMine(true)
+      }else{
+        setUserData(res.data)
+        getFollowings()
+      }
     }catch(err){
       console.log(err)
     }
   }
 
-  const changeFollow = () => {
-    if (follow === "팔로잉") {
-      following("팔로우");
-      notok(false);
-    } else if (follow === "팔로우") {
-      following("팔로잉");
-      notok(true);
+  const getFollowings = async () => {
+    try{
+      const res = await memoaAxios.get('/follow/followings', {params : {user : myData.nickname}})
+      if(res){
+        setFollowings(res.data)
+      }
+    }catch(err){
+      console.log(err)
     }
-  };
+  }
 
-  // if (userIndex === -1) {
-  //   return <div>This is not user</div>;
-  // }
-
-  let isVisible = true;
-
-  // if (userName === userInfo[0].nickname) {
-  //   isVisible = false;
-  // }
 
   useEffect(()=>{
     getUser()
@@ -79,11 +77,10 @@ const Profile = () => {
             <div>
               <div>{userData.nickname}</div>
               <button
-                onClick={changeFollow}
-                className={ok ? "following" : "follower"}
-                style={{ display: isVisible ? "befwqraglock" : "none" }}
+                className={isFollow ? "following" : "follower"}
+                style={{ display: isMine || "none" }}
               >
-                {follow}
+                {isFollow ? '팔로잉' : '팔로우'}
               </button>
             </div>
             <span>{userData.description}</span>
