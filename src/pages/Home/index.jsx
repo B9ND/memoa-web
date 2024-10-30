@@ -64,19 +64,19 @@ const Home = () => {
       <div className="head-main">
         <Header />
         <div className="home-main">
-        <div className='boards'>
-          <div className="board-container">
-            {boards.map((board, index)=>(<Board detail={board} key={index}/>))}
-          </div>
-          <div className="selecter-container">
-            학년 선택
-            <div className="selecter-tags">
-              <Tag tagPrint={'1학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
-              <Tag tagPrint={'2학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
-              <Tag tagPrint={'3학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+          <div className='boards'>
+            <div className="board-container">
+              {boards.map((board, index)=>(<Board detail={board} key={index}/>))}
+            </div>
+            <div className="selecter-container">
+              학년 선택
+              <div className="selecter-tags">
+                <Tag tagPrint={'1학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+                <Tag tagPrint={'2학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+                <Tag tagPrint={'3학년'} tagName={'select'} canActive={true} filter={selecter} setFilter={setSelecter}/>
+              </div>
             </div>
           </div>
-        </div>
           <Ads />
         </div>
       </div>

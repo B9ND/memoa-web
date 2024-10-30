@@ -4,7 +4,7 @@ import "./style.css";
 const Ad = ({ detail }) => {
   return (
     <div className="ad">
-      <a href={detail.adLink} target='_blank'>
+      <a href={detail.adLink} target='_blank' className="ad-link">
       <img src={detail.adImg}  alt="" className="ad-img"/>
       </a>
     </div>

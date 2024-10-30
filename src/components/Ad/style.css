@@ -1,9 +1,19 @@
 .ad{
+  position: relative;
   min-width: 200px;
   max-width: 300px;
   background-color: #f5f5f5;
-  margin-bottom: 20px;
+  height: fit-content;
+  margin-bottom: 24px;
 }
+
+.ad-link{
+  top: 0;
+  height: fit-content;
+  background-color: #ffffff;
+}
+
 .ad-img{
   width: 100%;
+
 }
