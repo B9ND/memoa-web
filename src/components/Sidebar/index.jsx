@@ -8,22 +8,11 @@ import {
 } from "react-icons/md";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { goodLoc } from "../../constants/constant";
 
 const Sidebar = () => {
   const location = useLocation().pathname;
   const [isOpen, setIsOpen] = useState(true);
-
-  const goodLoc = [
-    "/",
-    "/search",
-    "/profile",
-    "/bookmark",
-    "/setting",
-    "/help",
-    "/write",
-    "/follow",
-    "/detail/post",
-  ];
 
   const menuOne = [
     { name: "홈", path: "/", origin: "home" },
