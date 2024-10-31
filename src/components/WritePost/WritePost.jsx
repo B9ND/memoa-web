@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
 import Tag from "../Tag/Tag";
+import { array } from "prop-types";
 
 const WritePost = () => {
+  //textarea 관련 변수
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
-  const [textPrint, setText] = useState([]);
-  const useInput = useRef(null);
 
   const handleResizeHeight = () => {
     const textarea = textareaRef.current;
@@ -23,33 +23,66 @@ const WritePost = () => {
       }
     }
   };
-
   useEffect(() => {
     handleResizeHeight();
   }, [value]);
+
+  //tag 관련 변수
+  const [textPrint, setText] = useState([]);
+  const uniqueArr = textPrint.filter(
+    (el, index) => textPrint.indexOf(el) === index
+  );
+  const useInput = useRef(null);
+  const [tags, setTags] = useState({ tags: [] });
+  const ment = "국어";
+  const ment2 = "수학";
+  const tagList = [{ tags: ["국어", "수학"] }];
+
+  useEffect(() => {
+    console.log("tags :", tags);
+  }, [tags]);
 
   const show_tag = (e) => {
     const code = e.code;
     const text = e.target.value;
 
     if (code === "Enter" && e.nativeEvent.isComposing === false) {
-      e.preventDefault();  
       console.log("Enter키가 눌렸습니다.");
-      if (text !== "") {
-        setText((prevTextPrint) => [...prevTextPrint, text]); 
+      e.preventDefault();
+
+      const duplicationTag = () => {
+        let sum = 0;
+        for (let i = 0; i <= tagList[0].tags.length; ++i) {
+          if (text === tagList[0].tags[i]) {
+            alert("중복된 태그입니다.");
+            useInput.current.value = "";
+            sum += 1;
+          }
+        }
+        if (sum === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      if (text !== "" && duplicationTag() == true) {
+        setText((prevTextPrint) => [...prevTextPrint, text]);
         console.log(textPrint);
         useInput.current.value = "";
       }
     }
   };
 
-  
+  //enter 키 눌렀을 때 form submit 제출 방지
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    console.log("글이 제출되었습니다.");
+    e.preventDefault();
   };
 
-  
+  const preventEnter = (e) => {
+    if (e.key == "Enter") {
+      e.preventDefault();
+    }
+  };
 
   return (
     <>
@@ -57,14 +90,15 @@ const WritePost = () => {
         className="big-container"
         method="post"
         encType="multipart/form-data"
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit}
       >
         <div className="write-container">
           <div className="write-and-tag">
             <input
               type="text"
               placeholder="제목을 입력해주세요"
-              id="inputTitle"
+              className="input-title"
+              onKeyDown={preventEnter}
             />
             <div className="input-file">
               <input
@@ -75,11 +109,17 @@ const WritePost = () => {
                 ref={useInput}
               />
               <div className="write-tag-container">
-                {
-                  (textPrint.length == 0)
+                {textPrint.length == 0
                   ? ""
-                  : textPrint.map((text, idx) => (
-                      <Tag tagName="tags" tagPrint={text} key={idx} />
+                  : uniqueArr.map((text, idx) => (
+                      <Tag
+                        tagName="tags"
+                        tagPrint={text}
+                        key={idx}
+                        canActive={true}
+                        filter={tags}
+                        setFilter={setTags}
+                      />
                     ))}
               </div>
               <label htmlFor="file" id="write-image">
@@ -93,7 +133,45 @@ const WritePost = () => {
               />
             </div>
             <div className="line"></div>
+            <div className="basic-tag-container">
+              <Tag
+                tagName="tags"
+                tagPrint={ment}
+                canActive={true}
+                filter={tags}
+                setFilter={setTags}
+              />
+              <Tag
+                tagName="tags"
+                tagPrint={ment2}
+                canActive={true}
+                filter={tags}
+                setFilter={setTags}
+              />
+              <Tag
+                tagName="tags"
+                tagPrint={ment}
+                canActive={true}
+                filter={tags}
+                setFilter={setTags}
+              />
+              <Tag
+                tagName="tags"
+                tagPrint={ment}
+                canActive={true}
+                filter={tags}
+                setFilter={setTags}
+              />
+              <Tag
+                tagName="tags"
+                tagPrint={ment}
+                canActive={true}
+                filter={tags}
+                setFilter={setTags}
+              />
+            </div>
           </div>
+          <div className="line"></div>
           <div className="write-main">
             <textarea
               ref={textareaRef}

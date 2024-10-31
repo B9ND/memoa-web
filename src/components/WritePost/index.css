@@ -6,7 +6,7 @@
   width: 90%;
   height: 100%;
 }
-#inputTitle {
+.input-title {
   font-size: 1.5em;
   font-weight: 500;
   border: none;
@@ -93,7 +93,13 @@ input[type="file"] {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  justify-content: end;
 }
 .write-tag-container::-webkit-scrollbar {
   display: none;
+}
+.basic-tag-container {
+  display: flex;
+  margin: 10px 0 10px 0;
+  /* justify-content: space-around; */
 }
