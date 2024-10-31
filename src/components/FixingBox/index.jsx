@@ -2,20 +2,22 @@
 const FixingBox = ({ userInfo, setUserInfo, isFix, whatFix }) => {
   let fixing = <div></div>;
 
-  const handleSetting=(e)=>{
-    setUserInfo({...userInfo, [whatFix]:e.target.value})
+  const handleSetting = (e) => {
+    const { name, value } = e.target
+    setUserInfo((prev)=>({...prev, [name]:value}))
   }
 
   switch (whatFix) {
-    case "intro":
+    case "description":
       if (isFix == true) {
         fixing = (
           <textarea
             type="text"
             className="setting-intro-fixing"
+            name={whatFix}
             placeholder={userInfo.description}
             value={userInfo.description}
-            onChange={()=>handleSetting}
+            onChange={handleSetting}
           />
         );
       } else {
@@ -28,7 +30,9 @@ const FixingBox = ({ userInfo, setUserInfo, isFix, whatFix }) => {
           <input
             type="text"
             className="setting-contain-fixing"
+            name={whatFix}
             placeholder={userInfo.email}
+            onChange={handleSetting}
           />
         );
       } else {
@@ -41,20 +45,24 @@ const FixingBox = ({ userInfo, setUserInfo, isFix, whatFix }) => {
           <input
             type="text"
             className="setting-contain-fixing"
+            name={whatFix}
             placeholder={userInfo.school}
+            onChange={handleSetting}
           />
         );
       } else {
         fixing = <div className="setting-contain">{userInfo.school}</div>;
       }
       break;
-    case "name":
+    case "nickname":
       if (isFix == true) {
         fixing = (
           <input
             type="text"
             className="setting-user-name-fixing"
+            name={whatFix}
             placeholder={userInfo.nickname}
+            onChange={handleSetting}
           />
         );
       } else {

@@ -36,10 +36,49 @@
   margin-bottom: 32px;
 }
 
-.setting-profileimg{
+.setting-profile-img-container{
+  position: relative;
   width: 160px;
   height: 160px;
   margin-right: 24px;
+}
+
+.setting-profile-img{
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+}
+
+.setting-profile-img-delete{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background-color: #DD3A45;
+  right: 16px;
+  top: 16px;
+}
+
+.setting-profile-img-insert{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background-color: black;
+  border-radius: 999px;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#file{
+  z-index: 9;
 }
 
 .setting-user-info{
@@ -52,7 +91,7 @@
 .setting-user-name{
   padding: 0 8px;
   width: fit-content;
-  font-size: 31px;
+  font-size: 26px;
   font-weight: 600;
   margin: 12px 0;
 }
@@ -60,7 +99,7 @@
 .setting-user-name-fixing{
   padding: 0 8px;
   width: fit-content;
-  font-size: 31px;
+  font-size: 26px;
   font-weight: 600;
   margin: 12px 0;
   border: 1px solid #6D6D6E;
@@ -70,7 +109,7 @@
 .setting-intro{
   width: 100%;
   height: 100%;
-  font-size: 25px;
+  font-size: 20px;
   padding: 0px 8px;
   transition: 80ms linear;
 }
@@ -80,7 +119,7 @@
   text-align: start;
   width: 100%;
   height: 100%;
-  font-size: 25px;
+  font-size: 20px;
   padding: 4px 8px;
   transition: 80ms linear;
   border: 1px solid #6D6D6E;
@@ -93,29 +132,32 @@
   align-items: center;
   padding: 12px 24px;
   border-bottom: 1px solid;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .setting-heading{
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   padding-right: 24px;
 }
 
+.setting-view-email{
+  font-size: 20px;
+}
+
 .setting-contain{
-  font-size: 22px;
+  font-size: 20px;
   width: 80%;
   transition: 80ms linear;
 }
 
 .setting-contain-fixing{
-  font-size: 22px;
+  font-size: 20px;
   border: 1px solid #6D6D6E;
   color: #6D6D6E;
   width: 80%;
   padding: 6px 0 6px 12px;
   transition: 80ms linear;
-  font-size: 22px;
 }
 
 .setting-fix{
@@ -128,6 +170,7 @@
   text-decoration: underline;
   font-size: 18px;
   font-weight: 600;
+  outline: 0;
 }
 
 .setting-footer{
