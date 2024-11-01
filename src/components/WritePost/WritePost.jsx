@@ -32,11 +32,10 @@ const WritePost = () => {
   const uniqueArr = textPrint.filter(
     (el, index) => textPrint.indexOf(el) === index
   );
-  const useInput = useRef(null);
-  const [tags, setTags] = useState({ tags: [] });
   const ment = "국어";
   const ment2 = "수학";
-  const tagList = [{ tags: ["국어", "수학"] }];
+  const useInput = useRef(null);
+  const [tags, setTags] = useState({ tags: [ment, ment2] });
 
   useEffect(() => {
     console.log("tags :", tags);
@@ -52,8 +51,8 @@ const WritePost = () => {
 
       const duplicationTag = () => {
         let sum = 0;
-        for (let i = 0; i <= tagList[0].tags.length; ++i) {
-          if (text === tagList[0].tags[i]) {
+        for (let i = 0; i <= tags["tags"].length; ++i) {
+          if (text === tags["tags"][i]) {
             alert("중복된 태그입니다.");
             useInput.current.value = "";
             sum += 1;
@@ -67,7 +66,6 @@ const WritePost = () => {
       };
       if (text !== "" && duplicationTag() == true) {
         setText((prevTextPrint) => [...prevTextPrint, text]);
-        console.log(textPrint);
         useInput.current.value = "";
       }
     }
