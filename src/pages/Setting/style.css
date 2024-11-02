@@ -106,7 +106,7 @@
   color: #6D6D6E;
 }
 
-.setting-intro{
+.setting-description{
   width: 100%;
   height: 100%;
   font-size: 20px;
@@ -114,7 +114,7 @@
   transition: 80ms linear;
 }
 
-.setting-intro-fixing{
+.setting-description-fixing{
   padding: 4px 0;
   text-align: start;
   width: 100%;

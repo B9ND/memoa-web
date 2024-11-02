@@ -81,8 +81,8 @@ const Setting = () => {
                 <img alt="" className="setting-profile-img" src={userInfo.profileImage}/>
                 </div>
                 <div className="setting-user-info">
-                  <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix='nickname' />
-                  <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix='description' />
+                  <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={userInfo.nickname} />
+                  <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={'description'} />
                 </div>
               </div>
               <div className="setting-at">
@@ -91,10 +91,14 @@ const Setting = () => {
               </div>
               <div className="setting-at">
                 <div className="setting-heading">학교</div>
-                <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix='school' />
+                <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={'school'}/>
+              </div>
+              <div className="setting-at">
+                <div className="setting-heading">학과</div>
+                <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={'department'}/>
               </div>
               <div className="setting-fix">
-                <button className="setting-fix-button" onClick={()=>{setIsFixing(!isFixing); patchMe()}}>{isFixing == false ? '수정하기' : '수정 완료'}</button>
+                <button className="setting-fix-button" onClick={()=>{setIsFixing(!isFixing); if(isFixing){patchMe()}}}>{isFixing == false ? '수정하기' : '수정 완료'}</button>
               </div>
             </div>
             <div className="setting-footer">
