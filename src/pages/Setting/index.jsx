@@ -21,8 +21,7 @@ const Setting = () => {
 
   const getMe = async () => {
     try{
-      const res = await memoaAxios.get('/auth/me')
-      setUserInfo(res.data)
+      await memoaAxios.get('/auth/me').then((res) => setUserInfo(res.data))
     }catch(err){
       navigate('/login')
       console.log('로그인하세요', err)
@@ -31,10 +30,7 @@ const Setting = () => {
 
   const patchMe = async () => {
     try{
-      const res = await memoaAxios.patch('/auth/me', userInfo)
-      if(res){
-        getMe()
-      }
+      await memoaAxios.patch('/auth/me', userInfo).then(() => getMe())
     }catch(err){
       console.log(err)
     }
@@ -47,7 +43,7 @@ const Setting = () => {
     const reader = new FileReader();
     reader.readAsDataURL(uploadFile);
     reader.onloadend = ()=> {
-      setUserInfo((prev) => ({...prev, ['profileImage']: reader.result}));
+      setUserInfo((prev) => ({...prev, profileImage: reader.result}));
     }
   }
 
