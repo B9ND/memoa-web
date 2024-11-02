@@ -1,10 +1,8 @@
-import { MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Tag from "../Tag";
-import { IoMdBookmark } from "react-icons/io";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import BookmarkItem from "../BookmarkItem";
 
 const Post = () => {
   const userInfo = [
@@ -42,15 +40,6 @@ const Post = () => {
     },
   ];
 
-  const [which, setWhich] = useState(true);
-
-  const what = () => {
-    if (which === true) {
-      setWhich(false);
-    } else if (which === false) {
-      setWhich(true);
-    }
-  };
 
   const navigate = useNavigate();
 
@@ -76,9 +65,7 @@ const Post = () => {
                       alt="Profile"
                       style={{ width: "30px", height: "30px" }}
                     />
-                    <div className="user-name">
-                      {post.author}
-                    </div>
+                    <div className="user-name">{post.author}</div>
                     <div className="post-dot">•</div>
                     <div className="post-date">{post.createdAt}</div>
                   </div>
@@ -95,24 +82,7 @@ const Post = () => {
                       ))}
                     </div>
                     <div className="post-state-two">
-                        {which ? (
-                          <MdBookmarkBorder
-                            style={{
-                              width: "27px",
-                              height: "27px",
-                              color: "gray",
-                            }}
-                            onClick={what}
-                          />
-                        ) : (
-                          <IoMdBookmark
-                            style={{
-                              width: "27px",
-                              height: "27px",
-                            }}
-                            onClick={what}
-                          />
-                        )}
+                      <BookmarkItem state={false}/>
                     </div>
                   </div>
                   <div className="post-title">{post.title}</div>

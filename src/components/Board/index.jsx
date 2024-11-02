@@ -7,22 +7,12 @@ import {
 import Tag from "../Tag";
 import { useState } from "react";
 import "./style.css";
-import { IoMdBookmark } from "react-icons/io";
+import BookmarkItem from "../BookmarkItem"
 import { useNavigate } from "react-router-dom";
 
 /* eslint-disable */
 const Board = ({ detail }) => {
   const [isPop, setIsPop] = useState(false);
-  const [which, setWhich] = useState(true);
-
-  const what = () => {
-    if (which === true) {
-      setWhich(false);
-    } else if (which === false) {
-      setWhich(true);
-    }
-  };
-
   const navigate = useNavigate();
   return (
     <div className="board">
@@ -69,24 +59,7 @@ const Board = ({ detail }) => {
           ))}
         </div>
         <div className="board-bookmark">
-          {which ? (
-            <MdOutlineBookmarkBorder
-              style={{
-                width: "28px",
-                height: "28px",
-                cursor: "pointer",
-              }}
-              onClick={what}
-            />
-          ) : (
-            <IoMdBookmark
-              style={{
-                width: "28px",
-                height: "28px",
-              }}
-              onClick={what}
-            />
-          )}
+          <BookmarkItem state={true}/>
         </div>
       </div>
       <div className="board-footer">
