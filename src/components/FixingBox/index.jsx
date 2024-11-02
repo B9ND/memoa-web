@@ -1,70 +1,48 @@
 /* eslint-disable */
 const FixingBox = ({ userInfo, setUserInfo, isFix, whatFix }) => {
-  let fixing = <div></div>;
+  const { email, description, school, department, nickname } = userInfo;
 
-  const handleSetting=(e)=>{
-    setUserInfo({...userInfo, [whatFix]:e.target.value})
-  }
-
-  switch (whatFix) {
-    case "intro":
-      if (isFix == true) {
-        fixing = (
-          <textarea
-            type="text"
-            className="setting-intro-fixing"
-            placeholder={userInfo.description}
-            value={userInfo.description}
-            onChange={()=>handleSetting}
-          />
-        );
-      } else {
-        fixing = <div className="setting-intro">{userInfo.description}</div>;
+  const handleSetting = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({ ...prev, [name]: value }));
+  };
+  return isFix ? (
+    whatFix == "description" ? (
+      <textarea
+        type="text"
+        className="setting-description-fixing"
+        name="description"
+        placeholder={description}
+        value={description}
+        onChange={handleSetting}
+      />
+    ) : (
+      <input
+        type="text"
+        className={
+          whatFix == nickname
+            ? "setting-user-name-fixing"
+            : "setting-contain-fixing"
+        }
+        name={whatFix == nickname ? "nickname" : whatFix}
+        placeholder={whatFix}
+        value={whatFix}
+        onChange={handleSetting}
+      />
+    )
+  ) : (
+    <div
+      className={
+        whatFix == "description"
+          ? "setting-description"
+          : whatFix == nickname
+          ? "setting-user-name"
+          : "setting-contain"
       }
-      break;
-    case "email":
-      if (isFix == true) {
-        fixing = (
-          <input
-            type="text"
-            className="setting-contain-fixing"
-            placeholder={userInfo.email}
-          />
-        );
-      } else {
-        fixing = <div className="setting-contain">{userInfo.email}</div>;
-      }
-      break;
-    case "school":
-      if (isFix == true) {
-        fixing = (
-          <input
-            type="text"
-            className="setting-contain-fixing"
-            placeholder={userInfo.school}
-          />
-        );
-      } else {
-        fixing = <div className="setting-contain">{userInfo.school}</div>;
-      }
-      break;
-    case "name":
-      if (isFix == true) {
-        fixing = (
-          <input
-            type="text"
-            className="setting-user-name-fixing"
-            placeholder={userInfo.nickname}
-          />
-        );
-      } else {
-        fixing = <div className="setting-user-name">{userInfo.nickname}</div>;
-      }
-      break;
-    default:
-      break;
-  }
-  return <>{fixing}</>;
+    >
+      {whatFix == "description" ? description : whatFix}
+    </div>
+  );
 };
 
 export default FixingBox;
