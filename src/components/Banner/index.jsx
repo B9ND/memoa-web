@@ -1,4 +1,4 @@
-import './index.css';
+import './style.css';
 import cloud from '../../assets/cloud.svg';
 
 const Banner = ({ isLogin }) => {

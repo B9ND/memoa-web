@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './style.css';
 import EmailPasswordForm from '../EmailPassword/EmailPasswordForm';
 import EmailVerificationForm from '../EmailVerification/EmailVerificationForm';
 import PasswordForm from '../Password/PasswordForm';

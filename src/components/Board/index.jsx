@@ -6,7 +6,7 @@ import {
 // import { FaRegHeart } from "react-icons/fa";
 import Tag from "../Tag/Tag";
 import { useState } from "react";
-import "./index.css";
+import "./style.css";
 import { IoMdBookmark } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 

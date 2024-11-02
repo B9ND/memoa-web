@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./index.css";
+import "./style.css";
 import Tag from "../Tag/Tag";
-import { array } from "prop-types";
 
 const WritePost = () => {
   //textarea 관련 변수
@@ -32,14 +31,17 @@ const WritePost = () => {
   const uniqueArr = textPrint.filter(
     (el, index) => textPrint.indexOf(el) === index
   );
-  const ment = "국어";
-  const ment2 = "수학";
+  const getSchool = {
+    name: "string",
+    grade: 0,
+    school: {
+      school_id: 0,
+      name: "string",
+    },
+    subjects: ["국어", "수학", "영어", "한국사", "프로그래밍", "네트워크"],
+  };
   const useInput = useRef(null);
-  const [tags, setTags] = useState({ tags: [ment, ment2] });
-
-  useEffect(() => {
-    console.log("tags :", tags);
-  }, [tags]);
+  const [tags, setTags] = useState({ tags: [] });
 
   const show_tag = (e) => {
     const code = e.code;
@@ -51,8 +53,8 @@ const WritePost = () => {
 
       const duplicationTag = () => {
         let sum = 0;
-        for (let i = 0; i <= tags["tags"].length; ++i) {
-          if (text === tags["tags"][i]) {
+        for (let i = 0; i <= getSchool.subjects.length; ++i) {
+          if (text === getSchool.subjects[i]) {
             alert("중복된 태그입니다.");
             useInput.current.value = "";
             sum += 1;
@@ -132,41 +134,15 @@ const WritePost = () => {
             </div>
             <div className="line"></div>
             <div className="basic-tag-container">
-              <Tag
-                tagName="tags"
-                tagPrint={ment}
-                canActive={true}
-                filter={tags}
-                setFilter={setTags}
-              />
-              <Tag
-                tagName="tags"
-                tagPrint={ment2}
-                canActive={true}
-                filter={tags}
-                setFilter={setTags}
-              />
-              <Tag
-                tagName="tags"
-                tagPrint={ment}
-                canActive={true}
-                filter={tags}
-                setFilter={setTags}
-              />
-              <Tag
-                tagName="tags"
-                tagPrint={ment}
-                canActive={true}
-                filter={tags}
-                setFilter={setTags}
-              />
-              <Tag
-                tagName="tags"
-                tagPrint={ment}
-                canActive={true}
-                filter={tags}
-                setFilter={setTags}
-              />
+              {getSchool.subjects.map((sub, idx) => (
+                <Tag
+                  tagName="tags"
+                  tagPrint={sub}
+                  canActive={true}
+                  filter={tags}
+                  setFilter={setTags}
+                />
+              ))}
             </div>
           </div>
           <div className="line"></div>

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import "./index.css";
+import "./style.css";
 import { FaPlus } from "react-icons/fa6";
 
 const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {

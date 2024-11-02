@@ -1,4 +1,4 @@
-import "./index.css";
+import "./style.css";
 import { CSSTransition } from "react-transition-group";
 import {
   MdAccountCircle,

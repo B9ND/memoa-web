@@ -1,4 +1,4 @@
-import "./index.css";
+import "./style.css";
 import { MdBookmarkBorder } from "react-icons/md";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Tag from "../Tag/Tag";

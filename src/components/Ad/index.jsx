@@ -1,4 +1,4 @@
-import "./index.css";
+import "./style.css";
 
 /* eslint-disable */
 const Ad = ({ detail }) => {

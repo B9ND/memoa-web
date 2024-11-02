@@ -1,4 +1,4 @@
-import "../Header/index.css";
+import "./style.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {

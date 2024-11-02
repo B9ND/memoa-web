@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import "./index.css";
+import "./style.css";
 
 const FollowList = () => {
   let { followState, username } = useParams();

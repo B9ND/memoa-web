@@ -1,4 +1,4 @@
-import './index.css'
+import './style.css'
 import Board from '../Board/Board'
 import HomeSelector from '../HomeSelecter/HomeSelector'
 import { useState } from 'react'
