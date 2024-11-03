@@ -1,7 +1,6 @@
 import {
   MdAccountCircle,
   // MdOutlineComment,
-  MdOutlineBookmarkBorder,
 } from "react-icons/md";
 // import { FaRegHeart } from "react-icons/fa";
 import Tag from "../Tag";
