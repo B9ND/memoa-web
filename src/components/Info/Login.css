@@ -35,13 +35,13 @@
 
 .login-box h2 {
   font-weight: 600;
-  font-size: 30px;
+  font-size: 27px;
   margin: 15px;
 }
 
 .signup-box h2 {
   font-weight: 600;
-  font-size: 30px;
+  font-size: 27px;
   margin: 15px;
 }
 
@@ -61,13 +61,13 @@
 
 .login-Cont {
   font-weight: 400;
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 25px;
 }
 
 .signup-Cont {
   font-weight: 400;
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 25px;
 }
 
@@ -84,7 +84,7 @@
   transform: translateY(-50%);
   transition: all 0.2s ease;
   pointer-events: none;
-  font-size: 18px;
+  font-size: 16px;
   color: #818182;
 }
 
@@ -110,7 +110,7 @@
   height: 50px;
   padding: 10px 45px 10px 10px;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 14px;
   border: 1.4px solid #818182;
   border-radius: 8px;
   padding-left: 50px;
@@ -122,7 +122,7 @@
   height: 50px;
   padding: 10px 45px 10px 10px;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 14px;
   border: 1.4px solid #818182;
   border-radius: 8px;
   padding-left: 50px;

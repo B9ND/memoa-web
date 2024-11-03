@@ -4,7 +4,7 @@ import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
 import axios from 'axios';
 
-const PasswordForm = ({ password, setPassword, confirmPassword, setConfirmPassword }) => {
+const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -15,16 +15,22 @@ const PasswordForm = ({ password, setPassword, confirmPassword, setConfirmPasswo
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handlePassword = (e) => {
+    const { name, value } = e.target
+    setSignupData((prev)=>({...prev, [name]:value}))
+  }
+
   return (
     <>
       <div className="inputWrap">
         <img src={inputIcon} className="input-icon" alt="Input Icon" />
-        <label className={`floating-label ${password ? 'active' : ''}`}>비밀번호</label>
+        <label className={`floating-label ${signupData.password ? 'active' : ''}`}>비밀번호</label>
         <input
           className='long-input'
-          type={showPassword ? "text" : "password"} 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type={showPassword ? "text" : "signupData.password"} 
+          value={signupData.password}
+          name='password'
+          onChange={(e) => handlePassword(e)}
         />
         <button type="button" className="eyebutton" onClick={toggleShowPassword}>
           <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
@@ -47,4 +53,4 @@ const PasswordForm = ({ password, setPassword, confirmPassword, setConfirmPasswo
   );
 };
 
-export default PasswordForm;
+export default PasswordForm; 

@@ -30,11 +30,6 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
     setLoginData((prev)=>({...prev, [name]:value}))
   }
 
-  useEffect(()=>{
-    console.log(loginData.email)
-    console.log(loginData.password)
-  },[loginData])
-
   return (
     <>
         <div className="inputWrap">
@@ -52,7 +47,7 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
         </div>
         <div className="inputWrap">
           <img src={inputIcon} className="input-icon" />
-          <label className={`floating-label ${loginData.email && 'active' }`}>비밀번호</label>
+          <label className={`floating-label ${loginData.password && 'active' }`}>비밀번호</label>
           <input
             className='long-input'
             type={showPassword ? "text" : "password"}

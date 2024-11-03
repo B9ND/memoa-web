@@ -2,31 +2,37 @@ import React, { useState } from 'react';
 import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 
-const NicknameForm = ({ nickname, setnickname }) => {
+const NicknameForm = ({ signupData, setSignupData }) => {
   const [isDuplicateChecked, setIsDuplicateChecked] = useState(false);
   const [duplicateMessage, setDuplicateMessage] = useState("중복확인을 해주세요");
 
   const handleDuplicateCheck = () => {
     setIsDuplicateChecked(true);
-    if (nickname === "여승원") {
+    if (signupData.nickname === "여승원") {
       setDuplicateMessage("이미 사용중인 이름입니다");
     } else {
       setDuplicateMessage("중복확인!");
     }
   };
 
+  const handlenickname = (e) => {
+    const { name, value } = e.target
+    setSignupData((prev)=>({...prev, [name]:value}))
+  }
+
   return (
     <>
       <div className="inputWrap">
         <img src={inputIcon} className="input-icon" alt="Input Icon" />
-        <label className={`floating-label ${nickname ? 'active' : ''}`}>별명</label>
+        <label className={`floating-label ${signupData.nickname ? 'active' : ''}`}>별명</label>
         <input
           className='short-input'
           type="text"
-          value={nickname}
-          onChange={(e) => setnickname(e.target.value)}
+          value={signupData.nickname}
+          name='nickname'
+          onChange={(e) => handlenickname(e)}
         />
-        <button type="button" className="short-Delbutton" onClick={() => setnickname('')}>
+        <button type="button" className="short-Delbutton" onClick={() => setSignupData.nickname('')}>
           <img src={del} alt="Clear nickname" />
         </button>
         <button type="button" className="duplicate-check-button" onClick={handleDuplicateCheck}>

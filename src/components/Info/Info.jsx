@@ -8,10 +8,9 @@ import NicknameForm from '../Nickname/NicknameForm';
 import instance from '../../libs/axios/instance';
 
 const Info = ({ isLogin }) => {
+  const [ emailData, setEmailData ] = useState("");
   const [ loginData, setLoginData ] = useState({email: '', password: '' });
   const [ signUpData, setSignUpData ] = useState({email: '', password: '' , nickname:''});
-
-  const [verificationCode, setVerificationCode] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [school, setSchool] = useState('');
@@ -41,14 +40,12 @@ const Info = ({ isLogin }) => {
             <p className="login-Cont">
               <span className="login-project">프로젝트</span> 계정으로 계속하기
             </p>
-
               <EmailPasswordForm
                 loginData={loginData}
                 setLoginData={setLoginData}
                 showPassword={showPassword}
                 toggleShowPassword={toggleShowPassword}
                 handleClearEmail={handleClearEmail}/>
-
             <p className="login-signup-link">
               계정이 없다면? <a href="/signup">가입하기</a>
             </p>
@@ -63,10 +60,8 @@ const Info = ({ isLogin }) => {
               {step === 1 && (
                 <div>
                   <EmailVerificationForm
-                    signUpData={signUpData}
-                    setSignUpData={setSignUpData}
-                    verificationCode={verificationCode}
-                    setVerificationCode={setVerificationCode}
+                    email={emailData}
+                    setEmail={setEmailData}
                     handleSendCode={handleSendCode}
                   />
                   <button type="button" className="login-button" onClick={handleNextStep}>
