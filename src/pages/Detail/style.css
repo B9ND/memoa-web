@@ -13,6 +13,7 @@
 .post-detail-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
 .tag-container {
   width: 100%;

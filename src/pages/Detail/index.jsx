@@ -4,6 +4,8 @@ import { IoMdBookmark } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './style.css'
+import memoaAxios from "../../libs/axios/instance";
+import Tag from "../../components/Tag";
 
 const Detail = () => {
 
@@ -19,6 +21,14 @@ const Detail = () => {
     createdAt: "",
     images: [""],
   });
+
+  const getPostDetail = async () => {
+    try{
+      await memoaAxios.get(`/post/${params.id}`).then((res)=>setPostData(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
   
   const [which, setWhich] = useState(true);
 
@@ -29,6 +39,10 @@ const Detail = () => {
       setWhich(true);
     }
   };
+
+  useEffect(()=>{
+    getPostDetail()
+  }, [])
 
   return (
     <div className="head-main">
@@ -61,8 +75,8 @@ const Detail = () => {
           </div>
           <div className="tag-and-author">
             <div className="tag-container">
-              {postData.tags.map((tag, idx) => (
-                <div key={idx}>{tag}</div>
+              {postData.tags.map((item, index) => (
+                <Tag key={index} tagPrint={item} canActive={false} setDefault={true}/>
               ))}
             </div>
             <div className="author">작성자 : {postData.author}</div>

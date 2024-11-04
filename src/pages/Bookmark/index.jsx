@@ -11,7 +11,6 @@ const Bookmark = () => {
           <span>북마크</span>
         </div>
         <div className="bookmark-main">
-          <Post />
         </div>
       </div>
     </div>

@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import memoaAxios from '../../libs/axios/instance';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
-  
   const nav = useNavigate()
+
   const login = async () => {
     try {
       const res = await memoaAxios.post('/auth/login', loginData);
@@ -18,6 +18,7 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
         nav('/')
+        console.log(window.location.pathname.split('/:')[0])
       }
     } catch (err) {
       console.log('실패:', err);

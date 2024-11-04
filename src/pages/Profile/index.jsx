@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
 import Post from "../../components/Post";
-import BaseProfile from '../../assets/base-profile.png'
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import memoaAxios from "../../libs/axios/instance";
@@ -17,15 +16,21 @@ const Profile = () => {
       profileImage: "",
     }
   );
-  const [ myData, setMyData ] = useState();
+  const [ myData, setMyData ] = useState({
+    email: "",
+    nickname: "",
+    description: "",
+    profileImage: "",
+  });
+
   const [ isMine, setIsMine ] = useState(false);
   const [ isFollow, setIsFollow ] = useState(true);
   const [ followings, setFollowings ] = useState([]);
+  const [ myPost, setMyPost ] = useState([]);
 
   const getMe = async () => {
     try{
-      const res = await memoaAxios.get('/auth/me')
-      setMyData(res.data)
+      await memoaAxios.get('/auth/me').then((res)=>setMyData(res.data))
     }catch(err){
       console.log(err)
     }
@@ -39,8 +44,8 @@ const Profile = () => {
         setIsMine(true)
       }else{
         setUserData(res.data)
-        getFollowings()
       }
+      getFollowings()
     }catch(err){
       console.log(err)
     }
@@ -48,7 +53,7 @@ const Profile = () => {
 
   const getFollowings = async () => {
     try{
-      const res = await memoaAxios.get('/follow/followings', {params : {user : myData.nickname}})
+      const res = await memoaAxios.get('/follow/followings', {params: {user : userName}})
       if(res){
         setFollowings(res.data)
       }
@@ -57,9 +62,18 @@ const Profile = () => {
     }
   }
 
+  const getMyPost = async () => {
+    try{
+      await memoaAxios.get('/post/user', {params: {author: userName}}).then((res)=>setMyPost(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 
   useEffect(()=>{
     getUser()
+    getMyPost()
   },[])
 
   return (
@@ -68,8 +82,8 @@ const Profile = () => {
       <div className="profile-container">
         <div className="user-pro-img">
           <img
-            src={BaseProfile}
-            style={{ width: "110px", height: "110px" }}
+            src={userData.profileImage}
+            style={{ width: "110px", height: "110px", borderRadius:'999px'}}
           />
         </div>
         <div className="user-info-container">
@@ -110,7 +124,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Post />
+      <Post post={myPost} />
     </div>
   );
 };
