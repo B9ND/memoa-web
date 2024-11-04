@@ -1,41 +1,35 @@
 import Header from "../../components/Header";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState , useRef} from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
+import memoaAxios from "../../libs/axios/instance";
+import { ModuleCacheMap } from "vite/runtime";
 
-const SUBJECT_TAG = {
-  name: "string",
-  grade: 0,
-  school: {
-    school_id: 0,
-    name: "string",
-  },
-  subjects: ["국어", "수학", "영어", "한국사", "프로그래밍", "네트워크"],
-};
+// const SUBJECT_TAG = {
+//   name: "string",
+//   grade: 0,
+//   school: {
+//     school_id: 0,
+//     name: "string",
+//   },
+//   subjects: ["국어", "수학", "영어", "한국사", "프로그래밍", "네트워크"],
+// };
 
 const Write = () => {
   //textarea
-  const [value, setValue] = useState("");
-  const textareaRef = useRef(null);
+  const [content, setContent] = useState(""); 
 
-  const handleResizeHeight = () => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = "auto";
-      const scrollHeight = textarea.scrollHeight;
-      const maxHeight = 500;
-
-      if (scrollHeight > maxHeight) {
-        textarea.style.height = `${maxHeight}px`;
-      } else {
-        textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = "hidden";
-      }
+  const handleChange = (e) => {
+    const textarea = e.target;
+    const maxHeight = 400;
+    if (textarea.scrollHeight > maxHeight && textarea.value.length > content.length) {
+      return;
     }
-  };
-  useEffect(() => {
-    handleResizeHeight();
-  }, [value]);
+
+  setContent(textarea.value);
+  textarea.style.height = "auto";
+  textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
+};
 
   //tag
   const [textPrint, setText] = useState([]);
@@ -71,6 +65,24 @@ const Write = () => {
       e.preventDefault();
     }
   };
+
+  //내정보받기 서버통신
+  const [userInfo, getUserInfo] = useState({
+    department: {
+      subjects: [
+        ""
+      ]
+    }
+  })
+
+  const getMyInfo= async()=>{
+    try{
+      await memoaAxios.get('auth/me').then((res)=>getUserInfo(res.data))
+    }
+    catch(err){
+      console.log(error)
+    }
+  }
   return (
     <>
       <div className="head-main">
@@ -118,7 +130,7 @@ const Write = () => {
               </div>
               <div className="line"></div>
               <div className="basic-tag-container">
-                {SUBJECT_TAG.subjects.map((sub, idx) => (
+                {userInfo["department"].subjects.map((sub, idx) => (
                   <Tag
                     tagName="tags"
                     tagPrint={sub}
@@ -132,9 +144,8 @@ const Write = () => {
             <div className="line"></div>
             <div className="write-main">
               <textarea
-                ref={textareaRef}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                value={content}
+                onChange={handleChange}
                 rows={1}
                 placeholder="본문 내용을 입력해주세요"
                 id="text"
@@ -142,7 +153,7 @@ const Write = () => {
             </div>
           </div>
           <div className="btn-container">
-            <button className="submit-btn" type="submit">
+            <button className="submit-btn" type="submit" >
               글 등록하기
             </button>
           </div>
