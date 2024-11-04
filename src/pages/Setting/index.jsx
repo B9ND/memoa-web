@@ -18,6 +18,7 @@ const Setting = () => {
     description: "",
     profileImage: "",
   })
+  const [ profileImgFile, setProfileImgFile ] = useState({file:''});
 
   const getMe = async () => {
     try{
@@ -28,8 +29,19 @@ const Setting = () => {
     }
   }
 
+  const postProfileImg = async (file) => {
+    try{
+      await memoaAxios.post('/image/upload', {file}).then((res)=>{
+        console.log(res.data)
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   const patchMe = async () => {
     try{
+      // postProfileImg(profileImgFile.file)
       await memoaAxios.patch('/auth/me', userInfo).then(() => getMe())
     }catch(err){
       console.log(err)
@@ -37,14 +49,15 @@ const Setting = () => {
   }
 
   const handleProfileImg = (e) => {
-    const { files } = e.target;
-    const uploadFile = files[0];
+    let { files } = e.target
+    const uploadFile = files[0]
 
     const reader = new FileReader();
     reader.readAsDataURL(uploadFile);
     reader.onloadend = ()=> {
-      setUserInfo((prev) => ({...prev, profileImage: reader.result}));
+      setProfileImgFile((prev) => ({...prev, file: reader.result}));
     }
+    postProfileImg(profileImgFile.file)
   }
 
   const deleteProfileImg = () => {
@@ -74,7 +87,7 @@ const Setting = () => {
                   </>
                   )
                 }
-                <img alt="" className="setting-profile-img" src={userInfo.profileImage}/>
+                <img alt="" className="setting-profile-img" src={profileImgFile.file}/>
                 </div>
                 <div className="setting-user-info">
                   <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={userInfo.nickname} />

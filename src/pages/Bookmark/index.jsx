@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
 import "./style.css";
-import Post from "../../components/Post";
 
 const Bookmark = () => {
   return (

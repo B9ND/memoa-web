@@ -74,7 +74,7 @@ const Profile = () => {
   useEffect(()=>{
     getUser()
     getMyPost()
-  },[])
+  },[ username ])
 
   return (
     <div className="head-main">
@@ -92,7 +92,7 @@ const Profile = () => {
               <div>{userData.nickname}</div>
               <button
                 className={isFollow ? "following" : "follower"}
-                style={{ display: isMine || "none" }}
+                style={isMine ? { display: "none" } : {}}
               >
                 {isFollow ? '팔로잉' : '팔로우'}
               </button>
