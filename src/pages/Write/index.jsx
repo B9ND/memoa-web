@@ -47,8 +47,10 @@ const Write = () => {
     console.log(userInfo);
   }, [userInfo]);
 
+  //image upload
+
+
   //post /post
-  const []
 
   //tag
   const [textPrint, setText] = useState([]);
