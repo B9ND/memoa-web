@@ -1,35 +1,54 @@
 import Header from "../../components/Header";
-import React, { useState , useRef} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
 import { ModuleCacheMap } from "vite/runtime";
-
-// const SUBJECT_TAG = {
-//   name: "string",
-//   grade: 0,
-//   school: {
-//     school_id: 0,
-//     name: "string",
-//   },
-//   subjects: ["국어", "수학", "영어", "한국사", "프로그래밍", "네트워크"],
-// };
-
 const Write = () => {
   //textarea
-  const [content, setContent] = useState(""); 
+  const [content, setContent] = useState("");
 
   const handleChange = (e) => {
     const textarea = e.target;
     const maxHeight = 400;
-    if (textarea.scrollHeight > maxHeight && textarea.value.length > content.length) {
+    if (
+      textarea.scrollHeight > maxHeight &&
+      textarea.value.length > content.length
+    ) {
       return;
     }
 
-  setContent(textarea.value);
-  textarea.style.height = "auto";
-  textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
-};
+    setContent(textarea.value);
+    textarea.style.height = "auto";
+    textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
+  };
+
+  //get auth/me
+  const [userInfo, getUserInfo] = useState({
+    department: {
+      subjects: [""],
+    },
+  });
+
+  const getMyInfo = async () => {
+    try {
+      const res = await memoaAxios.get("/auth/me");
+      getUserInfo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMyInfo();
+  }, []);
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
+  //post /post
+  const []
 
   //tag
   const [textPrint, setText] = useState([]);
@@ -44,17 +63,16 @@ const Write = () => {
     if (code === "Enter" && e.nativeEvent.isComposing === false) {
       e.preventDefault();
 
-      if (SUBJECT_TAG.subjects.includes(text) == true) {
+      if (userInfo.department.subjects.includes(text) == true) {
         alert("중복된 태그입니다.");
         useInput.current.value = "";
       }
-      if (text !== "" && !SUBJECT_TAG.subjects.includes(text)) {
+      if (text !== "" && !userInfo.department.subjects.includes(text)) {
         setText((prevTextPrint) => [...prevTextPrint, text]);
         useInput.current.value = "";
       }
     }
   };
-
   //enter 키 눌렀을 때 form submit 제출 방지
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,24 +83,6 @@ const Write = () => {
       e.preventDefault();
     }
   };
-
-  //내정보받기 서버통신
-  const [userInfo, getUserInfo] = useState({
-    department: {
-      subjects: [
-        ""
-      ]
-    }
-  })
-
-  const getMyInfo= async()=>{
-    try{
-      await memoaAxios.get('auth/me').then((res)=>getUserInfo(res.data))
-    }
-    catch(err){
-      console.log(error)
-    }
-  }
   return (
     <>
       <div className="head-main">
@@ -153,7 +153,7 @@ const Write = () => {
             </div>
           </div>
           <div className="btn-container">
-            <button className="submit-btn" type="submit" >
+            <button className="submit-btn" type="submit">
               글 등록하기
             </button>
           </div>
