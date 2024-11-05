@@ -1,10 +1,26 @@
 import Header from "../../components/Header";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
 import { ModuleCacheMap } from "vite/runtime";
 const Write = () => {
+  const [tags, setTags] = useState({ tags: [] });
+  const [postData, setPostData] = useState({
+    title: "",
+    content: "",
+    tags:[
+      ""
+    ],
+    images: [
+      ""
+    ],
+    isReleased: true
+  })
+
+  useEffect(()=>{
+    console.log(postData)
+  },[postData])
   //textarea
   const [content, setContent] = useState("");
 
@@ -49,14 +65,20 @@ const Write = () => {
 
   //image upload
 
-
   //post /post
+  const createPost = async ()=>{
+    try{
+      const res = await memoaAxios.post('/post', postData)
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
   const useInput = useRef(null);
-  const [tags, setTags] = useState({ tags: [] });
 
   const show_tag = (e) => {
     const code = e.code;
@@ -75,6 +97,10 @@ const Write = () => {
       }
     }
   };
+
+  useEffect(()=>{
+    console.log(tags)
+  },[tags])
   //enter 키 눌렀을 때 form submit 제출 방지
   const handleSubmit = (e) => {
     e.preventDefault();
