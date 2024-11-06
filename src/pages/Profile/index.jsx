@@ -67,9 +67,6 @@ const Profile = () => {
     if(myData.nickname != '' && userData.nickname != ''){
       if(myData.nickname == userData.nickname){
         setIsMine(true)
-        console.log('itsmine')
-      }else{
-        console.log('itsNotMine')
       }
     }
   },[myData, userData])

@@ -62,7 +62,6 @@ const Setting = () => {
             setUserInfoPatch((prev) => ({ ...prev, profileImage: res.data.url }))
         });
       }else{
-        console.log('not-post-patch')
         patchMe()
       }
     } catch (err) {
@@ -72,7 +71,6 @@ const Setting = () => {
 
   useEffect(()=>{
     if(userInfo.profileImage != userInfoPatch.profileImage){
-      console.log('post-patch')
       patchMe()
     }
   }, [userInfoPatch.profileImage])
@@ -113,14 +111,6 @@ const Setting = () => {
   useEffect(() => {
     getMe();
   }, []);
-
-  // useEffect(() => {
-  //   console.log(userInfoPatch)
-  //   if (userInfoPatch.profileImage != userInfo.profileImage) {
-  //     console.log('not-post-patch')
-  //     patchMe();
-  //   }
-  // }, [userInfoPatch]);
 
   return (
     <div className="head-main">
