@@ -1,11 +1,12 @@
 /* eslint-disable */
-const FixingBox = ({ userInfo, setUserInfo, isFix, whatFix }) => {
-  const { email, description, school, department, nickname } = userInfo;
+const FixingBox = ({ userInfoPatch, setUserInfoPatch, isFix, whatFix }) => {
+  const { email, description, school, department, nickname } = userInfoPatch;
 
   const handleSetting = (e) => {
     const { name, value } = e.target;
-    setUserInfo((prev) => ({ ...prev, [name]: value }));
+    setUserInfoPatch((prev) => ({ ...prev, [name]: value }));
   };
+
   return isFix ? (
     whatFix == "description" ? (
       <textarea
