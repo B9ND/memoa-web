@@ -1,3 +1,10 @@
+.post-all-container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
@@ -78,12 +85,6 @@
   white-space: nowrap;
 }
 
-.all-container {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .post-state-two{
   display: flex;

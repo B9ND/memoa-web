@@ -17,7 +17,7 @@
   display: flex;
   margin-bottom: 0.04rem;
 }
-.following {
+.follow-ing{
   width: 68px;
   height: 32px;
   color: #fff;
@@ -26,9 +26,12 @@
   font-weight: 500;
   border-radius: 10px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 5px;
 }
-.follower {
+.follo-er{
   width: 68px;
   height: 32px;
   font-size: 17px;
@@ -37,8 +40,12 @@
   border: 0.7px solid #6d6d6e;
   color: #6d6d6e;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 5px;
 }
+
 .user-container {
   display: flex;
 }
