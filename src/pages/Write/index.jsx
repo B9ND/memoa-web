@@ -5,25 +5,30 @@ import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
 import { ModuleCacheMap } from "vite/runtime";
 const Write = () => {
-  const [tags, setTags] = useState({ tags: [] });
-  const [postData, setPostData] = useState({
-    title: "",
-    content: "",
-    tags:[
-      ""
-    ],
-    images: [
-      ""
-    ],
-    isReleased: true
-  })
-
-  useEffect(()=>{
-    console.log(postData)
-  },[postData])
-  //textarea
+  const [tag, setTags] = useState({ tag: [] });
+  const [title, setTitle] = useState("");
+  const [images, setImages] = useState([]);
+  const [isReleased, setIsReleased] = useState(true);
   const [content, setContent] = useState("");
+  const [tags, setTag] = useState("");
 
+  useEffect(() => {
+    setTag(Object.values(tag));
+  }, [tag]);
+
+  const [submitPostData, setSubmitPostData] = useState({
+    title,
+    content,
+    tags,
+    images,
+    isReleased,
+  });
+
+  useEffect(() => {
+    console.log("내가원하는값", submitPostData);
+  }, [submitPostData]);
+
+  //textarea
   const handleChange = (e) => {
     const textarea = e.target;
     const maxHeight = 400;
@@ -39,14 +44,14 @@ const Write = () => {
     textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
   };
 
-  //get auth/me
+  //get "auth/me"
   const [userInfo, getUserInfo] = useState({
     department: {
       subjects: [""],
     },
   });
 
-  const getMyInfo = async () => {
+  const getMe = async () => {
     try {
       const res = await memoaAxios.get("/auth/me");
       getUserInfo(res.data);
@@ -56,7 +61,7 @@ const Write = () => {
   };
 
   useEffect(() => {
-    getMyInfo();
+    getMe();
   }, []);
 
   useEffect(() => {
@@ -66,14 +71,15 @@ const Write = () => {
   //image upload
 
   //post /post
-  const createPost = async ()=>{
-    try{
-      const res = await memoaAxios.post('/post', postData)
-    }
-    catch(error){
-      console.log(error)
-    }
-  }
+  // const submitPost = async () => {
+  //   try {
+  //     await memoaAxios
+  //       .post("/post", submitPostData)
+  //       .then((res) => setSubmitPostData(res.data));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   //tag
   const [textPrint, setText] = useState([]);
@@ -98,14 +104,6 @@ const Write = () => {
     }
   };
 
-  useEffect(()=>{
-    console.log(tags)
-  },[tags])
-  //enter 키 눌렀을 때 form submit 제출 방지
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const preventEnter = (e) => {
     if (e.key == "Enter") {
       e.preventDefault();
@@ -115,7 +113,7 @@ const Write = () => {
     <>
       <div className="head-main">
         <Header />
-        <form className="big-container" method="post" onSubmit={handleSubmit}>
+        <div className="big-container">
           <div className="write-container">
             <div className="write-and-tag">
               <input
@@ -123,6 +121,7 @@ const Write = () => {
                 placeholder="제목을 입력해주세요"
                 className="input-title"
                 onKeyDown={preventEnter}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <div className="input-file">
                 <input
@@ -137,11 +136,11 @@ const Write = () => {
                     ? ""
                     : uniqueArr.map((text, idx) => (
                         <Tag
-                          tagName="tags"
+                          tagName="tag"
                           tagPrint={text}
                           key={idx}
                           canActive={true}
-                          filter={tags}
+                          filter={tag}
                           setFilter={setTags}
                         />
                       ))}
@@ -158,15 +157,17 @@ const Write = () => {
               </div>
               <div className="line"></div>
               <div className="basic-tag-container">
-                {userInfo["department"].subjects.map((sub, idx) => (
-                  <Tag
-                    tagName="tags"
-                    tagPrint={sub}
-                    canActive={true}
-                    filter={tags}
-                    setFilter={setTags}
-                  />
-                ))}
+                {userInfo["department"].subjects.length == 0
+                  ? ""
+                  : userInfo["department"].subjects.map((sub, idx) => (
+                      <Tag
+                        tagName="tag"
+                        tagPrint={sub}
+                        canActive={true}
+                        filter={tag}
+                        setFilter={setTags}
+                      />
+                    ))}
               </div>
             </div>
             <div className="line"></div>
@@ -185,7 +186,7 @@ const Write = () => {
               글 등록하기
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </>
   );
