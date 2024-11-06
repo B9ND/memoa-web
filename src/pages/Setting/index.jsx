@@ -105,7 +105,7 @@ const Setting = () => {
   const deleteProfileImg = () => {
     setUserInfoPatch((prev) => ({
       ...prev,
-      ["profileImage"]:
+      profileImage:
         "https://memoa-s3.s3.ap-northeast-2.amazonaws.com/profile.jpg",
     }));
   };
