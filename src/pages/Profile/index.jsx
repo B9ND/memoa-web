@@ -38,23 +38,23 @@ const Profile = () => {
   
   const getUser = async () => {
     try{
-      const res = await memoaAxios.get('/auth/user', {params : {username : userName}})
-      getMe()
-      if(res.data.nickname == myData.nickname){
-        setIsMine(true)
-      }else{
-        setUserData(res.data)
-      }
-      getFollowings()
+      await memoaAxios.get('/auth/user', {params : {username : userName}}).then((res) => setUserData(res.data))
     }catch(err){
       console.log(err)
     }
   }
 
+  useEffect(()=>{
+    if(myData.nickname == userData.nickname){
+      setIsMine(true)
+    }
+  },[myData, userData])
+
   const getFollowings = async () => {
     try{
       const res = await memoaAxios.get('/follow/followings', {params: {user : userName}})
       if(res){
+        console.log('followings :', res.data)
         setFollowings(res.data)
       }
     }catch(err){
@@ -62,7 +62,7 @@ const Profile = () => {
     }
   }
 
-  const getMyPost = async () => {
+  const getUserPost = async () => {
     try{
       await memoaAxios.get('/post/user', {params: {author: userName}}).then((res)=>setMyPost(res.data))
     }catch(err){
@@ -72,8 +72,10 @@ const Profile = () => {
 
 
   useEffect(()=>{
+    getMe()
     getUser()
-    getMyPost()
+    getUserPost()
+    getFollowings()
   },[ username ])
 
   return (
@@ -111,7 +113,7 @@ const Profile = () => {
               팔로워
               <span className="user-number">
                 {/* 더미 나중 연결 {userInfo[userIndex].followerCount} */}
-                12
+                {followings.length}
               </span>
             </Link>
             <Link to={`/follow/:${userName}/:following`} className="detail-container">

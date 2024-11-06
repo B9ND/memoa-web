@@ -18,8 +18,7 @@ const Post = ({ post }) => {
           }}
         >
           <Masonry gutter={"30px"} columnsCount={2}>
-            {post.map((item, index) => {
-              return (
+            {post.map((item, index) => (
                 <div key={index} className="post-container">
                   <div className="post-head">
                     <img
@@ -58,8 +57,8 @@ const Post = ({ post }) => {
                   </div>
                   <div className="post-title">{item.title}</div>
                 </div>
-              );
-            })}
+              )
+            )}
           </Masonry>
         </ResponsiveMasonry>
       </div>

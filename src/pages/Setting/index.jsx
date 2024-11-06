@@ -29,9 +29,7 @@ const Setting = () => {
   });
 
   const [profileImgFile, setProfileImgFile] = useState();
-
   const [viewProfileImg, setViewProfleImg] = useState({ profileImage: "" });
-
   const navigate = useNavigate();
 
   const getMe = async () => {
@@ -57,13 +55,14 @@ const Setting = () => {
 
   const postProfileImg = async () => {
     try {
-      if(profileImgFile.file){
+      if(profileImgFile){
         await memoaAxios
           .post("/image/upload", profileImgFile)
           .then((res) =>{
             setUserInfoPatch((prev) => ({ ...prev, profileImage: res.data.url }))
         });
       }else{
+        console.log('not-post-patch')
         patchMe()
       }
     } catch (err) {
@@ -73,6 +72,7 @@ const Setting = () => {
 
   useEffect(()=>{
     if(userInfo.profileImage != userInfoPatch.profileImage){
+      console.log('post-patch')
       patchMe()
     }
   }, [userInfoPatch.profileImage])
@@ -90,14 +90,14 @@ const Setting = () => {
   const handleProfileImg = (e) => {
     let { files } = e.target;
     const uploadFile = files[0];
-
     const formData = new FormData();
-
+    
     const reader = new FileReader();
     reader.readAsDataURL(uploadFile);
     reader.onloadend = () => {
       setViewProfleImg((prev) => ({ ...prev, profileImage: reader.result }));
     };
+    
     formData.append("file", uploadFile);
     setProfileImgFile(formData);
   };
