@@ -4,16 +4,17 @@ import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
 import { ModuleCacheMap } from "vite/runtime";
+
 const Write = () => {
   const [tag, setTags] = useState({ tag: [] });
   const [title, setTitle] = useState("");
   const [images, setImages] = useState([]);
   const [isReleased, setIsReleased] = useState(true);
   const [content, setContent] = useState("");
-  const [tags, setTag] = useState("");
+  const [tags, setTag] = useState([]);
 
   useEffect(() => {
-    setTag(Object.values(tag));
+    setTag([...tag.tag]);
   }, [tag]);
 
   const [submitPostData, setSubmitPostData] = useState({
@@ -25,8 +26,15 @@ const Write = () => {
   });
 
   useEffect(() => {
-    console.log("내가원하는값", submitPostData);
-  }, [submitPostData]);
+    setSubmitPostData({
+      title,
+      content,
+      tags,
+      images,
+      isReleased,
+    });
+    console.log(submitPostData);
+  }, [title, images, isReleased, content]);
 
   //textarea
   const handleChange = (e) => {
@@ -68,18 +76,19 @@ const Write = () => {
     console.log(userInfo);
   }, [userInfo]);
 
-  //image upload
+  //post
+  const submitPost = async () => {
+    try {
+      await memoaAxios
+        .post("/post", submitPostData)
+        .then((res) => console.log(res.data));
+      alert("성공적으로 업로드 되었습니다.");
 
-  //post /post
-  // const submitPost = async () => {
-  //   try {
-  //     await memoaAxios
-  //       .post("/post", submitPostData)
-  //       .then((res) => setSubmitPostData(res.data));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   //tag
   const [textPrint, setText] = useState([]);
@@ -182,7 +191,7 @@ const Write = () => {
             </div>
           </div>
           <div className="btn-container">
-            <button className="submit-btn" type="submit">
+            <button className="submit-btn" type="submit" onClick={submitPost}>
               글 등록하기
             </button>
           </div>
