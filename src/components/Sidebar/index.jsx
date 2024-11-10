@@ -1,18 +1,35 @@
 import "./style.css";
 import { CSSTransition } from "react-transition-group";
 import {
-  MdAccountCircle,
   MdArrowBackIosNew,
   MdAdd,
   MdArrowForwardIos,
 } from "react-icons/md";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { goodLoc } from "../../constants/constant";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Menu from "../Menu";
+import memoaAxios from "../../libs/axios/instance";
 
 const Sidebar = () => {
-  const location = useLocation().pathname;
+  const location = useLocation().pathname.split("/:")[0];
   const [isOpen, setIsOpen] = useState(true);
+  const [ userInfo, setUserInfo ] = useState({
+    email: "",
+    nickname: "",
+    description: "",
+    profileImage: "",
+  })
+  const navigate = useNavigate();
+
+  const getMe = async () => {
+    try{
+      await memoaAxios.get('/auth/me').then((res) => setUserInfo(res.data))
+    }catch(err){
+      navigate('/login')
+      alert('재로그인이 필요합니다.')
+      console.log(err)
+    }
+  }
 
   const menuOne = [
     { name: "홈", path: "/", origin: "home" },
@@ -25,7 +42,11 @@ const Sidebar = () => {
     { name: "도움말", path: "/help", origin: "help" },
   ];
 
-  return goodLoc.includes(location.split("/:")[0]) ? (
+  useEffect(() => {
+    getMe()
+  },[])
+  
+  return (
     <div className="container">
       <CSSTransition in={isOpen} className={"sidebar"} timeout={150}>
         <div className="sidebar">
@@ -49,8 +70,8 @@ const Sidebar = () => {
             timeout={{ enter: 300, exit: 450 }}
             className={"profile"}
           >
-            <Link to={"profile/:지존진교"} className="profile">
-              <MdAccountCircle className="big-icon" />
+            <Link to={`profile/:${userInfo.nickname}`} className="profile">
+              <img src={userInfo.profileImage} alt="" style={{width:'40px', height:'40px', borderRadius:'999px'}} />
               <CSSTransition
                 in={isOpen}
                 timeout={400}
@@ -58,8 +79,8 @@ const Sidebar = () => {
                 unmountOnExit
               >
                 <div className="user-info">
-                  <div className="user-name">zㅣ존재민</div>
-                  <div className="user-email">oygnijoes0209</div>
+                  <div className="menu-user-name">{userInfo.nickname}</div>
+                  <div className="user-email">{userInfo.email}</div>
                 </div>
               </CSSTransition>
             </Link>
@@ -81,62 +102,20 @@ const Sidebar = () => {
 
           <div className="menu">
             <div className="select-one">
-              {menuOne.map((menu, index) => (
-                  <CSSTransition
-                    in={isOpen}
-                    timeout={500}
-                    className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}
-                    key={index}
-                  >
-                    <Link to={menu.path} className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}>
-                      <div className="comment">
-                        <img src={`/src/assets/icon/${menu.origin}.svg`} alt="" className="normal-icon" />
-                        <CSSTransition
-                          in={isOpen}
-                          timeout={200}
-                          className={"fade menu-name"}
-                          unmountOnExit
-                        >
-                          <div>{menu.name}</div>
-                        </CSSTransition>
-                      </div>
-                    </Link>
-                  </CSSTransition>
-                )
+              {menuOne.map((item, index)=>
+                <Menu isOpen={isOpen} item={item} location={location} key={index}/>
               )}
             </div>
 
             <div className="select-two">
-              {menuTwo.map((menu, index) => (
-                  <CSSTransition
-                    in={isOpen}
-                    timeout={500}
-                    className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}
-                    key={index}
-                  >
-                    <Link to={menu.path} className={location.split("/:")[0] === menu.path ? "menu-lay-focused" : "menu-lay"}>
-                      <div className="comment">
-                        <img src={`/src/assets/icon/${menu.origin}.svg`} alt="" className="normal-icon" />
-                        <CSSTransition
-                          in={isOpen}
-                          timeout={200}
-                          className={"fade menu-name"}
-                          unmountOnExit
-                        >
-                          <div>{menu.name}</div>
-                        </CSSTransition>
-                      </div>
-                    </Link>
-                  </CSSTransition>
-                )
+              {menuTwo.map((item, index) => 
+                <Menu isOpen={isOpen} item={item} location={location} key={index}/>
               )}
             </div>
           </div>
         </div>
       </CSSTransition>
     </div>
-  ) : (
-    <></>
   );
 };
 

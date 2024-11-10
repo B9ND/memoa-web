@@ -1,8 +1,15 @@
+.post-all-container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 320px;
   height: fit-content;
   background-color: white;
   border-radius: 12px;
@@ -78,12 +85,6 @@
   white-space: nowrap;
 }
 
-.all-container {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .post-state-two{
   display: flex;

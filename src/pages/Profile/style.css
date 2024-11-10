@@ -11,13 +11,13 @@
   height: 160px;
 }
 .user-introduce {
-  margin-left: 40px;
+  margin-left: 24px;
 }
 .user-introduce > div {
   display: flex;
   margin-bottom: 0.04rem;
 }
-.following {
+.follow-ing{
   width: 68px;
   height: 32px;
   color: #fff;
@@ -26,9 +26,12 @@
   font-weight: 500;
   border-radius: 10px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 5px;
 }
-.follower {
+.follo-er{
   width: 68px;
   height: 32px;
   font-size: 17px;
@@ -37,8 +40,12 @@
   border: 0.7px solid #6d6d6e;
   color: #6d6d6e;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 5px;
 }
+
 .user-container {
   display: flex;
 }
@@ -48,11 +55,13 @@
   width: 80%;
   justify-content: space-between;
 }
+
 .user-introduce > div > div {
   font-size: 30px;
   font-weight: 600;
   margin-right: 16px;
 }
+
 .user-introduce > span {
   font-size: 20px;
   font-weight: 400;
@@ -61,6 +70,7 @@
   display: flex;
   flex-direction: column;
   border-left: 1px solid black;
+  white-space: nowrap;
 }
 
 .detail-container {
@@ -70,11 +80,6 @@
   font-size: 18px;
   margin-left: 16px;
 }
-.user-information > div {
-  font-size: 18px;
-  font-weight: 400;
-  margin-left: 16px;
-}
 .user-number {
   font-size: 18px;
   font-weight: 400;
@@ -82,14 +87,17 @@
   justify-content: space-between;
   margin-left: 10px;
 }
+
 @media (max-width: 950px) {
+  .profile-container{
+    width: 80%;
+  }
   .user-pro-img > img {
     width: 130px;
     height: 130px;
   }
   .user-introduce > div > div {
     font-size: 30px;
-    margin-left: 8px;
   }
   .user-introduce > span {
     font-size: 20px;
@@ -98,10 +106,6 @@
     width: 90px;
     height: 40px;
     font-size: 20px;
-  }
-  .user-information > div,
-  .user-information > div > span {
-    font-size: 18px;
   }
 }
 
@@ -116,10 +120,10 @@
     align-items: center;
     width: 100vw;
   }
-  .user-information > div,
-  .user-information > div > span {
+  .detail-container {
     font-size: 1em;
   }
+
   .user-introduce > div > div {
     font-size: 1.5em;
   }

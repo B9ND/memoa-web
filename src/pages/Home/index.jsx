@@ -8,24 +8,7 @@ import './style.css'
 import Tag from "../../components/Tag"
 
 const Home = () => {
-  const [ user, setUser ] = useState();
   const [ selecter, setSelecter ] = useState({'select':[]})
-  const navigate = useNavigate()
-
-  const getMe = async () => {
-    try{
-      const res = await memoaAxios.get('/auth/me')
-      if(res){
-        setUser(res.data)
-      }
-    }catch(err){
-      navigate('/login')
-      console.log('로그인하세요', err)
-    }
-  }
-  useEffect(()=>{
-    getMe()
-  },[])
 
   const boards = [
     { 

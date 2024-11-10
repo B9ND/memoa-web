@@ -9,8 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import memoaAxios from '../../libs/axios/instance';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
-  
   const nav = useNavigate()
+
   const login = async () => {
     try {
       const res = await memoaAxios.post('/auth/login', loginData);

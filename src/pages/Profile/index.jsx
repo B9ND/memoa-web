@@ -1,31 +1,55 @@
 import Header from "../../components/Header";
 import Post from "../../components/Post";
-import BaseProfile from '../../assets/base-profile.png'
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import memoaAxios from "../../libs/axios/instance";
+import BaseProfileImg from '../../assets/base-profile.png'
 import './style.css'
 
 const Profile = () => {
   const { username } = useParams();
   const userName = username.replace(":", "");
-  const [ userData, setUserData ] = useState(
-    {
-      email: "",
-      nickname: "",
-      description: "",
-      profileImage: "",
+  const [ userData, setUserData ] = useState({
+    email: "",
+    nickname: "",
+    description: "",
+    profileImage: "",
+    department: {
+      name: "",
+      grade: 0,
+      school: "",
+      subjects: [
+        ""
+      ]
     }
-  );
-  const [ myData, setMyData ] = useState();
+  });
+  const [ myData, setMyData ] = useState({
+    email: "",
+    nickname: "",
+    description: "",
+    profileImage: "",
+    department: {
+      name: "",
+      grade: 0,
+      school: "",
+      subjects: [
+        ""
+      ]
+    }
+  });
+
   const [ isMine, setIsMine ] = useState(false);
   const [ isFollow, setIsFollow ] = useState(true);
   const [ followings, setFollowings ] = useState([]);
+  const [ followers, setFollowers ] = useState([]);
+  const [ myPost, setMyPost ] = useState([]);
 
   const getMe = async () => {
     try{
-      const res = await memoaAxios.get('/auth/me')
-      setMyData(res.data)
+      await memoaAxios.get('/auth/me').then((res)=>setMyData(res.data))
+      if(userData.profileImage === ""){
+        setUserData((prev)=>({...prev, profileImage: BaseProfileImg}))
+      }
     }catch(err){
       console.log(err)
     }
@@ -33,34 +57,51 @@ const Profile = () => {
   
   const getUser = async () => {
     try{
-      const res = await memoaAxios.get('/auth/user', {params : {username : userName}})
-      getMe()
-      if(res.data.nickname == myData.nickname){
-        setIsMine(true)
-      }else{
-        setUserData(res.data)
-        getFollowings()
-      }
+      await memoaAxios.get('/auth/user', {params : {username : userName}}).then((res) => setUserData(res.data))
     }catch(err){
       console.log(err)
     }
   }
+
+  useEffect(()=>{
+    if(myData.nickname != '' && userData.nickname != ''){
+      if(myData.nickname == userData.nickname){
+        setIsMine(true)
+      }
+    }
+  },[myData, userData])
 
   const getFollowings = async () => {
     try{
-      const res = await memoaAxios.get('/follow/followings', {params : {user : myData.nickname}})
-      if(res){
-        setFollowings(res.data)
-      }
+      await memoaAxios.get('/follow/followings', {params: {user : userName}}).then((res)=>setFollowings(res.data))
     }catch(err){
       console.log(err)
     }
   }
 
+  const getFollowers = async () => {
+    try{
+      await memoaAxios.get('/follow/followers', {params: {user : userName}}).then((res)=>setFollowers(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getUserPost = async () => {
+    try{
+      await memoaAxios.get('/post/user', {params: {author: userName}}).then((res)=>setMyPost(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   useEffect(()=>{
+    getMe()
     getUser()
-  },[])
+    getUserPost()
+    getFollowings()
+    getFollowers()
+  },[ username ])
 
   return (
     <div className="head-main">
@@ -68,8 +109,8 @@ const Profile = () => {
       <div className="profile-container">
         <div className="user-pro-img">
           <img
-            src={BaseProfile}
-            style={{ width: "110px", height: "110px" }}
+            src={userData.profileImage}
+            style={{ width: "110px", height: "110px", borderRadius:'999px'}}
           />
         </div>
         <div className="user-info-container">
@@ -77,8 +118,8 @@ const Profile = () => {
             <div>
               <div>{userData.nickname}</div>
               <button
-                className={isFollow ? "following" : "follower"}
-                style={{ display: isMine || "none" }}
+                className={isFollow ? "follow-ing" : "follow-er"}
+                style={isMine && { display: "none" }}
               >
                 {isFollow ? '팔로잉' : '팔로우'}
               </button>
@@ -89,28 +130,25 @@ const Profile = () => {
             <div className="detail-container">
               작성한 글
               <span className="user-number">
-                {/* 더미 나중 연결{userInfo[userIndex].postCount} */}
-                10
+                {myPost.length}
               </span>
             </div>
             <Link to={`/follow/:${userName}/:followers`} className="detail-container">
               팔로워
               <span className="user-number">
-                {/* 더미 나중 연결 {userInfo[userIndex].followerCount} */}
-                12
+                {followings.length}
               </span>
             </Link>
             <Link to={`/follow/:${userName}/:following`} className="detail-container">
               팔로우
               <span className="user-number">
-                {/* {userInfo[userIndex].followCount} */}
-                14
+                {followers.length}
               </span>
             </Link>
           </div>
         </div>
       </div>
-      <Post />
+      <Post post={myPost} />
     </div>
   );
 };
