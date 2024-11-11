@@ -89,9 +89,6 @@ const Detail = () => {
         <div className="detail-post-content">
           <span>{postData.content}</span>
         </div>
-        <div className="detail-main-post">
-          <img src={postData.images[0]}></img>
-        </div>
         <div className="detail-post-content">
           <span>{postData.content}</span>
         </div>

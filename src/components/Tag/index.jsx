@@ -16,8 +16,7 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive, setDef
       )}
     else{
       setFilter((prev)=>{
-        const t = tagName
-        return{...prev, [t]:[...(prev[t] || []), tagPrint]}
+        return{...prev, [tagName]:[...(prev[tagName] || []), tagPrint]}
         })
     }
   };

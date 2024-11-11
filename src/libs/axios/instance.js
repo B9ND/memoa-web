@@ -1,10 +1,14 @@
 import axios from 'axios'
 import { getCookie, removeCookie, setCookie } from "../Cookie/cookie";
+import qs from 'qs'
 
 const memoaAxios = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
   headers: {
     Accept: "application/json, text/plain, */*, multipart/form-data",
+  },
+  paramsSerializer: {
+    serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
   },
   // withCredentials: true,
   // Credentialed Request 방식은 Access-Control-Allow-Origin 헤더가 *일 때 사용 불가하므로 수정!!
@@ -52,13 +56,12 @@ memoaAxios.interceptors.response.use(
       if (refreshToken) {
         return axios
           .post(
-            `${import.meta.env.VITE_API_KEY}auth/reissue`,
-            {},
-            { headers: { Refresh: refreshToken } }
+            `${import.meta.env.VITE_API_KEY}/auth/reissue`,
+            { refresh: refreshToken }
           )
           .then((response) => {
-            const newAccessToken = response.data.data.access;
-            const newRefreshToken = response.data.data.refresh;
+            const newAccessToken = response.data.access;
+            const newRefreshToken = response.data.refresh;
             setCookie('ACCESS_TOKEN',newAccessToken, {});
             setCookie('REFRESH_TOKEN',newRefreshToken, {});
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -66,8 +69,8 @@ memoaAxios.interceptors.response.use(
             return memoaAxios(originalRequest);
           })
           .catch((refreshError) => {
-            removeCookie('ACCESS_TOKEN');
-            removeCookie('REFRESH_TOKEN');
+            // removeCookie('ACCESS_TOKEN');
+            // removeCookie('REFRESH_TOKEN');
             return Promise.reject(refreshError);
           });
       }

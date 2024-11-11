@@ -1,18 +1,17 @@
-import { useState } from "react";
-import Header from "../../components/Header";
+import { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import Header from "../../components/Header";
+import Post from "../../components/Post";
 import Tag from "../../components/Tag";
+import { MdSearch, MdFilterAlt, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import memoaAxios from "../../libs/axios/instance";
 import "./style.css";
-import { MdSearch, MdFilterAlt } from "react-icons/md";
 
 const Search = () => {
-  const [toggleFilter, setToggleFilter] = useState(false);
-  const [searchMod, setSearchMod] = useState("인기순");
-  const [filter, setFilter] = useState({ tags: [], subject: [], search: "" });
-
-  const toggleSearchMod = () => {
-    searchMod == "인기순" ? setSearchMod("최신순") : setSearchMod("인기순");
-  };
+  const [ toggleFilter, setToggleFilter ] = useState(false);
+  const [ page, setPage ] = useState(0)
+  const [ filter, setFilter ] = useState({search: "", tags: [], page:page, size:10});
+  const [ searchResult, setSearchResult ] = useState([]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -23,32 +22,43 @@ const Search = () => {
     setToggleFilter(!toggleFilter);
   };
 
-  const school = ["중등", "고등"];
-  const grade = [1, 2, 3, 4, 5, 6];
+  const searchPost = async () => {
+    console.log(filter)
+    try{
+      await memoaAxios.get('/post', {params: filter}).then((res)=>{
+        setSearchResult(res.data)
+      })
+    }catch(err){
+      console.log(err)
+    };
+  };
+
+  const school = [ "중등", "고등" ];
+  const grade = [ 1, 2, 3 ];
   const subject = ["국어", "사회", "수학", "영어", "과학", "한국사"];
 
-  const searchResult = [
-    {
-      id: 0,
-      title: "string",
-      content: "string",
-      author: "string",
-      authorProfileImage: "src/assets/base-profile.png",
-      tags: ["string"],
-      createdAt: "2024-11-03",
-      images: ["string"],
-    },
-    {
-      id: 1,
-      title: "string",
-      content: "string",
-      author: "박재민",
-      authorProfileImage: "src/assets/base-profile.png",
-      tags: ["string"],
-      createdAt: "2024-11-03",
-      images: ["string"],
-    },
-  ];
+  // const searchResult = [
+  //   {
+  //     id: 0,
+  //     title: "string",
+  //     content: "string",
+  //     author: "string",
+  //     authorProfileImage: "src/assets/base-profile.png",
+  //     tags: ["string"],
+  //     createdAt: "2024-11-03",
+  //     images: ["string"],
+  //   },
+  //   {
+  //     id: 1,
+  //     title: "string",
+  //     content: "string",
+  //     author: "박재민",
+  //     authorProfileImage: "src/assets/base-profile.png",
+  //     tags: ["string"],
+  //     createdAt: "2024-11-03",
+  //     images: ["string"],
+  //   },
+  // ];
 
   return (
     <div className="head-main">
@@ -61,9 +71,9 @@ const Search = () => {
             placeholder="검색어를 입력해주세요."
             value={filter.search}
             onChange={(e) => handleInput(e)}
-            name="input"
+            name="search"
           />
-          <button className="search-button">
+          <button className="search-button" onClick={() => searchPost()}>
             <MdSearch className="semi-icon" color="white" />
           </button>
         </div>
@@ -94,8 +104,8 @@ const Search = () => {
                   <Tag
                     key={i}
                     tagPrint={s}
-                    tagStyle={"filter"}
-                    tagName={"school"}
+                    tagStyle="filter"
+                    tagName="tags"
                     setFilter={setFilter}
                     filter={filter}
                   />
@@ -109,8 +119,8 @@ const Search = () => {
                   <Tag
                     key={i}
                     tagPrint={g + "학년"}
-                    tagStyle={"filter"}
-                    tagName={"tags"}
+                    tagStyle="filter"
+                    tagName="tags"
                     setFilter={setFilter}
                     filter={filter}
                   />
@@ -124,8 +134,8 @@ const Search = () => {
                   <Tag
                     key={i}
                     tagPrint={s}
-                    tagStyle={"filter"}
-                    tagName={"subject"}
+                    tagStyle="filter"
+                    tagName="tags"
                     setFilter={setFilter}
                     filter={filter}
                   />
@@ -134,15 +144,16 @@ const Search = () => {
             </div>
           </div>
         </CSSTransition>
-        <div
-          className={
-            searchMod == "인기순" ? "search-mod-popular" : "search-mod-last"
-          }
-          onClick={() => toggleSearchMod()}
-        >
-          {searchMod == "인기순" ? "인기순" : "최신순"}
-        </div>
       </div>
+
+      <Post post={searchResult}/>
+      {searchResult == [] && <div className="search-page-controller">
+        <MdKeyboardArrowLeft />
+        <div className="search-page-viewer">
+          <span className="search-current-page">{page <= 10 ? `0${page}` : page}</span>
+        </div>
+        <MdKeyboardArrowRight />
+      </div>}
     </div>
   );
 };

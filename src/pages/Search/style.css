@@ -121,3 +121,15 @@
   margin: 0 16px;
   transition: 0.1s linear;
 }
+
+.search-page-controller{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.search-current-page{
+  font-size: 20px;
+}
