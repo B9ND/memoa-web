@@ -6,50 +6,27 @@ import memoaAxios from "../../libs/axios/instance";
 import { ModuleCacheMap } from "vite/runtime";
 
 const Write = () => {
-  const [tag, setTags] = useState({ tag: [] });
-  const [title, setTitle] = useState("");
-  const [images, setImages] = useState([]);
-  const [isReleased, setIsReleased] = useState(true);
-  const [content, setContent] = useState("");
-  const [tags, setTag] = useState([]);
-
-  useEffect(() => {
-    setTag([...tag.tag]);
-  }, [tag]);
-
   const [submitPostData, setSubmitPostData] = useState({
-    title,
-    content,
-    tags,
-    images,
-    isReleased,
+    title: "",
+    content: "",
+    tags: [],
+    images: [],
+    isReleased: true,
   });
 
-  useEffect(() => {
-    setSubmitPostData({
-      title,
-      content,
-      tags,
-      images,
-      isReleased,
-    });
-    console.log(submitPostData);
-  }, [title, images, isReleased, content]);
-
-  //textarea
-  const handleChange = (e) => {
-    const textarea = e.target;
+  const updateField = (event) => {
+    const { name, value, scrollHeight } = event.target;
     const maxHeight = 400;
-    if (
-      textarea.scrollHeight > maxHeight &&
-      textarea.value.length > content.length
-    ) {
-      return;
-    }
 
-    setContent(textarea.value);
-    textarea.style.height = "auto";
-    textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
+    setSubmitPostData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "content") {
+      event.target.style.height = "auto";
+      event.target.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
+    }
   };
 
   //get "auth/me"
@@ -78,18 +55,29 @@ const Write = () => {
 
   //post
   const submitPost = async () => {
-    try {
-      await memoaAxios
-        .post("/post", submitPostData)
-        .then((res) => console.log(res.data));
-      alert("성공적으로 업로드 되었습니다.");
-
-    } catch (err) {
-      console.log(err);
+    if (
+      submitPostData.title == "" ||
+      submitPostData.tags == "" ||
+      submitPostData.content == ""
+    ) {
+      alert("다시 한 번 게시물을 확인해 주세요.");
+    } else {
+      try {
+        await memoaAxios
+          .post("/post", submitPostData)
+          .then((res) => console.log(res.data));
+        alert("성공적으로 업로드 되었습니다.");
+      } catch (err) {
+        console.log(err);
+        alert("업로드에 실패하였습니다.");
+      }
     }
   };
 
-
+  //upload post
+  const handleImage = (e) => {
+    //e.target.file -> form 저장 -> 보낼때 formData.get
+  };
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -127,10 +115,12 @@ const Write = () => {
             <div className="write-and-tag">
               <input
                 type="text"
+                name="title"
+                value={submitPostData.title}
                 placeholder="제목을 입력해주세요"
                 className="input-title"
                 onKeyDown={preventEnter}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={updateField}
               />
               <div className="input-file">
                 <input
@@ -145,12 +135,12 @@ const Write = () => {
                     ? ""
                     : uniqueArr.map((text, idx) => (
                         <Tag
-                          tagName="tag"
+                          tagName="tags"
                           tagPrint={text}
                           key={idx}
                           canActive={true}
-                          filter={tag}
-                          setFilter={setTags}
+                          filter={submitPostData}
+                          setFilter={setSubmitPostData}
                         />
                       ))}
                 </div>
@@ -170,11 +160,11 @@ const Write = () => {
                   ? ""
                   : userInfo["department"].subjects.map((sub, idx) => (
                       <Tag
-                        tagName="tag"
+                        tagName="tags"
                         tagPrint={sub}
                         canActive={true}
-                        filter={tag}
-                        setFilter={setTags}
+                        filter={submitPostData}
+                        setFilter={setSubmitPostData}
                       />
                     ))}
               </div>
@@ -182,8 +172,9 @@ const Write = () => {
             <div className="line"></div>
             <div className="write-main">
               <textarea
-                value={content}
-                onChange={handleChange}
+                name="content"
+                value={submitPostData.content}
+                onChange={updateField}
                 rows={1}
                 placeholder="본문 내용을 입력해주세요"
                 id="text"
@@ -191,6 +182,7 @@ const Write = () => {
             </div>
           </div>
           <div className="btn-container">
+            <div className="post-image-container"></div>
             <button className="submit-btn" type="submit" onClick={submitPost}>
               글 등록하기
             </button>
