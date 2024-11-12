@@ -5,6 +5,8 @@ import Post from "../../components/Post";
 import Tag from "../../components/Tag";
 import { MdSearch, MdFilterAlt, MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import memoaAxios from "../../libs/axios/instance";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./style.css";
 
 const Search = () => {
@@ -73,7 +75,12 @@ const Search = () => {
             onChange={(e) => handleInput(e)}
             name="search"
           />
-          <button className="search-button" onClick={() => searchPost()}>
+          <button className="search-button" onClick={() =>
+            filter.tags.length === 0 && filter.search.trim().length === 0 ?
+            toast.error('검색어 / 태그를 넣어주세요!')
+            : searchPost()
+            }
+          >
             <MdSearch className="semi-icon" color="white" />
           </button>
         </div>
@@ -147,13 +154,21 @@ const Search = () => {
       </div>
 
       <Post post={searchResult}/>
-      {searchResult == [] && <div className="search-page-controller">
-        <MdKeyboardArrowLeft />
+
+      {searchResult && <div className="search-page-controller">
+        <MdKeyboardArrowLeft style={{
+          width: '28px',
+          height: '28px',
+          cursor: 'pointer',
+          color: page == 0 || "white"
+          }}
+        />
         <div className="search-page-viewer">
           <span className="search-current-page">{page <= 10 ? `0${page}` : page}</span>
         </div>
-        <MdKeyboardArrowRight />
+        <MdKeyboardArrowRight style={{width:'28px', height:'28px', cursor:'pointer'}} />
       </div>}
+      <ToastContainer />
     </div>
   );
 };
