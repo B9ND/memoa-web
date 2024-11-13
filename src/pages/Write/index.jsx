@@ -10,9 +10,14 @@ const Write = () => {
     title: "",
     content: "",
     tags: [],
-    images: [],
+    images: [
+      "https://i.pinimg.com/474x/7f/1f/4e/7f1f4ef3d11ff9cf89f593e3cef4b4a9.jpg",
+      "https://i.pinimg.com/564x/f0/48/cd/f048cd3f716229f6d4202bef74509095.jpg",
+    ],
     isReleased: true,
   });
+
+  let [img, setImg] = useState("");
 
   const updateField = (event) => {
     const { name, value, scrollHeight } = event.target;
@@ -73,10 +78,21 @@ const Write = () => {
       }
     }
   };
-
   //upload post
-  const handleImage = (e) => {
-    //e.target.file -> form 저장 -> 보낼때 formData.get
+  const [images, setImages] = useState([]); // 배열로 state 초기화
+
+  const handleImages = (e) => {
+    const files = e.target.files;
+    const fileArray = Array.from(files);
+
+    fileArray.forEach((file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        setImages((prev) => [...prev, reader.result]);
+      };
+    });
   };
   //tag
   const [textPrint, setText] = useState([]);
@@ -151,7 +167,11 @@ const Write = () => {
                   type="file"
                   id="file"
                   name="chooseFile"
-                  accept="image/*" /*onChange=()*/
+                  multiple
+                  accept=".jpg, .jpeg, .png"
+                  onChange={(e) => {
+                    handleImages(e);
+                  }}
                 />
               </div>
               <div className="line"></div>
@@ -182,13 +202,20 @@ const Write = () => {
             </div>
           </div>
           <div className="btn-container">
-            <div className="post-image-container"></div>
+            <div className="post-image-container">
+              {/* {submitPostData.images.map((imgURL) => (
+                <img src={imgURL} />
+              ))} */}
+              {images.map((image, index) => (
+                <img key={index} src={image} alt={`preview ${index}`} />
+              ))}
+            </div>
             <button className="submit-btn" type="submit" onClick={submitPost}>
               글 등록하기
             </button>
           </div>
         </div>
-      </div>
+        </div>
     </>
   );
 };
