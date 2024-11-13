@@ -15,17 +15,37 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
 
   const handleCodeChange = (e, index) => {
     const newCode = [...code];
-    if (e.target.value) {
-      newCode[index] = e.target.value;
+    const { value } = e.target;
+
+    if (value) {
+      newCode[index] = value;
       setCode(newCode);
-      const nextEmptyIndex = newCode.findIndex((value) => value === '');
-      if (nextEmptyIndex !== -1) {
-        document.getElementById(`code-input-${nextEmptyIndex}`).focus();
+      if (index < 5) {
+        document.getElementById(`code-input-${index + 1}`).focus();
       }
     } else {
-      newCode[index] = '';
-      setCode(newCode);
+      if (newCode[index]) {
+        newCode[index] = '';
+        setCode(newCode);
+        if (index < 5 && newCode[index + 1]) {
+          document.getElementById(`code-input-${index + 1}`).focus();
+        }
+      } else {
+        newCode[index] = '';
+        setCode(newCode);
+        if (index > 0) {
+          document.getElementById(`code-input-${index - 1}`).focus();
+        }
+      }
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === 'Backspace' && !code[index]) {
+      const newCode = [...code];
       if (index > 0) {
+        newCode[index - 1] = '';
+        setCode(newCode);
         document.getElementById(`code-input-${index - 1}`).focus();
       }
     }
@@ -61,15 +81,16 @@ const EmailVerificationForm = ({ email, setEmail, verificationCode, setVerificat
         </button>
       </div>
       <div className="code-input-wrap">
-        {[...Array(6)].map((_, index) => (
+        {Array(6).fill().map((_, index) => (
           <input
             key={index}
             id={`code-input-${index}`}
             type="text"
             maxLength="1"
             className="code-input"
+            value={code[index]}
             onChange={(e) => handleCodeChange(e, index)}
-            onClick={focusOnFirstEmptyIndex}
+            onKeyDown={(e) => handleKeyDown(e, index)}
           />
         ))}
       </div>
