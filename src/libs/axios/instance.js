@@ -54,7 +54,7 @@ memoaAxios.interceptors.response.use(
       const refreshToken = getCookie('REFRESH_TOKEN');
       //리프레시 토큰이 있다면, 재발급 요청
       if (refreshToken) {
-        return memoaAxios
+        return axios
           .post(
             `/auth/reissue`,
             { refresh: refreshToken }
