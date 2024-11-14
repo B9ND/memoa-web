@@ -1,24 +1,21 @@
 /* eslint-disable react/prop-types */
 import { MdBookmarkBorder } from "react-icons/md";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+// import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Tag from "../Tag";
 import { useNavigate } from "react-router-dom";
 import BaseProfileImg from '../../assets/base-profile.png'
 import "./style.css";
+import Masonry from 'react-masonry-css'
 
 const Post = ({ post }) => {
   const navigate = useNavigate();
 
   return (
-    <>
       <div className="post-all-container">
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{ 900: 1, 1000: 2, 1300: 3 }}
-          style={{
-            width: "100%",
-          }}
-        >
-          <Masonry gutter={"30px"} columnsCount={2} style={{justifyContent:'center'}}>
+        <Masonry
+            breakpointCols={{ 1040: 1, 1300: 2, default: 3 }}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column">
             {post.map((item, index) => (
                 <div key={index} className="post-container">
                   <div className="post-head">
@@ -61,9 +58,7 @@ const Post = ({ post }) => {
               )
             )}
           </Masonry>
-        </ResponsiveMasonry>
       </div>
-    </>
   );
 };
 
