@@ -35,28 +35,28 @@ const Write = () => {
   };
 
   //get "auth/me"
-  const [userInfo, getUserInfo] = useState({
-    department: {
-      subjects: [""],
-    },
-  });
+  // const [userInfo, getUserInfo] = useState({
+  //   department: {
+  //     subjects: [""],
+  //   },
+  // });
 
-  const getMe = async () => {
-    try {
-      const res = await memoaAxios.get("/auth/me");
-      getUserInfo(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getMe = async () => {
+  //   try {
+  //     const res = await memoaAxios.get("/auth/me");
+  //     getUserInfo(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getMe();
-  }, []);
+  // useEffect(() => {
+  //   getMe();
+  // }, []);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
+  // useEffect(() => {
+  //   console.log(userInfo);
+  // }, [userInfo]);
 
   //post
   const submitPost = async () => {
@@ -80,19 +80,27 @@ const Write = () => {
   };
   //upload post
   const [images, setImages] = useState([]); // 배열로 state 초기화
-
+  const formData = new FormData();
   const handleImages = (e) => {
     const files = e.target.files;
     const fileArray = Array.from(files);
+
+    // formData.append("name1", "values1");
 
     fileArray.forEach((file) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
+        // formData.append("key1", "values1")
         setImages((prev) => [...prev, reader.result]);
       };
     });
+    formData.append("image", file);
+    for (const x of formData) {
+      console.log("formData", x);
+    }
+    console.log();
   };
   //tag
   const [textPrint, setText] = useState([]);
@@ -176,7 +184,7 @@ const Write = () => {
               </div>
               <div className="line"></div>
               <div className="basic-tag-container">
-                {userInfo["department"].subjects.length == 0
+                {/* {userInfo["department"].subjects.length == 0
                   ? ""
                   : userInfo["department"].subjects.map((sub, idx) => (
                       <Tag
@@ -186,7 +194,7 @@ const Write = () => {
                         filter={submitPostData}
                         setFilter={setSubmitPostData}
                       />
-                    ))}
+                    ))} */}
               </div>
             </div>
             <div className="line"></div>
@@ -215,7 +223,7 @@ const Write = () => {
             </button>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 };
