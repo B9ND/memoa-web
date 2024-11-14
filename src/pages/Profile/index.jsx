@@ -119,7 +119,7 @@ const Profile = () => {
               <div>{userData.nickname}</div>
               <button
                 className={isFollow ? "follow-ing" : "follow-er"}
-                style={isMine ? { display: "none" } : { display: 'flex' }}
+                style={{ display: isMine ?  "none" : 'flex' }}
               >
                 {isFollow ? '팔로잉' : '팔로우'}
               </button>

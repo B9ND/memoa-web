@@ -54,9 +54,9 @@ memoaAxios.interceptors.response.use(
       const refreshToken = getCookie('REFRESH_TOKEN');
       //리프레시 토큰이 있다면, 재발급 요청
       if (refreshToken) {
-        return axios
+        return memoaAxios
           .post(
-            `${import.meta.env.VITE_API_KEY}/auth/reissue`,
+            `/auth/reissue`,
             { refresh: refreshToken }
           )
           .then((response) => {
@@ -69,8 +69,6 @@ memoaAxios.interceptors.response.use(
             return memoaAxios(originalRequest);
           })
           .catch((refreshError) => {
-            // removeCookie('ACCESS_TOKEN');
-            // removeCookie('REFRESH_TOKEN');
             return Promise.reject(refreshError);
           });
       }

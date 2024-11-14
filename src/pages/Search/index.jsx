@@ -156,10 +156,10 @@ const Search = () => {
               <div className="search-filter-tags">
                 등급
                 <div className="search-filter-real-tag">
-                  {school.map((s, i) => (
+                  {school.map((item, index) => (
                     <Tag
-                      key={i}
-                      tagPrint={s}
+                      key={index}
+                      tagPrint={item}
                       tagStyle="filter"
                       tagName="tags"
                       setFilter={setFilter}
@@ -171,10 +171,10 @@ const Search = () => {
               <div className="search-filter-tags">
                 학년
                 <div className="search-filter-real-tag">
-                  {grade.map((g, i) => (
+                  {grade.map((item, index) => (
                     <Tag
-                      key={i}
-                      tagPrint={g + "학년"}
+                      key={index}
+                      tagPrint={item + "학년"}
                       tagStyle="filter"
                       tagName="tags"
                       setFilter={setFilter}
@@ -186,10 +186,10 @@ const Search = () => {
               <div className="search-filter-tags">
                 과목
                 <div className="search-filter-real-tag">
-                  {subject.map((s, i) => (
+                  {subject.map((item, index) => (
                     <Tag
-                      key={i}
-                      tagPrint={s}
+                      key={index}
+                      tagPrint={item}
                       tagStyle="filter"
                       tagName="tags"
                       setFilter={setFilter}
