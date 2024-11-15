@@ -47,9 +47,6 @@ const Profile = () => {
   const getMe = async () => {
     try{
       await memoaAxios.get('/auth/me').then((res)=>setMyData(res.data))
-      if(userData.profileImage === ""){
-        setUserData((prev)=>({...prev, profileImage: BaseProfileImg}))
-      }
     }catch(err){
       console.log(err)
     }
@@ -57,7 +54,7 @@ const Profile = () => {
   
   const getUser = async () => {
     try{
-      await memoaAxios.get('/auth/user', {params : {username : userName}}).then((res) => setUserData(res.data))
+      await memoaAxios.get('/user', {params : {username : userName}}).then((res) => setUserData(res.data))
     }catch(err){
       console.log(err)
     }
@@ -68,6 +65,9 @@ const Profile = () => {
       if(myData.nickname == userData.nickname){
         setIsMine(true)
       }
+    }
+    if(userData.profileImage === ""){
+      setUserData((prev)=>({...prev, profileImage: BaseProfileImg}))
     }
   },[myData, userData])
 
@@ -119,7 +119,7 @@ const Profile = () => {
               <div>{userData.nickname}</div>
               <button
                 className={isFollow ? "follow-ing" : "follow-er"}
-                style={isMine && { display: "none" }}
+                style={{ display: isMine ?  "none" : 'flex' }}
               >
                 {isFollow ? '팔로잉' : '팔로우'}
               </button>

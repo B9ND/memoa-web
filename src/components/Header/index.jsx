@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="header">
       <button className="memoa" onClick={goHome}>MEMOA</button>
-      <span>❘</span>
+      <span className="header-bar">❘</span>
       <div className="page-icon" style={{backgroundImage: 'url(/src/assets/icon'+location+'.svg)'}}></div>
     </div>
   )
