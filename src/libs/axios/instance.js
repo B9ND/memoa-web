@@ -41,12 +41,14 @@ memoaAxios.interceptors.response.use(
   (error) => {
     console.log(error);
     const originalRequest = error.config;
+    
     // 원래요청의 바디에 담은 데이터가 파일형식이면 Content-Type을 multipart/form-data
     if (originalRequest.data instanceof FormData) {
       originalRequest.headers["Content-Type"] = "multipart/form-data";
     } else {
       originalRequest.headers["Content-Type"] = "application/json";
     }
+
     //원래 요청이 존재하고, 재시도가 false면 실행
     if (originalRequest && !originalRequest._retry) {
       //재시도 마킹

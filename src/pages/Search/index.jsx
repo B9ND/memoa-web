@@ -5,7 +5,7 @@ import Post from "../../components/Post";
 import Tag from "../../components/Tag";
 import { MdSearch, MdFilterAlt } from "react-icons/md";
 import memoaAxios from "../../libs/axios/instance";
-import { toast } from 'react-toastify';
+import showToast from "../../libs/toast/toast";
 import "./style.css";
 
 const Search = () => {
@@ -124,7 +124,7 @@ const Search = () => {
             />
             <button className="search-button" onClick={() =>
               filter.tags.length === 0 && filter.search.trim().length === 0
-              ? toast.error('검색어 / 태그를 넣어주세요!')
+              ? showToast('검색어 / 태그를 넣어주세요!', "ERROR")
               : searchPost()
               }
             >
