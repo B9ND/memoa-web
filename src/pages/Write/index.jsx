@@ -8,16 +8,11 @@ import { ModuleCacheMap } from "vite/runtime";
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
     title: "",
-    content: "",
+    content: "", // 내용/n ✔★url✔(imgurl)-> 서버 저장 이미지 업로드 완료
     tags: [],
-    images: [
-      "https://i.pinimg.com/474x/7f/1f/4e/7f1f4ef3d11ff9cf89f593e3cef4b4a9.jpg",
-      "https://i.pinimg.com/564x/f0/48/cd/f048cd3f716229f6d4202bef74509095.jpg",
-    ],
+    images: [], //images는 그냥 img url로 처리
     isReleased: true,
   });
-
-  let [img, setImg] = useState("");
 
   const updateField = (event) => {
     const { name, value, scrollHeight } = event.target;
@@ -32,31 +27,36 @@ const Write = () => {
       event.target.style.height = "auto";
       event.target.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
     }
+    
   };
 
   //get "auth/me"
-  // const [userInfo, getUserInfo] = useState({
-  //   department: {
-  //     subjects: [""],
-  //   },
-  // });
+  const [userInfo, getUserInfo] = useState({
+    department: {
+      subjects: [""],
+    },
+  });
 
-  // const getMe = async () => {
-  //   try {
-  //     const res = await memoaAxios.get("/auth/me");
-  //     getUserInfo(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getMe = async () => {
+    try {
+      const res = await memoaAxios.get("/auth/me");
+      getUserInfo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getMe();
-  // }, []);
+  useEffect(() => {
+    getMe();
+  }, []);
 
-  // useEffect(() => {
-  //   console.log(userInfo);
-  // }, [userInfo]);
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
+  useEffect(() => {
+    console.log(submitPostData);
+  }, [submitPostData]);
 
   //post
   const submitPost = async () => {
@@ -79,29 +79,31 @@ const Write = () => {
     }
   };
   //upload post
-  const [images, setImages] = useState([]); // 배열로 state 초기화
+  // 배열로 state 초기화
+  const [images, setImages] = useState([]);
   const formData = new FormData();
+
   const handleImages = (e) => {
     const files = e.target.files;
     const fileArray = Array.from(files);
-
-    // formData.append("name1", "values1");
 
     fileArray.forEach((file) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        // formData.append("key1", "values1")
         setImages((prev) => [...prev, reader.result]);
       };
     });
-    formData.append("image", file);
-    for (const x of formData) {
-      console.log("formData", x);
-    }
-    console.log();
-  };
+  };         
+  useEffect(() => {
+    formData.append("images", images);
+  }, [images]);
+
+  for (const x of formData) {
+    console.log("formData", x);
+  }
+  console.log(images);
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -184,7 +186,7 @@ const Write = () => {
               </div>
               <div className="line"></div>
               <div className="basic-tag-container">
-                {/* {userInfo["department"].subjects.length == 0
+                {userInfo["department"].subjects.length == 0
                   ? ""
                   : userInfo["department"].subjects.map((sub, idx) => (
                       <Tag
@@ -194,7 +196,7 @@ const Write = () => {
                         filter={submitPostData}
                         setFilter={setSubmitPostData}
                       />
-                    ))} */}
+                    ))}
               </div>
             </div>
             <div className="line"></div>

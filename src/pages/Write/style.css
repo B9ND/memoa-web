@@ -1,4 +1,8 @@
 .big-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   width: 90%;
   height: 100vh;
 }
@@ -53,8 +57,7 @@
   height: 25%; /*25%*/
   display: flex;
   justify-content: space-between;
-  position: relative;
-  top: -25%;
+  margin-bottom: 48px;
 }
 .submit-btn {
   width: 7.5em;
@@ -77,6 +80,7 @@
   font-weight: 500;
   border-radius: 10px;
   padding: 10px 7px;
+  white-space: nowrap;
 }
 input[type="file"] {
   position: absolute;
@@ -99,6 +103,8 @@ input[type="file"] {
 }
 .basic-tag-container {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
   margin: 10px 0 10px 0;
 }
 .post-image-container {
