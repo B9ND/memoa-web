@@ -7,7 +7,6 @@ import inputIcon from '../../assets/input-icon.svg';
 import instance from '../../libs/axios/instance';
 import { setCookie } from '../../libs/Cookie/cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
   
@@ -40,7 +39,9 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
             type="email"
             name='email'
             value={loginData.email}
-            onChange={(e) => handleLogin(e)} />
+            onChange={(e) => handleLogin(e)}
+            autoComplete='off'
+            />
           <button type="button" className="long-Delbutton" onClick={handleClearEmail}>
             <img src={del} alt="Clear Email" />
           </button>
@@ -53,7 +54,9 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
             type={showPassword ? "text" : "password"}
             name='password'
             value={loginData.password}
-            onChange={(e) => handleLogin(e)} />
+            onChange={(e) => handleLogin(e)}
+            autoComplete='off'
+            />
           <button type="button" className="eyebutton" onClick={toggleShowPassword}>
             <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
           </button>

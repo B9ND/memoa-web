@@ -1,24 +1,56 @@
 import React, { useState } from 'react';
 import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
+import instance from '../../libs/axios/instance';
+import { useNavigate } from 'react-router-dom';
 
-const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
+const EmailVerificationForm = ({ email, setEmail, handleNextStep }) => {
   const [code, setCode] = useState(Array(6).fill(''));
   const [isCodeSent, setIsCodeSent] = useState(false);
 
-  const handleSendEmailCode = (e) => {
+  const handleSendEmailCode = async (e) => {
     e.preventDefault();
-    handleSendCode();
-    setIsCodeSent(true);
-    focusOnFirstEmptyIndex();
+    if (!email) {
+      console.log('이메일을 입력하세요.');
+      return;
+    }
+
+    try {
+      const res = await instance.get(`/auth/send-code`, { params: { email } });
+      if (res) {
+        console.log('인증코드 전송 성공:', res.data);
+        setIsCodeSent(true);
+        focusOnFirstEmptyIndex();
+      }
+    } catch (err) {
+      console.log('인증코드 전송 실패:', err);
+    }
+  };
+
+  const nav = useNavigate();
+
+  const certification = async () => {
+    try {
+      const res = await instance.post('/auth/verify-code', null, {params : { email:email, code: code.join('') }});
+      if (res) {
+        console.log('인증 성공:', res.data);
+        nav('/home');
+      }
+    } catch (err) {
+      console.log('인증 실패:', err);
+    }
   };
 
   const handleCodeChange = (e, index) => {
+    const value = e.target.value;
+    if (value < 0 || value > 9) {
+      return;
+    }
+2
     const newCode = [...code];
     
-    if (e.target.value) {
-      // 값을 입력하면 현재 칸에 저장하고 다음 빈 칸으로 이동
-      newCode[index] = e.target.value;
+    if (value) {
+      newCode[index] = value;
       setCode(newCode);
   
       const nextEmptyIndex = newCode.findIndex((value) => value === '');
@@ -28,16 +60,13 @@ const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
         document.getElementById(`code-input-${index + 1}`).focus();
       }
     } else {
-      // 값을 지우는 경우
       if (newCode[index]) {
-        // 현재 칸에 값이 있으면 삭제하고 다음 칸으로 이동
         newCode[index] = '';
         setCode(newCode);
         if (index < 5) {
           document.getElementById(`code-input-${index + 1}`).focus();
         }
       } else {
-        // 현재 칸이 비어있을 경우 이전 칸으로 이동
         if (index > 0) {
           newCode[index - 1] = '';
           setCode(newCode);
@@ -49,7 +78,6 @@ const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
   
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && !code[index]) {
-      // 현재 칸이 비어있을 때 이전 칸의 값 삭제
       const newCode = [...code];
       if (index > 0) {
         newCode[index - 1] = '';
@@ -70,6 +98,12 @@ const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
     console.log('인증코드 재발송');
   };
 
+  const handleNextStepWithCertification = async (e) => {
+    e.preventDefault();
+    await certification();
+    handleNextStep(e);
+  };
+
   return (
     <>
       <div className="inputWrap">
@@ -81,6 +115,7 @@ const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
           name='email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete='off'
         />
         <button type="button" className="short-Delbutton" onClick={() => setEmail('')}>
           <img src={del} alt="Clear Email" />
@@ -90,25 +125,31 @@ const EmailVerificationForm = ({ email, setEmail, handleSendCode }) => {
         </button>
       </div>
       <div className="code-input-wrap">
-        {[...Array(6)].map((_, index) => (
+        {Array(6).fill().map((_, index) => (
           <input
             key={index}
             id={`code-input-${index}`}
-            type="text"
+            type="number"
+            inputMode="numeric"
+            pattern="[0-9]*"
             maxLength="1"
             className="code-input"
             value={code[index]}
             onChange={(e) => handleCodeChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
-            onClick={() => focusOnFirstEmptyIndex}
-            // onFocus={() => handleInputClick}
+            onClick={() => focusOnFirstEmptyIndex()}
+            autoComplete='off'
           />
         ))}
       </div>
       <button type="button" className="resend-code-button" onClick={handleResendCode}>
         인증코드 재발송
       </button>
+      <button type="button" className="login-button" onClick={handleNextStepWithCertification}>
+        다음으로
+      </button>
     </>
   );
 };
+
 export default EmailVerificationForm;

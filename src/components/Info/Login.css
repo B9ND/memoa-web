@@ -102,18 +102,18 @@
   transform: translateY(-50%);
   width: 27px;
   height: 27px;
+  z-index: 3;
 }
 
 .long-input {
   width: 350px;
   display: block;
   height: 50px;
-  padding: 10px 45px 10px 10px;
+  padding: 10px 45px 10px 50px;
   font-weight: 400;
   font-size: 14px;
   border: 1.4px solid #818182;
   border-radius: 8px;
-  padding-left: 50px;
 }
 
 .short-input {
@@ -317,6 +317,22 @@
   margin-bottom: 10px;
 }
 
+/* input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance:none;
+  margin: 0;
+} */
+
+.code-input::-webkit-inner-spin-button,
+.code-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.code-input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .code-input {
   width: 48px;
   height: 60px;
@@ -350,20 +366,80 @@
 .duplicate-message {
   color: #DD3A45;
   font-size: 16px;
-  padding-left: 180px;
   margin: 5px 0px 20px 0px;
-  text-align: center;
-}
-
-.duplicate-message {
-  color: #DD3A45;
-  font-size: 16px;
-  padding-left: 180px;
-  margin: 5px 0px 20px 0px;
-  text-align: center;
+  padding-right: 12px;
+  text-align: right;
 }
 
 .duplicate-message.success {
   color: #28a745;
-  padding-left: 260px;
+  padding-right: 12px;
+  text-align: right;
 }
+
+
+.dropdown-label {
+  font-size: 12px;
+  margin: 10px;
+  font-weight: bold;
+  color: rgb(50, 50, 50);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.dropbtn {
+  display: block;
+  border: 1px solid #818182;
+  border-radius: 8px;
+  background-color: #fcfcfc;
+  font-weight: 400;
+  color: rgb(124, 124, 124);
+  padding: 12px;
+  padding: 10px 10px 10px 50px;
+  width: 350px;
+  height: 50px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropbtn_word {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.dropdown-content {
+  display: block;;
+  background-color: #fcfcfc;
+  min-width: 350px;
+  border-radius: 8px;
+  height: 160px;
+  overflow-y: scroll;
+  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.dropdown-content::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgb(194, 194, 194);
+}
+
+.dropdown-index {
+  display: block;
+  color: rgb(37, 37, 37);
+  padding: 12px 10px;
+  cursor: pointer;
+  font-size: 17px;
+}
+

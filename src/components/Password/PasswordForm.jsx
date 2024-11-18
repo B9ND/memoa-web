@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
-import axios from 'axios';
 
 const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,9 +15,9 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
   };
 
   const handlePassword = (e) => {
-    const { name, value } = e.target
-    setSignupData((prev)=>({...prev, [name]:value}))
-  }
+    const { name, value } = e.target;
+    setSignupData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <>
@@ -27,10 +26,11 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
         <label className={`floating-label ${signupData.password ? 'active' : ''}`}>비밀번호</label>
         <input
           className='long-input'
-          type={showPassword ? "text" : "signupData.password"} 
+          type={showPassword ? "text" : "password"} 
           value={signupData.password}
           name='password'
-          onChange={(e) => handlePassword(e)}
+          onChange={handlePassword}
+          autoComplete='off'
         />
         <button type="button" className="eyebutton" onClick={toggleShowPassword}>
           <img src={showPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
@@ -44,6 +44,7 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
           type={showConfirmPassword ? "text" : "password"} 
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete='off'
         />
         <button type="button" className="eyebutton" onClick={toggleShowConfirmPassword}>
           <img src={showConfirmPassword ? eyeOpen : eyeClosed} alt="Toggle Password Visibility" />
@@ -53,4 +54,4 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
   );
 };
 
-export default PasswordForm; 
+export default PasswordForm;

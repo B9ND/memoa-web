@@ -16,9 +16,9 @@ const NicknameForm = ({ signupData, setSignupData }) => {
   };
 
   const handlenickname = (e) => {
-    const { name, value } = e.target
-    setSignupData((prev)=>({...prev, [name]:value}))
-  }
+    const { name, value } = e.target;
+    setSignupData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <>
@@ -30,9 +30,10 @@ const NicknameForm = ({ signupData, setSignupData }) => {
           type="text"
           value={signupData.nickname}
           name='nickname'
-          onChange={(e) => handlenickname(e)}
+          onChange={handlenickname}
+          autoComplete='off'
         />
-        <button type="button" className="short-Delbutton" onClick={() => setSignupData.nickname('')}>
+        <button type="button" className="short-Delbutton" onClick={() => setSignupData(prev => ({ ...prev, nickname: '' }))}>
           <img src={del} alt="Clear nickname" />
         </button>
         <button type="button" className="duplicate-check-button" onClick={handleDuplicateCheck}>

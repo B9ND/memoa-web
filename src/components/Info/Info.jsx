@@ -4,8 +4,8 @@ import EmailPasswordForm from '../EmailPassword/EmailPasswordForm';
 import EmailVerificationForm from '../EmailVerification/EmailVerificationForm';
 import PasswordForm from '../Password/PasswordForm';
 import SchoolForm from '../School/SchoolForm';
+import Departments from '../Departments/Departments';
 import NicknameForm from '../Nickname/NicknameForm';
-import instance from '../../libs/axios/instance';
 
 const Info = ({ isLogin }) => {
   const [ emailData, setEmailData ] = useState("");
@@ -19,7 +19,6 @@ const Info = ({ isLogin }) => {
   const handleClearEmail = () => setLoginData({...loginData, email:''});
   
   const toggleShowPassword = () => setShowPassword(!showPassword);
-  // const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
   
   const handleSendCode = () => {
     console.log("인증번호를 전송합니다.");
@@ -63,10 +62,8 @@ const Info = ({ isLogin }) => {
                     email={emailData}
                     setEmail={setEmailData}
                     handleSendCode={handleSendCode}
+                    handleNextStep={handleNextStep}
                   />
-                  <button type="button" className="login-button" onClick={handleNextStep}>
-                    다음으로
-                  </button>
                   <div className='tc'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
@@ -107,6 +104,17 @@ const Info = ({ isLogin }) => {
               )}
               {step === 4 && (
                 <>
+                  <Departments />
+                  <button type="button" className="login-button" onClick={handleNextStep}>
+                    다음으로
+                  </button>
+                  <div className='tc'>
+                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                  </div>
+                </>
+              )}
+              {step === 5 && (
+                <>
                   <NicknameForm
                     signupData={signUpData}
                     setSignupData={setSignUpData}
@@ -117,6 +125,7 @@ const Info = ({ isLogin }) => {
                   <div className='tc'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
+                  
                 </>
               )}
             <p className="login-signup-link">

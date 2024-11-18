@@ -18,7 +18,8 @@ const SchoolForm = ({ school, setSchool }) => {
           className='long-input'
           type="text"
           value={school}
-          onChange={(e) => setSchool(e.target.value)} // 학교 입력 값 업데이트
+          onChange={(e) => setSchool(e.target.value)}
+          autoComplete='off'
         />
         <button type="button" className="long-Delbutton" onClick={() => setSchool('')}>
           <img src={del} alt="Clear School" />
