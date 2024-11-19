@@ -27,7 +27,6 @@ const Write = () => {
       event.target.style.height = "auto";
       event.target.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
     }
-    
   };
 
   //get "auth/me"
@@ -80,7 +79,7 @@ const Write = () => {
   };
   //upload post
   // 배열로 state 초기화
-  const [images, setImages] = useState([]);
+  const [Images, setImages] = useState([]);
   const formData = new FormData();
 
   const handleImages = (e) => {
@@ -95,15 +94,18 @@ const Write = () => {
         setImages((prev) => [...prev, reader.result]);
       };
     });
-  };         
+  };
   useEffect(() => {
-    formData.append("images", images);
-  }, [images]);
-
-  for (const x of formData) {
-    console.log("formData", x);
-  }
-  console.log(images);
+    formData.append("images", Images);
+    if (Images.length != 0) {
+      console.log(`${Images.length}번째 사진이 들어갈 자리입니다.`);
+      // setSubmitPostData((prev)=>[...prev, `✔★${images[images.length]}✔`])
+    }
+    setSubmitPostData((prev) => ({
+      ...prev,
+      content: `✔★${Images}✔`,
+    }));
+  }, [Images]);
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -154,7 +156,6 @@ const Write = () => {
                   className="write-add-tag"
                   placeholder="태그 추가하기"
                   onKeyDown={show_tag}
-                  ref={useInput}
                 />
                 <div className="write-tag-container">
                   {textPrint.length == 0
@@ -216,7 +217,7 @@ const Write = () => {
               {/* {submitPostData.images.map((imgURL) => (
                 <img src={imgURL} />
               ))} */}
-              {images.map((image, index) => (
+              {Images.map((image, index) => (
                 <img key={index} src={image} alt={`preview ${index}`} />
               ))}
             </div>
