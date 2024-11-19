@@ -1,54 +1,55 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MdBookmarkBorder, MdOutlineBookmark } from "react-icons/md";
 import memoaAxios from "../../libs/axios/instance";
-import { debounce } from "../../utils/debounce";
 import './style.css'
 
 const Bookmarker = ({ isBookmarked, id, size }) => {
   const [ isBookmark, setIsBookmark ] = useState(Boolean);
-  const bookmarkRef = useRef(null);
+  const didmount = useRef(false)
+  const checkBookmark = useRef(null)
+  const checkNeed = useRef(false)
 
   useEffect(()=>{
     setIsBookmark(isBookmarked)
   }, [])
 
   useEffect(()=>{
-    console.log(isBookmark)
-    if(bookmarkRef.current == null) {
-      bookmarkRef.current = isBookmark
-      console.log('bookmarkRef', bookmarkRef)
+    if (didmount.current) {
+      const timer = setTimeout(() => {
+        setBookmark()
+      }, 1000);
+      return () => clearTimeout(timer);
     }
-  },[isBookmark])
+  }, [isBookmark, checkBookmark.current])
 
-  const bookmark = useCallback(
-    debounce(async ( id ) => {
-      try{
-        if(bookmarkRef.current == isBookmark){
-          await memoaAxios.post('/bookmark', null, {params : {'post-id' : id}})
-          console.log('bookmark,', id)
-          bookmarkRef.current = null
-        }else{
-          console.log('not bookmark')
-          bookmarkRef.current = null
-          return
-        }
-      }catch(err){
-        console.log(err)
-      }
-    }), [id]
-  )
+  const setBookmark = useCallback(()=>{
+    if (isBookmark != checkBookmark.current) onBookmark();
+    else checkBookmark.current = null
+  },[id])
 
-  const bookmarkClick = () => {
+  const onBookmark = useCallback( async () => {
+    try{
+      await memoaAxios.post('/bookmark', null, {params : {'post-id' : id}})
+      .then(()=>{
+        checkBookmark.current = null
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }, [id])
+
+  const bookmarkToggle = () => {
     setIsBookmark(prev => !prev);
-    bookmark(id);           
+    if (!checkNeed.current) checkNeed.current = true
+    if (checkNeed.current != null) checkBookmark.current = !checkBookmark.current
+    didmount.current = true
   }
-
 
   return (
     <div className="bookmarker-container">
       { isBookmark
-      ? <MdOutlineBookmark onClick={() => {bookmarkClick()}} className={size == 'big' ? 'bookmark-big' : 'bookmark-small' } />
-      : <MdBookmarkBorder onClick={() => {bookmarkClick()}} className={size == 'big' ? 'bookmark-big' : 'bookmark-small' } /> }
+      ? <MdOutlineBookmark onClick={() => {bookmarkToggle()}} className={size == 'big' ? 'bookmark-big' : 'bookmark-small' } />
+      : <MdBookmarkBorder onClick={() => {bookmarkToggle()}} className={size == 'big' ? 'bookmark-big' : 'bookmark-small' } /> }
     </div>
     
   )
