@@ -34,6 +34,8 @@ memoaAxios.interceptors.request.use(
   }
 );
 
+let isSessionExpired = false;
+
 memoaAxios.interceptors.response.use(
   (response) => {
     return response;
@@ -65,14 +67,18 @@ memoaAxios.interceptors.response.use(
           .then((response) => {
             const newAccessToken = response.data.access;
             const newRefreshToken = response.data.refresh;
-            setCookie('ACCESS_TOKEN',newAccessToken, {path :'/'});
-            setCookie('REFRESH_TOKEN',newRefreshToken, {path :'/'});
+            setCookie('ACCESS_TOKEN',newAccessToken, {path: '/'});
+            setCookie('REFRESH_TOKEN',newRefreshToken, {path: '/'});
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
             return memoaAxios(originalRequest);
           })
-          .catch((refreshError) => {
-            return Promise.reject(refreshError);
+          .catch(() => {
+            if (!isSessionExpired) {
+              isSessionExpired = true;
+              window.alert("세션이 만료되었습니다.");
+              window.location.href = '/login';
+            }
           });
       }
     }
