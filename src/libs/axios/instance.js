@@ -65,8 +65,8 @@ memoaAxios.interceptors.response.use(
           .then((response) => {
             const newAccessToken = response.data.access;
             const newRefreshToken = response.data.refresh;
-            setCookie('ACCESS_TOKEN',newAccessToken, {});
-            setCookie('REFRESH_TOKEN',newRefreshToken, {});
+            setCookie('ACCESS_TOKEN',newAccessToken, {path :'/'});
+            setCookie('REFRESH_TOKEN',newRefreshToken, {path :'/'});
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
             return memoaAxios(originalRequest);

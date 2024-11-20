@@ -5,15 +5,15 @@ import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
 import { setCookie } from '../../libs/Cookie/cookie';
-import memoaAxios from "../../libs/axios/instance";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
   const nav = useNavigate()
 
   const login = async () => {
     try {
-      await memoaAxios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData, { withCredentials: true })
+      await axios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData, { withCredentials: true })
       .then((res)=>{
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
