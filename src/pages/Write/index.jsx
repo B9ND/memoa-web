@@ -8,11 +8,13 @@ import { ModuleCacheMap } from "vite/runtime";
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
     title: "",
-    content: "", // 내용/n ✔★url✔(imgurl)-> 서버 저장 이미지 업로드 완료
+    content: "",
     tags: [],
-    images: [], //images는 그냥 img url로 처리
+    images: [],
     isReleased: true,
   });
+
+  const [imageFiles, setImageFiles] = useState("");
 
   const updateField = (event) => {
     const { name, value, scrollHeight } = event.target;
@@ -78,34 +80,47 @@ const Write = () => {
     }
   };
   //upload post
+  const postImage = async () => {
+    try {
+      await memoaAxios
+        .post("/image/upload", imageFiles[imageFiles.length])
+        .then((res) => {
+          setSubmitPostData((prev) => ({ ...prev, images: [res.data.url] }));
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // 배열로 state 초기화
-  const [Images, setImages] = useState([]);
-  const formData = new FormData();
-
+  const [viewImages, setViewImages] = useState([]);
   const handleImages = (e) => {
-    const files = e.target.files;
-    const fileArray = Array.from(files);
+    const { files } = e.target; // 선택한 모든 파일
+    const formData = new FormData();
+    const filePreviews = []; // 파일 미리보기 URL들을 저장할 배열
 
-    fileArray.forEach((file) => {
+    // 모든 파일을 순회하며 FormData에 추가하고 미리보기 생성
+    Array.from(files).forEach((file) => {
+      formData.append("files", file); // "files"라는 동일한 키로 여러 파일 추가
+
+      // FileReader로 파일 미리보기 URL 생성
       const reader = new FileReader();
       reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        filePreviews.push(reader.result);
 
-      reader.onload = () => {
-        setImages((prev) => [...prev, reader.result]);
+        // 모든 파일의 미리보기를 추가한 후 상태 업데이트
+        if (filePreviews.length === files.length) {
+          setImageFiles((prevImages) => [...prevImages, ...filePreviews]); // 기존 이미지 URL에 새로운 파일 미리보기 추가
+          setViewImages((prevImg) => [...prevImg, ...filePreviews]); // 미리보기 배열을 상태에 저장
+        }
       };
     });
+
+    setImageFiles(formData); // FormData에 파일 목록 저장
   };
-  useEffect(() => {
-    formData.append("images", Images);
-    if (Images.length != 0) {
-      console.log(`${Images.length}번째 사진이 들어갈 자리입니다.`);
-      // setSubmitPostData((prev)=>[...prev, `✔★${images[images.length]}✔`])
-    }
-    setSubmitPostData((prev) => ({
-      ...prev,
-      content: `✔★${Images}✔`,
-    }));
-  }, [Images]);
+  console.log(viewImages);
+  console.log(imageFiles);
+  console.log(imageFiles[imageFiles.length - 1]);
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -183,6 +198,9 @@ const Write = () => {
                   onChange={(e) => {
                     handleImages(e);
                   }}
+                  // onClick={()=>{
+                  //   postImage()
+                  // }}
                 />
               </div>
               <div className="line"></div>
@@ -217,7 +235,7 @@ const Write = () => {
               {/* {submitPostData.images.map((imgURL) => (
                 <img src={imgURL} />
               ))} */}
-              {Images.map((image, index) => (
+              {viewImages.map((image, index) => (
                 <img key={index} src={image} alt={`preview ${index}`} />
               ))}
             </div>
