@@ -13,12 +13,12 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
 
   const login = async () => {
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData);
-      if(res){
+      await axios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData, { withCredentials: true })
+      .then((res)=>{
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
         nav('/')
-      }
+      })
     } catch (err) {
       console.log('실패:', err);
     }

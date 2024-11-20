@@ -63,7 +63,6 @@ const Search = () => {
   }, [isLoading]);
   
   useEffect(() => {
-    console.log('searchResult change', searchResult)
     if(searchResult.length >= 10){ // 현재 0페이지이고 다음 페이지가 존재할 수 있을 때
 
       if (observerRef.current) {
@@ -94,10 +93,6 @@ const Search = () => {
       loadNextPost();
     }
   }, [filter.page])
-
-  useEffect(()=>{
-    console.log(shouldLoadMore)
-  },[observerRef, shouldLoadMore])
 
   const handleInput = (e) => {
     const { name, value } = e.target;

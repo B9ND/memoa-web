@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getCookie, removeCookie, setCookie } from "../Cookie/cookie";
+import { getCookie, setCookie } from "../Cookie/cookie";
 import qs from 'qs'
 
 const memoaAxios = axios.create({
@@ -10,7 +10,7 @@ const memoaAxios = axios.create({
   paramsSerializer: {
     serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
   },
-  // withCredentials: true,
+  withCredentials: true,
   // Credentialed Request 방식은 Access-Control-Allow-Origin 헤더가 *일 때 사용 불가하므로 수정!!
 });
 
@@ -59,13 +59,14 @@ memoaAxios.interceptors.response.use(
         return axios
           .post(
             `/auth/reissue`,
-            { refresh: refreshToken }
+            { refresh: refreshToken },
+            { withCredentials: true }
           )
           .then((response) => {
             const newAccessToken = response.data.access;
             const newRefreshToken = response.data.refresh;
-            setCookie('ACCESS_TOKEN',newAccessToken, {});
-            setCookie('REFRESH_TOKEN',newRefreshToken, {});
+            setCookie('ACCESS_TOKEN',newAccessToken, {path :'/'});
+            setCookie('REFRESH_TOKEN',newRefreshToken, {path :'/'});
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
             return memoaAxios(originalRequest);

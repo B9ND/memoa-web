@@ -1,0 +1,14 @@
+.bookmark-big{
+  width: 56px;
+  height: 56px;
+}
+
+.bookmark-small{
+  width: 28px;
+  height: 28px;
+}
+
+.bookmarker-container{
+  width: fit-content;
+  height: fit-content;
+}
