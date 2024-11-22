@@ -198,9 +198,9 @@ const Write = () => {
                   onChange={(e) => {
                     handleImages(e);
                   }}
-                  // onClick={()=>{
-                  //   postImage()
-                  // }}
+                  onClick={()=>{
+                    postImage()
+                  }}
                 />
               </div>
               <div className="line"></div>
