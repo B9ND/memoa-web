@@ -82,11 +82,9 @@ const Write = () => {
   //upload post
   const postImage = async () => {
     try {
-      await memoaAxios
-        .post("/image/upload", imageFiles[imageFiles.length])
-        .then((res) => {
-          setSubmitPostData((prev) => ({ ...prev, images: [res.data.url] }));
-        });
+      await memoaAxios.post("/image/upload", imageFiles).then((res) => {
+        setSubmitPostData((prev) => ({ ...prev, images: [res.data.url] }));
+      });
     } catch (error) {
       console.log(error);
     }
@@ -118,9 +116,7 @@ const Write = () => {
 
     setImageFiles(formData); // FormData에 파일 목록 저장
   };
-  console.log(viewImages);
-  console.log(imageFiles);
-  console.log(imageFiles[imageFiles.length - 1]);
+  console.log("imagesFile", imageFiles);
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -198,8 +194,8 @@ const Write = () => {
                   onChange={(e) => {
                     handleImages(e);
                   }}
-                  onClick={()=>{
-                    postImage()
+                  onClick={() => {
+                    postImage();
                   }}
                 />
               </div>
