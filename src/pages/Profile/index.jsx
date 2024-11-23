@@ -3,12 +3,14 @@ import Post from "../../components/Post";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import memoaAxios from "../../libs/axios/instance";
+import useFollow from "../../hooks/follow/useFollow";
 import BaseProfileImg from '../../assets/base-profile.png'
 import './style.css'
 
 const Profile = () => {
-  const { username } = useParams();
-  const userName = username.replace(":", "");
+  let { username } = useParams();
+  username = username.replace(":", "");
+  const follow = useFollow();
   const [ userData, setUserData ] = useState({
     email: "",
     nickname: "",
@@ -37,16 +39,14 @@ const Profile = () => {
       ]
     }
   });
-
   const [ isMine, setIsMine ] = useState(false);
   const [ isFollow, setIsFollow ] = useState(true);
-  const [ followings, setFollowings ] = useState([]);
-  const [ followers, setFollowers ] = useState([]);
   const [ myPost, setMyPost ] = useState([]);
 
   const getMe = async () => {
     try{
-      await memoaAxios.get('/auth/me').then((res)=>setMyData(res.data))
+      await memoaAxios.get('/auth/me')
+      .then((res)=>setMyData(res.data))
     }catch(err){
       console.log(err)
     }
@@ -54,7 +54,17 @@ const Profile = () => {
   
   const getUser = async () => {
     try{
-      await memoaAxios.get('/user', {params : {username : userName}}).then((res) => setUserData(res.data))
+      await memoaAxios.get('/user', {params : {username : username}})
+      .then((res) => setUserData(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getUserPost = async () => {
+    try{
+      await memoaAxios.get('/post/user', {params: {author: username}})
+      .then((res) => setMyPost(res.data))
     }catch(err){
       console.log(err)
     }
@@ -71,37 +81,14 @@ const Profile = () => {
     }
   },[myData, userData])
 
-  const getFollowings = async () => {
-    try{
-      await memoaAxios.get('/follow/followings', {params: {user : userName}}).then((res)=>setFollowings(res.data))
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  const getFollowers = async () => {
-    try{
-      await memoaAxios.get('/follow/followers', {params: {user : userName}}).then((res)=>setFollowers(res.data))
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  const getUserPost = async () => {
-    try{
-      await memoaAxios.get('/post/user', {params: {author: userName}}).then((res)=>setMyPost(res.data))
-    }catch(err){
-      console.log(err)
-    }
-  }
 
   useEffect(()=>{
     getMe()
     getUser()
     getUserPost()
-    getFollowings()
-    getFollowers()
-  },[ username ])
+    follow.getFollowers(username)
+    follow.getFollowings(username)
+  }, [ username ])
 
   return (
     <div className="head-main">
@@ -133,16 +120,16 @@ const Profile = () => {
                 {myPost.length}
               </span>
             </div>
-            <Link to={`/follow/:${userName}/:followers`} className="detail-container">
+            <Link to={`/follow/:${username}/:follower`} className="detail-container">
               팔로워
               <span className="user-number">
-                {followings.length}
+                {follow.followings.length}
               </span>
             </Link>
-            <Link to={`/follow/:${userName}/:following`} className="detail-container">
+            <Link to={`/follow/:${username}/:following`} className="detail-container">
               팔로우
               <span className="user-number">
-                {followers.length}
+                {follow.followers.length}
               </span>
             </Link>
           </div>

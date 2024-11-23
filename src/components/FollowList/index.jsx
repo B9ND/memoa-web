@@ -1,90 +1,39 @@
 import { Link, useParams } from "react-router-dom";
-import "./style.css";
+import FollowButton from "../../components/FollowButton";
+import { useEffect } from "react";
+import useFollow from "../../hooks/follow/useFollow";
 
 const FollowList = () => {
+  const follow = useFollow();
   let { followState, username } = useParams();
   followState = followState.substring(1)
-  
-  const following = [
-    {
-      email: "cugar@gmail.com",
-      nickname: "cugar0000000",
-      description: "여승팔",
-      profileImage: "../../src/assets/base-profile.png",
-    },
-    {
-      email: "legolove08@gmail.com",
-      nickname: "김민규",
-      description: "B9ND",
-      profileImage: "../../src/assets/base-profile.png",
-    },
-  ];
-  const followers = [
-    {
-      email: "cugar@gmail.com",
-      nickname: "cugar",
-      description: "여승원",
-      profileImage: "../../src/assets/base-profile.png",
-    },
-    {
-      email: "legolove08@gmail.com",
-      nickname: "김민규",
-      description: "B9ND 1짱.",
-      profileImage: "../../src/assets/base-profile.png",
-    },
-  ];
-  return (
-    <>
-      <div className="follow-navs">
-        {followState == 'following' ? (
-          <>
-            <button className="follow-nav-focused">팔로잉</button>
-            <Link to={`/follow/${username}/:followers`} className="follow-nav">
-              팔로워
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to={`/follow/${username}/:following`} className="follow-nav">
-              팔로잉
-            </Link>
-            <button className="follow-nav-focused">팔로워</button>
-          </>
-        )}
-      </div>
-      <div className="follow-list">
-        {followState == 'following' ? (
-          following.map((k, idx) => (
-            <Link
-              to={`/profile/:${k.nickname}`}
-              className="follow-item"
-              key={idx}
-            >
-              <img src={k.profileImage} alt="" className="follow-item-img" />
-              <div className="follow-item-info">
-                <div className="follow-item-name">{k.nickname}</div>
-                <div className="follow-item-email">{k.email}</div>
-              </div>
-            </Link>
-          ))
-        ) : (
-          followers.map((k, idx) => (
-            <Link
-              to={`/profile/:${k.nickname}`}
-              className="follow-item"
-              key={idx}
-            >
-              <img src={k.profileImage} alt="" className="follow-item-img" />
-              <div className="follow-item-info">
-                <div className="follow-item-name">{k.nickname}</div>
-                <div className="follow-item-email">{k.email}</div>
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
-    </>
-  );
-};
 
-export default FollowList;
+  useEffect(()=>{
+    follow.getFollowers(username)
+    follow.getFollowings(username)
+  }, [])
+
+  return (
+      <div className="follow-list">
+        {followState == 'following'
+          ? follow.followings
+          : follow.followers
+            .map((item, index) => (
+              <Link
+                to={`/profile/:${item.nickname}`}
+                className="follow-item"
+                key={index}
+              >
+                <img src={item.profileImage} alt="" className="follow-item-img" />
+                <div className="follow-item-info">
+                  <div className="follow-item-name">{item.nickname}</div>
+                  <div className="follow-item-email">{item.email}</div>
+                  <FollowButton user={item.nickname} isFollowersPage={followState != 'following'}/>
+                </div>
+              </Link>
+            ))}
+      </div>
+  )
+}
+
+export default FollowList
