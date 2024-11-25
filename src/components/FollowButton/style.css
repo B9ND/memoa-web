@@ -19,7 +19,7 @@
 
 .unfollow{
   background-color: transparent;
-  border: 2px #DD3A45;
+  border: 2px #DD3A45 solid;
   color: #DD3A45;
 }
 

@@ -29,7 +29,7 @@ const useToggle = ( apiReq, deps ) => {
           callToggleApi()
         }
         check.current = null
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [state])

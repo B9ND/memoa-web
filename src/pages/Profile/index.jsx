@@ -23,7 +23,8 @@ const Profile = () => {
       subjects: [
         ""
       ]
-    }
+    },
+    followed: true
   });
   const [ myData, setMyData ] = useState({
     email: "",
@@ -104,7 +105,7 @@ const Profile = () => {
           <div className="user-introduce">
             <div>
               <div>{userData.nickname}</div>
-              {isMine || <FollowButton targetNickname={username} myNickname={myData.nickname} followers={follow.followers}/>}
+              {isMine || <FollowButton targetNickname={username} isFollowed={userData.followed}/>}
             </div>
             <span>{userData.description}</span>
           </div>

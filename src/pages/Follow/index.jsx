@@ -12,17 +12,17 @@ const Follow = () => {
         <div className="follow-navs">
           {followState == ':following' ? (
             <>
-              <button className="follow-nav-focused">팔로잉</button>
               <Link to={`/follow/${username}/:followers`} className="follow-nav">
                 팔로워
               </Link>
+              <button className="follow-nav-focused">팔로잉</button>
             </>
           ) : (
             <>
+              <button className="follow-nav-focused">팔로워</button>
               <Link to={`/follow/${username}/:following`} className="follow-nav">
                 팔로잉
               </Link>
-              <button className="follow-nav-focused">팔로워</button>
             </>
           )}
         </div>
