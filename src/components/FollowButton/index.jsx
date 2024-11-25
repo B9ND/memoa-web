@@ -1,33 +1,31 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect } from "react";
+import useToggle from "../../hooks/toggle/useToggle";
+import './style.css'
+import { useParams } from "react-router-dom";
 
-const FollowButton = ( user, isFollowersPage ) => {
-  const [ isHover, setIsHover ] = useState(false);
-  const [ followState, setfollowState ] = useState('');
+const FollowButton = ({ targetNickname, myNickname, followers }) => {
+  const apiReq = ['/follow', {}, {params : {nickname : targetNickname}}]
+  let { username } = useParams();
+  username = username.replace(":", '');
+
+  const {...toggle} = useToggle(apiReq, username)
 
   useEffect(()=>{
-    if (isHover != false) {
-      setfollowState('unfollow')
-    } else {
-      setfollowState('following')
+    if (followers.length != 0 && myNickname.length != 0) {
+      toggle.setState(followers.some((user) => user.nickname === myNickname))
     }
-  }, [ isHover ])
+  }, [followers, myNickname])
 
-  useEffect(()=>{
-    if (isFollowersPage) {
-      console.log('dfasdf')
-    } else {
-      setfollowState('following')
-    }
-  }, [])
 
-  switch (followState) {
-    case "following":
-      return <div className="follow-button already-follow" onMouseEnter={() => setIsHover(prev => !prev)}>팔로잉</div>
-    case "unfollow":
-      return <div className="follow-button unfollow" onMouseLeave={() => setIsHover(prev => !prev)}>언팔로우</div>
-    case "notFollowing":
-      return <div className="follow-button follow">팔로우</div>;
-  }
+  return (
+    <div onClick={()=>toggle.toggleContent()}>
+      {toggle.state
+        ? <div className="follow-button already-follow">팔로잉</div>
+        : <div className="follow-button follow">팔로우</div>
+      }
+    </div>
+  )
 };
 
 export default FollowButton;

@@ -10,7 +10,7 @@ const Follow = () => {
       <div className="head-main">
         <Header/>
         <div className="follow-navs">
-          {followState == 'following' ? (
+          {followState == ':following' ? (
             <>
               <button className="follow-nav-focused">팔로잉</button>
               <Link to={`/follow/${username}/:followers`} className="follow-nav">

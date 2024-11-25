@@ -6,7 +6,7 @@ import useFollow from "../../hooks/follow/useFollow";
 const FollowList = () => {
   const follow = useFollow();
   let { followState, username } = useParams();
-  followState = followState.substring(1)
+  followState = followState.replace(":", "");
 
   useEffect(()=>{
     follow.getFollowers(username)
@@ -28,7 +28,7 @@ const FollowList = () => {
                 <div className="follow-item-info">
                   <div className="follow-item-name">{item.nickname}</div>
                   <div className="follow-item-email">{item.email}</div>
-                  <FollowButton user={item.nickname} isFollowersPage={followState != 'following'}/>
+                  <FollowButton targetNickname={item.nickname} />
                 </div>
               </Link>
             ))}

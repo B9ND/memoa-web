@@ -6,11 +6,11 @@ import memoaAxios from "../../libs/axios/instance";
 import useFollow from "../../hooks/follow/useFollow";
 import BaseProfileImg from '../../assets/base-profile.png'
 import './style.css'
+import FollowButton from "../../components/FollowButton";
 
 const Profile = () => {
   let { username } = useParams();
   username = username.replace(":", "");
-  const follow = useFollow();
   const [ userData, setUserData ] = useState({
     email: "",
     nickname: "",
@@ -40,8 +40,8 @@ const Profile = () => {
     }
   });
   const [ isMine, setIsMine ] = useState(false);
-  const [ isFollow, setIsFollow ] = useState(true);
   const [ myPost, setMyPost ] = useState([]);
+  const follow = useFollow();
 
   const getMe = async () => {
     try{
@@ -104,12 +104,7 @@ const Profile = () => {
           <div className="user-introduce">
             <div>
               <div>{userData.nickname}</div>
-              <button
-                className={isFollow ? "follow-ing" : "follow-er"}
-                style={{ display: isMine ?  "none" : 'flex' }}
-              >
-                {isFollow ? '팔로잉' : '팔로우'}
-              </button>
+              {isMine || <FollowButton targetNickname={username} myNickname={myData.nickname} followers={follow.followers}/>}
             </div>
             <span>{userData.description}</span>
           </div>
@@ -123,13 +118,13 @@ const Profile = () => {
             <Link to={`/follow/:${username}/:follower`} className="detail-container">
               팔로워
               <span className="user-number">
-                {follow.followings.length}
+                {follow.followers.length}
               </span>
             </Link>
             <Link to={`/follow/:${username}/:following`} className="detail-container">
               팔로우
               <span className="user-number">
-                {follow.followers.length}
+                {follow.followings.length}
               </span>
             </Link>
           </div>
