@@ -95,6 +95,24 @@
   color: #715AFF;
 }
 
+.pwcriteria {
+  font-weight: 400;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  font-size: 11px;
+  color: #818182;
+}
+
+.pwcriteria.active {
+  top: 12px;
+  left: 50px;
+  font-size: 10px;
+  color: #715AFF;
+}
+
 .input-icon {
   position: absolute;
   left: 12px;
@@ -136,14 +154,6 @@
 .signup-box input:focus {
   border-color: #A090FF;
   outline: none;
-}
-
-.login-box input:focus + .login-floating-label,
-.login-box input:not(:placeholder-shown) + .login-floating-label {
-  top: -13px;
-  left: 50px;
-  font-size: 13px;
-  color: #715AFF;
 }
 
 .long-Delbutton {
@@ -205,7 +215,7 @@
   cursor: pointer;
 }
 
-.tc {
+.termsuse {
   margin: 24px 0;
   font-size: 16px;
   font-weight: 400;
@@ -329,9 +339,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.code-input[type=number] {
+/* .code-input[type=number] {
   -moz-appearance: textfield;
-}
+} */
 
 .code-input {
   width: 48px;

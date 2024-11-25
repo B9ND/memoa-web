@@ -11,10 +11,11 @@ const Info = ({ isLogin }) => {
   const [ emailData, setEmailData ] = useState("");
   const [ loginData, setLoginData ] = useState({email: '', password: '' });
   const [ signUpData, setSignUpData ] = useState({email: '', password: '' , nickname:''});
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [school, setSchool] = useState('');
-  const [step, setStep] = useState(1);
+  const [ confirmPassword, setConfirmPassword ] = useState('');
+  const [ showPassword, setShowPassword ] = useState(false);
+  const [ school, setSchool ] = useState('');
+  const [ selectedGrade, setSelectedGrade ] = useState(null);
+  const [ step, setStep ] = useState(1);
 
   const handleClearEmail = () => setLoginData({...loginData, email:''});
   
@@ -27,6 +28,22 @@ const Info = ({ isLogin }) => {
   const handleNextStep = (e) => {
     e.preventDefault();
     setStep(step + 1);
+  };
+
+  const handleNextStepWithPasswordCheck = (e) => {
+    e.preventDefault();
+    const password = signUpData.password;
+    const confirmPasswordInput = confirmPassword;
+    
+    if (password.length >= 8 && /\d/.test(password)) {
+      if (password === confirmPasswordInput) {
+        setStep(step + 1);
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    } else {
+      alert("비밀번호는 8자리 이상이어야 하며, 숫자를 포함해야 합니다.");
+    }
   };
 
   return (
@@ -64,7 +81,7 @@ const Info = ({ isLogin }) => {
                     handleSendCode={handleSendCode}
                     handleNextStep={handleNextStep}
                   />
-                  <div className='tc'>
+                  <div className='termsuse'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                 </div>
@@ -80,10 +97,10 @@ const Info = ({ isLogin }) => {
                     toggleShowPassword={() => setShowPassword(!showPassword)}
                     toggleShowConfirmPassword={() => setConfirmPassword(!confirmPassword)}
                   />
-                  <button type="button" className="login-button" onClick={handleNextStep}>
+                  <button type="button" className="login-button" onClick={handleNextStepWithPasswordCheck}>
                     다음으로
                   </button>
-                  <div className='tc'>
+                  <div className='termsuse'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                 </>
@@ -93,11 +110,11 @@ const Info = ({ isLogin }) => {
                   <SchoolForm
                     school={school}
                     setSchool={setSchool}
+                    selectedGrade={selectedGrade}
+                    setSelectedGrade={setSelectedGrade}
+                    handleNextStep={handleNextStep}
                   />
-                  <button type="button" className="login-button" onClick={handleNextStep}>
-                    다음으로
-                  </button>
-                  <div className='tc'>
+                  <div className='termsuse'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                 </>
@@ -108,7 +125,7 @@ const Info = ({ isLogin }) => {
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
                   </button>
-                  <div className='tc'>
+                  <div className='termsuse'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                 </>
@@ -122,7 +139,7 @@ const Info = ({ isLogin }) => {
                   <button type="button" className="login-button" onClick={handleNextStep}>
                     다음으로
                   </button>
-                  <div className='tc'>
+                  <div className='termsuse'>
                     계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                   </div>
                   

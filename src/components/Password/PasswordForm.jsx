@@ -23,7 +23,10 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
     <>
       <div className="inputWrap">
         <img src={inputIcon} className="input-icon" alt="Input Icon" />
-        <label className={`floating-label ${signupData.password ? 'active' : ''}`}>비밀번호</label>
+        <label className={`floating-label ${signupData.password ? 'active' : ''}`}>
+          비밀번호
+          <span className={`pwcriteria ${signupData.password ? 'active' : ''}`}> (8자리 이상, 숫자포함)</span>
+        </label>
         <input
           className='long-input'
           type={showPassword ? "text" : "password"} 
