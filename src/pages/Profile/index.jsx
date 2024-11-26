@@ -115,13 +115,13 @@ const Profile = () => {
                 {myPost.length}
               </span>
             </div>
-            <Link to={`/follow/${username}/follower`} className="detail-container">
+            <Link to={`/follow/${username}/followers`} className="detail-container">
               팔로워
               <span className="user-number">
                 {follow.followers.length}
               </span>
             </Link>
-            <Link to={`/follow/${username}/following`} className="detail-container">
+            <Link to={`/follow/${username}/followings`} className="detail-container">
               팔로우
               <span className="user-number">
                 {follow.followings.length}

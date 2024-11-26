@@ -9,7 +9,7 @@ const Follow = () => {
       <div className="head-main">
         <Header/>
         <div className="follow-navs">
-          {followState == 'following' ? (
+          {followState == 'followings' ? (
             <>
               <Link to={`/follow/${username}/followers`} className="follow-nav">
                 팔로워
@@ -19,13 +19,13 @@ const Follow = () => {
           ) : (
             <>
               <button className="follow-nav-focused">팔로워</button>
-              <Link to={`/follow/${username}/following`} className="follow-nav">
+              <Link to={`/follow/${username}/followings`} className="follow-nav">
                 팔로잉
               </Link>
             </>
           )}
         </div>
-        <FollowList username={username} />
+        <FollowList />
       </div>
   )
 }

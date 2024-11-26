@@ -23,11 +23,12 @@ const FollowList = () => {
     follow.getFollowers(username)
     follow.getFollowings(username)
     getMe()
-  }, [])
+    console.log(username)
+  }, [username])
   
   return (
       <div className="follow-list">
-      { (followState == 'following' 
+      { (followState == 'followings' 
           ? follow.followings 
           : follow.followers
         ).map((item) => (
@@ -42,7 +43,7 @@ const FollowList = () => {
                   <div className="follow-item-email">{item.email}</div>
                 </Link>
               </div>
-              {myData != item.nickname && <FollowButton targetNickname={item.nickname} isFollowed={item.isFollowed} />}
+              {myData.nickname != item.nickname && <FollowButton targetNickname={item.nickname} isFollowed={item.isFollowed} />}
             </div>
           ))
         }
