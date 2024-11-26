@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import memoaAxios from '../../libs/axios/instance';
 
-const useFollow = ( ) => {
+const useFollow = () => {
   const [ followings, setFollowings ] = useState([]);
   const [ followers, setFollowers ] = useState([]);
 

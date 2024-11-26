@@ -1,27 +1,31 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import memoaAxios from "../../libs/axios/instance";
 
-const useToggle = ( apiReq, deps ) => {
+const useToggle = () => {
   const [ state, setState ] = useState(false);
+  const [ apiReqArray, setApiReqArray ] = useState([])
   const didmount = useRef(false);
   const check = useRef(null);
 
   
-  const toggleContent = ( ) => {
+  const toggleContent = (apiReq) => {
     didmount.current = true
     setState(prev => !prev);
-    if (check.current == null) {
+    if ( apiReqArray.length == 0 ) {
+      setApiReqArray(apiReq)
+    }
+    if (check.current === null) {
       check.current = state
     }
   }
 
   const callToggleApi = useCallback( async () => {
     try{
-      await memoaAxios.post(...apiReq)
+      await memoaAxios.post(...apiReqArray)
     }catch(err){
       console.log(err)
     }
-  }, [deps])
+  }, [apiReqArray])
 
   useEffect(()=>{
     if (didmount.current) {
