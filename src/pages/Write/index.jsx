@@ -3,8 +3,6 @@ import React, { useState, useRef, useEffect, memo } from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
-import { ModuleCacheMap } from "vite/runtime";
-
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
     title: "",
@@ -51,14 +49,6 @@ const Write = () => {
     getMe();
   }, []);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
-  useEffect(() => {
-    console.log(submitPostData);
-  }, [submitPostData]);
-
   //post
   const submitPost = async () => {
     if (
@@ -79,44 +69,70 @@ const Write = () => {
       }
     }
   };
+  //transeform content
+  const HandleContent = () => {
+    const transeformTxt = submitPostData.content.replace(
+      /📸\d+번째 사진이 들어갈 자리입니다\./g,
+      `✔★${submitPostData.images[/d/ - 1]}✔`
+    );
+    setSubmitPostData((prev) => ({
+      ...prev,
+      content: `${prev.content} ${transeformTxt}`,
+    }));
+  };
   //upload post
   const postImage = async () => {
-    try {
-      await memoaAxios.post("/image/upload", imageFiles).then((res) => {
-        setSubmitPostData((prev) => ({ ...prev, images: [res.data.url] }));
-      });
-    } catch (error) {
-      console.log(error);
+    if (imageFiles != []) {
+      try {
+        await memoaAxios.post(
+          "/image/upload",
+          imageFiles).then((res) => {
+            setSubmitPostData((prev) => ({
+              ...prev,
+              images: [res.data.url],
+            }));
+            HandleContent();
+            submitPost();
+          })
+
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      submitPost();
     }
   };
-  // 배열로 state 초기화
+
+  // preview Image
   const [viewImages, setViewImages] = useState([]);
   const handleImages = (e) => {
-    const { files } = e.target; // 선택한 모든 파일
+    const { files: file } = e.target; // files를 file로 변경
     const formData = new FormData();
-    const filePreviews = []; // 파일 미리보기 URL들을 저장할 배열
-
-    // 모든 파일을 순회하며 FormData에 추가하고 미리보기 생성
-    Array.from(files).forEach((file) => {
-      formData.append("files", file); // "files"라는 동일한 키로 여러 파일 추가
-
-      // FileReader로 파일 미리보기 URL 생성
+    const filePreviews = [];
+  
+    Array.from(file).forEach((fileItem) => { // file로 반복문 처리
+      formData.append("files", fileItem);
+  
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(fileItem);
       reader.onloadend = () => {
         filePreviews.push(reader.result);
-
-        // 모든 파일의 미리보기를 추가한 후 상태 업데이트
-        if (filePreviews.length === files.length) {
-          setImageFiles((prevImages) => [...prevImages, ...filePreviews]); // 기존 이미지 URL에 새로운 파일 미리보기 추가
-          setViewImages((prevImg) => [...prevImg, ...filePreviews]); // 미리보기 배열을 상태에 저장
+  
+        if (filePreviews.length === file.length) { // file 사용
+          setViewImages((prevImg) => [...prevImg, ...filePreviews]);
         }
       };
     });
-
-    setImageFiles(formData); // FormData에 파일 목록 저장
+  
+    setImageFiles(formData);
+    setSubmitPostData((prev) => ({
+      ...prev,
+      content: `${prev.content}📸${
+        viewImages.length + 1
+      }번째 사진이 들어갈 자리입니다.\n`,
+    }));
   };
-  console.log("imagesFile", imageFiles);
+  
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -194,9 +210,6 @@ const Write = () => {
                   onChange={(e) => {
                     handleImages(e);
                   }}
-                  onClick={() => {
-                    postImage();
-                  }}
                 />
               </div>
               <div className="line"></div>
@@ -228,14 +241,17 @@ const Write = () => {
           </div>
           <div className="btn-container">
             <div className="post-image-container">
-              {/* {submitPostData.images.map((imgURL) => (
-                <img src={imgURL} />
-              ))} */}
               {viewImages.map((image, index) => (
                 <img key={index} src={image} alt={`preview ${index}`} />
               ))}
             </div>
-            <button className="submit-btn" type="submit" onClick={submitPost}>
+            <button
+              className="submit-btn"
+              type="submit"
+              onClick={() => {
+                postImage();
+              }}
+            >
               글 등록하기
             </button>
           </div>

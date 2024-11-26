@@ -18,6 +18,7 @@ const Home = () => {
       if(res){
         setUser(res.data)
       }
+      
     }catch(err){
       navigate('/login')
       console.log('로그인하세요', err)
