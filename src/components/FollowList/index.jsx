@@ -7,7 +7,7 @@ import memoaAxios from "../../libs/axios/instance";
 
 const FollowList = () => {
   const follow = useFollow();
-  let { followState, username } = useParams();
+  const { followState, username } = useParams();
   const [ myData, setMyData ] = useState({});
 
   const getMe = async () => {

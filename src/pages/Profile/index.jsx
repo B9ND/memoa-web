@@ -9,7 +9,7 @@ import './style.css'
 import FollowButton from "../../components/FollowButton";
 
 const Profile = () => {
-  let { username } = useParams();
+  const { username } = useParams();
   const [ userData, setUserData ] = useState({
     email: "",
     nickname: "",

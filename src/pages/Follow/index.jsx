@@ -4,8 +4,7 @@ import './style.css'
 import { Link, useParams } from "react-router-dom";
 
 const Follow = () => {
-  let { followState, username } = useParams();
-  
+  const { followState, username } = useParams();
   return (
       <div className="head-main">
         <Header/>
