@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import useToggle from "../../hooks/toggle/useToggle";
 import './style.css'
-import { useParams } from "react-router-dom";
 
 const FollowButton = ({ targetNickname, isFollowed }) => {
   const [ isHover, setIsHover ] = useState(false);

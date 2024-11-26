@@ -8,8 +8,6 @@ import memoaAxios from "../../libs/axios/instance";
 const FollowList = () => {
   const follow = useFollow();
   let { followState, username } = useParams();
-  followState = followState.substring(1);
-  username = username.substring(1);
   const [ myData, setMyData ] = useState({});
 
   const getMe = async () => {
@@ -39,7 +37,7 @@ const FollowList = () => {
             >
               <div className="follow-item-header">  
                 <img src={item.profileImage} alt="" className="follow-item-img" />
-                <Link className="follow-item-info" to={`/profile/:${item.nickname}`}>
+                <Link className="follow-item-info" to={`/profile/${item.nickname}`}>
                   <div className="follow-item-name">{item.nickname}</div>
                   <div className="follow-item-email">{item.email}</div>
                 </Link>

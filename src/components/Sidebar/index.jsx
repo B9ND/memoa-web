@@ -69,7 +69,7 @@ const Sidebar = () => {
             timeout={{ enter: 300, exit: 450 }}
             className={"profile"}
           >
-            <Link to={`profile/:${userInfo.nickname}`} className="profile">
+            <Link to={`profile/${userInfo.nickname}`} className="profile">
               <img src={userInfo.profileImage} alt="" style={{width:'40px', height:'40px', borderRadius:'999px'}} />
               <CSSTransition
                 in={isOpen}

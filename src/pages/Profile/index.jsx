@@ -10,7 +10,6 @@ import FollowButton from "../../components/FollowButton";
 
 const Profile = () => {
   let { username } = useParams();
-  username = username.replace(":", "");
   const [ userData, setUserData ] = useState({
     email: "",
     nickname: "",
@@ -116,13 +115,13 @@ const Profile = () => {
                 {myPost.length}
               </span>
             </div>
-            <Link to={`/follow/:${username}/:follower`} className="detail-container">
+            <Link to={`/follow/${username}/follower`} className="detail-container">
               팔로워
               <span className="user-number">
                 {follow.followers.length}
               </span>
             </Link>
-            <Link to={`/follow/:${username}/:following`} className="detail-container">
+            <Link to={`/follow/${username}/following`} className="detail-container">
               팔로우
               <span className="user-number">
                 {follow.followings.length}

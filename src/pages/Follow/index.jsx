@@ -10,9 +10,9 @@ const Follow = () => {
       <div className="head-main">
         <Header/>
         <div className="follow-navs">
-          {followState == ':following' ? (
+          {followState == 'following' ? (
             <>
-              <Link to={`/follow/${username}/:followers`} className="follow-nav">
+              <Link to={`/follow/${username}/followers`} className="follow-nav">
                 팔로워
               </Link>
               <button className="follow-nav-focused">팔로잉</button>
@@ -20,7 +20,7 @@ const Follow = () => {
           ) : (
             <>
               <button className="follow-nav-focused">팔로워</button>
-              <Link to={`/follow/${username}/:following`} className="follow-nav">
+              <Link to={`/follow/${username}/following`} className="follow-nav">
                 팔로잉
               </Link>
             </>
