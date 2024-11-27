@@ -60,6 +60,7 @@ const Setting = () => {
           .post("/image/upload", profileImgFile)
           .then((res) =>{
             setUserInfoPatch((prev) => ({ ...prev, profileImage: res.data.url }))
+            console.log(profileImgFile)
         });
       }else{
         patchMe()

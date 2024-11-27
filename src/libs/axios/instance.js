@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "../Cookie/cookie";
-
+import qs from 'qs'
 
 const memoaAxios = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
@@ -8,6 +8,9 @@ const memoaAxios = axios.create({
     Accept: "application/json, text/plain, */*, multipart/form-data",
   },
   withCredentials: true,
+  paramsSerializer: {
+    serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
+  },
 });
 
 // 토큰 재발급 상태 관리
