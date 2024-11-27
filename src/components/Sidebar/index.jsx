@@ -19,14 +19,12 @@ const Sidebar = () => {
     description: "",
     profileImage: "",
   })
-  const navigate = useNavigate();
 
   const getMe = async () => {
     try{
       await memoaAxios.get('/auth/me').then((res) => setUserInfo(res.data))
-    }catch{
-      navigate('/login')
-      alert('재로그인이 필요합니다.')
+    }catch(err){
+      console.log(err)
     }
   }
 

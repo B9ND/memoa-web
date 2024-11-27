@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "../Cookie/cookie";
 import qs from 'qs'
+import showToast from "../toast/toast";
 
 const memoaAxios = axios.create({
   baseURL: import.meta.env.VITE_API_KEY,
@@ -60,11 +61,11 @@ memoaAxios.interceptors.response.use(
       originalRequest.headers["Content-Type"] = "application/json";
     }
 
-    // 403 에러가 발생한 경우
+    // 403 / 401 에러가 발생한 경우
     if (
       originalRequest &&
       !originalRequest._retry &&
-      error.response.status === 403
+      (error.response.status === 403 || error.response.status === 401)
     ) {
       originalRequest._retry = true;
       const refreshToken = getCookie("REFRESH_TOKEN");
@@ -88,11 +89,12 @@ memoaAxios.interceptors.response.use(
             // 재발급 완료 후 새로운 토큰으로 요청 다시 보내기
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
             return memoaAxios(originalRequest);
-          } catch (refreshError) {
+          } catch {
             // 토큰 재발급 실패 시 처리
             removeCookie("ACCESS_TOKEN");
             removeCookie("REFRESH_TOKEN");
-            return Promise.reject(refreshError);
+            alert('재로그인이 필요합니다.')
+            window.location.href = '/login'
           } finally {
             isRefreshing = false;
           }
