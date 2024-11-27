@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 import instance from '../../libs/axios/instance';
-import { useNavigate } from 'react-router-dom';
 
-const EmailVerificationForm = ({ email, setEmail, handleNextStep }) => { 
+const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) => { 
   const [code, setCode] = useState(Array(6).fill(''));
   const [isCodeSent, setIsCodeSent] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleSendEmailCode = async (e) => { 
     e.preventDefault();
-    if (!email) { 
+    if (!signupData.email) { 
       console.log('이메일을 입력하세요.');
       return; 
     } 
     try { 
-      const res = await instance.get(`/auth/send-code`, { params: { email } }); 
+      const res = await instance.get(`/auth/send-code`, { params: { email: signupData.email } }); 
       if (res) { 
         console.log('인증코드 전송 성공:', res.data); 
         setIsCodeSent(true); 
@@ -26,17 +26,16 @@ const EmailVerificationForm = ({ email, setEmail, handleNextStep }) => {
     } 
   }; 
 
-  const nav = useNavigate(); 
-
   const certification = async () => { 
     try { 
-      const res = await instance.post('/auth/verify-code', null, { params: { email:email, code: code.join('') }}); 
+      const res = await instance.post('/auth/verify-code', null, { params: { email: signupData.email, code: code.join('') }}); 
       if (res) { 
         console.log('인증 성공:', res.data); 
-        nav('/home'); 
+        setIsVerified(true);
       } 
     } catch (err) { 
       console.log('인증 실패:', err); 
+      setIsVerified(false);
     } 
   }; 
 
@@ -97,26 +96,31 @@ const EmailVerificationForm = ({ email, setEmail, handleNextStep }) => {
   const handleNextStepWithCertification = async (e) => { 
     e.preventDefault(); 
     await certification(); 
-    handleNextStep(e); 
-  }; 
+  };
+
+  useEffect(() => {
+    if (isVerified) {
+      handleNextStep(); // 인증이 완료되면 자동으로 다음 단계로 이동
+    }
+  }, [isVerified, handleNextStep]);
 
   return (
     <> 
       <div className="inputWrap">
-        <img src={inputIcon} className="input-icon" /> 
-        <label className={`floating-label ${email ? 'active' : ''}`}>이메일</label> 
+        <img src={inputIcon} className="input-icon" alt="Input Icon" /> 
+        <label className={`floating-label ${signupData.email ? 'active' : ''}`}>이메일</label> 
         <input 
           className='short-input' 
           type="email" 
           name='email' 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
+          value={signupData.email} 
+          onChange={(e) => setSignupData((prev) => ({ ...prev, email: e.target.value }))} 
           autoComplete='off' 
         /> 
         <button 
           type="button" 
           className="short-Delbutton" 
-          onClick={() => setEmail('')}
+          onClick={() => setSignupData((prev) => ({ ...prev, email: '' }))}
         > 
           <img src={del} alt="Clear Email" /> 
         </button> 
@@ -157,6 +161,7 @@ const EmailVerificationForm = ({ email, setEmail, handleNextStep }) => {
         type="button" 
         className="login-button" 
         onClick={handleNextStepWithCertification}
+        // disabled={!isCodeSent || code.includes('')} // 인증 코드가 전송되고 모든 입력칸이 채워진 경우에만 버튼 활성화
       > 
         다음으로 
       </button> 

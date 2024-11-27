@@ -6,27 +6,29 @@ import PasswordForm from '../Password/PasswordForm';
 import SchoolForm from '../School/SchoolForm';
 import Departments from '../Departments/Departments';
 import NicknameForm from '../Nickname/NicknameForm';
+import instance from '../../libs/axios/instance.js';
 
 const Info = ({ isLogin }) => {
-  const [ emailData, setEmailData ] = useState("");
-  const [ loginData, setLoginData ] = useState({email: '', password: '' });
-  const [ signUpData, setSignUpData ] = useState({email: '', password: '' , nickname:''});
-  const [ confirmPassword, setConfirmPassword ] = useState('');
-  const [ showPassword, setShowPassword ] = useState(false);
-  const [ school, setSchool ] = useState('');
-  const [ selectedGrade, setSelectedGrade ] = useState(null);
-  const [ step, setStep ] = useState(1);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [signUpData, setSignUpData] = useState({ email: '', password: '', nickname: '', departmentId: 1 });
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [school, setSchool] = useState('');
+  const [selectedGrade, setSelectedGrade] = useState(null);
+  const [step, setStep] = useState(1);
 
-  const handleClearEmail = () => setLoginData({...loginData, email:''});
-  
+  const handleClearEmail = () => setLoginData({ ...loginData, email: '' });
+
   const toggleShowPassword = () => setShowPassword(!showPassword);
-  
+
   const handleSendCode = () => {
     console.log("인증번호를 전송합니다.");
   };
 
   const handleNextStep = (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
     setStep(step + 1);
   };
 
@@ -34,7 +36,7 @@ const Info = ({ isLogin }) => {
     e.preventDefault();
     const password = signUpData.password;
     const confirmPasswordInput = confirmPassword;
-    
+
     if (password.length >= 8 && /\d/.test(password)) {
       if (password === confirmPasswordInput) {
         setStep(step + 1);
@@ -56,12 +58,12 @@ const Info = ({ isLogin }) => {
             <p className="login-Cont">
               <span className="login-project">프로젝트</span> 계정으로 계속하기
             </p>
-              <EmailPasswordForm
-                loginData={loginData}
-                setLoginData={setLoginData}
-                showPassword={showPassword}
-                toggleShowPassword={toggleShowPassword}
-                handleClearEmail={handleClearEmail}/>
+            <EmailPasswordForm
+              loginData={loginData}
+              setLoginData={setLoginData}
+              showPassword={showPassword}
+              toggleShowPassword={toggleShowPassword}
+              handleClearEmail={handleClearEmail} />
             <p className="login-signup-link">
               계정이 없다면? <a href="/signup">가입하기</a>
             </p>
@@ -73,78 +75,66 @@ const Info = ({ isLogin }) => {
             <div className="logo" />
             <h2>회원가입</h2>
             <p className="signup-Cont">가입해서 노트 정리 시작하기!</p>
-              {step === 1 && (
-                <div>
-                  <EmailVerificationForm
-                    email={emailData}
-                    setEmail={setEmailData}
-                    handleSendCode={handleSendCode}
-                    handleNextStep={handleNextStep}
-                  />
-                  <div className='termsuse'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-                  </div>
+            {step === 1 && (
+              <div>
+                <EmailVerificationForm
+                  signupData={signUpData}
+                  setSignupData={setSignUpData}
+                  handleSendCode={handleSendCode}
+                  handleNextStep={handleNextStep}
+                />
+                <div className='termsuse'>
+                  계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                 </div>
-              )}
-              {step === 2 && (
-                <>
-                  <PasswordForm
-                    signupData={signUpData}
-                    setSignupData={setSignUpData}
-                    showPassword={showPassword}
-                    confirmPassword={confirmPassword}
-                    setConfirmPassword={setConfirmPassword}
-                    toggleShowPassword={() => setShowPassword(!showPassword)}
-                    toggleShowConfirmPassword={() => setConfirmPassword(!confirmPassword)}
-                  />
-                  <button type="button" className="login-button" onClick={handleNextStepWithPasswordCheck}>
-                    다음으로
-                  </button>
-                  <div className='termsuse'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-                  </div>
-                </>
-              )}
-              {step === 3 && (
-                <>
-                  <SchoolForm
-                    school={school}
-                    setSchool={setSchool}
-                    selectedGrade={selectedGrade}
-                    setSelectedGrade={setSelectedGrade}
-                    handleNextStep={handleNextStep}
-                  />
-                  <div className='termsuse'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-                  </div>
-                </>
-              )}
-              {step === 4 && (
-                <>
-                  <Departments />
-                  <button type="button" className="login-button" onClick={handleNextStep}>
-                    다음으로
-                  </button>
-                  <div className='termsuse'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-                  </div>
-                </>
-              )}
-              {step === 5 && (
-                <>
-                  <NicknameForm
-                    signupData={signUpData}
-                    setSignupData={setSignUpData}
-                  />
-                  <button type="button" className="login-button" onClick={handleNextStep}>
-                    다음으로
-                  </button>
-                  <div className='termsuse'>
-                    계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
-                  </div>
-                  
-                </>
-              )}
+              </div>
+            )}
+            {step === 2 && (
+              <>
+                <PasswordForm
+                  signupData={signUpData}
+                  setSignupData={setSignUpData}
+                  confirmPassword={confirmPassword}
+                  setConfirmPassword={setConfirmPassword}
+                  showPassword={showPassword}
+                  toggleShowPassword={() => setShowPassword(!showPassword)}
+                  toggleShowConfirmPassword={() => setConfirmPassword(!confirmPassword)}
+                />
+                <button type="button" className="login-button" onClick={handleNextStepWithPasswordCheck}>
+                  다음으로
+                </button>
+                <div className='termsuse'>
+                  계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                </div>
+              </>
+            )}
+            {step === 3 && (
+              <>
+                <SchoolForm
+                  school={school}
+                  setSchool={setSchool}
+                  selectedGrade={selectedGrade}
+                  setSelectedGrade={setSelectedGrade}
+                  handleNextStep={handleNextStep}
+                />
+                <div className='termsuse'>
+                  계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
+                </div>
+              </>
+            )}
+            {step === 4 && (
+              <Departments
+                school={school}
+                handleNextStep={handleNextStep}
+                setSignupData={setSignUpData} // Departments에서 departmentId를 업데이트 할 수 있도록 추가
+              />
+            )}
+            {step === 5 && (
+              <NicknameForm
+                signupData={signUpData}
+                setSignupData={setSignUpData}
+                handleNextStep={handleNextStep} // 최종 단계로 이동하기 위한 handleNextStep 추가
+              />
+            )}
             <p className="login-signup-link">
               이미 계정이 있다면? <a href="/login">로그인</a>
             </p>
