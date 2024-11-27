@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import inputIcon from '../../assets/input-icon.svg';
 import del from '../../assets/del.svg';
-import instance from '../../libs/axios/instance.js'
+import instance from '../../libs/axios/instance.js';
 
 const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handleNextStep }) => {
   const [searchResults, setSearchResults] = useState([]);
@@ -35,9 +34,8 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
 
     setIsSearching(true);
     try {
-      console.log('요청 URL:', '/school/search');
-      console.log('요청 파라미터:', { name: term });
-      const res = await instance.get(`/school/search?search=${term}`, );
+      console.log('요청 URL:', `/school/search?search=${term}`);
+      const res = await instance.get(`/school/search?search=${term}`);
       console.log('서버 응답 데이터:', res.data); // 서버 응답 데이터 로그
       const data = res.data;
       if (Array.isArray(data)) {
@@ -79,19 +77,26 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
       setError('학교와 학년을 모두 선택해주세요.');
       return;
     }
+  
     try {
-      console.log('요청 URL:', '/school/search');
-      console.log('요청 파라미터:', { name: school });
-      const res = await axios.get('/school/search', { params: { name: school } });
+      console.log('요청 URL:', `/school/search?search=${school}`);
+      const res = await instance.get(`/school/search?search=${school}`);
       console.log('서버 응답 데이터:', res.data); // 서버 응답 데이터 로그
-      if (Array.isArray(res.data) && res.data.length > 0) {
-        handleNextStep(e);
+      const data = res.data;
+  
+      // 입력된 학교 이름과 서버에서 받아온 학교 이름 비교
+      const matchedSchool = data.find(item => item.name === school);
+      console.log('검색된 학교 이름:', matchedSchool ? matchedSchool.name : null);
+      console.log('입력된 학교 이름:', school);
+  
+      if (matchedSchool) {
+        handleNextStep(e); // 유효한 학교가 확인되면 다음 단계로 이동
       } else {
         setError('선택한 학교가 검색 결과에 없습니다.');
       }
     } catch (error) {
       console.error('서버 전송 에러:', error);
-      setError('데이터 전송에 실패했습니다.');
+      setError('데이터 전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
 
@@ -116,11 +121,12 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
       {/* 검색 결과 드롭다운 */}
       {Array.isArray(searchResults) && searchResults.length > 0 && (
         <div className="search-results-dropdown">
-          {searchResults.map((schoolItem, index) => (
+          {searchResults.slice(0, 3).map((schoolItem, index) => (
             <button
               key={index}
               onClick={() => handleSchoolSelect(schoolItem)}
               className="search-result-item"
+              style={{ display: 'block', width: '100%' }} // 줄 바꿈 및 너비 설정
             >
               {schoolItem.name}
             </button>
@@ -159,12 +165,10 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
           <span className='grade'>3학년</span>
         </button>
       </div>
-
       <button
         type="button"
         className="login-button"
         onClick={handleNext}
-        disabled={!school}
       >
         다음으로
       </button>
