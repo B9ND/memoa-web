@@ -9,8 +9,8 @@ import Search from "../../pages/Search";
 import Help from "../../pages/Help";
 import NotFound from "../../pages/NotFound";
 import Write from "../../pages/Write";
-import FollowList from "../FollowList";
 import Follow from "../../pages/Follow";
+import FollowList from "../FollowList";
 import Detail from "../../pages/Detail";
 import Layout from '../Layout'
 
