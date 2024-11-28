@@ -5,6 +5,7 @@ import instance from '../../libs/axios/instance.js';
 
 const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handleNextStep }) => {
   const [searchResults, setSearchResults] = useState([]);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
   const searchTimerRef = useRef(null); // useRef를 사용하여 타이머 유지
@@ -20,6 +21,7 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
     // 입력값이 비어있으면 검색 결과 초기화
     if (!value.trim()) {
       setSearchResults([]);
+      setDropdownVisible(false);
       return;
     }
 
@@ -43,6 +45,7 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
         if (data.length === 0) {
           setError('검색 결과가 없습니다.');
         }
+        setDropdownVisible(true);
       } else {
         throw new Error('서버 응답이 예상하지 못한 형식입니다.');
       }
@@ -50,6 +53,7 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
       console.error('오류 상세:', err);
       setError('학교 검색 중 오류가 발생했습니다.');
       setSearchResults([]);
+      setDropdownVisible(false);
     } finally {
       setIsSearching(false);
     }
@@ -58,6 +62,7 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
   const handleSchoolSelect = (selectedSchool) => {
     setSchool(selectedSchool.name);
     setSearchResults([]);
+    setDropdownVisible(false);
   };
 
   useEffect(() => {
@@ -77,18 +82,18 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
       setError('학교와 학년을 모두 선택해주세요.');
       return;
     }
-  
+
     try {
       console.log('요청 URL:', `/school/search?search=${school}`);
       const res = await instance.get(`/school/search?search=${school}`);
       console.log('서버 응답 데이터:', res.data); // 서버 응답 데이터 로그
       const data = res.data;
-  
+
       // 입력된 학교 이름과 서버에서 받아온 학교 이름 비교
       const matchedSchool = data.find(item => item.name === school);
       console.log('검색된 학교 이름:', matchedSchool ? matchedSchool.name : null);
       console.log('입력된 학교 이름:', school);
-  
+
       if (matchedSchool) {
         handleNextStep(e); // 유효한 학교가 확인되면 다음 단계로 이동
       } else {
@@ -99,6 +104,20 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
       setError('데이터 전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
+
+  // 외부 클릭 감지하여 드롭다운 닫기
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.dropbtn') && !event.target.closest('.search-results-dropdown')) {
+        setDropdownVisible(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -115,28 +134,18 @@ const SchoolForm = ({ school, setSchool, selectedGrade, setSelectedGrade, handle
           autoComplete='off'
         />
         <button type="button" className="long-Delbutton" onClick={() => setSchool('')}>
-            <img src={del} alt="Clear School" />
+          <img src={del} alt="Clear School" />
         </button>
+        {dropdownVisible && (
+          <div className="dropdown-content search-results-dropdown">
+            {searchResults.map((item, index) => (
+              <div key={item.id || index} className="dropdown-index" onClick={() => handleSchoolSelect(item)}>
+                {item.name}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      {/* 검색 결과 드롭다운 */}
-      {Array.isArray(searchResults) && searchResults.length > 0 && (
-        <div className="search-results-dropdown">
-          {searchResults.slice(0, 3).map((schoolItem, index) => (
-            <button
-              key={index}
-              onClick={() => handleSchoolSelect(schoolItem)}
-              className="search-result-item"
-              style={{ display: 'block', width: '100%' }} // 줄 바꿈 및 너비 설정
-            >
-              {schoolItem.name}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {isSearching && (
-        <p className="search-status">검색 중...</p>
-      )}
 
       {error && (
         <p className="error-message">{error}</p>

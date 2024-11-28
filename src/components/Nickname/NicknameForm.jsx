@@ -4,7 +4,7 @@ import inputIcon from '../../assets/input-icon.svg';
 import instance from '../../libs/axios/instance.js';
 
 const NicknameForm = ({ signupData, setSignupData, handleNextStep }) => {
-  const [duplicateMessage, setDuplicateMessage] = useState("중복확인을 해주세요");
+  const [duplicateMessage, setDuplicateMessage] = useState("");
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
 
   const handleRegister = async (e) => {
@@ -15,26 +15,28 @@ const NicknameForm = ({ signupData, setSignupData, handleNextStep }) => {
       password: signupData.password,
       departmentId: signupData.departmentId,
     };
-
-    console.log('이메일:', signupData.email);
-    console.log('닉네임:', signupData.nickname);
-    console.log('비밀번호:', signupData.password);
-    console.log('학과 ID:', signupData.departmentId);
-
     try {
-      const res = await instance.post('/auth/register',  data );
+      const res = await instance.post('/auth/register', data);
       console.log('회원가입 성공:', res.data);
-      setDuplicateMessage("회원가입 성공!");
+      setDuplicateMessage("사용 가능한 별명입니다!");
       setIsNicknameAvailable(true);
       handleNextStep(e); // 회원가입 성공 시 다음 단계로 이동
     } catch (error) {
       console.error('회원가입 실패:', error);
-      setDuplicateMessage("회원가입에 실패했습니다.");
+      if (error.response) {
+        if (error.response.status === 403) {
+          setDuplicateMessage("별명 중복 확인에 실패했습니다.");
+        } else if (error.response.status === 500) {
+          setDuplicateMessage("이미 있는 별명입니다");
+        } else {
+          setDuplicateMessage("회원가입에 실패했습니다.");
+        }
+      }
       setIsNicknameAvailable(false);
     }
   };
 
-  const handlenickname = (e) => {
+  const handleNicknameChange = (e) => {
     const { name, value } = e.target;
     setSignupData((prev) => ({ ...prev, [name]: value }));
   };
@@ -45,18 +47,15 @@ const NicknameForm = ({ signupData, setSignupData, handleNextStep }) => {
         <img src={inputIcon} className="input-icon" alt="Input Icon" />
         <label className={`floating-label ${signupData.nickname ? 'active' : ''}`}>별명</label>
         <input
-          className='short-input'
+          className='long-input'
           type="text"
           value={signupData.nickname}
           name='nickname'
-          onChange={handlenickname}
+          onChange={handleNicknameChange}
           autoComplete='off'
         />
-        <button type="button" className="short-Delbutton" onClick={() => setSignupData(prev => ({ ...prev, nickname: '' }))}>
+        <button type="button" className="long-Delbutton" onClick={() => setSignupData(prev => ({ ...prev, nickname: '' }))}>
           <img src={del} alt="Clear nickname" />
-        </button>
-        <button type="button" className="duplicate-check-button" onClick={handleRegister}>
-          중복 확인
         </button>
       </div>
       <div className={`duplicate-message ${isNicknameAvailable ? 'success' : ''}`}>
@@ -66,7 +65,6 @@ const NicknameForm = ({ signupData, setSignupData, handleNextStep }) => {
         type="button"
         className="login-button"
         onClick={handleRegister}
-        disabled={!isNicknameAvailable} // 닉네임 중복 확인이 완료되지 않으면 버튼 비활성화
       >
         다음으로
       </button>
