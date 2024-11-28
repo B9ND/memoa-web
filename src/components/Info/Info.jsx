@@ -16,6 +16,7 @@ const Info = ({ isLogin }) => {
   const [school, setSchool] = useState('');
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [step, setStep] = useState(1);
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   const handleClearEmail = () => setLoginData({ ...loginData, email: '' });
 
@@ -30,22 +31,6 @@ const Info = ({ isLogin }) => {
       e.preventDefault();
     }
     setStep(step + 1);
-  };
-
-  const handleNextStepWithPasswordCheck = (e) => {
-    e.preventDefault();
-    const password = signUpData.password;
-    const confirmPasswordInput = confirmPassword;
-
-    if (password.length >= 8 && /\d/.test(password)) {
-      if (password === confirmPasswordInput) {
-        setStep(step + 1);
-      } else {
-        alert("비밀번호가 일치하지 않습니다.");
-      }
-    } else {
-      alert("비밀번호는 8자리 이상이어야 하며, 숫자를 포함해야 합니다.");
-    }
   };
 
   return (
@@ -95,13 +80,9 @@ const Info = ({ isLogin }) => {
                   setSignupData={setSignUpData}
                   confirmPassword={confirmPassword}
                   setConfirmPassword={setConfirmPassword}
-                  showPassword={showPassword}
-                  toggleShowPassword={() => setShowPassword(!showPassword)}
-                  toggleShowConfirmPassword={() => setConfirmPassword(!confirmPassword)}
+                  handleNextStep={handleNextStep}
                 />
-                <button type="button" className="login-button" onClick={handleNextStepWithPasswordCheck}>
-                  다음으로
-                </button>
+                {confirmPasswordError && <p className="error-message">{confirmPasswordError}</p>}
                 <div className='termsuse'>
                   계정을 생성함으로써, <span className='TU-highlights'>이용약관</span>과<span className='PI-highlights'>개인정보처리약관</span>에<br />동의하였음을 확인합니다.
                 </div>

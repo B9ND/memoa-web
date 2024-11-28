@@ -463,12 +463,12 @@ input::-webkit-inner-spin-button {
   text-align: right;
   color: #DD3A45;
   font-size: 13px;
-  margin: 5px;
+  margin: 0px 5px;
 }
 
 .success-message {
   text-align: right;
   color: #28a745;
   font-size: 13px;
-  margin: 5px;
+  margin: 0px 5px;
 }
