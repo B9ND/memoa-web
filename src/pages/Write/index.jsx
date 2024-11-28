@@ -1,8 +1,15 @@
 import Header from "../../components/Header";
-import React, { useState, useRef, useEffect, memo } from "react";
+import React, { useState, useRef, useEffect, memo, useLayoutEffect } from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
+// import { useNavigate } from "react-router-dom"; navigate로 리로드하기
+// 문제점1 . 이미지 2번 해야지 되는거 -> useEffect() -> 해결 가능할지도?? 근데 submitPostData.images가 저장이 될때마다 바꾸어주어야함
+// 문제점2 . 이미지 여러개 -> 이미지 여러개는 map을 써서 api호출을 다 해준다음에 submitPost() 함수를 써서 하면 된다.
+// 문제점3 . 이미지 위치 나타내는 곳 -> 글을 중간에 쓰고 하다가 도 바꿀수 있게
+// 문제점5 . 이미지 변환 -> 건희코든데 아직 어디에 써야 할지 모르겠는....
+// 리로드를 시켜서 초기화시키기 -> 완료
+
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
     title: "",
@@ -12,8 +19,12 @@ const Write = () => {
     isReleased: true,
   });
 
-  const [imageFiles, setImageFiles] = useState("");
 
+  const [imageFiles, setImageFiles] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
   const updateField = (event) => {
     const { name, value, scrollHeight } = event.target;
     const maxHeight = 400;
@@ -32,6 +43,8 @@ const Write = () => {
   //get "auth/me"
   const [userInfo, getUserInfo] = useState({
     department: {
+      school: "",
+      grade: "",
       subjects: [""],
     },
   });
@@ -49,8 +62,18 @@ const Write = () => {
     getMe();
   }, []);
 
-  //post
+  useEffect(() => {
+    if (userInfo.department.school && userInfo.department.grade) {
+      setSubmitPostData((prev) => ({
+        ...prev,
+        tags: [userInfo.department.school, `${userInfo.department.grade}학년`],
+      }));
+    }
+  }, [userInfo]);
+
+  //post 게시물
   const submitPost = async () => {
+    //async
     if (
       submitPostData.title == "" ||
       submitPostData.tags == "" ||
@@ -58,81 +81,118 @@ const Write = () => {
     ) {
       alert("다시 한 번 게시물을 확인해 주세요.");
     } else {
+      updateContent();
       try {
-        await memoaAxios
-          .post("/post", submitPostData)
-          .then((res) => console.log(res.data));
-        alert("성공적으로 업로드 되었습니다.");
+        console.log("try");
+        await memoaAxios.post("/post", submitPostData).then((res) => {
+          console.log(res.data);
+          alert("성공적으로 업로드 되었습니다.");
+          handleContentTransform(submitPostData.content, submitPostData.images);
+        });
       } catch (err) {
         console.log(err);
         alert("업로드에 실패하였습니다.");
       }
     }
   };
-  //transeform content
-  const HandleContent = () => {
-    const transeformTxt = submitPostData.content.replace(
-      /📸\d+번째 사진이 들어갈 자리입니다\./g,
-      `✔★${submitPostData.images[/d/ - 1]}✔`
+
+  //content 변환
+  const handleContentTransform = (content, images) => {
+    return content.replace(
+      /✔📷(\d+) 번째에 들어갈 이미지 입니다!✔/g,
+      (match, numberStr) => {
+        const index = (parseInt(numberStr, 10) || 1) - 1;
+        const image = images[index] || "이미지 없음";
+        return `✔★${image}✔`;
+      }
     );
-    setSubmitPostData((prev) => ({
-      ...prev,
-      content: `${prev.content} ${transeformTxt}`,
+  };
+
+  const updateContent = () => {
+    setSubmitPostData((prevState) => ({
+      ...prevState,
+      content: handleContentTransform(prevState.content, prevState.images),
     }));
   };
-  //upload post
-  const postImage = async () => {
-    if (imageFiles != []) {
-      try {
-        await memoaAxios.post(
-          "/image/upload",
-          imageFiles).then((res) => {
-            setSubmitPostData((prev) => ({
-              ...prev,
-              images: [res.data.url],
-            }));
-            HandleContent();
-            submitPost();
-          })
 
-      } catch (error) {
-        console.log(error);
+  const [userImg, setUserImg] = useState([]);
+
+  //post images
+  const postImage = async () => {
+    try {
+      // 새로운 이미지가 있을 경우에만 업로드
+      if (isClicked && userImg.length > 0) {
+        const uploadPromises = userImg.map(async (file) => {
+          const formData = new FormData();
+          formData.append("file", file);
+          const response = await memoaAxios.post("/image/upload", formData);
+          return response.data.url;
+        });
+  
+        // 모든 이미지 업로드 완료 대기
+        const uploadedUrls = await Promise.all(uploadPromises);
+  
+        // 이미지 URL 상태 업데이트
+        setSubmitPostData((prev) => ({
+          ...prev,
+          images: [...prev.images, ...uploadedUrls],
+        }));
+  
+        // 이미지 업로드 후 게시물 제출
+        await submitPost();
+      } else {
+        // 새 이미지 없으면 바로 게시물 제출
+        await submitPost();
       }
-    } else {
-      submitPost();
+    } catch (error) {
+      console.error("이미지 업로드 또는 게시물 등록 실패:", error);
+      alert("이미지 업로드 또는 게시물 등록에 실패했습니다.");
     }
   };
-
+  
+  useLayoutEffect(()=>{
+    console.log("userImg", userImg, "userImg.length", userImg.length)
+    console.log("submitPostData.images", submitPostData.images, "submitPostData.images.length", submitPostData.images.length)
+    if(isClicked === true){
+      if(userImg.length === submitPostData.images.length){
+        submitPostData();
+      }
+    }
+  },[submitPostData.images, userImg])
   // preview Image
   const [viewImages, setViewImages] = useState([]);
   const handleImages = (e) => {
-    const { files: file } = e.target; // files를 file로 변경
+    const { files } = e.target;
     const formData = new FormData();
-    const filePreviews = [];
   
-    Array.from(file).forEach((fileItem) => { // file로 반복문 처리
-      formData.append("files", fileItem);
+    // Promise.all을 사용한 파일 읽기
+    const fileReadPromises = Array.from(files).map((fileItem) => {
+      formData.append("file", fileItem);
   
-      const reader = new FileReader();
-      reader.readAsDataURL(fileItem);
-      reader.onloadend = () => {
-        filePreviews.push(reader.result);
-  
-        if (filePreviews.length === file.length) { // file 사용
-          setViewImages((prevImg) => [...prevImg, ...filePreviews]);
-        }
-      };
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsDataURL(fileItem);
+      });
     });
   
+    Promise.all(fileReadPromises).then((previews) => {
+      setViewImages((prevImg) => [...prevImg, ...previews]);
+    });
+  
+    // userImg와 imageFiles 상태 정확히 설정
+    setUserImg((prev) => [...prev, ...files]);
     setImageFiles(formData);
+  
+    // 게시물 내용에 이미지 플레이스홀더 추가
     setSubmitPostData((prev) => ({
       ...prev,
-      content: `${prev.content}📸${
-        viewImages.length + 1
-      }번째 사진이 들어갈 자리입니다.\n`,
+      content: `${prev.content}✔📷${viewImages.length + 1} 번째에 들어갈 이미지 입니다!✔\n`,
     }));
   };
-  
+
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -249,6 +309,7 @@ const Write = () => {
               className="submit-btn"
               type="submit"
               onClick={() => {
+                handleClick();
                 postImage();
               }}
             >
