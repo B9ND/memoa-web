@@ -30,15 +30,33 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordRegex.test(signupData.password)) {
-      setConfirmPasswordError('비밀번호는 8자리 이상, 문자와 숫자가 포함되어야 합니다.');
+    const { password } = signupData;
+
+    if (!password) {
+      setConfirmPasswordError('비밀번호를 입력해 주세요');
       return;
     }
-    if (signupData.password !== confirmPassword) {
+    if (password !== confirmPassword) {
       setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
+    if (!/^\S*$/.test(password)) {
+      setConfirmPasswordError('비밀번호에는 띄어쓰기가 포함되어서는 안됩니다');
+      return;
+    }
+    if (password.length < 8) {
+      setConfirmPasswordError('비밀번호는 8자리 이상이여야 합니다.');
+      return;
+    }
+    if (!/[A-Za-z]/.test(password)) {
+      setConfirmPasswordError('비밀번호에는 문자가 포함되어야 합니다.');
+      return;
+    }
+    if (!/\d/.test(password)) {
+      setConfirmPasswordError('비밀번호에는 숫자가 포함되어야 합니다.');
+      return;
+    }
+
     setConfirmPasswordError(''); // 오류가 없을 경우 메시지 초기화
     handleNextStep(e); // 비밀번호가 유효하고 일치하면 다음 단계로 이동
   };
@@ -49,7 +67,7 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
         <img src={inputIcon} className="input-icon" alt="Input Icon" />
         <label className={`floating-label ${signupData.password ? 'active' : ''}`}>
           비밀번호
-          <span className={`pwcriteria ${signupData.password ? 'active' : ''}`}> (8자리 이상, 숫자포함)</span>
+          <span className={`pwcriteria ${signupData.password ? 'active' : ''}`}> (8자리 이상, 숫자 포함)</span>
         </label>
         <input
           className='long-input'
