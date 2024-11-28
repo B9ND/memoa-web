@@ -6,6 +6,7 @@ import memoaAxios from "../../libs/axios/instance";
 import { ImPencil } from "react-icons/im";
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { getCookie } from "../../libs/Cookie/cookie";
 
 const Setting = () => {
   const [isFixing, setIsFixing] = useState(false);
@@ -108,6 +109,18 @@ const Setting = () => {
     }));
   };
 
+  const handleLogout = async () => {
+    const refreshToken = getCookie("REFRESH_TOKEN");
+    try {
+      await memoaAxios.delete("/auth/logout", {
+        data: { token: refreshToken }
+      });
+      navigate("/login");
+    } catch (err) {
+      alert("잠시후 다시 시도해주세요");
+    }
+  };
+
   useEffect(() => {
     getMe();
   }, []);
@@ -176,14 +189,12 @@ const Setting = () => {
             </div>
             <div className="setting-at">
               <div className="setting-heading">학교</div>
-              {/* <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={'school'}/> */}
               <div className="setting-view-info">
                 {userInfo.department.school}
               </div>
             </div>
             <div className="setting-at">
               <div className="setting-heading">학과</div>
-              {/* <FixingBox userInfo={userInfo} setUserInfo={setUserInfo} isFix={isFixing} whatFix={'department'}/> */}
               <div className="setting-view-info">
                 {userInfo.department.name}
               </div>
@@ -203,15 +214,21 @@ const Setting = () => {
             </div>
           </div>
           <div className="setting-footer">
-            서비스 정책
-            <span style={{ display: "flex", margin: "0" }}>
+            <button
+              className="logout-button"
+              onClick={handleLogout}
+            >
+              로그아웃
+            </button>
+            <div className="setting-policy">
+              서비스 정책
               <a href="" className="setting-terms">
                 이용약관
               </a>
               <a href="" className="setting-privacy">
                 개인정보취급방침
               </a>
-            </span>
+            </div>
           </div>
         </div>
       </div>

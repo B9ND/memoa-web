@@ -1,47 +1,47 @@
-.setting-main{
+.setting-main {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
 }
 
-.settings{
+.settings {
   width: 600px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 24px 0 48px 0;
+  padding: 24px 0 24px 0;
   justify-content: space-between;
 }
 
-.setting-container{
+.setting-container {
   width: 100%;
   height: fit-content;
   display: flex;
   flex-direction: column;
 }
 
-.setting-profile{
+.setting-profile {
   width: 100%;
   height: fit-content;
   display: flex;
   margin-bottom: 32px;
 }
 
-.setting-profile-img-container{
+.setting-profile-img-container {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   margin-right: 24px;
 }
 
-.setting-profile-img{
-  width: 160px;
-  height: 160px;
+.setting-profile-img {
+  width: 140px;
+  height: 140px;
   border-radius: 999px;
 }
 
-.setting-profile-img-delete{
+.setting-profile-img-delete {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@
   top: 16px;
 }
 
-.setting-profile-img-insert{
+.setting-profile-img-insert {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,18 +69,18 @@
   z-index: 10;
 }
 
-#file{
+#file {
   z-index: 9;
 }
 
-.setting-user-info{
+.setting-user-info {
   display: flex;
   flex-direction: column;
   color: black;
   width: 100%;
 }
 
-.setting-user-name{
+.setting-user-name {
   padding: 0 8px;
   width: fit-content;
   font-size: 26px;
@@ -88,7 +88,7 @@
   margin: 12px 0;
 }
 
-.setting-user-name-fixing{
+.setting-user-name-fixing {
   padding: 0 8px;
   width: fit-content;
   font-size: 26px;
@@ -98,7 +98,7 @@
   color: #6D6D6E;
 }
 
-.setting-description{
+.setting-description {
   width: 100%;
   height: 100%;
   font-size: 20px;
@@ -106,7 +106,7 @@
   transition: 80ms linear;
 }
 
-.setting-description-fixing{
+.setting-description-fixing {
   padding: 4px 0;
   text-align: start;
   width: 100%;
@@ -119,7 +119,7 @@
   resize: none;
 }
 
-.setting-at{
+.setting-at {
   display: flex;
   align-items: center;
   padding: 12px 24px;
@@ -127,23 +127,23 @@
   margin-bottom: 20px;
 }
 
-.setting-heading{
+.setting-heading {
   font-size: 22px;
   font-weight: 600;
   padding-right: 24px;
 }
 
-.setting-view-info{
+.setting-view-info {
   font-size: 20px;
 }
 
-.setting-contain{
+.setting-contain {
   font-size: 20px;
   width: 80%;
   transition: 80ms linear;
 }
 
-.setting-contain-fixing{
+.setting-contain-fixing {
   font-size: 20px;
   border: 1px solid #6D6D6E;
   color: #6D6D6E;
@@ -152,12 +152,12 @@
   transition: 80ms linear;
 }
 
-.setting-fix{
+.setting-fix {
   display: flex;
   justify-content: end;
 }
 
-.setting-fix-button{
+.setting-fix-button {
   color: #3867DD;
   text-decoration: underline;
   font-size: 18px;
@@ -165,24 +165,34 @@
   outline: none;
 }
 
-.setting-footer{
+.setting-footer {
   display: flex;
+  flex-direction: column;
   width: 100%;
   font-size: 20px;
-  justify-content: space-between
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.setting-terms{
+.logout-button {
+  color: #DD3A45;
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 600;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+.setting-policy {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.setting-terms, .setting-privacy {
   font-size: 20px;
   font-weight: 600;
   text-decoration: underline;
   color: #38A1DD;
-}
-
-.setting-privacy{
-  font-weight: 600;
-  font-size: 20px;
-  text-decoration: underline;
-  color: #38A1DD;
-  margin-left: 12px;
+  margin-right: 12px;
 }
