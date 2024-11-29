@@ -1,14 +1,9 @@
 import Header from "../../components/Header";
-import React, { useState, useRef, useEffect, memo, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
-// import { useNavigate } from "react-router-dom"; navigate로 리로드하기
-// 문제점1 . 이미지 2번 해야지 되는거 -> useEffect() -> 해결 가능할지도?? 근데 submitPostData.images가 저장이 될때마다 바꾸어주어야함
-// 문제점2 . 이미지 여러개 -> 이미지 여러개는 map을 써서 api호출을 다 해준다음에 submitPost() 함수를 써서 하면 된다.
-// 문제점3 . 이미지 위치 나타내는 곳 -> 글을 중간에 쓰고 하다가 도 바꿀수 있게
-// 문제점5 . 이미지 변환 -> 건희코든데 아직 어디에 써야 할지 모르겠는....
-// 리로드를 시켜서 초기화시키기 -> 완료
+import { useNavigate } from "react-router-dom";
 
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
@@ -18,13 +13,8 @@ const Write = () => {
     images: [],
     isReleased: true,
   });
+  const navigate = useNavigate();
 
-
-  const [imageFiles, setImageFiles] = useState("");
-  const [isClicked, setIsClicked] = useState(false);
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
   const updateField = (event) => {
     const { name, value, scrollHeight } = event.target;
     const maxHeight = 400;
@@ -73,22 +63,27 @@ const Write = () => {
 
   //post 게시물
   const submitPost = async () => {
-    //async
     if (
-      submitPostData.title == "" ||
-      submitPostData.tags == "" ||
-      submitPostData.content == ""
+      submitPostData.title === "" ||
+      submitPostData.tags.length === 2 ||
+      submitPostData.content === ""
     ) {
       alert("다시 한 번 게시물을 확인해 주세요.");
     } else {
-      updateContent();
+      const transformedContent = handleContentTransform(
+        submitPostData.content,
+        submitPostData.images
+      );
+
       try {
-        console.log("try");
-        await memoaAxios.post("/post", submitPostData).then((res) => {
-          console.log(res.data);
-          alert("성공적으로 업로드 되었습니다.");
-          handleContentTransform(submitPostData.content, submitPostData.images);
+        const res = await memoaAxios.post("/post", {
+          ...submitPostData,
+          content: transformedContent,
         });
+        alert("성공적으로 업로드 되었습니다.");
+        setTimeout(() => {
+          navigate("/");
+        }, 700);
       } catch (err) {
         console.log(err);
         alert("업로드에 실패하였습니다.");
@@ -108,89 +103,37 @@ const Write = () => {
     );
   };
 
-  const updateContent = () => {
-    setSubmitPostData((prevState) => ({
-      ...prevState,
-      content: handleContentTransform(prevState.content, prevState.images),
-    }));
-  };
+  // preview Image
+  const handleImages = async (e) => {
+    const { files } = e.target;
+    const fileArray = Array.from(files);
 
-  const [userImg, setUserImg] = useState([]);
-
-  //post images
-  const postImage = async () => {
-    try {
-      // 새로운 이미지가 있을 경우에만 업로드
-      if (isClicked && userImg.length > 0) {
-        const uploadPromises = userImg.map(async (file) => {
+    for (const file of fileArray) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = async () => {
+        try {
           const formData = new FormData();
           formData.append("file", file);
-          const response = await memoaAxios.post("/image/upload", formData);
-          return response.data.url;
-        });
-  
-        // 모든 이미지 업로드 완료 대기
-        const uploadedUrls = await Promise.all(uploadPromises);
-  
-        // 이미지 URL 상태 업데이트
-        setSubmitPostData((prev) => ({
-          ...prev,
-          images: [...prev.images, ...uploadedUrls],
-        }));
-  
-        // 이미지 업로드 후 게시물 제출
-        await submitPost();
-      } else {
-        // 새 이미지 없으면 바로 게시물 제출
-        await submitPost();
-      }
-    } catch (error) {
-      console.error("이미지 업로드 또는 게시물 등록 실패:", error);
-      alert("이미지 업로드 또는 게시물 등록에 실패했습니다.");
+
+          await memoaAxios.post("image/upload", formData).then((res) => {
+            setSubmitPostData((prev) => ({
+              ...prev,
+              images: [...prev.images, res.data.url],
+            }));
+            setSubmitPostData((prev) => ({
+              ...prev,
+              content: `${prev.content}  ✔📷${
+                submitPostData.images.length + 1
+              } 번째에 들어갈 이미지 입니다!✔\n`,
+            }));
+          });
+        } catch (err) {
+          alert("이미지 업로드에 실패하였습니다.");
+          console.log("이미지 업로드 실패:", err);
+        }
+      };
     }
-  };
-  
-  useLayoutEffect(()=>{
-    console.log("userImg", userImg, "userImg.length", userImg.length)
-    console.log("submitPostData.images", submitPostData.images, "submitPostData.images.length", submitPostData.images.length)
-    if(isClicked === true){
-      if(userImg.length === submitPostData.images.length){
-        submitPostData();
-      }
-    }
-  },[submitPostData.images, userImg])
-  // preview Image
-  const [viewImages, setViewImages] = useState([]);
-  const handleImages = (e) => {
-    const { files } = e.target;
-    const formData = new FormData();
-  
-    // Promise.all을 사용한 파일 읽기
-    const fileReadPromises = Array.from(files).map((fileItem) => {
-      formData.append("file", fileItem);
-  
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.readAsDataURL(fileItem);
-      });
-    });
-  
-    Promise.all(fileReadPromises).then((previews) => {
-      setViewImages((prevImg) => [...prevImg, ...previews]);
-    });
-  
-    // userImg와 imageFiles 상태 정확히 설정
-    setUserImg((prev) => [...prev, ...files]);
-    setImageFiles(formData);
-  
-    // 게시물 내용에 이미지 플레이스홀더 추가
-    setSubmitPostData((prev) => ({
-      ...prev,
-      content: `${prev.content}✔📷${viewImages.length + 1} 번째에 들어갈 이미지 입니다!✔\n`,
-    }));
   };
 
   //tag
@@ -205,7 +148,7 @@ const Write = () => {
     if (code === "Enter" && e.nativeEvent.isComposing === false) {
       e.preventDefault();
 
-      if (userInfo.department.subjects.includes(text) == true) {
+      if (userInfo.department.subjects.includes(text)) {
         alert("중복된 태그입니다.");
         useInput.current.value = "";
       }
@@ -217,10 +160,11 @@ const Write = () => {
   };
 
   const preventEnter = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       e.preventDefault();
     }
   };
+
   return (
     <>
       <div className="head-main">
@@ -245,7 +189,7 @@ const Write = () => {
                   onKeyDown={show_tag}
                 />
                 <div className="write-tag-container">
-                  {textPrint.length == 0
+                  {textPrint.length === 0
                     ? ""
                     : uniqueArr.map((text, idx) => (
                         <Tag
@@ -274,12 +218,13 @@ const Write = () => {
               </div>
               <div className="line"></div>
               <div className="basic-tag-container">
-                {userInfo["department"].subjects.length == 0
+                {userInfo["department"].subjects.length === 0
                   ? ""
                   : userInfo["department"].subjects.map((sub, idx) => (
                       <Tag
                         tagName="tags"
                         tagPrint={sub}
+                        key={idx}
                         canActive={true}
                         filter={submitPostData}
                         setFilter={setSubmitPostData}
@@ -301,7 +246,7 @@ const Write = () => {
           </div>
           <div className="btn-container">
             <div className="post-image-container">
-              {viewImages.map((image, index) => (
+              {submitPostData.images.map((image, index) => (
                 <img key={index} src={image} alt={`preview ${index}`} />
               ))}
             </div>
@@ -309,8 +254,7 @@ const Write = () => {
               className="submit-btn"
               type="submit"
               onClick={() => {
-                handleClick();
-                postImage();
+                submitPost();
               }}
             >
               글 등록하기
