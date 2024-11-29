@@ -12,8 +12,16 @@ const removeCookie = (name) => {
   return cookie.remove(name)
 }
 
+const removeTokens = () => {
+  return (
+    cookie.remove('ACCESS_TOKEN'),
+    cookie.remove('REFRESH_TOKEN')
+  )
+}
+
 export {
   setCookie,
   getCookie,
-  removeCookie
+  removeCookie,
+  removeTokens
 }

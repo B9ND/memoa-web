@@ -1,0 +1,156 @@
+.search-main-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-info{
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: 60vw;
+  height: fit-content;
+  white-space: nowrap
+}
+
+.search-filter-contain{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+  width: 100%;
+  height: 0;
+  transition: 0.1s linear;
+  overflow: hidden;
+  border-bottom: 1px solid #C4C4C5;
+  margin-bottom: 16px;
+}
+
+.search-filter-contain.exit-done{
+  width: 100%;
+  height: auto;
+  padding: 40px 0;
+  border-bottom: 1px solid #C4C4C5;
+  transition: 0.1s linear;
+}
+
+.search-filter-tags{
+  display: flex;
+  gap: 20px;
+  width: 80%;
+  align-items: start;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.search-filter-real-tag{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 400;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-mod-popular{
+  width: fit-content;
+  padding: 4px 16px;
+  border: 1.2px #6D6D6E solid;
+  border-radius: 24px;
+  margin-right: 4px;
+  color: #6D6D6E;
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-mod-last{
+  width: fit-content;
+  padding: 4px 16px;
+  border: 1.2px solid #715AFF;
+  border-radius: 24px;
+  margin-right: 4px;
+  color: #ffffff;
+  background-color: #715AFF;
+  cursor: pointer;
+  user-select: none;
+}
+
+.search-bar{
+  width: 50%;
+  height: 64px;
+  display: flex;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.search-bar-input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #f5f5f5;
+  padding: 0 20px;
+  font-size: 16px;
+  color: #121212;
+  border-radius: 8px 0px 0px 8px;
+  outline: none;
+}
+
+.search-button{
+  width: 72px;
+  background-color: #715AFF;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+}
+
+.search-filter{
+  width: 64px;
+  height: 64px;
+  background-color: #715AFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0 16px;
+  transition: 0.1s linear;
+}
+
+.search-filter-close{
+  width: 64px;
+  height: 64px;
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0 16px;
+  transition: 0.1s linear;
+}
+
+.search-page-controller{
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.search-current-page{
+  font-size: 20px;
+}
+
+.search-loading{
+  font-weight: 400;
+  font-size: 12px;
+}
+
+#observer {
+  width: 100%;
+  height: 20px;
+  background-color: transparent;
+  margin-bottom: 1px;
+}

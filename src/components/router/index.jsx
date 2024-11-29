@@ -1,44 +1,40 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "../../pages/Login/Login";
-import Signup from "../../pages/Signup/Signup";
-import Home from "../../pages/Home/Home";
-import Bookmark from "../../pages/Bookmark/Bookmark";
-import Profile from "../../pages/Profile/Profile";
-import School from "../../pages/School/School";
-import Setting from "../../pages/Setting/Setting";
-import Search from "../../pages/Search/Search";
-import Help from "../../pages/Help/Help";
-import Sidebar from "../Sidebar/Sidebar";
-import NotFound from "../../pages/NotFound/NotFound";
-import Write from "../../pages/Write/Write";
-import FollowList from "../FollowList/FollowList";
-import Follow from "../../pages/Follow/Follow";
-import Detail from "../../pages/Detail/Detail";
-
+import Login from "../../pages/Login";
+import Signup from "../../pages/Signup";
+import Home from "../../pages/Home";
+import Bookmark from "../../pages/Bookmark";
+import Profile from "../../pages/Profile";
+import Setting from "../../pages/Setting";
+import Search from "../../pages/Search";
+import Help from "../../pages/Help";
+import NotFound from "../../pages/NotFound";
+import Write from "../../pages/Write";
+import Follow from "../../pages/Follow";
+import FollowList from "../FollowList";
+import Detail from "../../pages/Detail";
+import Layout from '../Layout'
 
 const Router = () => {
   return (
     <BrowserRouter>
       <div className="layout">
-        <Sidebar />
         <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/follow/:username" element={<Follow/>}>
+              <Route path=":followState" element={<FollowList/>}/>
+            </Route>
+            <Route path="/bookmark" element={<Bookmark />} />
+            <Route path="/profile/:username" element={<Profile />}/>
+            <Route path="/setting" element={<Setting />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/write" element={<Write />}/>
+            <Route path="/detail/post/:id" element={<Detail/>}/>
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/follow/:username" element={<Follow/>}>
-            <Route path=":followState" element={<FollowList/>}/>
-          </Route>
-          <Route path="/bookmark" element={<Bookmark />} />
-          <Route path="/profile/:username" element={<Profile />}/>
-          <Route path="/school" element={<School />} />
-          <Route path="/setting" element={<Setting />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/sidebar" element={<Sidebar />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/write" element={<Write />}/>
-          <Route path="/detail/post/:id" element={<Detail/>}/>
         </Routes>
       </div>
     </BrowserRouter>

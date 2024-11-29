@@ -1,24 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import del from '../../assets/del.svg';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
-import instance from '../../libs/axios/instance';
 import { setCookie } from '../../libs/Cookie/cookie';
 import { useNavigate } from 'react-router-dom';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
-  
   const nav = useNavigate()
+
   const login = async () => {
     try {
-      const res = await instance.post('/auth/login', loginData);
-      if(res){
+      await axios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData, { withCredentials: true })
+      .then((res)=>{
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
-        nav('/home')
-      }
+        nav('/')
+      })
     } catch (err) {
       console.log('실패:', err);
     }
