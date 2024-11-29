@@ -1,36 +1,24 @@
-import {
-  MdAccountCircle,
-  // MdOutlineComment,
-  MdOutlineBookmarkBorder,
-} from "react-icons/md";
-// import { FaRegHeart } from "react-icons/fa";
+import Bookmarker from '../Bookmarker'
 import Tag from "../Tag";
 import { useState } from "react";
 import "./style.css";
-import { IoMdBookmark } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import baseProfileImg from '../../assets/base-profile.png'
+import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 /* eslint-disable */
 const Board = ({ detail }) => {
   const [isPop, setIsPop] = useState(false);
-  const [which, setWhich] = useState(true);
-
-  const what = () => {
-    if (which === true) {
-      setWhich(false);
-    } else if (which === false) {
-      setWhich(true);
-    }
-  };
 
   const navigate = useNavigate();
+
   return (
     <div className="board">
       <div className="board-header">
-        <MdAccountCircle
-          style={{ width: "40px", height: "40px", marginRight: "8px" }}
-        />
-        <div className="board-name">{detail.author}</div>
+        <img src={detail.profileImage ? detail.profileImage : baseProfileImg } alt="" className="board-profile-img" />
+        <Link to={`/profile/${detail.author}`} className="board-name">
+          {detail.author}
+        </Link>
         <div className="middle-dot">•</div>
         <div className="board-date">{detail.createdAt}</div>
       </div>
@@ -39,28 +27,8 @@ const Board = ({ detail }) => {
           src={detail.images[0]}
           alt=""
           className="board-img"
-          onClick={() => navigate("/detail/post/:0")}
+          onClick={() => navigate(`/detail/post/${detail.id}`)}
         />
-        {/* <div className="board-state">
-          <div className="board-counters">
-            <div className="board-comment">
-              <MdOutlineComment
-                style={{ width: "24px", height: "24px", marginRight: "8px" }}
-              />
-              <div className="board-count">
-                {detail.commentCount >= 999 ? "999+" : detail.commentCount}
-              </div>
-            </div>
-            <div className="board-heart">
-              <FaRegHeart
-                style={{ width: "24px", height: "24px", marginRight: "8px" }}
-              />
-              <div className="board-count">
-                {detail.heartCount >= 999 ? "999+" : detail.heartCount}
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
       <div className="board-info">
         <div className="board-tag">
@@ -69,31 +37,18 @@ const Board = ({ detail }) => {
           ))}
         </div>
         <div className="board-bookmark">
-          {which ? (
-            <MdOutlineBookmarkBorder
-              style={{
-                width: "28px",
-                height: "28px",
-                cursor: "pointer",
-              }}
-              onClick={what}
-            />
-          ) : (
-            <IoMdBookmark
-              style={{
-                width: "28px",
-                height: "28px",
-              }}
-              onClick={what}
-            />
-          )}
+          <Bookmarker
+            size='small'
+            id={detail.id}
+            isBookmarked={detail.isBookmarked}
+          />
         </div>
       </div>
       <div className="board-footer">
         <div className="board-title">{detail.title}</div>
-        <div className="board-pop" onClick={() => setIsPop(!isPop)}>
-          {isPop == true ? "접기" : "펼치기"}
-        </div>
+          { isPop == true
+          ? <div className="board-pop" onClick={() => setIsPop(!isPop)}><MdKeyboardArrowUp className='normal-icon'/> 접기</div>
+          : <div className="board-pop" onClick={() => setIsPop(!isPop)}><MdOutlineKeyboardArrowDown className='normal-icon'/> 펼치기</div>}
       </div>
       {isPop == true && <div className="board-text">{detail.content}</div>}
     </div>
