@@ -118,8 +118,22 @@ input[type="file"] {
   border-radius: 12px;
   overflow-x: scroll;
 }
-.post-image-container > img {
+.preview-image-container {
+  width: fit-content;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.delete-icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 3px;
+}
+.preview-image {
   border-radius: 12px;
   margin-left: 15px;
-  height: 80%;
+  height: 90%;
 }
