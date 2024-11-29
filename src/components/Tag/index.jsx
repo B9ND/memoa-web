@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import { FaPlus } from "react-icons/fa6";
 
@@ -21,6 +21,9 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive, setDef
     }
   };
 
+  useEffect(()=>{
+    console.log(filter)
+  },[filter])
   return tagStyle == "filter" ? (
     <button className={choiced == true ? "tag-filter-choiced" : "tag-filter"} onClick={() => toggleChoice()}>
       <FaPlus color={choiced == true ? "white" : '#6D6D6E' }/>

@@ -9,7 +9,6 @@ import { MdOutlineKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 /* eslint-disable */
 const Board = ({ detail }) => {
   const [isPop, setIsPop] = useState(false);
-
   const navigate = useNavigate();
 
   return (

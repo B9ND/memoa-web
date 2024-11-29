@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
-import { MdBookmarkBorder } from "react-icons/md";
-import { IoMdBookmark } from "react-icons/io";
+import BookmarkItem from "../../components/BookmarkItem";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './style.css'
@@ -8,7 +7,6 @@ import memoaAxios from "../../libs/axios/instance";
 import Tag from "../../components/Tag";
 
 const Detail = () => {
-
   let params = useParams();
 
   const [postData, setPostData] = useState({
@@ -31,13 +29,6 @@ const Detail = () => {
   
   const [which, setWhich] = useState(true);
 
-  const what = () => {
-    if (which === true) {
-      setWhich(false);
-    } else if (which === false) {
-      setWhich(true);
-    }
-  };
 
   useEffect(()=>{
     getPostDetail()
@@ -78,7 +69,27 @@ const Detail = () => {
                 <Tag key={index} tagPrint={item} canActive={false} setDefault={true}/>
               ))}
             </div>
-            <div className="author">작성자 : {postData.author}</div>
+            <div className="tag-and-author">
+              <div className="tag-container">
+                {postData.tags.map((tag, idx) => (
+                  <div key={idx}>{tag}</div>
+                ))}
+              </div>
+              <div className="author">작성자 : {postData.author}</div>
+            </div>
+            <div className="post-line"></div>
+          </div>
+          <div className="detail-main-post">
+            <img src={postData.images[0]}></img>
+          </div>
+          <div className="detail-post-content">
+            <span>{postData.content}</span>
+          </div>
+          <div className="detail-main-post">
+            <img src={postData.images[0]}></img>
+          </div>
+          <div className="detail-post-content">
+            <span>{postData.content}</span>
           </div>
           <div className="post-line"></div>
         </div>
