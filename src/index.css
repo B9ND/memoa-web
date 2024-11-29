@@ -59,3 +59,12 @@ button {
   width: 48px;
   height: 48px;
 }
+
+.page-name{
+  width: 100%;
+  font-size: 32px;
+  padding: 8px 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}

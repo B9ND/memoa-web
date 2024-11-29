@@ -6,19 +6,19 @@ import eyeClosed from '../../assets/eye_2.svg';
 import inputIcon from '../../assets/input-icon.svg';
 import { setCookie } from '../../libs/Cookie/cookie';
 import { useNavigate } from 'react-router-dom';
-import memoaAxios from '../../libs/axios/instance';
+import axios from 'axios';
 
 const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPassword, handleClearEmail }) => {
-  
   const nav = useNavigate()
+
   const login = async () => {
     try {
-      const res = await memoaAxios.post('/auth/login', loginData);
-      if(res){
+      await axios.post(`${import.meta.env.VITE_API_KEY}/auth/login`, loginData, { withCredentials: true })
+      .then((res)=>{
         setCookie('ACCESS_TOKEN', res.data.access, {path:'/'})
         setCookie('REFRESH_TOKEN', res.data.refresh, {path:'/'})
         nav('/')
-      }
+      })
     } catch (err) {
       console.log('실패:', err);
     }

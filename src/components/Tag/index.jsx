@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./style.css";
 import { FaPlus } from "react-icons/fa6";
 
-const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
+const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive, setDefault}) => {
   const [choiced, setChoiced] = useState(false);
 
   const toggleChoice = () => {
@@ -16,8 +16,7 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
       )}
     else{
       setFilter((prev)=>{
-        const t = tagName
-        return{...prev, [t]:[...(prev[t] || []), tagPrint]}
+        return{...prev, [tagName]:[...(prev[tagName] || []), tagPrint]}
         })
     }
   };
@@ -41,7 +40,7 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive }) => {
       </button>
       ) : (
         <button
-        className="tag-notActive"
+        className={setDefault ? "tag-choiced" : "tag-notActive"}
       >
         {tagPrint}
       </button>

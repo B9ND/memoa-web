@@ -1,0 +1,30 @@
+.follow-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.already-follow{
+  background-color: #715AFF;
+  color: white;
+  border: 2px #715AFF solid;
+}
+
+.unfollow{
+  background-color: transparent;
+  border: 2px #DD3A45 solid;
+  color: #DD3A45;
+}
+
+.follow{
+  background-color: transparent;
+  border: 2px #715AFF solid;
+  color: #715AFF;
+}

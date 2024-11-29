@@ -1,13 +1,33 @@
+.post-all-container {
+  width: 90%;
+}
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -30px;
+  width: auto;
+}
+.my-masonry-grid_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 30px; 
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div {
+  margin-bottom: 30px;
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 320px;
   height: fit-content;
   background-color: white;
   border-radius: 12px;
   padding: 16px 0px 16px 0px;
-  /* box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1); */
 }
 .post-head {
   width: 100%;
@@ -41,6 +61,7 @@
 
 .main-img > img {
   width: 100%;
+  border-radius: 4px;
 }
 
 .post-comment > span {
@@ -78,12 +99,6 @@
   white-space: nowrap;
 }
 
-.all-container {
-  width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .post-state-two{
   display: flex;
