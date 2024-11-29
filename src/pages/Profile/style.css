@@ -1,0 +1,139 @@
+.profile-container {
+  width: 70%;
+  height: 176px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.user-pro-img > img {
+  width: 160px;
+  height: 160px;
+}
+.user-introduce {
+  margin-left: 24px;
+}
+.user-introduce > div {
+  display: flex;
+  margin-bottom: 0.04rem;
+}
+
+.follow-ing{
+  width: 68px;
+  height: 32px;
+  color: #fff;
+  background-color: #715aff;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 5px;
+}
+.follo-er{
+  width: 68px;
+  height: 32px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 0.7px solid #6d6d6e;
+  color: #6d6d6e;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 5px;
+}
+
+.user-container {
+  display: flex;
+}
+.user-info-container {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.user-introduce > div > div {
+  font-size: 30px;
+  font-weight: 600;
+  margin-right: 16px;
+}
+
+.user-introduce > span {
+  font-size: 20px;
+  font-weight: 400;
+}
+.user-information {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid black;
+  white-space: nowrap;
+}
+
+.detail-container {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 18px;
+  margin-left: 16px;
+}
+.user-number {
+  font-size: 18px;
+  font-weight: 400;
+  color: #715aff;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+@media (max-width: 950px) {
+  .profile-container{
+    width: 80%;
+  }
+  .user-pro-img > img {
+    width: 130px;
+    height: 130px;
+  }
+  .user-introduce > div > div {
+    font-size: 30px;
+  }
+  .user-introduce > span {
+    font-size: 20px;
+  }
+  .user-introduce > div > button {
+    width: 90px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .user-pro-img {
+    display: none;
+  }
+  .profile-container {
+    justify-content: center;
+  }
+  .user-info-container {
+    align-items: center;
+    width: 100vw;
+  }
+  .detail-container {
+    font-size: 1em;
+  }
+
+  .user-introduce > div > div {
+    font-size: 1.5em;
+  }
+  .user-introduce > span {
+    font-size: 1em;
+  }
+  .user-introduce > div > button {
+    font-size: 1em;
+    width: 5em;
+    height: 2.3em;
+  }
+}
