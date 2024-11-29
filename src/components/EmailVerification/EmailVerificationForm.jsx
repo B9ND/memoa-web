@@ -3,6 +3,16 @@ import del from '../../assets/del.svg';
 import inputIcon from '../../assets/input-icon.svg';
 import instance from '../../libs/axios/instance';
 
+const VerificationStatus = Object.freeze({
+  SUCCESS: '인증 성공!',
+  CODE_SENT: '인증코드 전송 성공!',
+  CODE_FAILED: '코드 인증 실패',
+  FAILED: '인증에 실패했습니다.',
+  EMAIL_EXISTS: '이미 등록된 이메일입니다',
+  EMAIL_EMPTY: '이메일을 입력하세요.',
+  COOL_DOWN: '인증 코드는 1분에 한 번만 보낼 수 있습니다.'
+});
+
 const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) => {
   const [code, setCode] = useState(Array(6).fill(''));
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -13,29 +23,27 @@ const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) =>
   const handleSendEmailCode = async (e) => {
     e.preventDefault();
     if (!signupData.email) {
-      setMessage('이메일을 입력하세요.');
+      setMessage(VerificationStatus.EMAIL_EMPTY);
       return;
     }
     if (isCooldown) {
-      setMessage('인증 코드는 1분에 한 번만 보낼 수 있습니다.');
+      setMessage(VerificationStatus.COOL_DOWN);
       return;
     }
     try {
       const res = await instance.get(`/auth/send-code`, { params: { email: signupData.email } });
       if (res) {
-        console.log('인증코드 전송 성공:', res.data);
         setIsCodeSent(true);
-        setMessage('인증코드 전송 성공!');
+        setMessage(VerificationStatus.CODE_SENT);
         setIsCooldown(true); // 쿨다운 상태 설정
         setTimeout(() => setIsCooldown(false), 60000); // 1분 후 쿨다운 해제
         focusOnFirstEmptyIndex();
       }
     } catch (err) {
-      console.log('인증코드 전송 실패:', err);
       if (err.response && err.response.status === 409) {
-        setMessage('이미 등록된 이메일입니다');
+        setMessage(VerificationStatus.EMAIL_EXISTS);
       } else {
-        setMessage('인증코드 전송에 실패했습니다.');
+        setMessage(VerificationStatus.FAILED);
       }
     }
   };
@@ -44,17 +52,15 @@ const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) =>
     try {
       const res = await instance.post('/auth/verify-code', null, { params: { email: signupData.email, code: code.join('') } });
       if (res && res.status === 200) {
-        console.log('인증 성공:', res.data);
         setIsVerified(true);
-        setMessage('인증 성공!');
+        setMessage(VerificationStatus.SUCCESS);
       }
     } catch (err) {
-      console.log('인증 실패:', err);
       setIsVerified(false);
       if (err.response && err.response.status === 401 && err.response.data.message === "코드 인증 실패") {
-        setMessage('코드 인증 실패');
+        setMessage(VerificationStatus.CODE_FAILED);
       } else {
-        setMessage('인증에 실패했습니다.');
+        setMessage(VerificationStatus.FAILED);
       }
     }
   };
@@ -92,10 +98,6 @@ const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) =>
     if (firstEmptyIndex !== -1) {
       document.getElementById(`code-input-${firstEmptyIndex}`).focus();
     }
-  };
-
-  const handleResendCode = () => {
-    console.log('인증코드 재발송');
   };
 
   const handleNextStepWrapper = async (e) => {
@@ -158,15 +160,8 @@ const EmailVerificationForm = ({ signupData, setSignupData, handleNextStep }) =>
           />
         ))}
       </div>
-      <button
-        type="button"
-        className="resend-code-button"
-        onClick={handleResendCode}
-      >
-        인증코드 재발송
-      </button>
       {message && (
-        <p className={`message ${isVerified || message === '인증코드 전송 성공!' ? 'success-message' : 'error-message'}`}>
+        <p className={`message ${isVerified || message === VerificationStatus.CODE_SENT ? 'success-message' : 'error-message'}`}>
           {message}
         </p>
       )}
