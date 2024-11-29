@@ -7,6 +7,7 @@ import { ImPencil } from "react-icons/im";
 import { MdClose } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../libs/Cookie/cookie";
+import { REFRESH_TOKEN_KEY } from "../../constants/token/token.constants";
 
 const Setting = () => {
   const [isFixing, setIsFixing] = useState(false);
@@ -110,7 +111,7 @@ const Setting = () => {
   };
 
   const handleLogout = async () => {
-    const refreshToken = getCookie("REFRESH_TOKEN");
+    const refreshToken = getCookie(REFRESH_TOKEN_KEY);
     try {
       await memoaAxios.delete("/auth/logout", {
         data: { token: refreshToken }
