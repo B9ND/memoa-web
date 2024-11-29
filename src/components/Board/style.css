@@ -4,6 +4,8 @@
   width: 420px;
   height: fit-content;
   padding: 12px 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .board-header{
@@ -11,6 +13,7 @@
   padding: 0 8px;
   align-items: center;
   margin-bottom: 12px;
+  
 }
 
 .profile-img{
@@ -18,10 +21,17 @@
   height: 40px;
 }
 
+.board-profile-img{
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
 .board-name{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   margin-right: 4px;
+  color: black;
 }
 
 .middle-dot{
@@ -81,6 +91,9 @@
 
 .board-tag{
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  min-width: 27px;
 }
 
 .board-bookmark{
@@ -104,6 +117,9 @@
   color: #715AFF;
   cursor: pointer;
   user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .board-text{

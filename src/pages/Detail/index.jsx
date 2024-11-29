@@ -10,7 +10,6 @@ import Tag from "../../components/Tag";
 const Detail = () => {
 
   let params = useParams();
-  params.id = params.id.substring(1);
 
   const [postData, setPostData] = useState({
     id: 0,

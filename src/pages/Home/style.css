@@ -14,6 +14,7 @@
 }
 
 .board-container{
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,22 +23,39 @@
 
 .selecter-container{
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: sticky;
   top: 12px;
-  flex-direction: column;
-  gap: 12px;
-  padding: 24px 16px;
-  background-color: #fcfcfc;
   height: fit-content;
+  width: fit-content;
+  gap: 12px;
+  padding: 28px 16px;
+  background-color: #fcfcfc;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
-  width: 120px;
+}
+
+.selecter-tag-title{
+  margin-bottom: 4px;
 }
 
 .selecter-tags{
   display: flex;
   flex-direction: column;
+  background-color: #fcfcfc;
+  width: 100%;
   gap: 8px;
-  align-items: center;
+}
+
+.selecter-loading{
+  font-weight: 400;
+  font-size: 12px;
+}
+
+#observer {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 1px;
 }
