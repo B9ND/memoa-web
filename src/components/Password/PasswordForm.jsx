@@ -48,12 +48,8 @@ const PasswordForm = ({ signupData, setSignupData, confirmPassword, setConfirmPa
       setConfirmPasswordError('비밀번호는 8자리 이상이여야 합니다.');
       return;
     }
-    if (!/[A-Za-z]/.test(password)) {
-      setConfirmPasswordError('비밀번호에는 문자가 포함되어야 합니다.');
-      return;
-    }
-    if (!/\d/.test(password)) {
-      setConfirmPasswordError('비밀번호에는 숫자가 포함되어야 합니다.');
+    if (!/(?=.*[A-Za-z])(?=.*\d)/.test(password)) {
+      setConfirmPasswordError('비밀번호에는 문자와 숫자가 포함되어야 합니다.');
       return;
     }
 
