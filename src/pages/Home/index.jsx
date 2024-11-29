@@ -145,7 +145,7 @@ const Home = () => {
           <div className='boards' >
             <div className="board-container">
               { searchResult.length == 0
-              ? <BoardSkeleton length={5}/>
+              ? Array.from({length:5}).map((_, index)=><BoardSkeleton key={index}/>)
               : searchResult.map((board, index)=>(<Board detail={board} key={index}/>))}
               {isLoading && <p className="selecter-loading">메모를 불러오는 중...</p>}
               { shouldLoadMore.current && <div id="observer"/>}
