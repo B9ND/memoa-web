@@ -11,15 +11,50 @@ import "./style.css";
 const Search = () => {
   const [ toggleFilter, setToggleFilter ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ userInfo, setUserInfo ] = useState({})
   const [ filter, setFilter ] = useState({search: "", tags: [], page:0, size:10});
   const [ searchResult, setSearchResult ] = useState([]);
   const observerRef = useRef(null);
   const shouldLoadMore = useRef(true);
 
-  const school = [ "대구소프트웨어마이스터고등학교" ];
+  const [ school, setSchool ] = useState('');
   const grade = [ 1, 2, 3 ];
-  const subject = ["국어", "사회", "수학", "영어", "과학", "한국사"];
+  const [ subjects, setSubjects ] = useState([]);
 
+  const getMe = async () => {
+    try{
+      await memoaAxios.get('/auth/me').then((res) => setUserInfo(res.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getSchool = async () => {
+    try{
+      await memoaAxios.get('/school/search',  {params:{search: userInfo.department.school}})
+      .then((res)=>{
+        const mySchoolData = res.data.find((school) => school.name === userInfo.department.school)
+        setSchool(mySchoolData.name)
+        setSubjects(mySchoolData.departments.reduce((result, department)=>{
+          result[department.grade - 1] = department.subjects
+          return result
+        }, []))
+      })
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    getMe()
+  }, [])
+
+  useEffect(()=>{
+    if(userInfo.department){
+      getSchool()
+    }
+  }, [userInfo])
+  
   const searchPost = async () => {
     try{
       shouldLoadMore.current = true;
@@ -149,18 +184,15 @@ const Search = () => {
           >
             <div className="search-filter-contain">
               <div className="search-filter-tags">
-                등급
+                학교
                 <div className="search-filter-real-tag">
-                  {school.map((item, index) => (
                     <Tag
-                      key={index}
-                      tagPrint={item}
+                      tagPrint={school}
                       tagStyle="filter"
                       tagName="tags"
                       setFilter={setFilter}
                       filter={filter}
                     />
-                  ))}
                 </div>
               </div>
               <div className="search-filter-tags">
@@ -180,17 +212,28 @@ const Search = () => {
               </div>
               <div className="search-filter-tags">
                 과목
+                {filter.tags.some((tagname) => tagname.includes('학년'))
+                || <span className="search-not-pick-grade">학년을 선택해주세요.</span>
+                }
                 <div className="search-filter-real-tag">
-                  {subject.map((item, index) => (
-                    <Tag
-                      key={index}
-                      tagPrint={item}
-                      tagStyle="filter"
-                      tagName="tags"
-                      setFilter={setFilter}
-                      filter={filter}
-                    />
-                  ))}
+                  {
+                  filter.tags
+                    .filter((tag) => tag.includes('학년')) // 학년 선택 정보 추출
+                    .map((item) => Number(item.substr(0,1))) // n학년 부분만 자르기
+                    .map((grade) => subjects[grade-1]) // index 번호로 subjects에서 찾기
+                    .map((subjects) => ( 
+                      subjects.map((subject, index) => ( // subjects에 포함된 학년별 배열 표시해주기
+                        <Tag
+                          key={index}
+                          tagPrint={subject}
+                          tagStyle="filter"
+                          tagName="tags"
+                          setFilter={setFilter}
+                          filter={filter}
+                        />
+                      ))
+                    ))
+                  }
                 </div>
               </div>
             </div>

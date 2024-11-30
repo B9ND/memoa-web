@@ -21,9 +21,6 @@ const Tag = ({ tagName, tagPrint, tagStyle, filter, setFilter, canActive, setDef
     }
   };
 
-  useEffect(()=>{
-    console.log(filter)
-  },[filter])
   return tagStyle == "filter" ? (
     <button className={choiced == true ? "tag-filter-choiced" : "tag-filter"} onClick={() => toggleChoice()}>
       <FaPlus color={choiced == true ? "white" : '#6D6D6E' }/>
