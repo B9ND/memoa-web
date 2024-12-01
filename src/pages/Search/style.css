@@ -31,7 +31,7 @@
 .search-filter-contain.exit-done{
   width: 100%;
   height: auto;
-  padding: 40px 0;
+  padding: 24px 0;
   border-bottom: 1px solid #C4C4C5;
   transition: 0.1s linear;
 }
@@ -42,7 +42,15 @@
   width: 80%;
   align-items: start;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.search-not-pick-grade{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #6D6D6E;
 }
 
 .search-filter-real-tag{
