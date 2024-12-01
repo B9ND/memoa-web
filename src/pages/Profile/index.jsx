@@ -7,6 +7,7 @@ import useFollow from "../../hooks/follow/useFollow";
 import BaseProfileImg from '../../assets/base-profile.png'
 import './style.css'
 import FollowButton from "../../components/FollowButton";
+import ConetentsNotFound from "../../components/ContentsNotFound";
 
 const Profile = () => {
   const { username } = useParams();
@@ -40,7 +41,7 @@ const Profile = () => {
     }
   });
   const [ isMine, setIsMine ] = useState(false);
-  const [ myPost, setMyPost ] = useState([]);
+  const [ post, setPost ] = useState([]);
   const follow = useFollow();
 
   const getMe = async () => {
@@ -64,7 +65,7 @@ const Profile = () => {
   const getUserPost = async () => {
     try{
       await memoaAxios.get('/post/user', {params: {author: username}})
-      .then((res) => setMyPost(res.data))
+      .then((res) => setPost(res.data))
     }catch(err){
       console.log(err)
     }
@@ -112,7 +113,7 @@ const Profile = () => {
             <div className="detail-container">
               작성한 글
               <span className="user-number">
-                {myPost.length}
+                {post.length}
               </span>
             </div>
             <Link to={`/follow/${username}/followers`} className="detail-container">
@@ -130,7 +131,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Post post={myPost} />
+      {post.length != 0
+      ? <Post post={post} />
+      : <ConetentsNotFound title="작성한 글이 없네요.." subTitle="글 작성하러 가기" goTo="/write"/>}
     </div>
   );
 };
