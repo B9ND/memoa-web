@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
-import { MdBookmarkBorder } from "react-icons/md";
-import { IoMdBookmark } from "react-icons/io";
+import BookmarkItem from "../../components/BookmarkItem";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './style.css'

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import { FaPlus } from "react-icons/fa6";
 
