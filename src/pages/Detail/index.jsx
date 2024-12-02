@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 import './style.css'
 import memoaAxios from "../../libs/axios/instance";
 import Tag from "../../components/Tag";
+import Bookmark from '../Bookmark/index';
 import { string } from "prop-types";
 
 const Detail = () => {
   let params = useParams();
-  params.id = params.id.substring(1);
 
   const [postData, setPostData] = useState({
     id: 0,
@@ -29,11 +29,6 @@ const Detail = () => {
       console.log(err);
     }
   }
-  const [which, setWhich] = useState(true);
-
-  const what = () => {
-    setWhich(!which);
-  };
 
   useEffect(() => {
     getPostDetail();
@@ -60,24 +55,7 @@ const Detail = () => {
               <span style={{ fontSize: "1.6em", fontWeight: "500" }}>
                 {postData.title}
               </span>
-              {which ? (
-                <MdBookmarkBorder
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    color: "gray",
-                  }}
-                  onClick={what}
-                />
-              ) : (
-                <IoMdBookmark
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                  }}
-                  onClick={what}
-                />
-              )}
+              <Bookmark/>
             </div>
             <div className="tag-and-author">
               <div className="tag-container">
