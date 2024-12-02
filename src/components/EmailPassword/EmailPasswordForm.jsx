@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from 'react';
 import del from '../../assets/del.svg';
 import eyeOpen from '../../assets/eye_1.svg';
 import eyeClosed from '../../assets/eye_2.svg';
@@ -20,6 +19,9 @@ const EmailPasswordForm = ({ loginData, setLoginData, showPassword, toggleShowPa
       })
     } catch (err) {
       console.log('실패:', err);
+      if(err.status == 401){
+        showToast('이메일 혹은 비밀번호가 틀렸습니다.', 'ERROR')
+      }
     }
   };
 

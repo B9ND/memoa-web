@@ -4,6 +4,7 @@ import "./style.css";
 import Tag from "../../components/Tag";
 import memoaAxios from "../../libs/axios/instance";
 import { useNavigate } from "react-router-dom";
+import { RiCloseFill } from "react-icons/ri";
 
 const Write = () => {
   const [submitPostData, setSubmitPostData] = useState({
@@ -103,11 +104,10 @@ const Write = () => {
     );
   };
 
-  // preview Image
+  //이미지 미리보기
   const handleImages = async (e) => {
     const { files } = e.target;
-    const fileArray = Array.from(files);
-
+    const fileArray = [...files];
     for (const file of fileArray) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -135,7 +135,34 @@ const Write = () => {
       };
     }
   };
-
+  //이미지 삭제
+  const updateContent = (content, target) => {
+    return content
+      .split("✔")
+      .filter((item) => !item.includes(`📷${target + 1}`) && item.trim() !== "")
+      .map((item, index) => {
+        if (item.includes("📷")) {
+          return item.replace(/📷\d+/, `📷${index + 1}`);
+        }
+        return item;
+      })
+      .join("✔")
+      .trim();
+  };
+  const deleteImage = (target) => {
+      setSubmitPostData((prev) => {
+        const updatedImages = prev.images.filter((_, index) => index !== target);
+        const updatedContent = updateContent(prev.content, target);
+  
+        return {
+          ...prev,
+          images: updatedImages,
+          content: updatedContent,
+        };
+      });
+  };
+    
+  
   //tag
   const [textPrint, setText] = useState([]);
   const uniqueArr = [...new Set(textPrint)];
@@ -247,7 +274,19 @@ const Write = () => {
           <div className="btn-container">
             <div className="post-image-container">
               {submitPostData.images.map((image, index) => (
-                <img key={index} src={image} alt={`preview ${index}`} />
+                <div className="preview-image-container">
+                  <RiCloseFill
+                    className="delete-icon"
+                    onClick={() => {
+                      deleteImage(index);
+                    }}
+                  ></RiCloseFill>
+                  <img
+                    src={image}
+                    alt={`preview ${index}`}
+                    className="preview-image"
+                  />
+                </div>
               ))}
             </div>
             <button
